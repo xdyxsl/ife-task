@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>P-TODO</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <style type="text/css">
+    html,
+    body {
+        height: 100%;
+    }
+    
+    * {
+        font-family: "Microsoft Yahei", Georgia, Serif;
+        font-size: 0.9rem;
+    }
+    
+    .header {
+        background-color: #5A4446;
+        border-bottom: 1px solid #cdcdcd;
+    }
+    
+    .main {
+        width: 100%;
+        height: 90%;
+        position: absolute;
+        bottom: 0;
+    }
+    
+    .header-name {
+        margin: 0;
+        padding: 1.5%;
+        color: #FBFEE9;
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
+    
+    .left-content-main,
+    .middle-content-main {
+        border-bottom: 1px solid #cdcdcd;
+    }
+    
+    .left-content,
+    .middle-content,
+    .right-content {
+        background-color: #f2f2f2;
+    }
+    
+    .left-content {
+        width: 200px;
+        padding-left: 1%;
+        height: 100%;
+        position: relative;
+    }
+    
+    .left-content dl {
+        padding-left: 2%;
+    }
+    
+    .left-content dl dt,
+    .left-content dl dd {
+        padding: 1%;
+    }
+    
+    .left-content-main-dl span {
+        padding-left: 4%;
+    }
+    
+    .middle-content {
+        width: 200px;
+        border-left: 1px solid #cdcdcd;
+        border-right: 1px solid #cdcdcd;
+        height: 100%;
+        position: relative;
+    }
+    
+    .middle-content-top ul {
+        margin: 3% 0% 3% -15%;
+    }
+    
+    .middle-content-main {
+        border-top: 1px solid #cdcdcd;
+        background-color: white;
+    }
+    
+    .middle-content-main dl {
+        margin: 0;
+    }
+    
+    .middle-content-main dd {
+        padding: 1.5% 0;
+    }
+    
+    .middle-content-bottom,
+    .left-content-bottom {
+        padding: 5%;
+    }
+    
+    .middle-content-bottom span,
+    .left-content-bottom span {
+        cursor: pointer;
+    }
+    
+    .fl {
+        float: left;
+    }
+    
+    .fr {
+        float: right;
+    }
+    
+    .fixed {
+        position: absolute;
+        bottom: 0px;
+        width: 100%;
+        text-align: center;
+        margin-left: -24px;
+        ;
+    }
+    
+    li {
+        list-style: none;
+        display: inline;
+        padding: 0.5% 4%;
+        font-size: 0.8rem;
+    }
+    
+    .class-checked {
+        border: 1px solid #cdcdcd;
+        background-color: white;
+    }
+    
+    .project-task-checked {
+        background-color: white;
+    }
+    
+    .task-checked {
+        background-color: #f2f2f2;
+    }
+    
+    .task-date {
+        padding-left: 5%;
+    }
+    
+    .right-content {
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+        min-width: 72px;
+    }
+    
+    .right-content-date,
+    .right-content-main {
+        padding: 1.8% 0 1.8% 1.8%;
+    }
+    
+    .right-content-date {
+        border: 1px solid #cdcdcd;
+    }
+    
+    .right-content-main {
+        background-color: white;
+    }
+    
+    .task-date,
+    .right-content-date {
+        background-color: #fafaee;
+    }
+    
+    .right-content-title {
+        border-bottom: 1px solid #cdcdcd;
+        padding: 2%;
+    }
+    
+    .right-content-title i {
+        float: right;
+        padding: 0 2%;
+        line-height: 1.4rem;
+    }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <p class="header-name">PKJY-TODO</p>
+    </header>
+    <section class="main">
+        <section class="left-content fl">
+            <section class="left-content-main">
+                <p>所有任务(11)</p>
+                <p>分类列表</p>
+                <dl class="left-content-main-dl">
+                    <dt><i class="fa fa-folder-open"></i><span>百度IFE项目</span><span>(10)</span></dt>
+                    <dd class="class-checked"><i class="fa fa-file"></i><span>task1</span><span>(6)</span></dd>
+                    <dd><i class="fa fa-file-o"></i><span>task2</span><span>(4)</span></dd>
+                    <dt><i class="fa fa-folder-open"></i><span>毕业设计</span><span>(0)</span></dt>
+                    <dt><i class="fa fa-folder-open"></i><span>社团活动</span><span>(0)</span></dt>
+                    <dt><i class="fa fa-folder-open"></i><span>家庭生活</span><span>(0)</span></dt>
+                    <dt><i class="fa fa-folder-open"></i><span>默认分类</span><span>(0)</span></dt>
+                </dl>
+            </section>
+            <section class="left-content-bottom fixed">
+                <i class="fa fa-plus-circle fa-2x"></i>
+                <span>新增分类</span>
+            </section>
+        </section>
+        <section class="middle-content fl">
+            <section class="middle-content-top">
+                <ul>
+                    <li class="class-checked">所有</li>
+                    <li>未完成</li>
+                    <li>已完成</li>
+                </ul>
+            </section>
+            <section class="middle-content-main">
+                <dl>
+                    <dt class="task-date">2016-01-28</dt>
+                    <dd>todo 1</dd>
+                    <dd>todo 2</dd>
+                    <dt class="task-date">2016-01-29</dt>
+                    <dd>todo 3</dd>
+                    <dd>todo 4</dd>
+                    <dt class="task-date">2016-02-30</dt>
+                    <dd>todo 5</dd>
+                    <dd class="task-checked">todo 6</dd>
+                    <dt class="task-date">2016-01-04</dt>
+                    <dd>todo 7</dd>
+                </dl>
+            </section>
+            <section class="middle-content-bottom fixed">
+                <i class="fa fa-plus-circle fa-2x"></i>
+                <span id="addTask">新增任务</span>
+            </section>
+        </section>
+        <section class="right-content">
+            <div>
+                <section class="right-content-title">
+                    计划名称：
+                    <span style="display:none">
+                        <span>to-do 6</span>
+                    <i class="fa fa-pencil-square-o fa-2x"></i>
+                    <i class="fa fa-check-square-o fa-2x"></i>
+                    </span>
+                    <span>
+                        <input type="text" value="请输入计划名称">
+                        <i class="fa fa-check fa-2x"></i> 
+                        <i class="fa fa-times fa-2x"></i>
+                    </span>
+                </section>
+                <section class="right-content-date">
+                    <div style="display:none">
+                        <i class="fa fa-calendar"></i>&nbsp;<span>2016-01-30</span>
+                    </div>
+                    <div>
+                        <i class="fa fa-calendar"></i>&nbsp;
+                        <input type="text" value="请输入日期" />
+                    </div>
+                </section>
+                <section class="right-content-main">
+                    <p style="display: none">完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作</p>
+                    <textarea rows="15" cols="140"></textarea>
+                </section>
+            </div>
+        </section>
+    </section>
+    <script type="text/javascript">
+    var addTask = function() {
+        window.localStorage.setItem("task1", "todo 1");
+    }
+    var addTaskBtn = document.getElementById("addTask");
+    window.onload = function() {
+        addTaskBtn.addEventListener("click", addTask(), false)
+    }
+    </script>
+</body>
+
+</html>
