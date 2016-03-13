@@ -119,7 +119,7 @@
         width: 100%;
         text-align: center;
         margin-left: -24px;
-        ;
+
     }
     
     li {
@@ -149,7 +149,7 @@
     .right-content {
         position: relative;
         overflow: hidden;
-        height: 100%;
+
         min-width: 72px;
     }
     
@@ -180,6 +180,9 @@
         float: right;
         padding: 0 2%;
         line-height: 1.4rem;
+    }
+    .hide{
+        display: none;
     }
     </style>
 </head>
@@ -240,41 +243,41 @@
             <div>
                 <section class="right-content-title">
                     计划名称：
-                    <span style="display:none">
+                    <span>
                         <span>to-do 6</span>
                     <i class="fa fa-pencil-square-o fa-2x"></i>
                     <i class="fa fa-check-square-o fa-2x"></i>
                     </span>
-                    <span>
+                    <span  class="hide">
                         <input type="text" value="请输入计划名称">
                         <i class="fa fa-check fa-2x"></i> 
                         <i class="fa fa-times fa-2x"></i>
                     </span>
                 </section>
                 <section class="right-content-date">
-                    <div style="display:none">
+                    <div>
                         <i class="fa fa-calendar"></i>&nbsp;<span>2016-01-30</span>
                     </div>
-                    <div>
+                    <div class="hide">
                         <i class="fa fa-calendar"></i>&nbsp;
                         <input type="text" value="请输入日期" />
                     </div>
                 </section>
                 <section class="right-content-main">
-                    <p style="display: none">完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作</p>
-                    <textarea rows="15" cols="140"></textarea>
+                    <p>完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作</p>
+                    <textarea rows="15" cols="125" class="hide"></textarea>
                 </section>
             </div>
         </section>
     </section>
     <script type="text/javascript">
-    var addTask = function() {
-        window.localStorage.setItem("task1", "todo 1");
+
+    function addClass() {
+        var eee = document.getElementById("addTask");
+        eee.style.display = "show";
     }
-    var addTaskBtn = document.getElementById("addTask");
-    window.onload = function() {
-        addTaskBtn.addEventListener("click", addTask(), false)
-    }
+    console.log(document.getElementById("addTask"));
+    document.getElementById("addTask").addEventListener("click",addClass(),false);
     </script>
 </body>
 
