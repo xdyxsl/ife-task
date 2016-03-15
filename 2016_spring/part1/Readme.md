@@ -7,6 +7,9 @@ task02 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part1/ta
 task03 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part1/task03.html>
 
 task04 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part1/task04.html>
+
+task05 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part1/task05.html>
+
 #### task02
 a伪类的顺序要注意一下，因为浏览器解析是从上往下解析样式的。a伪类的顺序应该是**lvha**。
 #### task03 
