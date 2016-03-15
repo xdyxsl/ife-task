@@ -78,14 +78,17 @@
         text-decoration: none;
     }
     
-    .nav-links a:link,
-    .nav-links a:active,
-    .nav-links a:hover {
+    .nav-links a:link {
         color: white;
     }
     
     .nav-links a:visited {
         color: #A6A4A9;
+    }
+    
+    .nav-links a:hover,
+    .nav-links a:active {
+        color: white;
     }
     
     .article {
@@ -122,10 +125,19 @@
         margin-left: 25%;
     }
     
+    .right-table li {
+        padding-top: 10px;
+    }
+    
     .right-table li label,
     h5 {
         display: inline-block;
         width: 130px;
+        text-align: right;
+    }
+    
+    .right-table .uniqe {
+        width: 20px;
     }
     
     .confirm-btn {
@@ -141,7 +153,7 @@
     
     .hint {
         display: block;
-        margin-left: 15.5%;
+        margin-left: 13.5%;
     }
     </style>
 </head>
@@ -260,26 +272,26 @@
         <form method="post" action="#" class="right-table">
             <ul>
                 <li>
-                    <label for="mail_address">请输入邮箱地址：</label>
+                    <label for="mail_address">请输入邮箱地址</label>
                     <input type="text" id="mail_address" value="这是一个文本输入框" name="mail_address" />
                     <span class="hint">邮箱地址请按要求格式输入</span>
                 </li>
                 <li>
-                    <label for="password">请输入密码：</label>
+                    <label for="password">请输入密码</label>
                     <input type="password" id="password" value="这是一个文本输入框" />
                     <br>
                 </li>
                 <li>
-                    <label for="confirm-password">请重复输入密码：</label>
+                    <label for="confirm-password">请重复输入密码</label>
                     <input type="password" id="confirm-password" value="这是一个文本输入框" name="password" />
                     <span class="hint">密码请为6-16位英文数字</span>
                 </li>
                 <li>
-                    <h5>性别：</h5>
+                    <h5>性别</h5>
                     <input type="radio" name="sex" value="男" id="male" checked="checked" />
-                    <label for="male">男</label>
+                    <label for="male" class="uniqe">男</label>
                     <input type="radio" name="sex" value="女" id="female" />
-                    <label for="female">女</label>
+                    <label for="female" class="uniqe">女</label>
                 </li>
                 <li>
                     <h5>城市</h5>
@@ -297,7 +309,7 @@
                     <input type="checkbox" />科学
                 </li>
                 <li>
-                    <h5>个人描述</h5>
+                    <h5 style="vertical-align: top;">个人描述</h5>
                     <textarea cols="100" rows="8">这是一个多行输入框，输入您的个人描述</textarea>
                 </li>
             </ul>
