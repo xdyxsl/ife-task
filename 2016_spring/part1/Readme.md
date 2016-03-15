@@ -2,9 +2,13 @@
 ## Demo 
 task01 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part1/task01.html>
 
+task02 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part1/task02.html>
+
 task03 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part1/task03.html>
 
 task04 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part1/task04.html>
+#### task02
+a伪类的顺序要注意一下，因为浏览器解析是从上往下解析样式的。a伪类的顺序应该是**lvha**。
 #### task03 
 整个任务我感觉有两种方式可以完成。利用float的浮动来脱离文本和利用position的relative和absolute定位来脱离文本流。
 
