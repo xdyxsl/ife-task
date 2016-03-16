@@ -10,6 +10,7 @@ task04 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part1/ta
 
 task05 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part1/task05.html>
 
+task07 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part1/task07.html>
 #### task02
 a伪类的顺序要注意一下，因为浏览器解析是从上往下解析样式的。a伪类的顺序应该是**lvha**。
 #### task03 
@@ -26,3 +27,10 @@ a伪类的顺序要注意一下，因为浏览器解析是从上往下解析样�
 
 #### task05 
 额，又是浮动。。醉了。。这次采取的方式是父级元素相对定位，固定宽度的地方设置绝对定位和宽度，自适应宽度的地方不设宽度设置一个margin就好了。。简单无脑省事，省得新建个层去包裹搞什么有的没得，太麻烦。。可以参考这个网站<http://jo2.org/css-auto-adapt-width/>说的，本来想试试那个`display:table`和`display:table-cell`的，好用是好用。但是不熟，发现有的DIV设置margin什么的都无效了，所以没用了，日后再研究下。
+
+#### task07
+给的背景图大小宽度有限，通过`background-size:100% auto;`来让大小填充满整个屏幕。
+子元素浮动之后，父元素没有高了。。解决办法有很多种，伪类清浮动搞了好久没搞起。。我就选择给父元素设置`overflow:hidden`属性。参考网页<http://blog.it985.com/13653.html>
+哎。。。要做到完全响应式比较麻烦。。暂时用了点小trick,去完成其他的再说。。
+IE8暂时对背景图片的SIZE属性支持的不好，还没去HACK的。
+那个复选框的样式，有点麻烦。单纯用背景去搞的话原来的黑色的小箭头还在，貌似可以用别的方法遮住自带的样式，先放着不搞。。
