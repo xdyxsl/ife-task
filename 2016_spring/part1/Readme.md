@@ -53,6 +53,7 @@ IE8暂时对背景图片的SIZE属性支持的不好，还没去HACK的。
 哎，效果图里要求间距20px,但是bootstrap里面的示例边缘和间距都是0 。。。我还是按照效果图里的来做吧。。
 
 #### task09 使用HTML/CSS实现一个复杂页面
+类似那些分栏的地方![例子](img/eg01.png),这个地方用margin啊 padding的方法都没有text-indent的好用，因为用了margin、padding之后要是要改背景色就会只有一截背景色，相当难搞。。
 
 #### task10 Flexbox 布局练习
 flex还是第一次接触，貌似flex实现居中最简单。。父元素`display:flex;`,子元素的`margin:auto;`就水平垂直居中了，相当暴力！
