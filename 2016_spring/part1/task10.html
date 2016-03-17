@@ -1,63 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>task10 Flexbox 布局练习</title>
-    <link rel="stylesheet" type="text/css" href="common/normalize.css">
     <style type="text/css">
-    body{
-        margin:0;
-        padding:0;
+    body {
+        margin: 0;
+        padding: 0;
     }
-    .box{
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    align-items:center;
+    
+    .box {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: center;
     }
+    
     .box1,
     .box2,
     .box3,
-    .box4{
+    .box4 {
         box-sizing: border-box;
-        width:150px;
-        padding:18px;
-        margin:20px 0;
+        width: 150px;
+        padding: 18px;
+        margin: 20px 0;
     }
+    
     .box1,
     .box2,
-    .box3{
-        border:1px solid #f00;
+    .box3 {
+        border: 1px solid #f00;
     }
-    .box1{
-        height:120px;
+    
+    .box1 {
+        height: 120px;
     }
-    .box2{
-        height:100px;
+    
+    .box2 {
+        height: 100px;
     }
-    .box3{
-        height:40px;
+    
+    .box3 {
+        height: 40px;
     }
-    .box4{
-        height:200px;
-        border:1px solid #0f0;
+    
+    .box4 {
+        height: 200px;
+        border: 1px solid #0f0;
     }
+    
     @media screen and (max-width:640px) {
-        .box{
+        .box {
             align-items: flex-start;
             align-content: flex-start;
         }
         .box1,
         .box2,
-        .box3{
-            order:2;
+        .box3 {
+            order: 2;
         }
-        .box4{
-            order:1;
+        .box4 {
+            order: 1;
         }
     }
     </style>
 </head>
+
 <body>
     <div class="box">
         <div class="box1">1</div>
@@ -66,4 +75,5 @@
         <div class="box4">4</div>
     </div>
 </body>
+
 </html>
