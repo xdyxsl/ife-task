@@ -1,33 +1,333 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>task09 使用HTML/CSS实现一个复杂页面</title>
+    <link rel="stylesheet" type="text/css" href="common/normalize.css">
     <style rel="stylesheet" type="text/css">
-    *{
-        margin:0;
-        padding:0;
+    body {
+        font-family: "Microsoft Yahei";
     }
-    .header{
-        height:50px;
-        background-color:#2189bf;
+    
+    html,
+    body {
+        height: 100%;
     }
-    .header a{
-        color:white;
+    
+    a {
+        text-decoration: none;
+        color: white;
     }
-    .header img[alt="logo"]{
-        width:35px;
-        height:35px;
+    
+    a:visited {
+        color: #697a8e;
+    }
+    
+    li,
+    dt,
+    dd {
+        list-style: none;
+    }
+    /*header 头部*/
+    
+    .header {
+        position: relative;
+        height: 50px;
+        background-color: #2189bf;
+    }
+    
+    .header a {
+        position: absolute;
+        right: 50px;
+        bottom: 15px;
+        color: white;
+        font-size: 0.8rem;
+    }
+    
+    .header input {
+        position: absolute;
+        width: 100px;
+        right: 269px;
+        border: none;
+        bottom: 10px;
+        border-radius: 20px;
+        text-indent: 20px;
+        background: url(img/task09-header02.png) no-repeat 5px white;
+        transition: all 2s;
+    }
+    
+    .header input:focus {
+        width: 200px;
+        border-radius: 0;
+        transition: all 1s;
+    }
+    
+    .header img[alt="logo"] {
+        position: absolute;
+        left: 46px;
+        top: 8px;
+        width: 35px;
+        border-radius: 5px;
+        height: 35px;
+        vertical-align: text-bottom;
+    }
+    /*aside 左侧的边栏*/
+    
+    .wrapper {
+        position: absolute;
+        top: 50px;
+        bottom: 0;
+        width: 100%;
+        overflow: auto;
+    }
+    
+    .aside img[alt="photo"] {
+        width: 65px;
+        height: 65px;
+        border-radius: 65px;
+    }
+    
+    .aside {
+        position: absolute;
+        background-color: #2a2e3d;
+        width: 200px;
+        color: #697a8e;
+        height: 100%;
+    }
+    
+    .aside-icon {
+        padding-left: 0;
+        margin: 0;
+        text-indent: 32px;
+        font-size: 0.8rem;
+    }
+    
+    .aside-icon li,
+    .aside-icon dd,
+    .aside-icon dt {
+        padding: 5px;
+    }
+    
+    .aside-icon li:first-child {
+        background-color: #383d4e;
+    }
+    
+    .aside-top {
+        text-align: center;
+        margin-top: 15px;
+    }
+    
+    .aside-top span {
+        display: block;
+    }
+    
+    .aside-hint ul {
+        padding-left: 6px;
+    }
+    
+    .aside-hint li {
+        display: inline-block;
+        padding: 0 30px;
+    }
+    
+    .aside-hint li:first-child {
+        border-right: 2px solid #383d4e;
+    }
+    
+    .aside dl {
+        margin: 0 15px;
+    }
+    
+    .aside img[alt="aside-icon"] {
+        padding-right: 8px;
+    }
+    
+    .aside li:hover {
+        background-color: #383d4e;
+    }
+    /*main 下右侧主内容区*/
+    
+    .main {
+        position：absolute;
+        height: 100%;
+        margin-left: 200px;
+        background-color: #eeeeed;
+    }
+    
+    .main-header {
+        background-color: #fff;
+        font-size: 0.9rem;
+        color: #b6b5b5;
+        padding: 10px;
+        text-indent: 20px;
+    }
+    
+    .main-header span:last-child {
+        color: #2189bf;
+    }
+    
+    .main-part01 {
+        background-color: #fff;
+        width: 80%;
+        padding: 20px 40px;
+        margin: 20px auto;
+        box-shadow: 10px 10px 5px #888;
+        ;
+    }
+    
+    .main-part01 label {
+        color: #b6b5b5;
+        font-size: 0.8rem;
+    }
+    
+    .main-part01 select,
+    .main-part01 input {
+        margin: 0 20px 0 0;
+    }
+    
+    .main-part01-box {
+        display: inline-block;
+        width: 125px;
+        height: 55px;
+    }
+    
+    .main-part01-box-mark {
+        width: 370px;
+        text-align: right;
+    }
+    
+    .main-part01 div:first-child {
+        width: 160px;
+        vertical-align: text-bottom;
+    }
+    
+    .main-part01-box-mark select[id="box"] {
+        width: 80px;
+    }
+    
+    .main-part01-box-mark select[id="number"] {
+        width: 100px;
+    }
+    
+    .main-part01-box-mark select:last-child {
+        width: 141px;
+    }
+    
+    .main-part01-box-mark select:last-child,
+    .main-part01-box select[id="seller"] {
+        margin-top: 10px;
+    }
+    
+    .main-part01 input:last-child {
+        margin-left: 40px;
+        vertical-align: text-bottom;
+        border: none;
+        margin-bottom: 15px;
+        line-height: 24px;
+        background-color: #388ac1;
+        display: inline-block;
+        color: #fff;
+        padding: 2px 15px;
+        border-radius: 10px;
     }
     </style>
 </head>
+
 <body>
     <div class="header">
         <img src="img/logo.png" alt="logo" />
-        <input type="text" name="search"/>
-        <a href="#" ><img src="img/header01.png">登录</a>
+        <input type="text" name="search" />
+        <a href="#"><img src="img/task09-header01.png">登录</a>
     </div>
-    <div class="aside"></div>
-    <div class="main"></div>
+    <div class="wrapper">
+        <div class="aside">
+            <div class="aside-top">
+                <img src="img/pjy.jpg" alt="photo">
+                <span>pkjy</span>
+            </div>
+            <div class="aside-hint">
+                <ul>
+                    <li><a href="#"><span>666</span><br><span>收藏</span></a></li>
+                    <li><a href="#"><span>233</span><br><span>粉丝</span></a></li>
+                </ul>
+            </div>
+            <ul class="aside-icon">
+                <li><img src="img/task09-aside09.png" alt="aside-icon" /><a href="#">
+                个人报表
+                <dl>
+                    <dt><img src="img/task09-aside04.png" alt="aside-icon"><img src="img/task09-aside01.png" alt="aside-icon">文件夹一</dt>
+                    <dt><img src="img/task09-aside11.png" alt="aside-icon"><img src="img/task09-aside02.png" alt="aside-icon">文件夹二</dt>
+                    <dd><img src="img/task09-aside05.png" alt="aside-icon">文档1</dd>
+                    <dd><img src="img/task09-aside06.png" alt="aside-icon">文档1</dd>
+                    <dt><img src="img/task09-aside04.png" alt="aside-icon"><img src="img/task09-aside01.png" alt="aside-icon">文件夹三</dt>
+                </dl>
+                </a></li>
+                <li><img src="img/task09-aside07.png" alt="aside-icon" /><a href="#">个人收藏</a></li>
+                <li><img src="img/task09-aside10.png" alt="aside-icon" /><a href="#">我的分享</a></li>
+                <li><img src="img/task09-aside07.png" alt="aside-icon" /><a href="#">图库</a></li>
+                <li><img src="img/task09-aside07.png" alt="aside-icon" /><a href="#">成长记录</a></li>
+                <li><img src="img/task09-aside03.png" alt="aside-icon" /><a href="#">账户信息</a></li>
+            </ul>
+        </div>
+        <div class="main">
+            <div class="main-header">
+                <span>c站</span>/<span>个人报表</span>/<span>文件一</span>/<span>文档一</span>
+            </div>
+            <div class="main-part01">
+                <div class="main-part01-box">
+                    <label for="box">查询项</label>
+                    <select id="box">
+                        <option>第一项</option>
+                        <option>第二项</option>
+                        <option>第三项</option>
+                    </select>
+                </div>
+                <div class="main-part01-box">
+                    <label for="buyer">买方</label>
+                    <select id="buyer">
+                        <option>小A</option>
+                        <option>小王</option>
+                        <option>小八</option>
+                    </select>
+                    <label for="seller">卖方</label>
+                    <select id="seller">
+                        <option value="one">小C</option>
+                        <option value="two">小三</option>
+                        <option value="three">小四</option>
+                    </select>
+                </div>
+                <div class="main-part01-box main-part01-box-mark">
+                    <label for="date">日期</label>
+                    <input type="text" id="date" value="2016-04-01" name="date">
+                    <label for="time">总耗时</label>
+                    <select id="time">
+                        <option value="8">8天</option>
+                        <option value="12">12天</option>
+                        <option value="14">14天</option>
+                    </select>
+                    <label for="number">人数</label>
+                    <select id="number">
+                        <option value="number1">10人</option>
+                        <option value="number2">12人</option>
+                        <option value="number3">14人</option>
+                    </select>
+                    <label for="deal">成交项</label>
+                    <select id="deal">
+                        <option value="deal1">10人</option>
+                        <option value="deal2">12人</option>
+                        <option value="deal3">14人</option>
+                    </select>
+                </div>
+                <input type="button" value="搜索" name="search" />
+            </div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
 </body>
+
 </html>
