@@ -12,6 +12,10 @@ task05 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part1/ta
 
 task07 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part1/task07.html>
 
+task08 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part1/task08.html>
+
+task09 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part1/task09.html>
+
 task10 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part1/task10.html>
 
 task12 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part1/task12.html>
@@ -42,10 +46,18 @@ IE8暂时对背景图片的SIZE属性支持的不好，还没去HACK的。
 
 那个复选框的样式，有点麻烦。单纯用背景去搞的话原来的黑色的小箭头还在，貌似可以用别的方法遮住自带的样式，先放着不搞。。
 
+#### task08 响应式网格（栅格化）布局
+我的理解响应式网格(栅格化)布局就是给同一个元素不同的样式，也是通过媒介查询来做，但是比一般的响应式布局更加规范化。
+子元素float出父元素后记得给父元素前后添加伪类清浮动，父元素就能包裹子元素啦！
+
+哎，效果图里要求间距20px,但是bootstrap里面的示例边缘和间距都是0 。。。我还是按照效果图里的来做吧。。
+
+#### task09 使用HTML/CSS实现一个复杂页面
+
 #### task10 Flexbox 布局练习
 flex还是第一次接触，貌似flex实现居中最简单。。父元素`display:flex;`,子元素的`margin:auto;`就水平垂直居中了，相当暴力！
 
-...我说我怎么怎么设置都没有变化，但是规则看上去都生效了！！！原来是我给子元素加了`margin:auto;`真的是害死人啊！！！原理很简单，子元素设置了自动居中。。其他的规则虽然没报错，但是显示不出来。。
+...我说我怎么怎么设置都没有变化，但是规则看上去都生效了！！！原来是我给子元素加了`margin:auto;`真的是害死人啊！！！原理很简单，子元素设置了自动居中。其他的规则虽然没报错，但是显示不出来。。
 
 把子元素的`margin:auto;`删掉一切正常，还是比较简单的，因为这个属性半个小时的东西搞了好几个小时真是不值！！！
 
