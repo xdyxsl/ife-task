@@ -14,13 +14,6 @@ a {
     text-decoration: none;
 }
 
-.wrapper {
-    /*    font-size: 14px;
-        max-width: 400px;
-        margin: 0 auto;
-        background-color:#eee;*/
-}
-
 .header,
 .nav,
 .logo,
@@ -190,9 +183,8 @@ a {
 }
 
 .article span {
-    margin-top: 40px;
+    margin-top: 60px;
     display: block;
-    font-size: 1.8w;
     color: #C1C1C1;
 }
 
