@@ -120,6 +120,7 @@
     .aside-icon-dd,
     .aside-icon-dt {
         cursor: pointer;
+        background-color: #383d4e;
     }
     
     .aside-icon li,
@@ -131,17 +132,28 @@
     .aside-icon li:first-child a:hover,
     .aside-hint li:hover,
     .aside li:hover,
-    .aside-icon li:hover,
-    .aside-icon-dd:hover,
-    .aside-icon-dt:hover {
+    .aside-icon li:hover {
         background-color: #383d4e;
         color: #fff;
     }
-    
+    .aside-icon-dt{
+        text-indent: 66px;
+        background: url(img/task09-aside04.png) no-repeat 52px #383d4e;
+    }
+    .aside-icon-dt:hover{
+        background: url(img/task09-aside11.png) no-repeat 52px #fff;
+    }
+    .aside-icon li:nth-child(3),
+    .aside-icon li:nth-child(4){
+        color:#fff;
+    }
     .aside-icon li:first-child {
         background-color: #383d4e;
+
     }
-    
+    .aside-icon li:first-child a{
+        color:#fff;
+    }
     .aside-top {
         text-align: center;
         margin-top: 15px;
@@ -183,6 +195,11 @@
         color: #b6b5b5;
         padding: 10px;
         text-indent: 20px;
+    }
+
+    .main-header span:hover{
+        color: #2189BF;
+        cursor: pointer;
     }
     
     .main-header span:last-child {
@@ -696,11 +713,11 @@
             </div>
             <ul class="aside-icon">
                 <li><img src="img/task09-aside09.png" alt="aside-icon" /><a href="#">个人报表</a></li>
-                <li class="aside-icon-dt"><img src="img/task09-aside04.png" alt="aside-icon"><img src="img/task09-aside01.png" alt="aside-icon">文件夹一</li>
-                <li class="aside-icon-dt"><img src="img/task09-aside11.png" alt="aside-icon"><img src="img/task09-aside02.png" alt="aside-icon">文件夹二</li>
+                <li class="aside-icon-dt"><img src="img/task09-aside01.png" alt="aside-icon">文件夹一</li>
+                <li class="aside-icon-dt"><img src="img/task09-aside02.png" alt="aside-icon">文件夹二</li>
                 <li class="aside-icon-dd"><img src="img/task09-aside05.png" alt="aside-icon">文档1</li>
                 <li class="aside-icon-dd"><img src="img/task09-aside06.png" alt="aside-icon">文档1</li>
-                <li class="aside-icon-dt"><img src="img/task09-aside04.png" alt="aside-icon"><img src="img/task09-aside01.png" alt="aside-icon">文件夹三</li>
+                <li class="aside-icon-dt"><img src="img/task09-aside01.png" alt="aside-icon">文件夹三</li>
                 <li><img src="img/task09-aside07.png" alt="aside-icon" /><a href="#">个人收藏</a></li>
                 <li><img src="img/task09-aside10.png" alt="aside-icon" /><a href="#">我的分享</a></li>
                 <li><img src="img/task09-aside07.png" alt="aside-icon" /><a href="#">图库</a></li>
