@@ -4,20 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <title>task09 使用HTML/CSS实现一个复杂页面</title>
-    <link rel="stylesheet" type="text/css" href="common/normalize.css">
     <style rel="stylesheet" type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
     body {
         font-family: "Microsoft Yahei";
     }
     
-    html,
-    body {
-        height: 100%;
-    }
-    
     a {
         text-decoration: none;
-        color: white;
+        color: #697a8e;
+        ;
     }
     
     a:visited {
@@ -57,6 +57,7 @@
         position: absolute;
         width: 100px;
         right: 269px;
+        padding: 5px;
         border: none;
         bottom: 10px;
         border-radius: 20px;
@@ -136,24 +137,29 @@
         background-color: #383d4e;
         color: #fff;
     }
-    .aside-icon-dt{
+    
+    .aside-icon-dt {
         text-indent: 66px;
         background: url(img/task09-aside04.png) no-repeat 52px #383d4e;
     }
-    .aside-icon-dt:hover{
+    
+    .aside-icon-dt:hover {
         background: url(img/task09-aside11.png) no-repeat 52px #fff;
     }
+    
     .aside-icon li:nth-child(3),
-    .aside-icon li:nth-child(4){
-        color:#fff;
+    .aside-icon li:nth-child(4) {
+        color: #fff;
     }
+    
     .aside-icon li:first-child {
         background-color: #383d4e;
-
     }
-    .aside-icon li:first-child a{
-        color:#fff;
+    
+    .aside-icon li:first-child a {
+        color: #fff;
     }
+    
     .aside-top {
         text-align: center;
         margin-top: 15px;
@@ -196,8 +202,8 @@
         padding: 10px;
         text-indent: 20px;
     }
-
-    .main-header span:hover{
+    
+    .main-header span:hover {
         color: #2189BF;
         cursor: pointer;
     }
@@ -288,7 +294,13 @@
     
     .main-part02 {
         text-align: center;
-        width: 80%;
+    }
+    
+    .main-part02:before,
+    .main-part02:after {
+        content: "";
+        display: block;
+        clear: both;
     }
     
     .main-part02 div {
@@ -296,9 +308,8 @@
     }
     
     .main-part02 li {
-        padding: 11px 20px;
+        padding: 20px 21px;
         display: inline-block;
-        margin: -7px 5px;
         color: #acacab;
     }
     
@@ -313,21 +324,29 @@
     .main-part02 div:nth-child(1),
     .main-part02 div:nth-child(3) {
         width: 35px;
-        padding: 37px 1px;
-        height: 0px;
-        line-height: 25px;
-        margin: 0 -34px 0 6px;
+        margin-top: 7px;
+        padding: 33px 1px;
+    }
+    
+    .main-part02-left {
+        margin-left: 74px;
+    }
+    
+    .main-part02-center {
+        margin: 0px 20px 0 20px;
     }
     
     .main-part02 div:last-child {
-        padding: 21px 29px 12px 29px;
-        margin-left: 42px;
-        margin-right: -223px;
+        padding: 30px 35px 30px 35px;
+        margin-left: 32px;
     }
     
     .main-part02 div:last-child a {
-        margin-top: 3px;
         display: inline-block;
+    }
+    
+    .main-part02 div:last-child a span {
+        vertical-align: super;
     }
     
     .main-part02-time {
@@ -342,8 +361,7 @@
     /*main-part03*/
     
     .main-part03 {
-        width: 80%;
-        margin: 0 auto;
+        margin: 20px 0 20px 75px;
     }
     
     .main-part03 span {
@@ -351,7 +369,7 @@
     }
     
     .main-part03-title {
-        margin-left: -40px;
+        margin-bottom: 10px;
     }
     
     .main-part03 li {
@@ -382,16 +400,18 @@
     }
     
     .main-part03 li:nth-child(2) {
-        margin: 0px 10px 0px 54px;
+        margin: 0px 21px 0px 57px;
     }
     
     .main-part03 li:nth-child(3) {
-        margin: 0px 58px 0px 37px;
+        margin: 0px 56px 0px 44px;
     }
     
-    .main-part03 ul {
-        width: 996px;
-        margin-left: -75px;
+    .main-part03 ul:before,
+    .main-part03 ul:after {
+        content: "";
+        clear: both;
+        display: block;
     }
     /*main-part04*/
     
@@ -417,11 +437,13 @@
         color: #b0afaf;
         padding: 15px;
         margin: 0;
+        font-size: 16px;
     }
     
     .main-part04 {
         width: 600px;
-        margin-left: 80px;
+        margin-left: 74px;
+        padding-bottom: 1px;
     }
     
     .main-part04-project {
@@ -429,22 +451,23 @@
     }
     
     .main-part04-detail {
-        padding-bottom: 25px;
+        margin: 0 0 20px 59px;
     }
     
     .main-part04-project li {
         display: inline-block;
-        padding: 6px 20px;
+        padding: 6px 19.3px;
         background-color: #D6D6DE;
+        font-size: 16px;
     }
     
     .main-part04 ul {
-        margin: 0;
+        margin-left: 59px;
     }
     
     .main-part04-detail td {
         border: 1px solid #000;
-        font-size: 0.7rem;
+        font-size: 12px;
         padding: 2px 6px 2px 6px;
     }
     
@@ -457,27 +480,29 @@
     .main-part04 table {
         display: inline-block;
         text-align: center;
-        padding: 34px;
+        padding: 25.5px;
         border: 1px solid #b0afaf;
     }
     /*main-part05*/
     
     .main-part05 {
         width: 372px;
-        margin: 0px 60px 0px 22px;
+        margin: 0px 0px 0px 26px;
     }
     
     .main-part05 span {
         color: #C6C6C6;
+        display: inline-block;
     }
     
     .main-part05 ul,
     .main-part05 div {
-        font-size: 0.8rem;
+        font-size: 14px;
     }
     
     .main-part05-ul {
         display: inline-block;
+        margin: 10px 0 68px 35px;
     }
     
     .main-part05-ul-li {
@@ -601,14 +626,14 @@
     
     .main-part07 th,
     .main-part07 td {
-        padding: 5px 41px;
+        padding: 0px 31px;
         border: 1px solid #eee;
     }
     
     .main-part07 table {
         text-align: center;
-        font-size: 0.1rem;
-        margin: 20px auto;
+        font-size: 13px;
+        margin: 22px auto;
     }
     
     .main-part07-img {
@@ -779,42 +804,40 @@
                 <input type="button" value="搜索" name="search" />
             </div>
             <div class="main-part02">
-                <div class="main-part02-left">
+                <div class="main-part02-left fl">
                     <a href="#"><img src="img/task09-mainpart02-01.png" alt="little-icon"></a>
                 </div>
-                <div>
-                    <ul>
-                        <li><span class="main-part02-time">10:00 am</span>
-                            <br>￥<span class="main-part02-price">1200</span></li>
-                        <li><span class="main-part02-time">11:00 am</span>
-                            <br>￥<span class="main-part02-price">1200</span></li>
-                        <li><span class="main-part02-time">12:00 am</span>
-                            <br>￥<span class="main-part02-price">1200</span></li>
-                        <li><span class="main-part02-time">01:00 pm</span>
-                            <br>￥<span class="main-part02-price">1200</span></li>
-                        <li><span class="main-part02-time">02:00 pm</span>
-                            <br>￥<span class="main-part02-price">1200</span></li>
-                        <li><span class="main-part02-time">03:00 pm</span>
-                            <br>￥<span class="main-part02-price">1200</span></li>
-                    </ul>
-                </div>
-                <div>
+                <ul class="main-part02-center fl">
+                    <li><span class="main-part02-time">10:00 am</span>
+                        <br>￥<span class="main-part02-price">1200</span></li>
+                    <li><span class="main-part02-time">11:00 am</span>
+                        <br>￥<span class="main-part02-price">1200</span></li>
+                    <li><span class="main-part02-time">12:00 am</span>
+                        <br>￥<span class="main-part02-price">1200</span></li>
+                    <li><span class="main-part02-time">01:00 pm</span>
+                        <br>￥<span class="main-part02-price">1200</span></li>
+                    <li><span class="main-part02-time">02:00 pm</span>
+                        <br>￥<span class="main-part02-price">1200</span></li>
+                    <li><span class="main-part02-time">03:00 pm</span>
+                        <br>￥<span class="main-part02-price">1200</span></li>
+                </ul>
+                <div class="fl">
                     <a href="#"><img src="img/task09-mainpart02-02.png" alt="little-icon"></a>
                 </div>
-                <div>
+                <div class="fl">
                     <a href="#"><img src="img/task09-mainpart02-03.png" alt="little-icon"><span>历史查询</span></a>
                 </div>
             </div>
             <div class="main-part03">
                 <p class="main-part03-title">2016年4月份统计</p>
                 <ul>
-                    <li>
+                    <li class="fl">
                         <p>133311</p><span>成交量</span></li>
-                    <li>
+                    <li class="fl">
                         <p>133311</p><span>成交量</span></li>
-                    <li>
+                    <li class="fl">
                         <p>133311</p><span>成交量</span></li>
-                    <li>
+                    <li class="fl">
                         <p>133311</p><span>成交量</span></li>
                 </ul>
             </div>
@@ -827,97 +850,46 @@
                     <li id="project04"><a href="#project04">项目四</a></li>
                     <li id="project05"><a href="#project05">项目五</a></li>
                 </ul>
-                <ul class="main-part04-detail">
-                    <li>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td>购买材料一</td>
-                                    <td>购买材料一</td>
-                                    <td>购买材料一</td>
-                                    <td>购买材料一</td>
-                                </tr>
-                                <tr>
-                                    <td>购买材料二</td>
-                                    <td>购买材料二</td>
-                                    <td>购买材料二</td>
-                                    <td>购买材料二</td>
-                                </tr>
-                                <tr>
-                                    <td>购买材料四</td>
-                                    <td>购买材料四</td>
-                                    <td>购买材料四</td>
-                                    <td>购买材料四</td>
-                                </tr>
-                                <tr>
-                                    <td>购买材料十二</td>
-                                    <td>购买材料十二</td>
-                                    <td>购买材料十二</td>
-                                    <td>购买材料十二</td>
-                                </tr>
-                                <tr>
-                                    <td>购买材料二十六</td>
-                                    <td>购买材料二十六</td>
-                                    <td>购买材料二十六</td>
-                                    <td>购买材料二十六</td>
-                                </tr>
-                                <tr>
-                                    <td>购买材料三十</td>
-                                    <td>购买材料三十</td>
-                                    <td>购买材料三十</td>
-                                    <td>购买材料三十</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </li>
-                    <!-- <li>
-                        <table border="1">
-                            <tbody>
-                                <tr>
-                                    <td>da</td>
-                                    <td>购买材ff料一</td>
-                                    <td>购买材料一</td>
-                                    <td>购das料一</td>
-                                </tr>
-                                <tr>
-                                    <td>发大水材料二</td>
-                                    <td>购买材fda料二</td>
-                                    <td>购买材料二</td>
-                                    <td>购发大水材料二</td>
-                                </tr>
-                                <tr>
-                                    <td>购买材料四</td>
-                                    <td>购买材料四</td>
-                                    <td>购买材料四</td>
-                                    <td>购买材料四</td>
-                                </tr>
-                                <tr>
-                                    <td>购买材料十二</td>
-                                    <td>购买材料十二</td>
-                                    <td>购买材料十二</td>
-                                    <td>购买材料十二</td>
-                                </tr>
-                                <tr>
-                                    <td>购买材料二十六</td>
-                                    <td>购买材料二十六</td>
-                                    <td>购买材料二十六</td>
-                                    <td>购买材料二十六</td>
-                                </tr>
-                                <tr>
-                                    <td>购买材料三十</td>
-                                    <td>购买材料三十</td>
-                                    <td>购买材料三十</td>
-                                    <td>购买材料三十</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </li>
-                    <li>
-                        
-                    </li>
-                    <li></li>
-                    <li></li> -->
-                </ul>
+                <table class="main-part04-detail">
+                    <tbody>
+                        <tr>
+                            <td>购买材料一</td>
+                            <td>购买材料一</td>
+                            <td>购买材料一</td>
+                            <td>购买材料一</td>
+                        </tr>
+                        <tr>
+                            <td>购买材料二</td>
+                            <td>购买材料二</td>
+                            <td>购买材料二</td>
+                            <td>购买材料二</td>
+                        </tr>
+                        <tr>
+                            <td>购买材料四</td>
+                            <td>购买材料四</td>
+                            <td>购买材料四</td>
+                            <td>购买材料四</td>
+                        </tr>
+                        <tr>
+                            <td>购买材料十二</td>
+                            <td>购买材料十二</td>
+                            <td>购买材料十二</td>
+                            <td>购买材料十二</td>
+                        </tr>
+                        <tr>
+                            <td>购买材料二十六</td>
+                            <td>购买材料二十六</td>
+                            <td>购买材料二十六</td>
+                            <td>购买材料二十六</td>
+                        </tr>
+                        <tr>
+                            <td>购买材料三十</td>
+                            <td>购买材料三十</td>
+                            <td>购买材料三十</td>
+                            <td>购买材料三十</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div class="main-part05 fl">
                 <p class="main-part05-title">第二组项目</p>
