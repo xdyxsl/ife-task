@@ -4,67 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>task10 Flexbox 布局练习</title>
-    <style type="text/css">
-    body {
-        margin: 0;
-        padding: 0;
-    }
-    
-    .box {
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-between;
-        align-items: center;
-    }
-    
-    .box1,
-    .box2,
-    .box3,
-    .box4 {
-        box-sizing: border-box;
-        width: 150px;
-        padding: 18px;
-        margin: 20px 0;
-    }
-    
-    .box1,
-    .box2,
-    .box3 {
-        border: 1px solid #f00;
-    }
-    
-    .box1 {
-        height: 120px;
-    }
-    
-    .box2 {
-        height: 100px;
-    }
-    
-    .box3 {
-        height: 40px;
-    }
-    
-    .box4 {
-        height: 200px;
-        border: 1px solid #0f0;
-    }
-    
-    @media screen and (max-width:640px) {
-        .box {
-            align-items: flex-start;
-            align-content: flex-start;
-        }
-        .box1,
-        .box2,
-        .box3 {
-            order: 2;
-        }
-        .box4 {
-            order: 1;
-        }
-    }
-    </style>
+    <link rel="stylesheet" type="text/css" href="task10.css">
 </head>
 
 <body>

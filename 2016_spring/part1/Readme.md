@@ -74,6 +74,8 @@ IE8暂时对背景图片的SIZE属性支持的不好，还没去HACK的。
 ![谷歌](img/eg03.png)
 
 **教训：**以后的前置工作一点要做好，比如规范默认字体样式，规范默认字体大小。
+
+记住代码完善的最后要用autoprefix加下前缀，再用HTML/CSS/JS Prettify美化下！
 #### task10 Flexbox 布局练习
 flex还是第一次接触，貌似flex实现居中最简单。。父元素`display:flex;`,子元素的`margin:auto;`就水平垂直居中了，相当暴力！
 
@@ -87,6 +89,12 @@ flex还是第一次接触，貌似flex实现居中最简单。。父元素`displ
 
 确实这个网站的看了之后就完全明了了。。[Flexbox详解](<https://segmentfault.com/a/1190000002910324>)
 
+#### task11 移动Web页面布局实践
+百度介绍的学习资料都非常有用，这个说的挺好的[手机/移动前端开发需要注意的20个要点](http://sentsin.com/web/54.html)。
+
+网页中尤其是需要自适应的网页中字体的单位可以选择vw(viewport-width)或vh(viewport-height)。[CSS3实现的响应式字体：自适应视图窗口大小的新单位](http://ourjs.com/detail/549cbea78a34fa3204000024)，目前的支持情况如下图。![vh-vw](image/eg04.png)![exp](image/eg05.png)
+
+感觉标签，模块一、模块二的排版是在需要的时候自动变为两栏，而最顶端的导航最好一行显示。
 #### task12 学习CSS 3的新特性
 前两个小意思。。就是最后一个懵逼了。。！！看了其他队的代码才知道有个选择器叫做`:target`，W3SCHOOL的解释是**选择当前活动的 `#`元素**。
 
