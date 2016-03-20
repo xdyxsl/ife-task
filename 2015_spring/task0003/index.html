@@ -13,35 +13,42 @@
     }
     
     * {
+        margin: 0;
+        padding: 0;
         font-family: "Microsoft Yahei", Georgia, Serif;
-        font-size: 0.9rem;
+    }
+    
+    li {
+        font-size: 0.8vw;
+        list-style: none;
+        display: inline-block;
+        padding: 2% 5%;
+        margin: 2%;
+    }
+    
+    ul {
+        text-align: center;
+    }
+    
+    dd {
+        text-indent: 20%;
     }
     
     .header {
         background-color: #5A4446;
-        border-bottom: 1px solid #cdcdcd;
-        height: 100px;
-        position: relative;
+        height: 10%;
     }
     
     .main {
-        width: 100%;
+        align-items: stretch;
         height: 90%;
-        position: absolute;
-        bottom: 0;
+        display: flex;
     }
     
     .header-name {
-        margin: 0;
-        padding: 1.5%;
         color: #FBFEE9;
         font-weight: bold;
-        font-size: 1.5rem;
-    }
-    
-    .left-content-main,
-    .middle-content-main {
-        border-bottom: 1px solid #cdcdcd;
+        font-size: 4vw;
     }
     
     .left-content,
@@ -50,54 +57,39 @@
         background-color: #f2f2f2;
     }
     
+    .left-content-main dt:hover,
+    .left-content-main dd:hover,
+    .middle-content dd:hover {
+        background-color: #fff;
+        cursor: pointer;
+    }
+    
+    .left-content,
+    .middle-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
     .left-content {
         width: 200px;
-        padding-left: 1%;
-        height: 100%;
-        position: relative;
+        flex-shrink: 0;
     }
     
-    .left-content dl {
-        padding-left: 2%;
-    }
-    
-    .left-content dl dt,
-    .left-content dl dd {
-        padding: 1%;
-    }
-    
-    .left-content-main-dl span {
-        padding-left: 4%;
+    .left-content-main-dl {
+        overflow: auto;
     }
     
     .middle-content {
         width: 200px;
+        flex-shrink: 0;
         border-left: 1px solid #cdcdcd;
         border-right: 1px solid #cdcdcd;
-        height: 100%;
-        position: relative;
-    }
-    
-    .middle-content-top ul {
-        margin: 3% 0% 3% -15%;
     }
     
     .middle-content-main {
         border-top: 1px solid #cdcdcd;
-        background-color: white;
-    }
-    
-    .middle-content-main dl {
-        margin: 0;
-    }
-    
-    .middle-content-main dd {
-        padding: 1.5% 0;
-    }
-    
-    .middle-content-bottom,
-    .left-content-bottom {
-        padding: 5%;
+        background-color: #fff;
     }
     
     .middle-content-bottom span,
@@ -105,57 +97,40 @@
         cursor: pointer;
     }
     
-    .fl {
-        float: left;
+    .middle-content dd,
+    .left-content-main dd span {
+        font-size: 1.2vw;
     }
     
-    .fr {
-        float: right;
+    .middle-content dt,
+    .left-content-main dt {
+        font-size: 1.5vw;
+        margin: 2% 0;
+        text-indent: 10%;
+    }
+    
+    .left-content-main p {
+        font-size: 2vw;
+        padding: 3%;
     }
     
     .fixed {
-        position: absolute;
-        bottom: 0px;
-        width: 100%;
         text-align: center;
-        margin-left: -24px;
-
-    }
-    
-    li {
-        list-style: none;
-        display: inline;
-        padding: 0.5% 4%;
-        font-size: 0.8rem;
+        border-top: 1px solid #cdcdcd;
+        padding: 5%;
     }
     
     .class-checked {
         border: 1px solid #cdcdcd;
-        background-color: white;
+        background-color: #fff;
     }
     
     .project-task-checked {
-        background-color: white;
+        background-color: #fff;
     }
     
     .task-checked {
         background-color: #f2f2f2;
-    }
-    
-    .task-date {
-        padding-left: 5%;
-    }
-    
-    .right-content {
-        position: relative;
-        overflow: hidden;
-
-        min-width: 72px;
-    }
-    
-    .right-content-date,
-    .right-content-main {
-        padding: 1.8% 0 1.8% 1.8%;
     }
     
     .right-content-date {
@@ -163,7 +138,7 @@
     }
     
     .right-content-main {
-        background-color: white;
+        background-color: #fff;
     }
     
     .task-date,
@@ -173,7 +148,6 @@
     
     .right-content-title {
         border-bottom: 1px solid #cdcdcd;
-        padding: 2%;
     }
     
     .right-content-title i {
@@ -181,8 +155,19 @@
         padding: 0 2%;
         line-height: 1.4rem;
     }
-    .hide{
+    
+    .right-content {
+        overflow: auto;
+    }
+    
+    .hide {
         display: none;
+    }
+    
+    .right-content-title,
+    .right-content-date,
+    .right-content-main {
+        padding: 2%;
     }
     </style>
 </head>
@@ -192,7 +177,7 @@
         <p class="header-name">PKJY-TODO</p>
     </header>
     <section class="main">
-        <section class="left-content fl">
+        <section class="left-content">
             <section class="left-content-main">
                 <p>所有任务(11)</p>
                 <p>分类列表</p>
@@ -211,15 +196,13 @@
                 <span>新增分类</span>
             </section>
         </section>
-        <section class="middle-content fl">
-            <section class="middle-content-top">
+        <section class="middle-content">
+            <section>
                 <ul>
                     <li class="class-checked">所有</li>
                     <li>未完成</li>
                     <li>已完成</li>
                 </ul>
-            </section>
-            <section class="middle-content-main">
                 <dl>
                     <dt class="task-date">2016-01-28</dt>
                     <dd>todo 1</dd>
@@ -240,44 +223,41 @@
             </section>
         </section>
         <section class="right-content">
-            <div>
-                <section class="right-content-title">
-                    计划名称：
-                    <span>
+            <section class="right-content-title">
+                计划名称：
+                <span>
                         <span>to-do 6</span>
-                    <i class="fa fa-pencil-square-o fa-2x"></i>
-                    <i class="fa fa-check-square-o fa-2x"></i>
-                    </span>
-                    <span  class="hide">
+                <i class="fa fa-pencil-square-o fa-2x"></i>
+                <i class="fa fa-check-square-o fa-2x"></i>
+                </span>
+                <span class="hide">
                         <input type="text" value="请输入计划名称">
                         <i class="fa fa-check fa-2x"></i> 
                         <i class="fa fa-times fa-2x"></i>
                     </span>
-                </section>
-                <section class="right-content-date">
-                    <div>
-                        <i class="fa fa-calendar"></i>&nbsp;<span>2016-01-30</span>
-                    </div>
-                    <div class="hide">
-                        <i class="fa fa-calendar"></i>&nbsp;
-                        <input type="text" value="请输入日期" />
-                    </div>
-                </section>
-                <section class="right-content-main">
-                    <p>完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作</p>
-                    <textarea rows="15" cols="125" class="hide"></textarea>
-                </section>
-            </div>
+            </section>
+            <section class="right-content-date">
+                <div>
+                    <i class="fa fa-calendar"></i><span>2016-01-30</span>
+                </div>
+                <div class="hide">
+                    <i class="fa fa-calendar"></i>
+                    <input type="text" value="请输入日期" />
+                </div>
+            </section>
+            <section class="right-content-main">
+                <p>完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作完成task3的编码工作</p>
+                <textarea rows="15" cols="125" class="hide"></textarea>
+            </section>
         </section>
     </section>
     <script type="text/javascript">
-
     function addClass() {
         var eee = document.getElementById("addTask");
         eee.style.display = "show";
     }
     console.log(document.getElementById("addTask"));
-    document.getElementById("addTask").addEventListener("click",addClass(),false);
+    document.getElementById("addTask").addEventListener("click", addClass(), false);
     </script>
 </body>
 
