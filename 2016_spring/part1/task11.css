@@ -45,10 +45,11 @@ a {
 .header a {
     background: url(img/task11-header01.png) 63% 0% no-repeat;
     background-size: 16%;
-    padding-left: 75px;
+    padding-left: 6%;
     position: absolute;
     top: 5%;
     left: 3.5%;
+    font-size: 1.2vw;
 }
 
 .nav {
@@ -93,7 +94,7 @@ a {
     margin: auto;
     padding: 75px 20px 30px 20px;
     background: url(img/task11-tag.png) no-repeat 30% 0%;
-    background-size: 96%;
+    background-size: 80%;
     font-weight: bold;
 }
 
@@ -137,11 +138,15 @@ a {
     margin-bottom: 20px;
 }
 
+.module img {
+    width: 10%;
+}
+
 .module li {
     float: left;
-    margin: 35px 0px 0px 20px;
+    margin: 2% 0px 0px 6%;
     background-color: #F8F8F8;
-    padding: 20px 0px;
+    padding: 1.5% 0px;
     text-align: center;
     box-sizing: border-box;
     width: 40%;
@@ -209,4 +214,7 @@ a {
 
 .article li {
     padding-left: 10px;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
 }
