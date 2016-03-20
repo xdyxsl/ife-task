@@ -218,3 +218,7 @@ a {
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
 }
+
+.article img{
+    width: 147px;
+}
