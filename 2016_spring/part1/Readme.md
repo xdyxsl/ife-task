@@ -94,7 +94,7 @@ flex还是第一次接触，貌似flex实现居中最简单。。父元素`displ
 #### task11 移动Web页面布局实践
 百度介绍的学习资料都非常有用，这个说的挺好的[手机/移动前端开发需要注意的20个要点](http://sentsin.com/web/54.html)。
 
-网页中尤其是需要自适应的网页中字体的单位可以选择vw(viewport-width)或vh(viewport-height)。[CSS3实现的响应式字体：自适应视图窗口大小的新单位](http://ourjs.com/detail/549cbea78a34fa3204000024)，目前的支持情况如下图。![vh-vw](image/eg04.png)![exp](image/eg05.png)
+网页中尤其是需要自适应的网页中字体的单位可以选择vw(viewport-width)或vh(viewport-height)。[CSS3实现的响应式字体：自适应视图窗口大小的新单位](http://ourjs.com/detail/549cbea78a34fa3204000024)，目前的支持情况如下图。 ![vmvh](img/eg04.png)![note](img/eg05.png)
 
 感觉标签，模块一、模块二的排版是在需要的时候自动变为两栏，而最顶端的导航最好一行显示。
 
