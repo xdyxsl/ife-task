@@ -58,13 +58,15 @@ dd {
     border-radius: 20px;
     text-indent: 20px;
     background: url(img/task09-header02.png) no-repeat 5px white;
-    transition: all 2s;
+    transition-property: width, border-radius;
+    transition-duration: 1s, 1s
 }
 
 .header input:focus {
     width: 200px;
     border-radius: 0;
-    transition: all 1s;
+    transition-property: width, border-radius;
+    transition-duration: 1s, 1s
 }
 
 .header img[alt="logo"] {
@@ -110,6 +112,10 @@ dd {
     font-size: 0.8rem;
 }
 
+.aside-hint {
+    margin: 10px 0;
+}
+
 .aside-icon-dd {
     margin: 0;
     text-indent: 92px;
@@ -124,7 +130,7 @@ dd {
 .aside-icon li,
 .aside-icon-dd,
 .aside-icon-dt {
-    padding: 5px;
+    padding: 6% 0;
 }
 
 .aside-icon li:first-child a:hover,
@@ -217,7 +223,7 @@ dd {
 .main-part01 {
     width: 80%;
     padding: 20px 40px;
-    margin: 20px auto;
+    margin: 2% auto;
 }
 
 .main-part01 label {
@@ -284,89 +290,144 @@ dd {
     display: inline-block;
     color: #fff;
     padding: 2px 15px;
-    transition: all 1s;
+    transition: border-radius 1s;
 }
 
 .main-part01 input:last-child:hover {
     border-radius: 20px;
-    transition: all 1s;
+    transition: border-radius 1s;
 }
 
 
-/*main-part02*/
+/*main-part02 已采用flex定位*/
 
 .main-part02 {
-    text-align: center;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 89%;
+    margin: 2% auto;
 }
 
-.main-part02:before,
-.main-part02:after {
-    content: "";
-    display: block;
-    clear: both;
+.main-part02-btn {
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
 }
 
-.main-part02 div {
-    display: inline-block;
+.main-part02-class {
+    -webkit-flex-grow: 2;
+    -ms-flex-positive: 2;
+    flex-grow: 2;
+}
+
+.main-part02-search {
+    -webkit-flex-grow: 3;
+    -ms-flex-positive: 3;
+    flex-grow: 3;
 }
 
 .main-part02 li {
-    padding: 20px 21px;
-    display: inline-block;
-    color: #acacab;
+    margin: 0 10px 0 10px;
+    padding: 10px;
 }
 
-.main-part02 li:hover {
+.main-part02 li:nth-child(2) {
     border-top: 5px solid #4388c9;
 }
 
-.main-part02 li:first-child {
+.main-part02 li:nth-child(2):hover,
+.main-part02 li:nth-child(3):hover,
+.main-part02 li:nth-child(4):hover,
+.main-part02 li:nth-child(5):hover,
+.main-part02 li:nth-child(6):hover,
+.main-part02 li:nth-child(7):hover {
     border-top: 5px solid #4388c9;
+    cursor: pointer;
 }
 
-.main-part02 div:nth-child(1),
-.main-part02 div:nth-child(3) {
-    width: 35px;
-    margin-top: 7px;
-    padding: 33px 1px;
+.main-part02-btn a,
+.main-part02-class a {
+    display: block;
 }
 
-.main-part02-left {
-    margin-left: 74px;
+.main-part02-btn {
+    text-indent: -999999999999999999999px;
+    cursor: pointer;
 }
 
-.main-part02-center {
-    margin: 0px 20px 0 20px;
-}
-
-.main-part02 div:last-child {
-    padding: 30px 35px 30px 35px;
-    margin-left: 32px;
-}
-
-.main-part02 div:last-child a {
+.main-part02-class span {
     display: inline-block;
 }
 
-.main-part02 div:last-child a span {
-    vertical-align: super;
+.main-part02-class {
+    text-align: center;
+    color: #ABABAB;
 }
 
 .main-part02-time {
-    font-size: 0.8rem;
+    font-size: .9rem;
     color: #000;
 }
 
 .main-part02-price {
-    font-size: 1.4rem;
-    color: #ec6500;
+    font-size: 1.3rem;
+    color: #ED6300;
+}
+
+.main-part02-btn-left {
+    background: url(img/task09-mainpart02-01.png) no-repeat center;
+}
+
+.main-part02-btn-right {
+    background: url(img/task09-mainpart02-02.png) no-repeat center;
+}
+
+.main-part02-search {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: space-around;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    -webkit-align-content: flex-end;
+    -ms-flex-line-pack: end;
+    align-content: flex-end;
+}
+
+.main-part02-search a {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
 }
 
 
 /*main-part03*/
 
 .main-part03 {
-    margin: 20px 0 20px 75px;
+    width: 87%;
+    margin: 2% auto;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.main-part03-ul {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
 }
 
 .main-part03 span {
@@ -404,21 +465,6 @@ dd {
     background: url(img/task09-mainpart03-04.png) no-repeat #fff 100px;
 }
 
-.main-part03 li:nth-child(2) {
-    margin: 0px 21px 0px 57px;
-}
-
-.main-part03 li:nth-child(3) {
-    margin: 0px 56px 0px 44px;
-}
-
-.main-part03 ul:before,
-.main-part03 ul:after {
-    content: "";
-    clear: both;
-    display: block;
-}
-
 
 /*main-part04*/
 
@@ -448,8 +494,8 @@ dd {
 }
 
 .main-part04 {
-    width: 600px;
-    margin-left: 74px;
+    width: 619px;
+    margin-left: 6.4%;
     padding-bottom: 1px;
 }
 
@@ -495,7 +541,7 @@ li:target {
 /*main-part05*/
 
 .main-part05 {
-    width: 372px;
+    width: 360px;
     margin: 0px 0px 0px 26px;
 }
 
@@ -534,7 +580,7 @@ li:target {
 }
 
 .main-part05-bottom {
-    padding: 14.6px;
+    padding: 12.5px;
     border-top: 1px solid #eee;
 }
 
@@ -549,7 +595,7 @@ li:target {
     margin-left: 170px;
     color: #fff;
     padding: 2px 15px;
-    transition: all 1s;
+    transition: border-radius, background-color, color 1s;
 }
 
 .search-btn:hover {
@@ -564,7 +610,7 @@ li:target {
 
 .main-part06 {
     width: 347.9999px;
-    margin: 20px 20px 0 80px;
+    margin: 2% 2% 0 6.5%;
 }
 
 .main-part06-header {
@@ -610,9 +656,7 @@ li:target {
     margin: 2px 0;
 }
 
-.main-part06-bottom {
-    margin-left: -4px;
-}
+.main-part06-bottom {}
 
 .festival,
 .weekend {
@@ -628,8 +672,8 @@ li:target {
 /*main-part07*/
 
 .main-part07 {
-    margin: 20px 20px 100px 10px;
-    width: 616px;
+    margin: 2% 2% 10% 1%;
+    width: 622px;
 }
 
 .main-part07 tr:hover {
@@ -645,7 +689,7 @@ li:target {
 
 .main-part07 table {
     text-align: center;
-    font-size: 13px;
+    font-size: 16px;
     margin: 22px auto;
 }
 

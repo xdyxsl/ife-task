@@ -76,6 +76,8 @@ IE8暂时对背景图片的SIZE属性支持的不好，还没去HACK的。
 **教训：**以后的前置工作一点要做好，比如规范默认字体样式，规范默认字体大小。
 
 记住代码完善的最后要用autoprefix加下前缀，再用HTML/CSS/JS Prettify美化下！
+
+关于带图标的按钮，以后直接在做背景图好了，位置一个center搞定，随便打个文字在a标签里占位，在text-indent给搞没就好了。
 #### task10 Flexbox 布局练习
 flex还是第一次接触，貌似flex实现居中最简单。。父元素`display:flex;`,子元素的`margin:auto;`就水平垂直居中了，相当暴力！
 
