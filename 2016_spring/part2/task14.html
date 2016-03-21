@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>task14 零基础JavaScript编码（二）</title>
+  </head>
+<body>
+
+  <h3>污染城市列表</h3>
+  <ul id="aqi-list">
+<!--   
+    <li>第一名：福州（样例），10</li>
+    <li>第二名：福州（样例），10</li> -->
+  </ul>
+
+<script type="text/javascript">
+
+var aqiData = [
+  ["北京", 90],
+  ["上海", 50],
+  ["福州", 10],
+  ["广州", 50],
+  ["成都", 90],
+  ["西安", 100]
+];
+
+(function () {
+
+  /*
+  在注释下方编写代码
+  遍历读取aqiData中各个城市的数据
+  将空气质量指数大于60的城市显示到aqi-list的列表中
+  */
+ 
+ //排序函数
+    function sortNums(){
+       //获取传入的参数个数
+       var nums = arguments.length
+       for(i=0;i<nums;i++){
+           for(j=nums-1;j>i;j--){
+               if(arguments[j]>arguments[j-1]){
+                   //以下替换的临时的不能用var声明，否则报错
+                   temp = arguments[j];
+                   arguments[j] = arguments[j-1];
+                   arguments[j-1] =temp;
+               }
+           }
+       }
+       for(k=0;k<nums;k++){
+           console.log(arguments[k]);
+       }
+    }
+
+    var rank = 1;
+    for(var i = 0,j = aqiData.length;i<j;i++){
+        if(aqiData[i][1]>60){
+
+            switch(rank){
+              case 1:
+              rank_numb = "一";
+              break;
+              case 2:
+              rank_numb = "二";
+              break;
+              case 3:
+              rank_numb = "三";
+              break;
+              case 4:
+              rank_numb = "四";
+              break;
+              default:
+              rank_numb = "啦啦啦";
+              break;
+            }
+
+
+            var li = document.createElement("li");
+            li.innerHTML = "第"+rank_numb+"名"+"："+aqiData[i][0]+" "+aqiData[i][1];
+            var ul = document.getElementById('aqi-list');
+            ul.appendChild(li);
+            rank++;
+            var newArr = [];
+            newArr.push(aqiData[i])
+            console.log(newArr[0],i)
+            sortNums(newArr[i][1],newArr[i][1],newArr[i][1])
+        }
+    }
+
+})();
+
+</script>
+</body>
+</html>
