@@ -1,6 +1,7 @@
 * {
     font-family: "Microsoft Yahei";
     font-size: 16px;
+    color: #B5B0B0;
 }
 
 li {
@@ -12,6 +13,7 @@ a {
     color: black;
     text-decoration: none;
 }
+
 
 /*一点妥协。。。哎。。响应式太花时间。。暂时就藏起来好了*/
 
@@ -32,6 +34,8 @@ a {
         display: none;
     }
 }
+
+
 /*header*/
 
 .header {
@@ -42,11 +46,15 @@ a {
 .header span {
     display: inline-block;
     margin: 12px 0 0 50px;
-    font-size: 1.1em;
+    font-size: 1.1rem;
 }
 
 .header strong {
-    margin: 12px;
+    margin: 0px 12px;
+    vertical-align: top;
+    display: inline-block;
+    color: #000;
+    font-size: 1.5rem;
 }
 
 .header ul {
@@ -58,12 +66,22 @@ a {
 .header a {
     padding: 5px 18px;
 }
-.header a:hover{
-    border-bottom:solid #e74f4d 5px;
+
+.header a:hover {
+    border-bottom: solid #e74f4d 5px;
 }
-.header li:last-child a {
+
+.header li:first-child a {
+    border-bottom: solid #e74f4d 5px;
     color: #e74f4d;
 }
+
+.header li:last-child a {
+    color: #e74f4d;
+    font-weight: bold;
+}
+
+
 /*part01*/
 
 .part01 {
@@ -89,10 +107,18 @@ a {
     font-size: 2.8rem;
 }
 
+.part01 h2,
+.part01 p,
+.part01 input {
+    color: #fff;
+}
+
 .part01-content input {
     width: 100%;
     font-size: 2.1rem;
 }
+
+
 /*part02*/
 
 .part02 {
@@ -107,21 +133,26 @@ a {
     padding: 3.5%;
     margin-top: 4%;
 }
+
+
 /*part03*/
 
 .part03 {
     background-color: #ededec;
     text-align: center;
-    margin-bottom: -32px;
+    margin-bottom: -50px;
 }
 
 .part03 p {
     padding-bottom: 10%;
+    font-size: 3rem;
 }
 
 .part03 img {
     margin-top: 8%;
 }
+
+
 /*part04*/
 
 .part04 {
@@ -150,18 +181,20 @@ a {
     width: 17%;
     height: 30px;
     line-height: 30px;
-
 }
-.part04 select{
+
+.part04 select {
     /*background:url(img/task07-background04-01.png) no-repeat white 203px 3px;
 */
-    border: 2px solid #e74f4d;
 }
+
 .part04 a {
     background-color: #e74f4d;
     color: white;
     margin-bottom: 15%;
 }
+
+
 /*part05*/
 
 .part05 {
@@ -177,6 +210,17 @@ a {
 .part05 img {
     border: 10px solid white;
 }
+
+.part05 h2 {
+    color: #000;
+    font-size: 1.5rem;
+}
+
+.part05 p {
+    font-size: 0.7rem;
+}
+
+
 /*part06*/
 
 .part06 {
@@ -201,7 +245,10 @@ a {
 .part06-left h3,
 .part06-left a {
     text-align: center;
+    color: #000;
 }
+
+
 /*part06 a & part07 a */
 
 .part06-left a,
@@ -228,6 +275,7 @@ a {
 .part06-right-content span {
     display: block;
     text-align: center;
+    color: #fff;
 }
 
 .part06-right-content span:first-child {
@@ -237,6 +285,8 @@ a {
 .part06-right-content span:nth-child(2) {
     font-size: 6rem;
 }
+
+
 /*part07*/
 
 .part07 {
@@ -278,9 +328,15 @@ a {
     color: white;
 }
 
+.part07-middle p {
+    color: #000;
+}
+
 .part07 p {
     padding-top: 50%;
 }
+
+
 /*part08*/
 
 .part08 {
@@ -293,6 +349,7 @@ a {
 
 .part08 span:first-child {
     display: block;
+    color: #000;
     font-size: 2rem;
 }
 
@@ -323,13 +380,16 @@ a {
 .part08-bottom-right li,
 .part08-bottom-right textarea {
     background-color: #ededee;
-    color: black;
     padding: 10px;
 }
 
 .part08-bottom-right li {
     width: 274px;
     margin: 5px 0;
+}
+
+.part08 h5 {
+    color: #000;
 }
 
 .part08-bottom-left {
@@ -341,12 +401,13 @@ a {
     display: block;
     text-align: right;
 }
+
+
 /*footer*/
 
 .footer {
     position: relative;
     background-color: #32353e;
-    color: white;
     text-align: center;
     padding: 3.5%;
 }
@@ -384,7 +445,19 @@ a {
     height: 50px;
     line-height: 50px;
 }
-.footer-bottom span{
-    position:absolute;
-    left:50px;
+
+.footer-bottom span {
+    position: absolute;
+    left: 50px;
+}
+
+.footer h3,
+.footer p,
+.footer span,
+.footer a {
+    color: #fff;
+}
+
+.footer-bottom a {
+    margin-right: -80%;
 }
