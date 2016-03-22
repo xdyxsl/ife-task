@@ -1,4 +1,7 @@
 # 2016年百度IFE春季班
+- <a href="#Demo">查看Demo地址</a>
+- <a href="#IFE春季班第一阶段任务">IFE春季班第一阶段任务</a>
+
 ## Demo 
 task01 任务要求地址：<http://pkjy.github.io/ife-task/2016_spring/part1/task01.md><br>
 task01 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part1/task01.html>
