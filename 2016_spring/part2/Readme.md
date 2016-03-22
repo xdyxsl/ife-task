@@ -96,3 +96,5 @@ task16 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/ta
 数组使用`bracket`的记法就可以同时命名数组的属性和值了。
 
 `for in`循环的使用，如何遍历对象的属性和值，[W3CSchool的示例](http://www.w3school.com.cn/tiy/t.asp?f=js_object_for_in)。
+
+children

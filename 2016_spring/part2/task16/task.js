@@ -14,12 +14,13 @@ var aqiData = {};
  */
 function addAqiData() {
     var city = document.getElementById('aqi-city-input').value;
+    if (!city.match(/^[a-zA-Z\u4e00-\u9fa5]+$/)) { alert("城市名称只接受中英文字符哦。");
+        return false }
     var value = document.getElementById('aqi-value-input').value;
-    aqiData[city]= value;
-    for(var city in aqiData){
-        console.log(aqiData)
-        console.log(city,aqiData[city])
-    }
+    if (!value.match(/^-?\d+$/)) { alert("空气质量只接受整数哦");
+        return false }
+    console.log(city, value)
+    aqiData[city] = value;
 }
 
 /**
@@ -27,7 +28,10 @@ function addAqiData() {
  */
 function renderAqiList() {
     var result = "<tr><td>城市</td><td>空气质量</td><td>操作</td></tr>";
-    result += "<tr><td>"+ aqiData.city+"</td><td>"+aqiData.city +"</td><td><button>删除</button></td></tr>";
+    for (var city in aqiData) {
+        result += "<tr><td>" + city + "</td><td>" + aqiData[city] + "</td><td><button>删除</button></td></tr>";
+    }
+    document.getElementById('aqi-table').innerHTML = result;
 }
 
 /**
@@ -35,8 +39,8 @@ function renderAqiList() {
  * 获取用户输入，更新数据，并进行页面呈现的更新
  */
 function addBtnHandle() {
-  addAqiData( );
-  renderAqiList();
+    addAqiData();
+    renderAqiList();
 }
 
 /**
@@ -44,16 +48,26 @@ function addBtnHandle() {
  * 获取哪个城市数据被删，删除数据，更新表格显示
  */
 function delBtnHandle() {
-  // do sth.
+    // do sth.
 
-  renderAqiList();
+    //通过当前元素父节点的父节点的第一个子节点的文本内容确定当前数组的属性并删除
+    var cityName = event.target.parentNode.parentNode.childNodes[0].innerHTML;
+    delete aqiData[cityName];
+    renderAqiList();
 }
 
 function init() {
-  // 在这下面给add-btn绑定一个点击事件，点击时触发addBtnHandle函数
-  document.getElementById('add-btn').addEventListener("click",addBtnHandle,false)
-  // 想办法给aqi-table中的所有删除按钮绑定事件，触发delBtnHandle函数
-  // document.getElementById("aqi-table").document.getElementsByTagName('button').addEventListener("click",delBtnHandle,false)
+    // 在这下面给add-btn绑定一个点击事件，点击时触发addBtnHandle函数
+    document.getElementById('add-btn').addEventListener("click", addBtnHandle, false)
+
+    // 想办法给aqi-table中的所有删除按钮绑定事件，触发delBtnHandle函数
+
+    //为表格绑定事件监听，if筛选出button按钮，并为button按钮添加删除函数
+    document.getElementById("aqi-table").addEventListener("click", function() {
+        if (event.target.nodeName.toLowerCase() == "button") {
+            delBtnHandle();
+        }
+    }, false)
 }
 
 init();
