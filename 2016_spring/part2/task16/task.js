@@ -51,23 +51,30 @@ function delBtnHandle() {
     // do sth.
 
     //通过当前元素父节点的父节点的第一个子节点的文本内容确定当前数组的属性并删除
-    var cityName = event.target.parentNode.parentNode.childNodes[0].innerHTML;
+    //这里不能用e，要用this来指代对象
+    var cityName = this.target.parentNode.parentNode.childNodes[0].innerHTML;
     delete aqiData[cityName];
     renderAqiList();
 }
-
+var event = event  || window.event;
 function init() {
     // 在这下面给add-btn绑定一个点击事件，点击时触发addBtnHandle函数
     document.getElementById('add-btn').addEventListener("click", addBtnHandle, false)
 
     // 想办法给aqi-table中的所有删除按钮绑定事件，触发delBtnHandle函数
-
+    
     //为表格绑定事件监听，if筛选出button按钮，并为button按钮添加删除函数
-    document.getElementById("aqi-table").addEventListener("click", function() {
-        if (event.target.nodeName.toLowerCase() == "button") {
-            delBtnHandle();
-        }
-    }, false)
+   
+       document.getElementById("aqi-table").addEventListener("click", function(e) {
+            //下两行适配FF和IE，将event作为函数的参数传入例如e，然后为参数e添加适配方法
+                e = e || window.event;
+                target = e.target || e.srcElement;
+
+           if (e.target.nodeName.toLowerCase() == "button") {
+               delBtnHandle();
+           }
+       }, false)
+     
 }
 
 init();
