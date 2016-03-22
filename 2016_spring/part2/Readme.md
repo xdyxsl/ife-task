@@ -9,6 +9,8 @@ task14 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/ta
 task15 任务要求地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task15.md><br>
 task15 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task15.html>
 
+task16 任务要求地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task16.md><br>
+task16 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task16.html>
 ## IFE春季班第一阶段任务
 
 　　第二阶段的主要目标是帮助大家 **了解、认识、学习、掌握JavaScript**。第一阶段任务从 **3月21日** 开始，持续到 **4月10日**。当然，您也可以在这个时间以后继续自行实践练习。第一阶段和第二阶段有一部分时间是重合的，主要考虑到大家的基础不同，有的同学HTML/CSS比较好，想更多地参与JavaScript的学习。对于想继续学习CSS的各位依然可以按照自己的节奏继续学习第一阶段的任务。
@@ -89,3 +91,8 @@ task15 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/ta
 排序之后切记要`return data`哦，找了一个多小时，原来是这里出问题了。
 
 好像火狐浏览器不支持`innerText`，改用了`innerHTML`
+
+#### task16 面向零基础的JavaScript代码编写（四）
+数组使用`bracket`的记法就可以同时命名数组的属性和值了。
+
+`for in`循环的使用，如何遍历对象的属性和值，[W3CSchool的示例](http://www.w3school.com.cn/tiy/t.asp?f=js_object_for_in)。
