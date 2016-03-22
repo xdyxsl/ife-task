@@ -1,16 +1,16 @@
 # 2016年百度IFE春季班
 ## Demo 
-task13 任务要求地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task13.md><br>
-task13 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task13.html>
+task13 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part2/task13><br>
+task13 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task13/>
 
-task14 任务要求地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task14.md><br>
-task14 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task14.html>
+task14 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part2/task14><br>
+task14 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task14/>
 
-task15 任务要求地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task15.md><br>
-task15 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task15.html>
+task15 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part2/task15><br>
+task15 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task15/>
 
-task16 任务要求地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task16.md><br>
-task16 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task16.html>
+task16 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part2/task16><br>
+task16 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task16/>
 ## IFE春季班第一阶段任务
 
 　　第二阶段的主要目标是帮助大家 **了解、认识、学习、掌握JavaScript**。第一阶段任务从 **3月21日** 开始，持续到 **4月10日**。当然，您也可以在这个时间以后继续自行实践练习。第一阶段和第二阶段有一部分时间是重合的，主要考虑到大家的基础不同，有的同学HTML/CSS比较好，想更多地参与JavaScript的学习。对于想继续学习CSS的各位依然可以按照自己的节奏继续学习第一阶段的任务。

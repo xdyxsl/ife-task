@@ -16,7 +16,6 @@ function addAqiData() {
     var city = document.getElementById('aqi-city-input').value;
     var value = document.getElementById('aqi-value-input').value;
     aqiData[city]= value;
-    console.log("addAqiData","work!")
     for(var city in aqiData){
         console.log(aqiData)
         console.log(city,aqiData[city])
@@ -29,7 +28,6 @@ function addAqiData() {
 function renderAqiList() {
     var result = "<tr><td>城市</td><td>空气质量</td><td>操作</td></tr>";
     result += "<tr><td>"+ aqiData.city+"</td><td>"+aqiData.city +"</td><td><button>删除</button></td></tr>";
-    console.log("renderAqiList","work!")
 }
 
 /**
@@ -52,7 +50,6 @@ function delBtnHandle() {
 }
 
 function init() {
-    console.log(aqiData)
   // 在这下面给add-btn绑定一个点击事件，点击时触发addBtnHandle函数
   document.getElementById('add-btn').addEventListener("click",addBtnHandle,false)
   // 想办法给aqi-table中的所有删除按钮绑定事件，触发delBtnHandle函数
