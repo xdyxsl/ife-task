@@ -110,3 +110,8 @@ task17 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/ta
 使用数组的`bracket`的时候记得要带上`""`，把参数当作字符串才能正确读取~例如`pageState["nowSelectCity"]`
 
 巧用对象的`replace`方法，
+
+#### task18 基础JavaScript练习（一）
+可以参照`inserBefore()`等方法，[链接](http://www.w3school.com.cn/jsref/met_node_insertbefore.asp)和`appendChild`方法，[链接](http://www.w3school.com.cn/jsref/met_node_appendchild.asp)
+
+e.target
