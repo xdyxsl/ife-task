@@ -3,7 +3,7 @@
 ###### 2016年春季班：
 
 1. [part1](https://github.com/pkjy/ife-task/blob/gh-pages/2016_spring/part1/Readme.md)
-2. part2
+2. [part2](https://github.com/pkjy/ife-task/blob/gh-pages/2016_spring/part2/Readme.md)
 3. part3
 4. part4
 
