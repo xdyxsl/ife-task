@@ -81,7 +81,7 @@ function renderChart() {
   var html = "";//循环体外先声明
   for(var x in graData){
     html += module.replace('{width}',graData[x]['width']).replace('{height}',graData[x]['height']).replace('{color}',graData[x]['color']).replace('{title}',graData[x]['title']).replace('{data}',graData[x]['data']);//调用5次replace()方法动态设置浏览器元素为数据组里的数据
-    console.log("graData的x是 ",x,"render里面的graData ",graData,"render里面的graData[x] ",graData[x])
+    // console.log("graData的x是 ",x,"render里面的graData ",graData,"render里面的graData[x] ",graData[x])
 
   }
   chart_wrap.innerHTML = html;
@@ -143,30 +143,62 @@ function initAqiChartData() {
   var day ={};//创建天为单位的数组
 
   var week = {};//创建周为单位的数组
+  var weekNumb = 1;//计数多少周
+  var weekTotal = 0;
 
   var month = {};//创建月为单位的数组
 
-  for(var city in aqiSourceData){
+  for(var city in aqiSourceData){//city是城市
     //先遍历声明日、周、月的数组
     day[city] = {};
     week[city] = {};
     month[city] = {};
-    for(var data in aqiSourceData[city]){//再次遍历，把每个城市对应的数据挑出来
+    for(var date in aqiSourceData[city]){//再次遍历，把每个城市对应的数据挑出来,data是每一天的日期
+      var sourceData = aqiSourceData[city][date];//aqiSourceData[city][date]是每个城市的每天空气质量的数据
 
-      var sourceData = aqiSourceData[city][data];//aqiSourceData[city][data]是每个城市的每日空气质量数据
+      /*每日数据*/
       var dayGet = {};//声明一个数组暂时存放需要的数据
       dayGet['data'] = sourceData; //把数据赋给date属性
       dayGet['height'] = sourceData*0.75 + "px";//把数据值乘以0.75赋给height，给以后动态调用
       dayGet['width'] ='10px';//每日数据的宽度设为10px
       dayGet['color'] = randomColor();
-      dayGet['title'] = city;
+      dayGet['title'] = city+date;//传入当前的城市和日期
 
-      day[city][data] = dayGet;//把dayGet所获得的动态数组赋给day数组的当前值
 
+      day[city][date] = dayGet;//把dayGet所获得的动态数组赋给day数组的当前值
+
+      /*每周数据*/
+      weekTotal += sourceData;
+      if (date == '2016-01-03') {
+               var weekData = (weekTotal / 3).toFixed(2);
+             } else if (date == '2016-03-31') {
+               var weekData = (weekTotal / 4).toFixed(2);
+             } else {
+               var weekData = (weekTotal / 7).toFixed(2);
+             }
+
+      var key = "第" + weekNumb+ "周";
+      var weekGet = {};//声明一个数组暂时存放需要的数据
+      weekGet['data'] = sourceData; //把数据赋给date属性
+      weekGet['height'] = sourceData*0.75 + "px";//把数据值乘以0.75赋给height，给以后动态调用
+      weekGet['width'] ='50px';//每日数据的宽度设为10px
+      weekGet['color'] = randomColor();
+      weekGet['title'] = city+key;//传入当前的城市和日期
+
+
+      week[city][key] = weekGet;//把dayGet所获得的动态数组赋给day数组的当前值
+
+      weekNumb++;
+      /*每月数据*/
+      
     }
-  } console.log(day)
+    //周数和月数初始化
+    weekNumb=1;
+  } 
+  console.log(week)
   chartData.day = day;
-    
+  chartData.week = week;
+  chartData.month = month;  
 }
 
 /**
