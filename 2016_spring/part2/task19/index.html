@@ -10,9 +10,9 @@
         width: 50px;
         background-color: red;
         text-indent: -99999999999px;
-        margin: 0 10px;
+        margin: 0 1px;
         line-height: 50px;
-        padding: 10px;
+        padding: 0 1px;
     }
     
     li:hover {
@@ -43,16 +43,18 @@
     function inputLeftIn() {
         var value = validNum();
         var liNum = content.childNodes.length;
-        if ((value != false)&&(liNum<60)) {
-            var newItem = document.createElement("li");
-            var textnode = document.createTextNode(value);
-            newItem.appendChild(textnode);
-            content.insertBefore(newItem, content.childNodes[0]);
-            newItem.style.height = value + 'px';
-            newItem.style.width = '8px';
-            newItem.setAttribute('title', value);
-        }else{
-            alert("最多输入60个哦~");
+        if (value != false){
+            if(liNum<60) {
+                var newItem = document.createElement("li");
+                var textnode = document.createTextNode(value);
+                newItem.appendChild(textnode);
+                content.insertBefore(newItem, content.childNodes[0]);
+                newItem.style.height = value + 'px';
+                newItem.style.width = '8px';
+                newItem.setAttribute('title', value);
+            }else{
+                alert("最多输入60个哦~");
+            }
         }
 
     }
@@ -60,7 +62,8 @@
     function inputRightIn() {
         var value = validNum();
         var liNum = content.childNodes.length;
-        if ((value != false)&&(liNum<60)) {
+        if (value != false){
+            if(liNum<60) {
             var newItem = document.createElement("li");
             var textnode = document.createTextNode(value);
             newItem.appendChild(textnode);
@@ -70,8 +73,11 @@
             newItem.style.width = '8px';
             newItem.setAttribute('title', value);
             
+            }else{
+                alert("最多输入60个哦~");
+            }
         }else{
-            alert("最多输入60个哦~");
+            return false;
         }
     }
     
