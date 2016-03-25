@@ -37,37 +37,44 @@
     <script type="text/javascript">
     var txt = document.getElementById('inputText');
     var content = document.getElementById("content");
+    
 
     //左进按钮
     function inputLeftIn() {
         var value = validNum();
-        if (value != false){
+        var liNum = content.childNodes.length;
+        if ((value != false)&&(liNum<60)) {
             var newItem = document.createElement("li");
-        
-        var textnode = document.createTextNode(value);
-        newItem.appendChild(textnode);
-        content.insertBefore(newItem, content.childNodes[0]);
-        newItem.style.height = value + 'px';
-        newItem.style.width = '8px';
-        newItem.setAttribute('title', value);
+            var textnode = document.createTextNode(value);
+            newItem.appendChild(textnode);
+            content.insertBefore(newItem, content.childNodes[0]);
+            newItem.style.height = value + 'px';
+            newItem.style.width = '8px';
+            newItem.setAttribute('title', value);
+        }else{
+            alert("最多输入60个哦~");
         }
 
     }
     //右进按钮
     function inputRightIn() {
         var value = validNum();
-        if (value != false){
+        var liNum = content.childNodes.length;
+        if ((value != false)&&(liNum<60)) {
             var newItem = document.createElement("li");
-        
-        var textnode = document.createTextNode(value);
-        newItem.appendChild(textnode);
-        content.appendChild(newItem);
+            var textnode = document.createTextNode(value);
+            newItem.appendChild(textnode);
+            content.appendChild(newItem);
 
-        newItem.style.height = value + 'px';
-        newItem.style.width = '8px';
-        newItem.setAttribute('title', value);
+            newItem.style.height = value + 'px';
+            newItem.style.width = '8px';
+            newItem.setAttribute('title', value);
+            
+        }else{
+            alert("最多输入60个哦~");
         }
     }
+    
     //左出按钮
     function inputLeftOut() {
         alert("删除的最左侧节点： " + content.firstChild.innerHTML);
