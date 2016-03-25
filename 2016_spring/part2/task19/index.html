@@ -8,17 +8,17 @@
     li {
         display: inline-block;
         width: 50px;
-        height: 50px;
         background-color: red;
         text-indent: -99999999999px;
         margin: 0 10px;
         line-height: 50px;
         padding: 10px;
-        overflow: auto;
     }
-    li:hover{
+    
+    li:hover {
         cursor: pointer;
     }
+    
     ul {
         padding-left: 0;
     }
@@ -27,7 +27,7 @@
 
 <body>
     <div>
-        <input type="text" placeholder="请输入数字" id="inputText" onblur="checkNum()">
+        <input type="text" placeholder="请输入数字" id="inputText">
         <input type="button" value="左侧入" id="inputLeftIn">
         <input type="button" value="右侧入" id="inputRightIn">
         <input type="button" value="左侧出" id="inputLeftOut">
@@ -40,25 +40,33 @@
 
     //左进按钮
     function inputLeftIn() {
-        var newItem = document.createElement("li");
-        var textnode = document.createTextNode(txt.value);
+        var value = validNum();
+        if (value != false){
+            var newItem = document.createElement("li");
+        
+        var textnode = document.createTextNode(value);
         newItem.appendChild(textnode);
         content.insertBefore(newItem, content.childNodes[0]);
-        
-        newItem.style.height = txt.value+'px';
+        newItem.style.height = value + 'px';
         newItem.style.width = '8px';
-        newItem.setAttribute('title',txt.value);
+        newItem.setAttribute('title', value);
+        }
+
     }
     //右进按钮
     function inputRightIn() {
-        var newItem = document.createElement("li");
-        var textnode = document.createTextNode(txt.value);
+        var value = validNum();
+        if (value != false){
+            var newItem = document.createElement("li");
+        
+        var textnode = document.createTextNode(value);
         newItem.appendChild(textnode);
         content.appendChild(newItem);
 
-        newItem.style.height = txt.value+'px';
+        newItem.style.height = value + 'px';
         newItem.style.width = '8px';
-        newItem.setAttribute('title',txt.value);
+        newItem.setAttribute('title', value);
+        }
     }
     //左出按钮
     function inputLeftOut() {
@@ -67,30 +75,31 @@
     }
     //右出按钮
     function inputRightOut() {
-            alert("删除的最左侧节点： " +content.childNodes[content.childNodes.length - 1].innerHTML);
-            content.removeChild(content.childNodes[content.childNodes.length - 1]);
-        }
+        alert("删除的最左侧节点： " + content.childNodes[content.childNodes.length - 1].innerHTML);
+        content.removeChild(content.childNodes[content.childNodes.length - 1]);
+    }
     //给已出现的Li都添加点击事件
     content.addEventListener("click", function(e) {
         content.removeChild(e.target);
     }, false)
 
-    document.getElementById("inputLeftIn").addEventListener("click",inputLeftIn,false);
-    document.getElementById("inputRightIn").addEventListener("click",inputRightIn,false);
-    document.getElementById("inputLeftOut").addEventListener("click",inputLeftOut,false);
-    document.getElementById("inputRightOut").addEventListener("click",inputRightOut,false);
+    document.getElementById("inputLeftIn").addEventListener("click", inputLeftIn, false);
+    document.getElementById("inputRightIn").addEventListener("click", inputRightIn, false);
+    document.getElementById("inputLeftOut").addEventListener("click", inputLeftOut, false);
+    document.getElementById("inputRightOut").addEventListener("click", inputRightOut, false);
 
-    //检测输入的数字
-    function checkNum(){
-        console.log(txt.value.match(/[10-100]+/g))
+    //过滤数字
+    function validNum() {
+        var num = parseInt(txt.value);
+        if ((isNaN(num)) || (num < 10) || (num > 100)) {
+            alert("请输入10-100的数字。");
+            return false;
+        } else {
+            console.log("validNum");
+            return num;
+        }
     }
-    
-    function formatNum(){
-        
-    }
-
     </script>
-
 </body>
 
 </html>

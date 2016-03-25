@@ -118,3 +118,5 @@ task18 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/ta
 可以参照`inserBefore()`方法，[链接](http://www.w3school.com.cn/jsref/met_node_insertbefore.asp)、`appendChild`方法，[链接](http://www.w3school.com.cn/jsref/met_node_appendchild.asp)等等。
 
 首先创建元素(`createElement()`)，再创建文本节点(`createTextNode()`)，再调用元素的插入功能把文本节点插入。
+
+啊啊，验证数字的时候，返回的`false`也能被当作值创建文本节点。
