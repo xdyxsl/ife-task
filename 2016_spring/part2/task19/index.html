@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <title>task19 基础JavaScript练习（二）</title>
     <style type="text/css">
+    body{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
     li {
         display: inline-block;
         width: 50px;
@@ -23,12 +28,19 @@
         display: flex;
         align-items: flex-end;
     }
+    input{
+        border:1px #eee solid;
+        background-color:#fff;
+        border-radius:20px;
+        padding:20px;
+        cursor:pointer;
+    }
     </style>
 </head>
 
 <body>
     <div>
-        <input type="text" placeholder="请输入数字" id="inputText">
+        <input type="text" placeholder="请输入10-100的数字" id="inputText">
         <input type="button" value="左侧入" id="inputLeftIn">
         <input type="button" value="右侧入" id="inputRightIn">
         <input type="button" value="左侧出" id="inputLeftOut">
@@ -40,6 +52,7 @@
     <script type="text/javascript">
     var txt = document.getElementById('inputText');
     var content = document.getElementById("content");
+    var time = document.getElementById('timeValue');
 
     //左进按钮
     function inputLeftIn() {
@@ -52,7 +65,7 @@
                 newItem.appendChild(textnode);
                 content.insertBefore(newItem, content.childNodes[0]);
                 newItem.style.height = value + 'px';
-                newItem.style.width = '8px';
+                newItem.style.width = '15px';
                 newItem.setAttribute('title', value);
             } else {
                 alert("最多输入60个哦~");
@@ -72,7 +85,7 @@
                 content.appendChild(newItem);
 
                 newItem.style.height = value + 'px';
-                newItem.style.width = '8px';
+                newItem.style.width = '15px';
                 newItem.setAttribute('title', value);
 
             } else {
@@ -96,11 +109,6 @@
         content.removeChild(e.target);
     }, false)
 
-    document.getElementById("inputLeftIn").addEventListener("click", inputLeftIn, false);
-    document.getElementById("inputRightIn").addEventListener("click", inputRightIn, false);
-    document.getElementById("inputLeftOut").addEventListener("click", inputLeftOut, false);
-    document.getElementById("inputRightOut").addEventListener("click", inputRightOut, false);
-    document.getElementById('sort').addEventListener("click", sort, false);
 
     //过滤数字
     function validNum() {
@@ -111,6 +119,17 @@
         } else {
             return num;
         }
+    }
+
+    //随机来60个数字
+    function randomNum() {
+        var html = "";
+        for (var i = 1; i < 40; i++) {
+            var x = Math.floor(Math.random() * 90 + 10);
+            html += "<li style='height:" + x + "px;width:15px;' title=" + x + ">" + x + "</li>"; //因为我排序时候提取的是innerHTML，所以这里要把值写入innerHTML
+            console.log("randomNum work!")
+        }
+        content.innerHTML = html;
     }
 
     //循环遍历改变位置
@@ -124,35 +143,40 @@
 
             if (i < len) {
                 if (j > i) {
-                    Li[j].style.backgroundColor = "grey";
+                    Li[j].style.backgroundColor = "red";
                     if (parseInt(Li[j].innerHTML) < parseInt(Li[j - 1].innerHTML)) {
                         temp = Li[j];
                         Li[j] = Li[j - 1];
                         Li[j - 1] = temp;
                         Li[j].style.backgroundColor = "green";
                         content.insertBefore(Li[j], Li[j - 1]);
-                        setTimeout(timeout, 100);
+                        setTimeout(timeout,50);
                         j--;
                     } else {
                         j--;
                         Li[j].style.backgroundColor = "green";
-                        setTimeout(timeout, 100);
+                        setTimeout(timeout,50);
                     }
                 } else { //这个else语句很关键！！！哎，总算搞出来了，不考虑这个else的话if只搜索一遍就跳出去了！设置这个else再初始化i和j的值！
                     i++;
-                    Li[j].style.backgroundColor = "black";
+                    Li[j].style.backgroundColor = "#000";
                     j = len - 1;
-                    setTimeout(timeout, 100);
+                    setTimeout(timeout,50);
                 }
             }
 
         }
-        setTimeout(timeout, 100);
+        setTimeout(timeout,50);
     }
 
-    function randomNum() {
-        Math.floor(Math.random() * 90 + 10)
-    }
+
+    document.getElementById("inputLeftIn").addEventListener("click", inputLeftIn, false);
+    document.getElementById("inputRightIn").addEventListener("click", inputRightIn, false);
+    document.getElementById("inputLeftOut").addEventListener("click", inputLeftOut, false);
+    document.getElementById("inputRightOut").addEventListener("click", inputRightOut, false);
+    document.getElementById('sort').addEventListener("click", sort, false);
+    document.getElementById('randomNum').addEventListener("click", randomNum, false)
+
     </script>
 </body>
 
