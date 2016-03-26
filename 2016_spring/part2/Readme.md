@@ -120,3 +120,5 @@ task18 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/ta
 首先创建元素(`createElement()`)，再创建文本节点(`createTextNode()`)，再调用元素的插入功能把文本节点插入。
 
 啊啊，验证数字的时候，返回的`false`也能被当作值创建文本节点。就算设置`return false`还是会自动返回`undefined`，一样有内容在，所以在另一个函数体里面加了个判断，不是`false`才能进行。
+
+声明对象，数组一定要放在循环体外，不然只记录最后一项。

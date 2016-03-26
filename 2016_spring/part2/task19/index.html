@@ -12,7 +12,6 @@
         text-indent: -99999999999px;
         margin: 0 1px;
         line-height: 50px;
-        padding: 0 1px;
     }
     
     li:hover {
@@ -21,6 +20,8 @@
     
     ul {
         padding-left: 0;
+        display: flex;
+        align-items: flex-end;
     }
     </style>
 </head>
@@ -32,19 +33,20 @@
         <input type="button" value="右侧入" id="inputRightIn">
         <input type="button" value="左侧出" id="inputLeftOut">
         <input type="button" value="右侧出" id="inputRightOut">
+        <input type="button" value="排序" id="sort">
     </div>
     <ul id="content"></ul>
     <script type="text/javascript">
     var txt = document.getElementById('inputText');
     var content = document.getElementById("content");
-    
+
 
     //左进按钮
     function inputLeftIn() {
         var value = validNum();
         var liNum = content.childNodes.length;
-        if (value != false){
-            if(liNum<60) {
+        if (value != false) {
+            if (liNum < 60) {
                 var newItem = document.createElement("li");
                 var textnode = document.createTextNode(value);
                 newItem.appendChild(textnode);
@@ -52,7 +54,7 @@
                 newItem.style.height = value + 'px';
                 newItem.style.width = '8px';
                 newItem.setAttribute('title', value);
-            }else{
+            } else {
                 alert("最多输入60个哦~");
             }
         }
@@ -62,25 +64,23 @@
     function inputRightIn() {
         var value = validNum();
         var liNum = content.childNodes.length;
-        if (value != false){
-            if(liNum<60) {
-            var newItem = document.createElement("li");
-            var textnode = document.createTextNode(value);
-            newItem.appendChild(textnode);
-            content.appendChild(newItem);
+        if (value != false) {
+            if (liNum < 60) {
+                var newItem = document.createElement("li");
+                var textnode = document.createTextNode(value);
+                newItem.appendChild(textnode);
+                content.appendChild(newItem);
 
-            newItem.style.height = value + 'px';
-            newItem.style.width = '8px';
-            newItem.setAttribute('title', value);
-            
-            }else{
+                newItem.style.height = value + 'px';
+                newItem.style.width = '8px';
+                newItem.setAttribute('title', value);
+
+            } else {
                 alert("最多输入60个哦~");
             }
-        }else{
-            return false;
         }
     }
-    
+
     //左出按钮
     function inputLeftOut() {
         alert("删除的最左侧节点： " + content.firstChild.innerHTML);
@@ -100,6 +100,7 @@
     document.getElementById("inputRightIn").addEventListener("click", inputRightIn, false);
     document.getElementById("inputLeftOut").addEventListener("click", inputLeftOut, false);
     document.getElementById("inputRightOut").addEventListener("click", inputRightOut, false);
+    document.getElementById('sort').addEventListener("click", sort, false);
 
     //过滤数字
     function validNum() {
@@ -108,10 +109,35 @@
             alert("请输入10-100的数字。");
             return false;
         } else {
-            console.log("validNum");
             return num;
         }
     }
+
+    //循环遍历改变位置
+    function sort() {
+        var Li = content.childNodes;
+        var liObj = new Object();
+        for (var i = 1; i < Li.length + 1; i++) {
+            left = Li[i - 1].innerHTML;
+            liObj[i] = left;
+            console.log(liObj[(i + 1)]);
+            if (liObj[i] > liObj[(i + 1)]) {
+                var temp = liObj[i];
+                liObj[i] = liObj[(i + 1)];
+                liObj[(i + 1)] = temp;
+            } else {
+                console.log("左小于右")
+            }
+
+        }
+        console.log(liObj[2], liObj[3], liObj[2] > liObj[3]);
+
+    }
+
+    //渲染
+    // function render(){
+    //     // content.innerHTML = 
+    // }
     </script>
 </body>
 
