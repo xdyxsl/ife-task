@@ -126,7 +126,7 @@
         var html = "";
         for (var i = 1; i < 40; i++) {
             var x = Math.floor(Math.random() * 90 + 10);
-            html += "<li style='height:" + x + "px;width:15px;' title=" + x + ">" + x + "</li>"; //因为我排序时候提取的是innerHTML，所以这里要把值写入innerHTML
+            html += "<li style='height:" + x + "px;width:15px;transition:all .5s;' title=" + x + ">" + x + "</li>"; //因为我排序时候提取的是innerHTML，所以这里要把值写入innerHTML
             console.log("randomNum work!")
         }
         content.innerHTML = html;
@@ -148,13 +148,13 @@
                         temp = Li[j];
                         Li[j] = Li[j - 1];
                         Li[j - 1] = temp;
-                        Li[j].style.backgroundColor = "green";
+                        Li[j].style.backgroundColor = "#00FF00";
                         content.insertBefore(Li[j], Li[j - 1]);
                         setTimeout(timeout,50);
                         j--;
                     } else {
                         j--;
-                        Li[j].style.backgroundColor = "green";
+                        Li[j].style.backgroundColor = "#00FF00";
                         setTimeout(timeout,50);
                     }
                 } else { //这个else语句很关键！！！哎，总算搞出来了，不考虑这个else的话if只搜索一遍就跳出去了！设置这个else再初始化i和j的值！
