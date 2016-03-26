@@ -33,13 +33,13 @@
         <input type="button" value="右侧入" id="inputRightIn">
         <input type="button" value="左侧出" id="inputLeftOut">
         <input type="button" value="右侧出" id="inputRightOut">
+        <input type="button" value="听天由命" id="randomNum">
         <input type="button" value="排序" id="sort">
     </div>
     <ul id="content"></ul>
     <script type="text/javascript">
     var txt = document.getElementById('inputText');
     var content = document.getElementById("content");
-
 
     //左进按钮
     function inputLeftIn() {
@@ -116,28 +116,43 @@
     //循环遍历改变位置
     function sort() {
         var Li = content.childNodes;
-        var liObj = new Object();
-        for (var i = 1; i < Li.length + 1; i++) {
-            left = Li[i - 1].innerHTML;
-            liObj[i] = left;
-            console.log(liObj[(i + 1)]);
-            if (liObj[i] > liObj[(i + 1)]) {
-                var temp = liObj[i];
-                liObj[i] = liObj[(i + 1)];
-                liObj[(i + 1)] = temp;
-            } else {
-                console.log("左小于右")
+        var len = Li.length;
+        var i = 0;
+        var j = len - 1;
+
+        function timeout() {
+
+            if (i < len) {
+                if (j > i) {
+                    Li[j].style.backgroundColor = "grey";
+                    if (parseInt(Li[j].innerHTML) < parseInt(Li[j - 1].innerHTML)) {
+                        temp = Li[j];
+                        Li[j] = Li[j - 1];
+                        Li[j - 1] = temp;
+                        Li[j].style.backgroundColor = "green";
+                        content.insertBefore(Li[j], Li[j - 1]);
+                        setTimeout(timeout, 100);
+                        j--;
+                    } else {
+                        j--;
+                        Li[j].style.backgroundColor = "green";
+                        setTimeout(timeout, 100);
+                    }
+                } else { //这个else语句很关键！！！哎，总算搞出来了，不考虑这个else的话if只搜索一遍就跳出去了！设置这个else再初始化i和j的值！
+                    i++;
+                    Li[j].style.backgroundColor = "black";
+                    j = len - 1;
+                    setTimeout(timeout, 100);
+                }
             }
 
         }
-        console.log(liObj[2], liObj[3], liObj[2] > liObj[3]);
-
+        setTimeout(timeout, 100);
     }
 
-    //渲染
-    // function render(){
-    //     // content.innerHTML = 
-    // }
+    function randomNum() {
+        Math.floor(Math.random() * 90 + 10)
+    }
     </script>
 </body>
 
