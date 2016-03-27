@@ -21,6 +21,8 @@ task18 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/ta
 task19 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part2/task19><br>
 task19 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task19/>
 
+task20 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part2/task20><br>
+task20 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task20/>
 ## IFE春季班第一阶段任务
 
 　　第二阶段的主要目标是帮助大家 **了解、认识、学习、掌握JavaScript**。第一阶段任务从 **3月21日** 开始，持续到 **4月10日**。当然，您也可以在这个时间以后继续自行实践练习。第一阶段和第二阶段有一部分时间是重合的，主要考虑到大家的基础不同，有的同学HTML/CSS比较好，想更多地参与JavaScript的学习。对于想继续学习CSS的各位依然可以按照自己的节奏继续学习第一阶段的任务。
@@ -123,6 +125,10 @@ task19 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/ta
 
 首先创建元素(`createElement()`)，再创建文本节点(`createTextNode()`)，再调用元素的插入功能把文本节点插入。
 
+#### task19 基础JavaScript练习（二）
 啊啊，验证数字的时候，返回的`false`也能被当作值创建文本节点。就算设置`return false`还是会自动返回`undefined`，一样有内容在，所以在另一个函数体里面加了个判断，不是`false`才能进行。
 
 声明对象，数组一定要放在循环体外，不然只记录最后一项。
+
+#### tasl20 基础JavaScript练习（三）
+正则+split方法(把字符串分割成字符串数组)。`\s+`过滤一个或多个空格，本打算挑出那些特殊符号来匹配的，也可以换个思路，匹配所有的数字英文符号文字的然后取反匹配就好了。`[^abc]`就是这个方括号，里面的`^`就是取反。
