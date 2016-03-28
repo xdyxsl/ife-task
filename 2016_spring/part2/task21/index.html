@@ -79,18 +79,19 @@
         var e = e||event;
         if(e.keyCode==13||e.keyCode==32||e.keyCode==188){
         var value = document.getElementById('inputText').value;
-        if(value.charAt(value.length-1)==","){console.log(value.charAt(value.length-1))};
+        if(value.charAt(value.length-1).toString() == ","){value = value.slice(0,value.length-1)};//消除逗号输入后逗号残留的BUG
+        if(value.charAt(0).toString() == ","){console.log(value.charAt(0).toString())}
         var liNum = content.childNodes.length;
-            if (value != false) {
+            if (value != false) {//防止输入框为空
                 console.log(value)
                 var newItem = document.createElement("li");
                 var textnode = document.createTextNode(value);
                 newItem.appendChild(textnode);
                 content.appendChild(newItem, content.childNodes[0]);
                 newItem.setAttribute('title', value);
-                
+                newItem.setAttribute('onmouseover', 'showDelInfo()');//添加hover效果
+                newItem.setAttribute('onmouseout', 'hideDelInfo()');//添加hover效果
                 txt.value = "";
-                
                 if (liNum == 10) {//超过10个就call删除最早的函数
                     deleteOld();
                 }
@@ -103,8 +104,21 @@
         content.removeChild(content.childNodes[0]);
     }
    
+    //hover效果
+    function showDelInfo(e){
+        var e= e||event;
+        e.target.style.backgroundColor = "rgba(0, 255, 0, 0.5)";
+        e.target.innerHTML = "点击删除"+e.target.innerHTML;
+    }
+    function hideDelInfo(e){
+        var e = e||event;
+        e.target.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
+        e.target.innerHTML = e.target.innerHTML.slice(4,e.target.innerHTML.length);
+    }
+
     //给已出现的Li都添加点击事件
     content.addEventListener("click", function(e) {
+        var e = e||event;
         content.removeChild(e.target);
     }, false)
 
