@@ -63,69 +63,104 @@
 <body>
     <div>
         <label for="inputText">Tag:</label>
-        <input type="text" placeholder="新建标签，可以按回车，逗号，空格完成创建" id="inputText" onkeyup="add(event)">
-        <input type="button" value="添加" id="inputLeftIn">
+        <input type="text" placeholder="回车/逗号/空格均可完成创建" id="inputText" onkeyup="add(event)">
         <ul id="content"></ul>
-        <textarea placeholder="批量输入多个内容，格式可以为数字、中文、英文等，可以通过用回车，逗号（全角半角均可），顿号，空格（全角半角、Tab等均可）等符号作为不同内容的间隔。" id="searchInput" cols="100" rows="5"></textarea>
+        <textarea placeholder="批量输入多个内容，格式可以为数字、中文、英文等，可以通过用回车，逗号（全角半角均可），顿号，空格（全角半角、Tab等均可）等符号作为不同内容的间隔。" id="addInterest" cols="100" rows="5"></textarea>
+        <input type="button" value="确认兴趣爱好" id="confirBtn">
+        <ul id="area_content"></ul>
         <input type="button" value="查询" id="searchBtn">
         <input type="button" value="重置" id="resetBtn">
     </div>
     <script type="text/javascript">
     var txt = document.getElementById('inputText');
     var content = document.getElementById("content");
+    var area = document.getElementById('area_content');
 
-    //添加
+
+    //添加TAG
     function add(event) {
-        var e = e||event;
-        if(e.keyCode==13||e.keyCode==32||e.keyCode==188){
-        var value = document.getElementById('inputText').value;
-        if(value.charAt(value.length-1).toString() == ","){value = value.slice(0,value.length-1)};//消除逗号输入后逗号残留的BUG
-        if(value.charAt(0).toString() == ","){console.log(value.charAt(0).toString())}
-        var liNum = content.childNodes.length;
-            if (value != false) {//防止输入框为空
-                console.log(value)
+        var e = e || event;
+        if (e.keyCode == 13 || e.keyCode == 32 || e.keyCode == 188) {
+            var value = txt.value;
+            if (value.charAt(value.length - 1).toString() == ",") {
+                value = value.slice(0, value.length - 1)
+            }; //消除逗号输入后逗号残留的BUG
+            if (value.charAt(0).toString() == ",") {
+                console.log(value.charAt(0).toString())
+            }
+            var liNum = content.childNodes.length;
+            if (value != false) { //防止输入框为空
                 var newItem = document.createElement("li");
                 var textnode = document.createTextNode(value);
                 newItem.appendChild(textnode);
                 content.appendChild(newItem, content.childNodes[0]);
                 newItem.setAttribute('title', value);
-                newItem.setAttribute('onmouseover', 'showDelInfo()');//添加hover效果
-                newItem.setAttribute('onmouseout', 'hideDelInfo()');//添加hover效果
+                newItem.setAttribute('onmouseover', 'showDelInfo()'); //添加hover效果
+                newItem.setAttribute('onmouseout', 'hideDelInfo()'); //添加hover效果
                 txt.value = "";
-                if (liNum == 10) {//超过10个就call删除最早的函数
-                    deleteOld();
+                if (liNum == 10) { //超过10个就call删除最早的函数
+                    deleteOld(content);
                 }
+            }
         }
     }
-}
+
+    function addFavo() {
+        getRegExp();
+        var value = document.getElementById('addInterest').value;
+        var liNum = area.childNodes.length;
+        if (value != false) { //防止输入框为空
+            var newItem = document.createElement("li");
+            var textnode = document.createTextNode(value);
+            newItem.appendChild(textnode);
+            area.appendChild(newItem, area.childNodes[0]);
+            newItem.setAttribute('title', value);
+            newItem.setAttribute('onmouseover', 'showDelInfo()'); //添加hover效果
+            newItem.setAttribute('onmouseout', 'hideDelInfo()'); //添加hover效果
+            txt.value = "";
+            if (liNum == 10) { //超过10个就call删除最早的函数
+                deleteOld(area);
+            }
+        }
+    }
 
     //删除最左端，最早的Tag
-    function deleteOld() {
-        content.removeChild(content.childNodes[0]);
-    }
-   
-    //hover效果
-    function showDelInfo(e){
-        var e= e||event;
-        e.target.style.backgroundColor = "rgba(0, 255, 0, 0.5)";
-        e.target.innerHTML = "点击删除"+e.target.innerHTML;
-    }
-    function hideDelInfo(e){
-        var e = e||event;
-        e.target.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
-        e.target.innerHTML = e.target.innerHTML.slice(4,e.target.innerHTML.length);
+    function deleteOld(e) {
+        var e = e || event;
+        e.removeChild(e.childNodes[0]);
+        console.log("delete success")
     }
 
-    //给已出现的Li都添加点击事件
+    //hover效果
+    function showDelInfo(e) {
+        var e = e || event;
+        e.target.style.backgroundColor = "rgba(0, 255, 0, 0.5)";
+        e.target.innerHTML = "点击删除" + e.target.innerHTML;
+    }
+
+    function hideDelInfo(e) {
+        var e = e || event;
+        e.target.style.backgroundColor = "rgba(255, 0, 0, 0.5)";
+        e.target.innerHTML = e.target.innerHTML.slice(4, e.target.innerHTML.length);
+    }
+
+    //给第一个UL内都添加点击事件
     content.addEventListener("click", function(e) {
-        var e = e||event;
-        content.removeChild(e.target);
+        var e = e || event;
+        e.target.parentNode.removeChild(e.target);
+    }, false)
+
+    //给第二个UL内都添加点击事件
+    area.addEventListener("click", function(e) {
+        var e = e || event;
+        e.target.parentNode.removeChild(e.target);
     }, false)
 
     //正则过滤
     function getRegExp() {
         function getValue() {
-            value = txt.value.replace(/[^\d\u4e00-\u9fa5a-zA-Z]+/g, " ").split(" ");
+            var inputTxt = document.getElementById('addInterest').value;
+            value = inputTxt.replace(/[^\d\u4e00-\u9fa5a-zA-Z]+/g, " ").split(" ");
             if (value[0] !== "") {
                 return value;
             } else {
@@ -139,7 +174,7 @@
     //查询按钮
     function searchItem() {
         var childLi = content.childNodes;
-        var inputTxt = document.getElementById('searchInput').value;
+        var inputTxt = document.getElementById('addInterest').value;
         for (var i = 0; i < childLi.length; i++) {
             if (inputTxt == childLi[i].innerHTML) {
                 childLi[i].style.backgroundColor = "#FFFF00";
@@ -152,10 +187,10 @@
     function reset() {
         content.innerHTML = "";
         txt.value = "";
+        area.value = "";
     }
 
-
-    document.getElementById("inputLeftIn").addEventListener("click", inputLeftIn, false);
+    document.getElementById('confirBtn').addEventListener("click", addFavo, false)
     document.getElementById('searchBtn').addEventListener("click", searchItem, false);
     document.getElementById('resetBtn').addEventListener("click", reset, false)
     </script>
