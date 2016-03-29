@@ -99,7 +99,7 @@
         getRegExp();
         var liNum = content.childNodes.length;
         if (value != false) { //排除空元素
-            for (var i = 0; i < value.length - 1; i++) {
+            for (var i = 0; i < value.length; i++) {
                 if (liNum < 60) {
                     var newItem = document.createElement("li");
                     var textnode = document.createTextNode(value[i]);
