@@ -67,9 +67,9 @@
         for (var i = 0; i < str.length; i++) {
             char_code = str.charCodeAt(i); //取每一个字符的code值
             if (char_code >= 0 && char_code <= 128) {
-                countLength += 1; //如果是英文就自加1
+                countLength += 1; //如果非汉字就自加1
             } else {
-                countLength += 2; //如果是英文以外就自加2
+                countLength += 2; //如果非汉字以外就自加2
             }
         }
         return countLength;
