@@ -69,7 +69,6 @@ function init() {
     // 想办法给aqi-table中的所有删除按钮绑定事件，触发delBtnHandle函数
 
     //为表格绑定事件监听，if筛选出button按钮，并为button按钮添加删除函数
-
     document.getElementById("aqi-table").addEventListener("click", function(e) {
         //下两行适配FF和IE，将event作为函数的参数传入例如e，然后为参数e添加适配方法
         e = e || window.event;
