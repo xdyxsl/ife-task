@@ -66,6 +66,7 @@
         <ul id="area_content"></ul>
         <input type="button" value="重置" id="resetBtn">
     </div>
+    <!--还差查重功能,trim没完成,UL点击会消失的BUG-->
     <script type="text/javascript">
     var tag_text = document.getElementById('tag_text');
     var interest_text = document.getElementById('interest_text');
@@ -104,7 +105,7 @@
     //添加兴趣爱好
     function addInterest() {
         getRegExp();
-        value= trim(value);
+        
         var liNum = area_content.childNodes.length;
         for (var i = 0; i < value.length; i++) {
             if (value != false) { //防止输入框为空
@@ -172,20 +173,20 @@
         getValue();
     }
 
-    //trim删除左右两端的空格
-    function trim(str) {
-        var strhh = str.replace(/[\r\n]/g,"");
-        var strdh = strhh.replace(/(.*)[,，]$/, '$1');
-        var value = strdh.replace(/(^\s*)|(\s*$)/g, "");
-        var ivalue = document.querySelectorAll(".ivalue");
-        for (var j = ivalue.length - 1; j >= 0; j--) {
-            if (value ==document.querySelectorAll(".ivalue")[j].innerHTML) {
-                value = '';
-            }
-        }
+    // //trim删除左右两端的空格
+    // function trim(str) {
+    //     var strhh = str.replace(/[\r\n]/g,"");
+    //     var strdh = strhh.replace(/(.*)[,，]$/, '$1');
+    //     var value = strdh.replace(/(^\s*)|(\s*$)/g, "");
+    //     var ivalue = document.querySelectorAll(".ivalue");
+    //     for (var j = ivalue.length - 1; j >= 0; j--) {
+    //         if (value ==document.querySelectorAll(".ivalue")[j].innerHTML) {
+    //             value = '';
+    //         }
+    //     }
 
-        return value;
-    }
+    //     return value;
+    // }
 
     //重置清空函数
     function reset() {
