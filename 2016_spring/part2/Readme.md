@@ -149,3 +149,14 @@ task30 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/ta
 `nextSibling`是操作节点的，`nextElementSibliing`是操作元素的！！要分清楚
 
 用到正则的`test()`方法，可以通过查询正则表达式返回布尔值。`^1`代表以1开头，`[3|4|5|8]` 紧跟上面的1后面，可以是3或4或5或8的一个数字，`[0-9]`表示0-9中间的任何数字，可以是0或9 ，`\d{4,8}`这个\d跟[0-9]意思一样，都是0-9中间的数字。`{4,8}`表示匹配前面的最低4位数字最高8位数字。我就直接用`{8}`来限制位数，记得在最后添加$表示结束匹配，否则超出的位数也会匹配成功。
+
+#### task31 表单（三）联动
+主要考察`select`的掌握程度。`select`可以通过索引值获取当前选中的文本或值。以下是原生js方法，参考[链接](http://blog.sina.com.cn/s/blog_a73036570101e9ry.html)
+
+    var obj = document.getElementByIdx_xx_x('testSelect'); //定位id
+
+    var index = obj.selectedIndex; // 选中索引
+
+    var text = obj.options[index].text; // 选中文本
+
+    var value = obj.options[index].value; // 选中值
