@@ -23,6 +23,9 @@ task19 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/ta
 
 task20 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part2/task20><br>
 task20 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task20/>
+
+task29 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part2/task29><br>
+task29 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task29/>
 ## IFE春季班第一阶段任务
 
 　　第二阶段的主要目标是帮助大家 **了解、认识、学习、掌握JavaScript**。第一阶段任务从 **3月21日** 开始，持续到 **4月10日**。当然，您也可以在这个时间以后继续自行实践练习。第一阶段和第二阶段有一部分时间是重合的，主要考虑到大家的基础不同，有的同学HTML/CSS比较好，想更多地参与JavaScript的学习。对于想继续学习CSS的各位依然可以按照自己的节奏继续学习第一阶段的任务。
@@ -135,3 +138,6 @@ task20 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/ta
 
 #### task21 基础JavaScript练习（四）
 监控回车`onkeydown`，回车的`keyCode`是13,空格是32,逗号是188。逗号用188号来监控有小BUG，会遗留逗号在表格里(已经查明，是重置输入框的时间太慢，放到插入子节点之前重置输入框就好了。)。
+
+#### task29 表单（一）单个表单项的检验
+用到JS的`charCodeAt()`方法，可以返回指定位置的字符的Unicode编码,根据返回的编码分开计算英文与非英文的字符长度,[W3School](http://www.w3school.com.cn/jsref/jsref_charCodeAt.asp)。注意其余`charAt()`方法的区别。
