@@ -6,17 +6,13 @@
     <title>task21 基础JavaScript练习（四）</title>
     <style type="text/css">
     body {
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        -webkit-align-items: center;
-        -ms-flex-align: center;
-        align-items: center;
+        width:50%;
+        margin:0 auto;
     }
-    
+    div{
+        display:flex;
+        flex-direction: column;
+    }
     li {
         display: inline-block;
         background-color: rgba(255, 0, 0, 0.5);
@@ -32,7 +28,7 @@
     }
     
     ul {
-        padding-left: 0;
+        padding:10px 0;
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
@@ -62,65 +58,71 @@
 
 <body>
     <div>
-        <label for="inputText">Tag:</label>
-        <input type="text" placeholder="回车/逗号/空格均可完成创建" id="inputText" onkeyup="add(event)">
-        <ul id="content"></ul>
-        <textarea placeholder="批量输入多个内容，格式可以为数字、中文、英文等，可以通过用回车，逗号（全角半角均可），顿号，空格（全角半角、Tab等均可）等符号作为不同内容的间隔。" id="addInterest" cols="100" rows="5"></textarea>
+        <label for="tag_text">Tag:</label>
+        <input type="text" placeholder="回车/逗号/空格均可完成创建" id="tag_text" onkeyup="addTag(event)">
+        <ul id="tag_content"></ul>
+        <textarea placeholder="批量输入多个内容，格式可以为数字、中文、英文等，可以通过用回车，逗号（全角半角均可），顿号，空格（全角半角、Tab等均可）等符号作为不同内容的间隔。" id="interest_text" cols="100" rows="5"></textarea>
         <input type="button" value="确认兴趣爱好" id="confirBtn">
         <ul id="area_content"></ul>
-        <input type="button" value="查询" id="searchBtn">
         <input type="button" value="重置" id="resetBtn">
     </div>
     <script type="text/javascript">
-    var txt = document.getElementById('inputText');
-    var content = document.getElementById("content");
-    var area = document.getElementById('area_content');
+    var tag_text = document.getElementById('tag_text');
+    var interest_text = document.getElementById('interest_text');
+    var tag_content = document.getElementById("tag_content");
+    var area_content = document.getElementById('area_content');
 
 
     //添加TAG
-    function add(event) {
+    function addTag(event) {
         var e = e || event;
         if (e.keyCode == 13 || e.keyCode == 32 || e.keyCode == 188) {
-            var value = txt.value;
+            var value = tag_text.value;
             if (value.charAt(value.length - 1).toString() == ",") {
                 value = value.slice(0, value.length - 1)
             }; //消除逗号输入后逗号残留的BUG
             if (value.charAt(0).toString() == ",") {
                 console.log(value.charAt(0).toString())
             }
-            var liNum = content.childNodes.length;
+            var liNum = tag_content.childNodes.length;
             if (value != false) { //防止输入框为空
                 var newItem = document.createElement("li");
                 var textnode = document.createTextNode(value);
                 newItem.appendChild(textnode);
-                content.appendChild(newItem, content.childNodes[0]);
+                tag_content.appendChild(newItem, tag_content.childNodes[0]);
                 newItem.setAttribute('title', value);
                 newItem.setAttribute('onmouseover', 'showDelInfo()'); //添加hover效果
                 newItem.setAttribute('onmouseout', 'hideDelInfo()'); //添加hover效果
-                txt.value = "";
-                if (liNum == 10) { //超过10个就call删除最早的函数
-                    deleteOld(content);
+                tag_text.value = "";
+                if (liNum >= 10) { //超过10个就call删除最早的函数
+                    deleteOld(tag_content);
                 }
             }
         }
     }
 
-    function addFavo() {
+    //添加兴趣爱好
+    function addInterest() {
         getRegExp();
-        var value = document.getElementById('addInterest').value;
-        var liNum = area.childNodes.length;
-        if (value != false) { //防止输入框为空
-            var newItem = document.createElement("li");
-            var textnode = document.createTextNode(value);
-            newItem.appendChild(textnode);
-            area.appendChild(newItem, area.childNodes[0]);
-            newItem.setAttribute('title', value);
-            newItem.setAttribute('onmouseover', 'showDelInfo()'); //添加hover效果
-            newItem.setAttribute('onmouseout', 'hideDelInfo()'); //添加hover效果
-            txt.value = "";
-            if (liNum == 10) { //超过10个就call删除最早的函数
-                deleteOld(area);
+        value= trim(value);
+        var liNum = area_content.childNodes.length;
+        for (var i = 0; i < value.length; i++) {
+            if (value != false) { //防止输入框为空
+                console.log(value[i].charAt(value[i].length-1)=="")
+                if(value[i].charAt(value[i].length-1) ==""){ value[i] = value[i].slice(0, value.length - 1)}
+                var newItem = document.createElement("li");
+                var textnode = document.createTextNode(value[i]);
+                
+                newItem.appendChild(textnode);
+                area_content.appendChild(newItem, area_content.childNodes[0]);
+                newItem.setAttribute('title', value[i]);
+                newItem.setAttribute('onmouseover', 'showDelInfo()'); //添加hover效果
+                newItem.setAttribute('onmouseout', 'hideDelInfo()'); //添加hover效果
+                interest_text.value = "";
             }
+        }
+        if (liNum >= 10) { //超过10个就call删除最早的函数
+            deleteOld(area_content);
         }
     }
 
@@ -144,54 +146,56 @@
         e.target.innerHTML = e.target.innerHTML.slice(4, e.target.innerHTML.length);
     }
 
-    //给第一个UL内都添加点击事件
-    content.addEventListener("click", function(e) {
+    //给UL添加点击事件
+    for(var i =0,j=document.getElementsByTagName('ul');i<j.length;i++){
+        console.log(j[i].childNodes);
+        j[i].addEventListener("click",function(e) {
         var e = e || event;
+        
         e.target.parentNode.removeChild(e.target);
-    }, false)
-
-    //给第二个UL内都添加点击事件
-    area.addEventListener("click", function(e) {
-        var e = e || event;
-        e.target.parentNode.removeChild(e.target);
-    }, false)
+        }, false)
+    }
+   
 
     //正则过滤
     function getRegExp() {
         function getValue() {
-            var inputTxt = document.getElementById('addInterest').value;
+            var inputTxt = document.getElementById('interest_text').value;
             value = inputTxt.replace(/[^\d\u4e00-\u9fa5a-zA-Z]+/g, " ").split(" ");
             if (value[0] !== "") {
                 return value;
             } else {
-                alert("请先输入点东西~");
+                alert("请先输入内容");
                 return false;
             }
         }
         getValue();
     }
 
-    //查询按钮
-    function searchItem() {
-        var childLi = content.childNodes;
-        var inputTxt = document.getElementById('addInterest').value;
-        for (var i = 0; i < childLi.length; i++) {
-            if (inputTxt == childLi[i].innerHTML) {
-                childLi[i].style.backgroundColor = "#FFFF00";
-                childLi[i].style.color = "#000";
+    //trim删除左右两端的空格
+    function trim(str) {
+        var strhh = str.replace(/[\r\n]/g,"");
+        var strdh = strhh.replace(/(.*)[,，]$/, '$1');
+        var value = strdh.replace(/(^\s*)|(\s*$)/g, "");
+        var ivalue = document.querySelectorAll(".ivalue");
+        for (var j = ivalue.length - 1; j >= 0; j--) {
+            if (value ==document.querySelectorAll(".ivalue")[j].innerHTML) {
+                value = '';
             }
         }
+
+        return value;
     }
 
     //重置清空函数
     function reset() {
-        content.innerHTML = "";
-        txt.value = "";
-        area.value = "";
+        tag_content.innerHTML = "";
+        tag_text.value = "";
+        interest_text.value = "";
+        area_content.innerHTML = "";
     }
 
-    document.getElementById('confirBtn').addEventListener("click", addFavo, false)
-    document.getElementById('searchBtn').addEventListener("click", searchItem, false);
+    document.getElementById('confirBtn').addEventListener("click", addInterest, false);
     document.getElementById('resetBtn').addEventListener("click", reset, false)
     </script>
 </body>
