@@ -134,14 +134,16 @@
                 password_info.nextElementSibling.innerHTML = "密码可用";
                 password_info.nextElementSibling.style.color = "#0f0";
                 password_info.style.border = "2px solid #0f0"
+            }else{
+                password_info.nextElementSibling.innerHTML = "请输入密码";
+                password_info.nextElementSibling.style.color = "#BBBBBB";
+                password_info.style.border = "1px solid #888";
+            }
+            if(password_confirm_info.value!=""){
                 if(password_info.value === password_confirm_info.value){
                     password_confirm_info.nextElementSibling.innerHTML = "密码输入一致";
                     password_confirm_info.nextElementSibling.style.color = "#0f0";
                     password_confirm_info.style.border = "2px solid #0f0";
-                }else if(password_confirm_info.value==""){
-                    password_confirm_info.nextElementSibling.innerHTML = "再次输入相同的密码";
-                    password_confirm_info.nextElementSibling.style.color = "#BBB";
-                    password_confirm_info.style.border = "1px solid #888";
                 }else{
                     password_confirm_info.nextElementSibling.innerHTML = "密码输入不一致";
                     password_confirm_info.nextElementSibling.style.color = "#f00";
@@ -149,9 +151,10 @@
                 }
             }else{
                 password_confirm_info.nextElementSibling.innerHTML = "再次输入相同的密码";
-                password_confirm_info.nextElementSibling.style.color = "#BBB";
+                password_confirm_info.nextElementSibling.style.color = "#bbb";
                 password_confirm_info.style.border = "1px solid #888";
             }
+           
         }
 
         //验证邮箱
@@ -190,7 +193,7 @@
             }else{
                 phone_info.nextElementSibling.innerHTML = "输入您的手机号码";
                 phone_info.nextElementSibling.style.color = "#BBB";
-                phone_info.style.border = "2px solid #888";
+                phone_info.style.border = "1px solid #888";
             }
         }
 
