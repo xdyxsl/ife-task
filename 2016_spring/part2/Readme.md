@@ -32,6 +32,9 @@ task30 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/ta
 
 task31 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part2/task31><br>
 task31 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task31/>
+
+task32 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part2/task32><br>
+task32 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task32/>
 ## IFE春季班第一阶段任务
 
 　　第二阶段的主要目标是帮助大家 **了解、认识、学习、掌握JavaScript**。第一阶段任务从 **3月21日** 开始，持续到 **4月10日**。当然，您也可以在这个时间以后继续自行实践练习。第一阶段和第二阶段有一部分时间是重合的，主要考虑到大家的基础不同，有的同学HTML/CSS比较好，想更多地参与JavaScript的学习。对于想继续学习CSS的各位依然可以按照自己的节奏继续学习第一阶段的任务。
@@ -163,3 +166,8 @@ task31 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/ta
     var text = obj.options[index].text; // 选中文本
 
     var value = obj.options[index].value; // 选中值
+
+#### task32 表单（四）实现表单自动生成工厂
+用`checkbox`的`checked`属性，被选中会返回`true`。这个主要考察面向对象编程和模块化。！
+
+当变量名称和已经申明的对象名称重复了得时候，就不能调用对象了..解决方法，把对象们放到一个数组里，调用数组就好了~~
