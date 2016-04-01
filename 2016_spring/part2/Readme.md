@@ -146,7 +146,14 @@ task32 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/ta
 正则+split方法(把字符串分割成字符串数组)。`\s+`过滤一个或多个空格，本打算挑出那些特殊符号来匹配的，也可以换个思路，匹配所有的数字英文符号文字的然后取反匹配就好了。`[^abc]`就是这个方括号，里面的`^`就是取反。
 
 #### task21 基础JavaScript练习（四）
-监控回车`onkeydown`，回车的`keyCode`是13,空格是32,逗号是188。逗号用188号来监控有小BUG，会遗留逗号在表格里(已经查明，是重置输入框的时间太慢，放到插入子节点之前重置输入框就好了。)。
+监控回车`onkeydown`，回车的`keyCode`是13,空格是32,逗号是188。逗号用188号来监控有小BUG，会遗留逗号在表格里(已经查明，是重置输入框的时间太慢，放到插入子节点之前重置输入框就好了。)
+
+//trim删除左右两端的空格
+    function trim(str) {
+        var regex1 = /^\s*/;
+        var regex2 = /\s*$/;
+        return (str.replace(regex1, "")).replace(regex2, "");
+    }
 
 #### task29 表单（一）单个表单项的检验
 用到JS的`charCodeAt()`方法，可以返回指定位置的字符的Unicode编码,根据返回的编码分开计算英文与非英文的字符长度,[W3School](http://www.w3school.com.cn/jsref/jsref_charCodeAt.asp)。注意其余`charAt()`方法的区别。
@@ -171,3 +178,6 @@ task32 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/ta
 用`checkbox`的`checked`属性，被选中会返回`true`。这个主要考察面向对象编程和模块化。！
 
 当变量名称和已经申明的对象名称重复了得时候，就不能调用对象了..解决方法，把对象们放到一个数组里，调用数组就好了~~
+
+#### task 33 听指令的小方块（一）
+`border-collapse`属性设置表格的边框是否被合并为一个单一的边框，还是象在标准的 HTML 中那样分开显示。

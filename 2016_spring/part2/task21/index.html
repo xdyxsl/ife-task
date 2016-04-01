@@ -66,7 +66,7 @@
         <ul id="area_content"></ul>
         <input type="button" value="重置" id="resetBtn">
     </div>
-    <!--还差查重功能,trim没完成,UL点击会消失的BUG-->
+    <!--还差查重功能,textarea的trim已完成,UL点击会消失的BUG-->
     <script type="text/javascript">
     var tag_text = document.getElementById('tag_text');
     var interest_text = document.getElementById('interest_text');
@@ -82,10 +82,8 @@
             if (value.charAt(value.length - 1).toString() == ",") {
                 value = value.slice(0, value.length - 1)
             }; //消除逗号输入后逗号残留的BUG
-            if (value.charAt(0).toString() == ",") {
-                console.log(value.charAt(0).toString())
-            }
-            var liNum = tag_content.childNodes.length;
+            
+            var liNum = tag_content.childNodes;
             if (value != false) { //防止输入框为空
                 var newItem = document.createElement("li");
                 var textnode = document.createTextNode(value);
@@ -95,22 +93,23 @@
                 newItem.setAttribute('onmouseover', 'showDelInfo()'); //添加hover效果
                 newItem.setAttribute('onmouseout', 'hideDelInfo()'); //添加hover效果
                 tag_text.value = "";
-                if (liNum >= 10) { //超过10个就call删除最早的函数
+                if (liNum.length >= 10) { //超过10个就call删除最早的函数
                     deleteOld(tag_content);
                 }
             }
         }
     }
 
+    var html = "";
     //添加兴趣爱好
     function addInterest() {
         getRegExp();
-        
-        var liNum = area_content.childNodes.length;
+        var liNum = area_content.childNodes;
         for (var i = 0; i < value.length; i++) {
             if (value != false) { //防止输入框为空
-                console.log(value[i].charAt(value[i].length-1)=="")
-                if(value[i].charAt(value[i].length-1) ==""){ value[i] = value[i].slice(0, value.length - 1)}
+                // console.log(value[i]);
+                // html += "<li title='"+value[i]+"' onmouseover='showDelInfo()' onmouseout='hideDelInfo()'>"+value[i]+"</li>";
+                // area_content.innerHTML = html;
                 var newItem = document.createElement("li");
                 var textnode = document.createTextNode(value[i]);
                 
@@ -122,9 +121,10 @@
                 interest_text.value = "";
             }
         }
-        if (liNum >= 10) { //超过10个就call删除最早的函数
+        if (liNum.length >= 10) { //超过10个就call删除最早的函数
             deleteOld(area_content);
         }
+
     }
 
     //删除最左端，最早的Tag
@@ -149,7 +149,6 @@
 
     //给UL添加点击事件
     for(var i =0,j=document.getElementsByTagName('ul');i<j.length;i++){
-        console.log(j[i].childNodes);
         j[i].addEventListener("click",function(e) {
         var e = e || event;
         
@@ -161,9 +160,11 @@
     //正则过滤
     function getRegExp() {
         function getValue() {
-            var inputTxt = document.getElementById('interest_text').value;
+            var inputTxt = trim(document.getElementById('interest_text').value);
             value = inputTxt.replace(/[^\d\u4e00-\u9fa5a-zA-Z]+/g, " ").split(" ");
+
             if (value[0] !== "") {
+                
                 return value;
             } else {
                 alert("请先输入内容");
@@ -173,20 +174,26 @@
         getValue();
     }
 
-    // //trim删除左右两端的空格
-    // function trim(str) {
-    //     var strhh = str.replace(/[\r\n]/g,"");
-    //     var strdh = strhh.replace(/(.*)[,，]$/, '$1');
-    //     var value = strdh.replace(/(^\s*)|(\s*$)/g, "");
-    //     var ivalue = document.querySelectorAll(".ivalue");
-    //     for (var j = ivalue.length - 1; j >= 0; j--) {
-    //         if (value ==document.querySelectorAll(".ivalue")[j].innerHTML) {
-    //             value = '';
-    //         }
-    //     }
 
-    //     return value;
-    // }
+    /*去掉数组中重复的项*/
+    Array.prototype.unique = function () {
+        var res = [];
+        var json = {};
+        for(var i = 0; i < this.length; i++){
+            if(!json[this[i]]){
+                res.push(this[i]);
+                json[this[i]] = 1;
+            }
+        }
+        return res;
+    }
+
+    //trim删除左右两端的空格
+    function trim(str) {
+        var regex1 = /^\s*/;
+        var regex2 = /\s*$/;
+        return (str.replace(regex1, "")).replace(regex2, "");
+    }
 
     //重置清空函数
     function reset() {
