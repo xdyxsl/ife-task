@@ -1,48 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>task33 听指令的小方块（一）</title>
     <style type="text/css">
-    *{
-        padding:0;
-        margin:0;
+    * {
+        padding: 0;
+        margin: 0;
     }
-    .right{
-        border-right:2px solid #000;
+    
+    .clear_border {
+        border: none;
     }
-    .left{
-        border:none;
-      border-right:2px solid #000;
-    }
-    .top{
-        border:none;
-        border-bottom:2px solid #000;
-        
-    }
-    .bottom{
-        border-bottom:2px solid #000;
-    }
-    table{
+    
+    table {
         border-spacing: 0;
         border-collapse: collapse;
     }
-    td{
+    
+    td {
         font-family: Microsoft Yahei;
         text-align: center;
-        font-weight:bold;
-        border:1px solid #eee;
-        width:50px;
-        height:50px;
+        font-weight: bold;
+        border: 1px solid #eee;
+        width: 50px;
+        height: 50px;
         box-sizing: border-box;
     }
-    .blank{
-        border:none;
+    
+    .blank {
+        border: none;
     }
-    .robot-box{
+    
+    .robot-box {
         transition: all .8s;
-        height:50px;
-        width:50px;
+        height: 50px;
+        width: 50px;
         position: absolute;
         top: 50px;
         left: 50px;
@@ -51,217 +45,147 @@
     }
     </style>
 </head>
+
 <body>
-    <table>
-        <tbody>
-            <tr>
-                <td class="blank"></td>
-                <td class="top">1</td>
-                <td class="top">2</td>
-                <td class="top">3</td>
-                <td class="top">4</td>
-                <td class="top">5</td>
-                <td class="top">6</td>
-                <td class="top">7</td>
-                <td class="top">8</td>
-                <td class="top">9</td>
-                <td class="top">10</td>
-            </tr>
-            <tr>
-                <td class="left">1</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="right"></td>
-            </tr>
-            <tr>
-                <td class="left">2</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="right"></td>
-            </tr>
-            <tr>
-                <td class="left">3</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="right"></td>
-            </tr>
-            <tr>
-                <td class="left">4</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="right"></td>
-            </tr>
-            <tr>
-                <td class="left">5</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="right"></td>
-            </tr>
-            <tr>
-                <td class="left">6</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="right"></td>
-            </tr>
-            <tr>
-                <td class="left">7</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="right"></td>
-            </tr>
-            <tr>
-                <td class="left">8</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="right"></td>
-            </tr>
-            <tr>
-                <td class="left">9</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="right"></td>
-            </tr>
-            <tr>
-                <td class="left">10</td>
-                <td class="bottom"></td>
-                <td class="bottom"></td>
-                <td class="bottom"></td>
-                <td class="bottom"></td>
-                <td class="bottom"></td>
-                <td class="bottom"></td>
-                <td class="bottom"></td>
-                <td class="bottom"></td>
-                <td class="bottom"></td>
-                <td class="right bottom"></td>
-            </tr>
-        </tbody>
-    </table>
+    <table id="table"></table>
     <div class="robot-box" id="robot_box"></div>
-    <input type="text" id="comand_input" >
+    <input type="text" id="comand_input">
     <input type="button" id="comand_button" value="GO">
     <input type="button" id="turn_left" value="TUN LEF">
     <input type="button" id="turn_right" value="TUN RIG">
     <input type="button" id="turn_back" value="TUN BAC">
-
     <script type="text/javascript">
+    (function createTable() {
+        var table = document.getElementById('table');
+        var tr_arr = [];
+        for (var i = 0; i < 11; i++) {
+            tr_arr[i] = document.createElement("tr");
+            table.appendChild(tr_arr[i]);
+            for (var j = 0; j < 11; j++) {
+                var td_arr = [];
+                td_arr[j] = document.createElement("td");
+                tr_arr[i].appendChild(td_arr[j]);
+                if (i == 0) {
+                    td_arr[j].setAttribute("class", "clear_border");
+                    if (j > 0) td_arr[j].innerHTML = j;
+                }
+                if (j == 0) {
+                    td_arr[0].setAttribute("class", "clear_border");
+                    if (i > 0) td_arr[0].innerHTML = i;
+                }
+            }
+        }
+    })();
+
     var robot = document.getElementById('robot_box');
+    var cmd_btn = document.getElementById('comand_button');
     var t_left = document.getElementById('turn_left');
     var t_right = document.getElementById('turn_right');
     var t_back = document.getElementById('turn_back');
-    var deg = 0;//初始化啊角度
-    var face = 0;//初始化方向  0: 上, 1: 右, 2: 下, 3: 左;
+    var deg = 0; //初始化角度
+    var face = 0; //初始化方向  0: 上, 1: 右, 2: 下, 3: 左;
+    var xPos = 50;
+    var yPos = 50;
+
     var RobotBox = {
-        xPos:function(){
-            this.xPos = this.face*10+"px";
-            return this.xPos
+        xPos: function() {
+            xPos += "px";
+            return robot.style.top
         },
-        yPos:function(){
-            this.yPos = this.face*10+"px";
-            return this.yPos
+        yPos: function() {
+            yPos += "px"
+            return robot.style.left
         },
-        face:function(){
-            face = Math.abs(face);
-            if(face==0||face%4==0){
-                console.log("朝上");
-            }else if(face%4==1){
-                console.log("朝右");
-            }else if(face%4==2){
-                console.log("朝下");
-            }else{
-                console.log("朝左")
+        face: function() {
+            face = face % 4;
+            if (face == 0) {
+                console.log(face, "朝上");
+                return face;
+            } else if (face == 1) {
+                console.log(face, "朝左");
+                return face;
+            } else if (face == 2) {
+                console.log(face, "朝下");
+                return face;
+            } else {
+                console.log(face, "朝右");
+                return face;
             }
         },
-        go:function(){},
-        turnLeft:function(){
+        go: function() {
+            var comand_input = document.getElementById('comand_input')
+            switch (comand_input.value) {
+                case "":
+                    switch (face) {
+                        case 0:
+                            if (yPos > 50) {
+                                yPos -= 50;
+                                robot.style.top = yPos + 'px';
+                            }
+                            break;
+                        case 1:
+                            if (xPos > 50) {
+                                xPos -= 50;
+                                robot.style.left = xPos + 'px';
+                            }
+                            break;
+                        case 2:
+                            if (yPos < 500) {
+                                yPos += 50;
+                                robot.style.top = yPos + 'px';
+                            }
+                            break;
+                        default:
+                            if (xPos < 500) {
+                                xPos += 50;
+                                robot.style.left = xPos + 'px';
+                            }
+                            break;
+                    }
+                    break;
+                case "TUN LEF":
+                    RobotBox.turnLeft();
+                    break;
+                case "TUN RIG":
+                    RobotBox.turnRight();
+                    break;
+                case "TUN BAC":
+                    RobotBox.turnBack();
+                    break;
+                default:
+                    alert("在输入框中允许输入如下指令,TUN LEF：向左转,TUN RIG：向右转,TUN BAC：向右转,不填任何指令则默认向头顶朝的方向前进一格")
+            }
+        },
+        turnLeft: function() {
+            face = face % 4;
             deg -= 90;
-            robot.style.transform ="rotate("+deg+"deg)";
-            face--;
-            console.log(face)
-            RobotBox.face()
-        },
-        turnRight:function(){
-            deg += 90;
-            robot.style.transform ="rotate("+deg+"deg)";
+            robot.style.transform = "rotate(" + deg + "deg)";
             face++;
-            console.log(face)
             RobotBox.face()
         },
-        turnBack:function(){
+        turnRight: function() {
+            face = face % 4;
+            deg += 90;
+            robot.style.transform = "rotate(" + deg + "deg)";
+            face += 3;
+            RobotBox.face()
+        },
+        turnBack: function() {
+            // face = face%4;
             deg += 180;
-            robot.style.transform ="rotate("+deg+"deg)";
+            robot.style.transform = "rotate(" + deg + "deg)";
             face += 2;
-            console.log(face);
+
             RobotBox.face()
         },
     }
 
-    console.log(RobotBox.face())
-    t_left.addEventListener("click",RobotBox.turnLeft,false);
-    t_right.addEventListener("click",RobotBox.turnRight,false);
-    t_back.addEventListener("click",RobotBox.turnBack,false);
+
+    cmd_btn.addEventListener("click", RobotBox.go, false)
+    t_left.addEventListener("click", RobotBox.turnLeft, false);
+    t_right.addEventListener("click", RobotBox.turnRight, false);
+    t_back.addEventListener("click", RobotBox.turnBack, false);
     </script>
 </body>
+
 </html>
