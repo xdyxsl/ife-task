@@ -20,6 +20,13 @@
     }
 })();
 
+//正则分割内容框里的内容,扩展命令，添加数字
+function enhanceCommand(str) {
+    var filter = /\n/g;
+    var inputArr = str.split(filter);
+    return inputArr;
+}
+
 var robot = document.getElementById('robot_box');
 var cmd_btn = document.getElementById('command_button');
 var deg = 0; //初始化角度
@@ -54,10 +61,9 @@ var RobotBox = {
             throw "啊？"
         }
     },
-    go: function() {
-        var comand_input = document.getElementById('comand_input')
-        switch (comand_input.value) {
-            case "":
+    go: function(str, line_num) { //修改为传入参数，自动识别
+        switch (str) {
+            case "blank":
                 switch (face) {
                     case 0:
                         RobotBox.transTop();
@@ -71,6 +77,8 @@ var RobotBox = {
                     case 3:
                         RobotBox.transRight();
                         break;
+                    default:
+
                 }
                 break;
             case "TUN LEF":
@@ -106,8 +114,11 @@ var RobotBox = {
             case "MOV BOT":
                 RobotBox.moveBottom();
                 break;
-            default:
-                alert("指令错误，请查阅右边的指令");
+            default: //处理错误的命令所对应的行数
+                console.log("指令错误，请查阅右边的指令");
+                var Li = document.getElementById('command_display_count').getElementsByTagName("li");
+                Li[line_num].style.borderRadius = "10px"
+                Li[line_num].style.backgroundColor = "#FF9A9A"
         }
     },
     turnLeft: function() {
@@ -156,8 +167,8 @@ var RobotBox = {
     },
     moveLeft: function() {
         if (face != 1) { //如果方向不同
+            RobotBox.turnLeft();
             var little = setInterval(function() {
-                RobotBox.turnLeft();
                 if (face == 1) {
                     clearInterval(little);
                 }
@@ -169,8 +180,8 @@ var RobotBox = {
     },
     moveTop: function() {
         if (face != 0) { //如果方向不同
+            RobotBox.turnLeft();
             var little = setInterval(function() {
-                RobotBox.turnLeft();
                 if (face == 0) {
                     clearInterval(little);
                 }
@@ -182,8 +193,8 @@ var RobotBox = {
     },
     moveRight: function() {
         if (face != 3) { //如果方向不同
+            RobotBox.turnLeft();
             var little = setInterval(function() {
-                RobotBox.turnLeft();
                 if (face == 3) {
                     clearInterval(little);
                 }
@@ -214,7 +225,6 @@ var RobotBox = {
 
 //创建行数标记
 function renderLineNum(count) {
-
     var command_display_count = document.getElementById('command_display_count');
     command_display_count.innerHTML = "";
     for (var i = 1; i <= count; i++) {
@@ -230,18 +240,45 @@ function updateLineNum() {
     setTimeout(
         function activeEnter() {
             var command_input = document.getElementById('command_input');
-                var line_num = command_input.value; //行数
-                line_num.match(/\n/g) ? renderLineNum(line_num.match(/\n/g).length + 1) : renderLineNum(1);
+            var line_num = command_input.value; //行数
+            line_num.match(/\n/g) ? renderLineNum(line_num.match(/\n/g).length + 1) : renderLineNum(1);
         }, 0)
 }
 
 //实时设置第一个li的margin值，达到滚动的效果。
 function setMargin() {
-    var li = document.getElementById('command_display_count').getElementsByTagName('li');
-    li[0].style.marginTop = -command_input.scrollTop + "px";
-    console.log("滑动work")
+    var Li = document.getElementById('command_display_count').getElementsByTagName('li');
+    Li[0].style.marginTop = -command_input.scrollTop + "px";
 }
 
-document.getElementById('command_input').addEventListener("scroll", setMargin, false);
-// document.getElementById('refresh_buttun').addEventListener("click",reset,false)
-cmd_btn.addEventListener("click", RobotBox.go, false)
+//执行按钮   
+function execute() {
+    var inputArr = enhanceCommand(command_input.value);
+    for (var x in inputArr) {
+        var times = "";
+        if (inputArr[x].slice(0, 2).toUpperCase() == "GO") {
+            conmmand_input = "blank";
+            times = inputArr[x].slice(3)?Number(inputArr[x].slice(3)):1;
+            console.log("go work")
+        } else if (inputArr[x] == "") {
+            conmmand_input = "blank";
+            times = 1;
+        } else {
+            conmmand_input = inputArr[x].slice(0, 7);
+            times = inputArr[x].slice(8) ? Number(inputArr[x].slice(8)) : 1;
+        }
+        if (isNaN(times)) { alert("次数输入有误，请规范书写！"); }
+        for (var i = 0; i < times; i++) {
+            RobotBox.go(conmmand_input.toUpperCase(), x);
+        }
+    }
+
+}
+
+//重置按钮 
+function reset() {
+    command_input.value = "";
+    updateLineNum();
+}
+document.getElementById('refresh_buttun').addEventListener("click", reset, false);
+cmd_btn.addEventListener("click", execute, false);

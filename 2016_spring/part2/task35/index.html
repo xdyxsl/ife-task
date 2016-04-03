@@ -32,14 +32,13 @@
         height: 50px;
         box-sizing: border-box;
     }
-    /*ul {
-        position: absolute;
-        right: 50px;
-        top: 50px;
-    }*/
     
     .wrapper {
         display: flex;
+    }
+    
+    .table {
+        flex-shrink: 0;
     }
     
     .robot-box {
@@ -52,11 +51,19 @@
         transform: rotate(0deg);
         background: url(box.jpg) no-repeat 40% 40%;
     }
-    /*command-part*/
+    
+    .command-part {
+        margin: 10px 20px;
+    }
     
     .command-part-display {
         display: flex;
         overflow: hidden;
+    }
+    
+    .command-part-button {
+        display: flex;
+        justify-content: space-around;
     }
     
     .command-part-display-count {}
@@ -91,14 +98,15 @@
     }
     
     .command-rules {
-        float: right;
+        align-self: center;
     }
     </style>
 </head>
 
 <body>
+    <!--动作先后的效果还没调好。结果差不多。。先用着吧！-->
     <section class="wrapper">
-        <section>
+        <section class="table">
             <table id="table"></table>
             <div class="robot-box" id="robot_box"></div>
         </section>
@@ -115,18 +123,16 @@
             </section>
         </section>
         <ul class="command-rules">
-            <li>GO：确认按钮，不填任何指令则默认向头顶朝的方向前进一格</li>
-            <li>TUN LEF：向左转（逆时针旋转90度）</li>
-            <li>TUN RIG：向右转（顺时针旋转90度）</li>
-            <li>TUN BAC：向右转（旋转180度）</li>
-            <li>TRA LEF：向屏幕的左侧移动一格，方向不变</li>
-            <li>TRA TOP：向屏幕的上面移动一格，方向不变</li>
-            <li>TRA RIG：向屏幕的右侧移动一格，方向不变</li>
-            <li>TRA BOT：向屏幕的下面移动一格，方向不变</li>
-            <li>MOV LEF：方向转向屏幕左侧，并向屏幕的左侧移动一格</li>
-            <li>MOV TOP：方向转向屏幕上面，向屏幕的上面移动一格</li>
-            <li>MOV RIG：方向转向屏幕右侧，向屏幕的右侧移动一格</li>
-            <li>MOV BOT：方向转向屏幕下面，向屏幕的下面移动一格</li>
+            <li>支持大小写混写，但书写必需规范化。</li>
+            <li>GO n：向当前方向前进n格</li>
+            <li>TRA LEF n：向屏幕的左侧平移 n 格</li>
+            <li>TRA TOP n：向屏幕的上面平移 n 格</li>
+            <li>TRA RIG n：向屏幕的右侧平移 n 格</li>
+            <li>TRA BOT n：向屏幕的下面平移 n 格</li>
+            <li>MOV LEF n：方向转向屏幕左侧，并向屏幕的左侧移动 n 格</li>
+            <li>MOV TOP n：方向转向屏幕上面，向屏幕的上面移动 n 格</li>
+            <li>MOV RIG n：方向转向屏幕右侧，向屏幕的右侧移动 n 格</li>
+            <li>MOV BOT n：方向转向屏幕下面，向屏幕的下面移动 n 格</li>
         </ul>
     </section>
     <script type="text/javascript" src="main.js"></script>
