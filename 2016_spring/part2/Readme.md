@@ -190,3 +190,10 @@ task34 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/ta
 
 #### task34 听指令的小方块（二）
 `setInterval()`括号里面的参数或函数名称要加上引号，`clearInterval()`括号里面的定时器名称不要加引号，否则无效！
+
+#### task35 听指令的小方块（三）
+CSS3的`resize`属性规定是否可由用户调整元素的尺寸。
+
+实时显示行数可以通过获取相同`class`的个数来确定。匹配换行符的个数，来动态设置每行的行数。
+
+`onscroll`事件元素滚动时执行。
