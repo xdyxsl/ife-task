@@ -57,25 +57,57 @@ var RobotBox = {
     go: function() {
         var comand_input = document.getElementById('comand_input')
         switch (comand_input.value) {
-            case "":switch (face) {
-                    case 0:RobotBox.transTop();break;
-                    case 1:RobotBox.transLeft();break;
-                    case 2:RobotBox.transBottom();break;
-                    case 3:RobotBox.transRight();break;
+            case "":
+                switch (face) {
+                    case 0:
+                        RobotBox.transTop();
+                        break;
+                    case 1:
+                        RobotBox.transLeft();
+                        break;
+                    case 2:
+                        RobotBox.transBottom();
+                        break;
+                    case 3:
+                        RobotBox.transRight();
+                        break;
                 }
                 break;
-            case "TUN LEF":RobotBox.turnLeft();break;
-            case "TUN RIG":RobotBox.turnRight();break;
-            case "TUN BAC":RobotBox.turnBack();break;
-            case "TRA LEF":RobotBox.transLeft();break;
-            case "TRA TOP":RobotBox.transTop();break;
-            case "TRA RIG":RobotBox.transRight();break;
-            case "TRA BOT":RobotBox.transBottom();break;
-            case "MOV LEF":RobotBox.moveLeft();break;
-            case "MOV TOP":RobotBox.moveTop();break;
-            case "MOV RIG":RobotBox.moveRight();break;
-            case "MOV BOT":RobotBox.moveBottom();break;
-            default:alert("指令错误，请查阅右边的指令");
+            case "TUN LEF":
+                RobotBox.turnLeft();
+                break;
+            case "TUN RIG":
+                RobotBox.turnRight();
+                break;
+            case "TUN BAC":
+                RobotBox.turnBack();
+                break;
+            case "TRA LEF":
+                RobotBox.transLeft();
+                break;
+            case "TRA TOP":
+                RobotBox.transTop();
+                break;
+            case "TRA RIG":
+                RobotBox.transRight();
+                break;
+            case "TRA BOT":
+                RobotBox.transBottom();
+                break;
+            case "MOV LEF":
+                RobotBox.moveLeft();
+                break;
+            case "MOV TOP":
+                RobotBox.moveTop();
+                break;
+            case "MOV RIG":
+                RobotBox.moveRight();
+                break;
+            case "MOV BOT":
+                RobotBox.moveBottom();
+                break;
+            default:
+                alert("指令错误，请查阅右边的指令");
         }
     },
     turnLeft: function() {
@@ -176,16 +208,16 @@ var RobotBox = {
     },
 }
 
-//输入框区域函数
-function reset(){
 
-}
+
+/***********************************输入框区域的函数********************************/
 
 //创建行数标记
-function renderLineNum(count){
+function renderLineNum(count) {
+
     var command_display_count = document.getElementById('command_display_count');
     command_display_count.innerHTML = "";
-    for(var i = 1;i<=count;i++){
+    for (var i = 1; i <= count; i++) {
         var li = document.createElement("li");
         var txt = document.createTextNode(i);
         li.appendChild(txt);
@@ -193,13 +225,23 @@ function renderLineNum(count){
     }
 }
 
-function update(){
-    if(event.keyCode==13){
-        var command_input = document.getElementById('command_input')
-        var line_num = command_input.value;//行数
-        line_num.match(/\n/g)? renderLineNum(line_num.match(/\n/g).length+2):renderLineNum(2);
-    }
+//检测当前输入框文本的行数,实时更新lineNum
+function updateLineNum() {
+    setTimeout(
+        function activeEnter() {
+            var command_input = document.getElementById('command_input');
+                var line_num = command_input.value; //行数
+                line_num.match(/\n/g) ? renderLineNum(line_num.match(/\n/g).length + 1) : renderLineNum(1);
+        }, 0)
 }
 
-document.getElementById('refresh_buttun').addEventListener("click",reset,false)
+//实时设置第一个li的margin值，达到滚动的效果。
+function setMargin() {
+    var li = document.getElementById('command_display_count').getElementsByTagName('li');
+    li[0].style.marginTop = -command_input.scrollTop + "px";
+    console.log("滑动work")
+}
+
+document.getElementById('command_input').addEventListener("scroll", setMargin, false);
+// document.getElementById('refresh_buttun').addEventListener("click",reset,false)
 cmd_btn.addEventListener("click", RobotBox.go, false)
