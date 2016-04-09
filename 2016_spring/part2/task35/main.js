@@ -168,11 +168,7 @@ var RobotBox = {
     moveLeft: function() {
         if (face != 1) { //如果方向不同
             RobotBox.turnLeft();
-            var little = setInterval(function() {
-                if (face == 1) {
-                    clearInterval(little);
-                }
-            }, 200);
+           
             RobotBox.transLeft();
         } else {
             RobotBox.transLeft();
@@ -181,11 +177,7 @@ var RobotBox = {
     moveTop: function() {
         if (face != 0) { //如果方向不同
             RobotBox.turnLeft();
-            var little = setInterval(function() {
-                if (face == 0) {
-                    clearInterval(little);
-                }
-            }, 200);
+        
             RobotBox.transTop();
         } else {
             RobotBox.transTop();
@@ -193,28 +185,27 @@ var RobotBox = {
     },
     moveRight: function() {
         if (face != 3) { //如果方向不同
-            RobotBox.turnLeft();
-            var little = setInterval(function() {
-                if (face == 3) {
-                    clearInterval(little);
-                }
-            }, 200);
+            var little = setTimeout(RobotBox.turnLeft(),200)
             RobotBox.transRight();
         } else {
             RobotBox.transRight();
         }
     },
     moveBottom: function() {
+
         if (face != 2) { //如果方向不同
-            var little = setInterval(function() {
-                RobotBox.turnLeft();
-                if (face == 2) {
-                    clearInterval(little);
-                }
-            }, 200);
+            function inTurn(){
+                RobotBox.turnLeft()
+            }
+            var little = setTimeout(inTurn(),200);
+            if(face == 2){
+                console.log("等于二啦！！！");
+                clearTimeout(little)
+            }
             RobotBox.transBottom();
         } else {
             RobotBox.transBottom();
+            clearTimeout(little)
         }
     },
 }
@@ -255,14 +246,14 @@ function setMargin() {
 function execute() {
     var inputArr = enhanceCommand(command_input.value);
     for (var x in inputArr) {
-        var times = "";
+        var times = 1;
         if (inputArr[x].slice(0, 2).toUpperCase() == "GO") {
-            conmmand_input = "blank";
+            // conmmand_input = "blank";
+            conmmand_input = inputArr[x].slice(0, 2);
             times = inputArr[x].slice(3)?Number(inputArr[x].slice(3)):1;
             console.log("go work")
         } else if (inputArr[x] == "") {
             conmmand_input = "blank";
-            times = 1;
         } else {
             conmmand_input = inputArr[x].slice(0, 7);
             times = inputArr[x].slice(8) ? Number(inputArr[x].slice(8)) : 1;
