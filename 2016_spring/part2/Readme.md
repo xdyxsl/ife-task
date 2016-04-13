@@ -24,6 +24,9 @@ task19 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/ta
 task20 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part2/task20><br>
 task20 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task20/>
 
+task21 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part2/task21><br>
+task21 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task21/>
+
 task29 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part2/task29><br>
 task29 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task29/>
 
