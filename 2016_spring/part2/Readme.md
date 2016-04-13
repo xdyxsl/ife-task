@@ -157,13 +157,14 @@ task35 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/ta
 #### task21 基础JavaScript练习（四）
 监控回车`onkeydown`，回车的`keyCode`是13,空格是32,逗号是188。逗号用188号来监控有小BUG，会遗留逗号在表格里(已经查明，是重置输入框的时间太慢，放到插入子节点之前重置输入框就好了。)
 
+```
 //trim删除左右两端的空格
-
-    function trim(str) {
-        var regex1 = /^\s*/;
-        var regex2 = /\s*$/;
-        return (str.replace(regex1, "")).replace(regex2, "");
-    }
+function trim(str) {
+    var regex1 = /^\s*/;
+    var regex2 = /\s*$/;
+    return (str.replace(regex1, "")).replace(regex2, "");
+}
+```
 
 #### task29 表单（一）单个表单项的检验
 用到JS的`charCodeAt()`方法，可以返回指定位置的字符的Unicode编码,根据返回的编码分开计算英文与非英文的字符长度,[W3School](http://www.w3school.com.cn/jsref/jsref_charCodeAt.asp)。注意其余`charAt()`方法的区别。
@@ -176,13 +177,15 @@ task35 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/ta
 #### task31 表单（三）联动
 主要考察`select`的掌握程度。`select`可以通过索引值获取当前选中的文本或值。以下是原生js方法，参考[链接](http://blog.sina.com.cn/s/blog_a73036570101e9ry.html)
 
-    var obj = document.getElementByIdx_xx_x('testSelect'); //定位id
+```
+var obj = document.getElementByIdx_xx_x('testSelect'); //定位id
 
-    var index = obj.selectedIndex; // 选中索引
+var index = obj.selectedIndex; // 选中索引
 
-    var text = obj.options[index].text; // 选中文本
+var text = obj.options[index].text; // 选中文本
 
-    var value = obj.options[index].value; // 选中值
+var value = obj.options[index].value; // 选中值
+```
 
 #### task32 表单（四）实现表单自动生成工厂
 用`checkbox`的`checked`属性，被选中会返回`true`。这个主要考察面向对象编程和模块化。！
