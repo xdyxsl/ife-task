@@ -44,7 +44,7 @@ task34 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/ta
 
 task35 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part2/task35><br>
 task35 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task35/>
-## IFE春季班第一阶段任务
+## IFE春季班第二阶段任务
 
 　　第二阶段的主要目标是帮助大家 **了解、认识、学习、掌握JavaScript**。第一阶段任务从 **3月21日** 开始，持续到 **4月21日**。当然，您也可以在这个时间以后继续自行实践练习。第一阶段和第二阶段有一部分时间是重合的，主要考虑到大家的基础不同，有的同学HTML/CSS比较好，想更多地参与JavaScript的学习。对于想继续学习CSS的各位依然可以按照自己的节奏继续学习第一阶段的任务。
 
@@ -117,7 +117,7 @@ task35 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/ta
 ## notes
 
 #### task14 零基础JavaScript编码（二）
-原来array数组自带排序的方法！！！一定要好好学好基础啊！
+原来array数组自带排序的方法，`sort()`！！！一定要好好学好基础,知道这个后一切都迎刃而解。
 
 
 #### task15 零基础JavaScript编码（三）
@@ -128,7 +128,7 @@ task35 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/ta
 #### task16 面向零基础的JavaScript代码编写（四）
 数组使用`bracket`的记法就可以同时命名数组的属性和值了。
 
-`for in`循环的使用，如何遍历对象的属性和值，[W3CSchool的示例](http://www.w3school.com.cn/tiy/t.asp?f=js_object_for_in)。
+`for in`循环的使用，如何遍历对象的属性和值，[W3School的示例](http://www.w3school.com.cn/tiy/t.asp?f=js_object_for_in)。
 
 注意`childNodes`的运用，同`getElementsByTagName`一样，获得的是数组，访问的时候记得添加`[]`
 
@@ -158,6 +158,7 @@ task35 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/ta
 监控回车`onkeydown`，回车的`keyCode`是13,空格是32,逗号是188。逗号用188号来监控有小BUG，会遗留逗号在表格里(已经查明，是重置输入框的时间太慢，放到插入子节点之前重置输入框就好了。)
 
 //trim删除左右两端的空格
+
     function trim(str) {
         var regex1 = /^\s*/;
         var regex2 = /\s*$/;
