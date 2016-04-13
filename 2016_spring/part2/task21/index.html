@@ -60,6 +60,7 @@
 
 <body>
     <div>
+        <!--ul还会被误伤，但是还没定义undefined的时候，给li添加删除事件会报错-->
         <label for="tag_text">Tag:</label>
         <input type="text" placeholder="回车/逗号/空格均可完成创建" id="tag_text" onkeyup="addTag(event)">
         <ul id="tag_content"></ul>
@@ -131,8 +132,7 @@
     }
 
     //删除最左端，最早的Tag
-    function deleteOld(event) {
-        var e = e || event;
+    function deleteOld(e) {
         e.removeChild(e.childNodes[0]);
         console.log("delete success")
         console.log(e.childNodes[0])
