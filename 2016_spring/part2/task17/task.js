@@ -70,9 +70,9 @@ function renderChart() {
 
     var now_select_city = pageState["nowSelectCity"]; //当前选择城市
     var now_gra_time = pageState["nowGraTime"]; //当前选择的粒度,默认是day
-    console.log(now_select_city, now_gra_time);
+    // console.log(now_select_city, now_gra_time);
     var graData = chartData[now_gra_time][now_select_city];
-    console.log("graData", graData);
+    // console.log("graData", graData);
 
     //设置HTML样式模板
     var style = "style='width:{width};height:{height};background-color:rgba({color},0.6)'";
@@ -82,8 +82,6 @@ function renderChart() {
     var html = ""; //循环体外先声明
     for (var x in graData) {
         html += module.replace('{width}', graData[x]['width']).replace('{height}', graData[x]['height']).replace('{color}', graData[x]['color']).replace('{title}', graData[x]['title']).replace('{data}', graData[x]['data']); //调用5次replace()方法动态设置浏览器元素为数据组里的数据
-        // console.log("graData的x是 ",x,"render里面的graData ",graData,"render里面的graData[x] ",graData[x])
-
     }
     chart_wrap.innerHTML = html;
 }
@@ -187,7 +185,6 @@ function initAqiChartData() {
                 weekGet['title'] = city + key; //传入当前的城市和日期
 
                 week[city][key] = weekGet; //把dayGet所获得的动态数组赋给day数组的当前值
-                console.log(weekData)
                 weekTotal = 0;
                 weekDays = 0;
                 weekNum++;
@@ -213,7 +210,6 @@ function initAqiChartData() {
                 monthTotal = 0;
                 monthNum++;
             }
-
         }
         //周数和月数初始化，否则轮到上海周数据的时候第一周就显示成10多周了
         monthNum = 1;
@@ -232,7 +228,6 @@ function init() {
     initGraTimeForm()
     initCitySelector();
     initAqiChartData();
-
 
     if (pageState['nowSelectCity'] == -1) {
         pageState['nowSelectCity'] = '北京';
