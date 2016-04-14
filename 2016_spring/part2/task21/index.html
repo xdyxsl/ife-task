@@ -60,7 +60,6 @@
 
 <body>
     <div>
-        <!--ul还会被误伤，但是还没定义undefined的时候，给li添加删除事件会报错-->
         <label for="tag_text">Tag:</label>
         <input type="text" placeholder="回车/逗号/空格均可完成创建" id="tag_text" onkeyup="addTag(event)">
         <ul id="tag_content"></ul>
@@ -100,9 +99,10 @@
                     newItem.setAttribute('onmouseover', 'showDelInfo()'); //添加hover效果
                     newItem.setAttribute('onmouseout', 'hideDelInfo()'); //添加hover效果
                     tag_text.value = "";
-                    console.log(tag_text.value);
+                    tag_content.childNodes[i].addEventListener("click", remove, false);
                 }
             }
+
             if (tag_li_num.length > 10) { //超过10个就call删除最早的函数
                 deleteOld(tag_content);
             }
@@ -124,6 +124,8 @@
                 newItem.setAttribute('onmouseover', 'showDelInfo()'); //添加hover效果
                 newItem.setAttribute('onmouseout', 'hideDelInfo()'); //添加hover效果
                 interest_text.value = "";
+
+                area_content.childNodes[i].addEventListener("click", remove, false);
             }
         }
         if (area_li_num.length > 10) { //超过10个就call删除最早的函数
@@ -152,12 +154,12 @@
     }
 
     //给UL添加点击事件
-    for (var i = 0, j = document.getElementsByTagName('ul'); i < j.length; i++) {
-        j[i].addEventListener("click", function(e) {
+    
+        var remove = function(e) {
             var e = e || event;
             e.target.parentNode.removeChild(e.target);
-        }, false)
-    }
+        }
+
 
     //正则过滤
     function getRegExp() {
