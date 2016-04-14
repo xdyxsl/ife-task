@@ -1,3 +1,4 @@
+//还没能逐条执行动作。。
 (function createTable() {
     var table = document.getElementById('table');
     var tr_arr = [];
@@ -63,7 +64,7 @@ var RobotBox = {
     },
     go: function(str, line_num) { //修改为传入参数，自动识别
         switch (str) {
-            case "blank":
+            case "GO":
                 switch (face) {
                     case 0:
                         RobotBox.transTop();
@@ -78,7 +79,8 @@ var RobotBox = {
                         RobotBox.transRight();
                         break;
                     default:
-
+                    alert("???");
+                    break;
                 }
                 break;
             case "TUN LEF":
@@ -91,13 +93,13 @@ var RobotBox = {
                 RobotBox.turnBack();
                 break;
             case "TRA LEF":
-                RobotBox.transLeft();
+                RobotBox.transLeft()
                 break;
             case "TRA TOP":
-                RobotBox.transTop();
+                RobotBox.transTop()
                 break;
             case "TRA RIG":
-                RobotBox.transRight();
+                RobotBox.transRight()
                 break;
             case "TRA BOT":
                 RobotBox.transBottom();
@@ -142,70 +144,80 @@ var RobotBox = {
         RobotBox.face();
     },
     transLeft: function() {
-        if (xPos > 50) {
+        setTimeout(function(){
+            if (xPos > 50) {
             xPos -= 50;
             robot.style.left = xPos + 'px';
         }
+        },20)
     },
     transTop: function() {
-        if (yPos > 50) {
+        setTimeout(function(){
+            if (yPos > 50) {
             yPos -= 50;
             robot.style.top = yPos + 'px';
         }
+        },20)
     },
     transRight: function() {
-        if (xPos < 500) {
+        setTimeout(function(){
+            if (xPos < 500) {
             xPos += 50;
             robot.style.left = xPos + 'px';
         }
+        },20)
     },
     transBottom: function() {
-        if (yPos < 500) {
+        setTimeout(function(){
+            if (yPos < 500) {
             yPos += 50;
             robot.style.top = yPos + 'px';
         }
+        },20)
     },
     moveLeft: function() {
         if (face != 1) { //如果方向不同
             RobotBox.turnLeft();
-           
-            RobotBox.transLeft();
+            var time_out_count = setTimeout(function() {
+                RobotBox.moveLeft();
+            }, 0);
         } else {
+            clearTimeout(time_out_count);
             RobotBox.transLeft();
         }
+        
     },
     moveTop: function() {
         if (face != 0) { //如果方向不同
             RobotBox.turnLeft();
-        
-            RobotBox.transTop();
+            var time_out_count = setTimeout(function() {
+                RobotBox.moveTop();
+            }, 0);
         } else {
+            clearTimeout(time_out_count);
             RobotBox.transTop();
         }
     },
     moveRight: function() {
         if (face != 3) { //如果方向不同
-            var little = setTimeout(RobotBox.turnLeft(),200)
-            RobotBox.transRight();
+            RobotBox.turnLeft();
+            var time_out_count = setTimeout(function() {
+                RobotBox.moveRight();
+            }, 0);
         } else {
-            RobotBox.transRight();
+            clearTimeout(time_out_count);
+            RobotBox.transRight()
         }
     },
     moveBottom: function() {
-
         if (face != 2) { //如果方向不同
-            function inTurn(){
-                RobotBox.turnLeft()
-            }
-            var little = setTimeout(inTurn(),200);
-            if(face == 2){
-                console.log("等于二啦！！！");
-                clearTimeout(little)
-            }
-            RobotBox.transBottom();
+            RobotBox.turnLeft();
+            var time_out_count = setTimeout(function() {
+                RobotBox.moveBottom();
+            }, 0);
         } else {
-            RobotBox.transBottom();
-            clearTimeout(little)
+            clearTimeout(time_out_count);
+            RobotBox.transBottom()
         }
     },
 }
@@ -246,24 +258,25 @@ function setMargin() {
 function execute() {
     var inputArr = enhanceCommand(command_input.value);
     for (var x in inputArr) {
-        var times = 1;
+        var times = "";
         if (inputArr[x].slice(0, 2).toUpperCase() == "GO") {
-            // conmmand_input = "blank";
-            conmmand_input = inputArr[x].slice(0, 2);
+            conmmand_input = "GO";
             times = inputArr[x].slice(3)?Number(inputArr[x].slice(3)):1;
             console.log("go work")
         } else if (inputArr[x] == "") {
             conmmand_input = "blank";
+            times = 1;
         } else {
             conmmand_input = inputArr[x].slice(0, 7);
             times = inputArr[x].slice(8) ? Number(inputArr[x].slice(8)) : 1;
         }
         if (isNaN(times)) { alert("次数输入有误，请规范书写！"); }
+        
         for (var i = 0; i < times; i++) {
-            RobotBox.go(conmmand_input.toUpperCase(), x);
+            RobotBox.go(conmmand_input.toUpperCase(), x)
+            console.log(conmmand_input)
         }
     }
-
 }
 
 //重置按钮 
