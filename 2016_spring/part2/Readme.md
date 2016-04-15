@@ -168,6 +168,17 @@ function trim(str) {
     return (str.replace(regex1, "")).replace(regex2, "");
 }
 ```
+#### task26 行星与飞船（一）
+首先考验的是对`canvas`的掌握,包括画圆`arc()`的方法，动态绘图`moveTo()` 、`lineTo()`的方法。
+
+用`parseInt()`强行把字符串转成整数，自动过滤掉非数字，`parseFloat()`类似。
+
+`drawImage()`函数把图像画进去画布。`clearRect(x,y,width,height)`可以把指定坐标的指定矩形范围清空.
+
+>---
+假设一个圆的圆心坐标是(a,b)，半径为r，
+则圆上每个点的X坐标=a + Math.sin(2*Math.PI / 360) * r ；Y坐标=b + Math.cos(2*Math.PI / 360) * r ；
+---
 
 #### task29 表单（一）单个表单项的检验
 用到JS的`charCodeAt()`方法，可以返回指定位置的字符的Unicode编码,根据返回的编码分开计算英文与非英文的字符长度,[W3School](http://www.w3school.com.cn/jsref/jsref_charCodeAt.asp)。注意其余`charAt()`方法的区别。

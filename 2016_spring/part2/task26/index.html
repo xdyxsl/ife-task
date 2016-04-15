@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task26 行星与飞船（一）</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="600px" height="600px" style="border:1px solid red"></canvas>
+    <input type="button" value="添加1号飞船" id="ship1">
+    <input type="button" value="添加2号飞船" id="ship2">
+    <input type="button" value="添加3号飞船" id="ship3">
+    <input type="button" value="添加4号飞船" id="ship4">
+
+    <script type="text/javascript">
+        var canvas = document.getElementById("myCanvas");
+        var canvas_width = parseInt(canvas.getAttribute("width"));//画布的宽,无PX单位
+        var canvas_height = parseInt(canvas.getAttribute("height"));//画布的高,无PX单位
+        var canvas_radius = {//画布的圆心坐标
+            x: canvas_width/2,
+            y: canvas_height/2,
+        }
+
+        var spaceship_size = 30;//飞船图片是30*30尺寸
+        var spaceship_speed = 2;//飞行速度为2
+
+        //初始化宇宙地图
+        var initMap = function(){
+            if(canvas.getContext){
+                var ctx = canvas.getContext("2d");
+                ctx.beginPath();
+                ctx.strokeStyle = "black";
+                var Circle = function(x,y,r){
+                    this.x = x;
+                    this.y = y;
+                    this.r = r;
+                }
+
+                //画第一个圈
+                var circle1 = new Circle(300,300,100);
+                ctx.arc(circle1.x,circle1.y,circle1.r,0,Math.PI*2,true);
+                ctx.stroke();
+                
+                //画第二个圈
+                ctx.beginPath();
+                var circle2 = new Circle(300,300,150)
+                ctx.arc(circle2.x,circle2.y,circle2.r,0,Math.PI*2,true);
+                ctx.stroke();
+
+                //画第三个圈
+                ctx.beginPath();
+                var circle3 = new Circle(300,300,200)
+                ctx.arc(circle3.x,circle3.y,circle3.r,0,Math.PI*2,true);
+                ctx.stroke();
+
+                //画第四个圈
+                ctx.beginPath();
+                var circle4 = new Circle(300,300,250)
+                ctx.arc(circle4.x,circle4.y,circle4.r,0,Math.PI*2,true);
+                ctx.stroke();
+
+                ctx.closePath();
+            }
+        }
+        initMap()
+        //创建飞船对象
+        var Spaceship = function(id){
+            this.id = id
+            this.power = 100;//飞船初始电量
+            this.currentState = "stop";//飞船当前状态
+            this.orbit = 50 + 50*id;//飞船的轨道半径
+            this.deg = 0;//飞船初始角度
+        }
+
+        var spaceship1 = new Spaceship(1);
+        var spaceship2 = new Spaceship(2);
+        var spaceship3 = new Spaceship(3);
+        var spaceship4 = new Spaceship(4);
+
+        //画飞船
+        var drawSpaceship = function(spaceship_choosed){
+            var spanceship_img = new Image();
+            spanceship_img.src = "spanceship.png";
+            var _ctx = canvas.getContext("2d");
+            spanceship_img.onload = function(){//飞船图片加载好就开画
+                
+                _ctx.save();
+                spaceship_choosed.deg += spaceship_speed;
+                if(Spaceship.deg==360){Spaceship.deg=0;}
+                _ctx.drawImage(spanceship_img,300-spaceship_size/2+Math.sin(2*Math.PI / 360*spaceship_choosed.deg)*spaceship_choosed.orbit,300-spaceship_size/2+Math.cos(2*Math.PI / 360*spaceship_choosed.deg)*spaceship_choosed.orbit,spaceship_size,spaceship_size);
+            }
+            _ctx.restore();
+            _ctx.clearRect(300-spaceship_size/2+Math.sin(2*Math.PI / 360*spaceship_choosed.deg)*spaceship_choosed.orbit,300-spaceship_size/2+Math.cos(2*Math.PI / 360*spaceship_choosed.deg)*spaceship_choosed.orbit,spaceship_size,spaceship_size);
+            
+            console.log(spaceship_choosed.deg)
+        }
+        
+        //开始行动的数组
+        var spaceLoop = {
+            ship1:function(){setTimeout(spaceLoop.ship1,1000);drawSpaceship(spaceship1);},
+            ship2:function(){setTimeout(spaceLoop.ship2,1000);drawSpaceship(spaceship2);},
+            ship3:function(){setTimeout(spaceLoop.ship3,1000);drawSpaceship(spaceship3);},
+            ship4:function(){setTimeout(spaceLoop.ship4,1000);drawSpaceship(spaceship4);},
+        }
+        // var spaceLoop = function(){
+        //     setTimeout(spaceLoop,1000);
+        //     drawSpaceship(spaceship1);
+        //     drawSpaceship(spaceship2);
+        //     drawSpaceship(spaceship3);
+        //     drawSpaceship(spaceship4);
+        // }
+        spaceLoop.ship1()
+        for(var i=0,input=document.getElementsByTagName("input");i<input.length;i++){
+            input[i].addEventListener("click",function(){
+                var temp = this.getAttribute("id");
+                console.log(temp)
+                spaceLoop.temp;
+            },false)
+            
+        }
+
+    </script>
+</body>
+</html>
