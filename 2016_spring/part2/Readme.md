@@ -175,6 +175,8 @@ function trim(str) {
 
 `drawImage()`函数把图像画进去画布。`clearRect(x,y,width,height)`可以把指定坐标的指定矩形范围清空.
 
+把绘制背景地图的用`save()`保存起来，然后开始飞船的绘制，绘制完成后`restore()`，就相当于刷新了整个画布。
+
 >---
 假设一个圆的圆心坐标是(a,b)，半径为r，
 则圆上每个点的X坐标=a + Math.sin(2*Math.PI / 360) * r ；Y坐标=b + Math.cos(2*Math.PI / 360) * r ；
