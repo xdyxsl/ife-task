@@ -92,10 +92,10 @@
         }
         DynamicFactory.prototype.fly =(function(){
                 return startLoop = {
-                    ship1:function(){start_timeout1 = setTimeout(startLoop.ship1,16);drawSpaceship(spaceship1);},
-                    ship2:function(){start_timeout2 = setTimeout(startLoop.ship2,16);drawSpaceship(spaceship2);},
-                    ship3:function(){start_timeout3 = setTimeout(startLoop.ship3,16);drawSpaceship(spaceship3);},
-                    ship4:function(){start_timeout4 = setTimeout(startLoop.ship4,16);drawSpaceship(spaceship4);},
+                    ship1:function(){start_timeout1 = setTimeout(startLoop.ship1,1600);console.log(this);drawSpaceship(spaceship1);},
+                    ship2:function(){start_timeout2 = setTimeout(startLoop.ship2,1600);drawSpaceship(spaceship2);},
+                    ship3:function(){start_timeout3 = setTimeout(startLoop.ship3,1600);drawSpaceship(spaceship3);},
+                    ship4:function(){start_timeout4 = setTimeout(startLoop.ship4,1600);drawSpaceship(spaceship4);},
                 }
             })();
         DynamicFactory.prototype.stop = (function(){
@@ -228,10 +228,13 @@
             if(spaceship4.currentState=="fly"){stopLoop.ship4();}else{return false}
         },false);
 
-
-        document.getElementById('createShip1').addEventListener("click",function(){
-            if(spaceship1.currentState=="null"){createShip1.currentState="stop";drawSpaceship(spaceship1);}else{return false}
-        },false);
+        
+        for(var i=0,j=document.getElementsByName("create");i<j.length;i++){
+            document.getElementsByName("create")[i].addEventListener("click",function(){
+                console.log(this.nextSibling.getAttribute("id"))
+            },false);
+        }
+        
 
 
         /**
