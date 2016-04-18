@@ -88,8 +88,8 @@
          * @return {Object} return startLoop 返回开始循环的对象
          * @return {Object} return stopLoop 返回停止循环的对象
          */
-        var DynamicFactory = function (ship){
-            this.ship = ship;
+        var DynamicFactory = function (id){
+            this.ship = id;
             this.speed = 1.5 ;
             this.consume = 0.5;
             this.timer = "null";
@@ -100,7 +100,7 @@
             var startLoop = function(){
                 // if(ship.currentState=="fly")return;
                 
-                start_timeout = setTimeout(startLoop,16);
+                start_timeout = setTimeout(startLoop,1600);
                 console.log(ship);
                 drawSpaceship();
             }
@@ -115,8 +115,6 @@
         };
         
         DynamicFactory();
-
-
 
         /**
          * [DestroyFactory]摧毁工厂
@@ -136,7 +134,8 @@
          * [Mediator]指挥台
          * @param {[type]} id [description]
          */
-        var Mediator = function(a){
+        var Mediator = function(id){
+            this.ship = id;
             var ships = {};
 
             return {
@@ -173,7 +172,6 @@
                 // this.supplyfactory = new SupplyFactory(this);
                 this.destroyFactory = new DestroyFactory(this.id);
                 this.mediator = new Mediator(this.id);
-
             }
             return {
                 create:function(){
@@ -254,15 +252,18 @@
             ship_img.onload = function drawScreen(){//飞船图片加载好就开始
 
                 var ctx = canvas.getContext("2d");
+                var _ctx = canvas.getContext("2d");
 
                 ctx.save();
+
                 that.deg += that.dynamicFactory.speed;
                 
                 spaceship_temp_x = 300-spaceship_size/2+Math.sin(2*Math.PI / 360*that.deg)*that.orbit;
                 spaceship_temp_y = 300-spaceship_size/2+Math.cos(2*Math.PI / 360*that.deg)*that.orbit;
                 if(that.deg==360){that.deg=0;initMap();}
+
+                _ctx.drawImage(ship_img,spaceship_temp_x,spaceship_temp_y,spaceship_size,spaceship_size);
                 
-                ctx.drawImage(ship_img,spaceship_temp_x,spaceship_temp_y,spaceship_size,spaceship_size);
                 ctx.restore()
              
                 that.power -= 0.5;//起飞过程中能量值每秒减少3点

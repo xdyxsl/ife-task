@@ -1,7 +1,7 @@
 # 2016年百度IFE春季班
 ## Demo 
-task37 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part2/task37><br>
-task37 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task37/>
+task39 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part2/task39><br>
+task39 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/task39/>
 
 ## IFE春季班第三阶段任务
 
@@ -46,3 +46,18 @@ task37 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part2/ta
 ## notes
 
 #### task37 浮出层组件实现
+
+#### task39 UI组件之冻结行列表格
+scrollTop需要兼容。
+
+```
+window.onscroll = function(e) {
+        /**
+         * [兼容浏览器]
+         */
+        var e = e || window.event;
+        var scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
+
+        //coding 
+    }
+```

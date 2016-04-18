@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Task39 UI组件之冻结行列表格</title>
+    <style type="text/css">
+    *{
+        margin:0;
+        padding:0;
+    }
+    td,
+    th {
+        border: 2px solid #505050;
+        padding: 20px;
+        width: 40px;
+    }
+    
+    th {
+        background-color: black;
+        color: #fff;
+    }
+    
+    table {
+        border-collapse: collapse;
+    }
+    
+    .wrapper {
+        display: flex;
+        justify-content: center;
+    }
+    </style>
+</head>
+
+<body>
+    <p>占位</p>
+    <br/>
+    <div class="wrapper">
+        <table>
+            <tr id="first_line">
+                <th>姓名</th>
+                <th>语文</th>
+                <th>数学</th>
+                <th>英语</th>
+                <th>总分</th>
+            </tr>
+            <tr>
+                <td>小亮</td>
+                <td>80</td>
+                <td>10</td>
+                <td>50</td>
+                <td>60</td>
+            </tr>
+            <tr>
+                <td>小狗</td>
+                <td>80</td>
+                <td>10</td>
+                <td>50</td>
+                <td>60</td>
+            </tr>
+            <tr>
+                <td>小猪</td>
+                <td>80</td>
+                <td>10</td>
+                <td>50</td>
+                <td>60</td>
+            </tr>
+            <tr>
+                <td>小六</td>
+                <td>80</td>
+                <td>10</td>
+                <td>50</td>
+                <td>60</td>
+            </tr>
+            <tr>
+                <td>小3</td>
+                <td>80</td>
+                <td>10</td>
+                <td>50</td>
+                <td>60</td>
+            </tr>
+        </table>
+    </div>
+    <p>占位</p><br/><p>占位</p><br/><p>占位</p><br/><p>占位</p><br/><p>占位</p><br/><p>占位</p><br/><p>占位</p><br/><p>占位</p><br/><p>占位</p><br/><p>占位</p><br/><p>占位</p><br/>
+    <script type="text/javascript">
+    window.onscroll = function(e) {
+        /**
+         * [兼容浏览器]
+         */
+        var e = e || window.event;
+        var scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
+
+        var fist_line = document.getElementById('first_line');
+        if (scrolltop > 335) {
+            first_line.style.display = "none";
+        } else if (scrolltop > 73) {
+            first_line.style.display = "table-row";
+            first_line.style.position = "fixed";
+            first_line.style.top = 0;
+        } else {
+            first_line.style.position = "inherit";
+            first_line.style.display = "table-row"
+        }
+    }
+    </script>
+</body>
+
+</html>
