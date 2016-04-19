@@ -46,6 +46,7 @@ task39 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part3/ta
 ## notes
 
 #### task37 浮出层组件实现
+Window.innerWidth 获得当前浏览器显示区域的宽
 
 #### task39 UI组件之冻结行列表格
 scrollTop需要兼容。
@@ -61,4 +62,19 @@ window.onscroll = function(e) {
         //coding 
     }
 ```
+一个比较快速的方法。`getBoundingClientRect()`方法。
+它返回一个对象，其中包含了left、right、top、bottom四个属性，分别对应了该元素的左上角和右下角相对于浏览器窗口（viewport）左上角的距离。
+所以，网页元素的相对位置就是
+```
+var X= this.getBoundingClientRect().left;
 
+var Y =this.getBoundingClientRect().top;
+```
+再加上滚动距离，就可以得到绝对位置.
+```
+var X= fixed_table.getBoundingClientRect().left+document.documentElement.scrollLeft;
+
+var Y =fixed_table.getBoundingClientRect().top+document.documentElement.scrollTop;
+
+
+```
