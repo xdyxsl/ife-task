@@ -111,7 +111,6 @@ offsetHeight = height
 
 #### task39 UI组件之冻结行列表格
 scrollTop需要兼容。
-
 ```
 window.onscroll = function(e) {
         /**
