@@ -3,6 +3,9 @@
 task37 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part3/task37><br>
 task37 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part3/task37/>
 
+task38 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part3/task38><br>
+task38 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part3/task38/>
+
 task39 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part3/task39><br>
 task39 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part3/task39/>
 
@@ -93,6 +96,12 @@ task39 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part3/ta
 * offsetWidth = width 
 * offsetHeight = height
 ---
+
+通过review发现一个厉害的东西，cursor的`resize`属性。日后完善相关介绍。
+#### task38 UI组件之排序表格
+`sort`方法要灵活的使用，带对象的数组用了sort后，对象会一起更改顺序！知道了这点就成功了大半了。
+
+接着就是要理解`sort`接受的函数意义。传入a,b两个参数，然后该函数如果返回的是大于0的数，那么就会**交换**a,b的位置。
 
 #### task39 UI组件之冻结行列表格
 scrollTop需要兼容。

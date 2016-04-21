@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Task38 UI组件之排序表格</title>
+    <style type="text/css">
+    td {
+        border: 1px solid black;
+        width: 100px;
+    }
+    
+    table {
+        border-collapse: collapse;
+        text-align: center;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="table"></div>
+    <input type="button" id="sortYWup" value="sortYWup">
+    <input type="button" id="sortSXup" value="sortSXup">
+    <input type="button" id="sortYYup" value="sortYYup">
+    <input type="button" id="sortYWdown" value="sortYWdown">
+    <input type="button" id="sortSXdown" value="sortSXdown">
+    <input type="button" id="sortYYdown" value="sortYYdown">
+    <script type="text/javascript">
+    var student = [];
+    var Student = function(name, yw, sx, yy) {
+        this.name = name;
+        this.yw = yw;
+        this.sx = sx;
+        this.yy = yy;
+    }
+
+    student[0] = new Student("小明", 20, 90, 70);
+    student[1] = new Student("小红", 90, 60, 90);
+    student[2] = new Student("小虹", 60, 100, 70);
+
+    function ascendingSort(data, courese) {
+        data.sort(function(a, b) {
+            return a[courese] - b[courese];
+        });
+        return data;
+    }
+
+    function descendingSort(data, courese) {
+        data.sort(function(a, b) {
+            return b[courese] - a[courese];
+        });
+        return data;
+    }
+
+    var render = function() {
+        var table = document.createElement("table");
+        var thead = document.createElement("thead");
+        var thead_tr = document.createElement("tr");
+        var td1 = document.createElement("td");
+        td1.innerHTML = "姓名";
+        var td2 = document.createElement("td");
+        td2.innerHTML = "语文";
+        var td3 = document.createElement("td");
+        td3.innerHTML = "数学";
+        var td4 = document.createElement("td");
+        td4.innerHTML = "英语";
+
+        thead_tr.appendChild(td1);
+        thead_tr.appendChild(td2);
+        thead_tr.appendChild(td3);
+        thead_tr.appendChild(td4);
+
+        thead.appendChild(thead_tr);
+        table.appendChild(thead);
+
+        var tbody = document.createElement("tbody");
+
+        //开始body第一行
+        var tbody_tr1 = document.createElement("tr");
+        var tbody_tr1_td1 = document.createElement("td");
+        tbody_tr1_td1.innerHTML = student[0].name;
+        var tbody_tr1_td2 = document.createElement("td");
+        tbody_tr1_td2.innerHTML = student[0].yw;
+        var tbody_tr1_td3 = document.createElement("td");
+        tbody_tr1_td3.innerHTML = student[0].sx;
+        var tbody_tr1_td4 = document.createElement("td");
+        tbody_tr1_td4.innerHTML = student[0].yy;
+
+        tbody_tr1.appendChild(tbody_tr1_td1);
+        tbody_tr1.appendChild(tbody_tr1_td2);
+        tbody_tr1.appendChild(tbody_tr1_td3);
+        tbody_tr1.appendChild(tbody_tr1_td4);
+
+        tbody.appendChild(tbody_tr1);
+
+        //开始body第二行
+        var tbody_tr2 = document.createElement("tr");
+        var tbody_tr2_td1 = document.createElement("td");
+        tbody_tr2_td1.innerHTML = student[1].name;
+        var tbody_tr2_td2 = document.createElement("td");
+        tbody_tr2_td2.innerHTML = student[1].yw;
+        var tbody_tr2_td3 = document.createElement("td");
+        tbody_tr2_td3.innerHTML = student[1].sx;
+        var tbody_tr2_td4 = document.createElement("td");
+        tbody_tr2_td4.innerHTML = student[1].yy;
+
+        tbody_tr2.appendChild(tbody_tr2_td1);
+        tbody_tr2.appendChild(tbody_tr2_td2);
+        tbody_tr2.appendChild(tbody_tr2_td3);
+        tbody_tr2.appendChild(tbody_tr2_td4);
+
+        tbody.appendChild(tbody_tr2);
+
+        //开始body第三行
+        var tbody_tr3 = document.createElement("tr");
+        var tbody_tr3_td1 = document.createElement("td");
+        tbody_tr3_td1.innerHTML = student[2].name;
+        var tbody_tr3_td2 = document.createElement("td");
+        tbody_tr3_td2.innerHTML = student[2].yw;
+        var tbody_tr3_td3 = document.createElement("td");
+        tbody_tr3_td3.innerHTML = student[2].sx;
+        var tbody_tr3_td4 = document.createElement("td");
+        tbody_tr3_td4.innerHTML = student[2].yy;
+
+        tbody_tr3.appendChild(tbody_tr3_td1);
+        tbody_tr3.appendChild(tbody_tr3_td2);
+        tbody_tr3.appendChild(tbody_tr3_td3);
+        tbody_tr3.appendChild(tbody_tr3_td4);
+
+        tbody.appendChild(tbody_tr3);
+
+        table.appendChild(tbody);
+
+        document.getElementById("table").appendChild(table);
+    }
+    render();
+
+    function resetTable() {
+        document.getElementById("table").innerHTML = "";
+    }
+    document.getElementById("sortYWup").addEventListener("click", function() {
+        resetTable();
+        ascendingSort(student, "yw");
+        render();
+    }, false);
+    document.getElementById("sortSXup").addEventListener("click", function() {
+        resetTable();
+        ascendingSort(student, "sx");
+        render();
+    }, false);
+    document.getElementById("sortYYup").addEventListener("click", function() {
+        resetTable();
+        ascendingSort(student, "yy");
+        render();
+    }, false);
+    document.getElementById("sortYWdown").addEventListener("click", function() {
+        resetTable();
+        descendingSort(student, "yw");
+        render();
+    }, false);
+    document.getElementById("sortSXdown").addEventListener("click", function() {
+        resetTable();
+        descendingSort(student, "sx");
+        render();
+    }, false);
+    document.getElementById("sortYYdown").addEventListener("click", function() {
+        resetTable();
+        descendingSort(student, "yy");
+        render();
+    }, false);
+    </script>
+</body>
+
+</html>
