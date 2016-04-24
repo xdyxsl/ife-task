@@ -5,144 +5,191 @@
     <meta charset="UTF-8">
     <title>Task38 UI组件之排序表格</title>
     <style type="text/css">
-    td {
-        border: 1px solid black;
-        width: 100px;
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: "Microsoft Yahei";
+        font-weight: bold;
     }
     
-    table {
-        border-collapse: collapse;
-        text-align: center;
+    td:hover {
+        background-color: #eee;
+    }
+    
+    th {
+        background-color: #A768C7;
+        color: #fff;
     }
     </style>
 </head>
 
 <body>
-    <div id="table"></div>
     <script type="text/javascript">
-    var TableTool = {
-        init: function(param) {
-            var student = [];
-            var Student = function(name, Chinese, Computer, English) {
-                this.name = name;
-                this.Chinese = Chinese;
-                this.Computer = Computer;
-                this.English = English;
-            }
+    function tableTool(param) {
+        this.data = param;
+    };
 
-            student[0] = new Student("小明", 20, 90, 40);
-            student[1] = new Student("小红", 90, 60, 90);
-            student[2] = new Student("小虹", 60, 100, 70);
-
-            data = {
-                table_thead: ["姓名", "语文", "电脑", "英语"],
-                student: student,
-            }
-
-            return data;
-
+    tableTool.prototype = {
+        data: {
+            // table_name:"default",
+            // table_head: ["Name", "course1", "course2", "course3"],
+            // isSort: [0, 1, 1, 1],
+            // tbody_obj: {
+            //     1:["person1", 20, 90, 40],
+            //     2:["person2", 90, 60, 90],
+            //     3: ["person3", 60, 100, 70],
+            // },
+            // tdWH: [200, 50],
         },
-
         createTable: function() {
-            this.init();
-            var render = function() {
-                var table = document.createElement("table");
-                var thead = document.createElement("thead");
-                var thead_tr = document.createElement("tr");
+            var table = document.createElement("table");
+            table.setAttribute("id", this.data.table_name);
 
-                var table_html = "";
-                for (var i = 0; i < data.table_thead.length; i++) {
-                    table_html += "<td name='" + data.table_thead[i] + "'>" + data.table_thead[i] + "<img src='arrow_up.png' id='sort" + data.table_thead[i] + "down'><img  src='arrow_down.png' id='sort" + data.table_thead[i] + "up'></td>";
+            table.style.textAlign = "center";
+            table.style.backgroundColor = this.data.table_color;
+            table.style.borderCollapse = "collapse";
+
+            var thead = document.createElement("thead");
+            thead.style.backgroundColor = this.data.head_color; //标题行背景色
+            var thead_tr = document.createElement("tr");
+
+            var table_html = "",
+                tempHTML = "";
+            for (var i = 0; i < this.data.table_head.length; i++) {
+                //借鉴http://sakitama.github.io所采取的方式，用符号代替图片的箭头
+                if (this.data.isSort[i] == "1") {
+                    tempHTML = "</p><span data-index='1' class='asc'>↑</span>&nbsp<span data-index='1' class='des'>↓</span</td>"; //标记递增为asc；递减des
+                } else {
+                    tempHTML = "</p><span data-index='0'></span>&nbsp<span data-index='0'></span</td>";
                 }
-
-                thead.innerHTML = table_html;
-
-                table.appendChild(thead);
-
-                var tbody = document.createElement("tbody");
-
-                var tbody_obj = {
-                    1: data.student[0],
-                    2: data.student[1],
-                    3: data.student[2]
-                };
-
-                var tbody_html = "";
-                for (var i = 1; i < data.table_thead.length; i++) {
-                    tbody_html += "<tr><td>" + tbody_obj[i].name + "</td><td>" + tbody_obj[i].Chinese + "</td><td>" + tbody_obj[i].Computer + "</td><td>" + tbody_obj[i].English + "</td></tr>";
-                }
-
-                tbody.innerHTML = tbody_html;
-
-                table.appendChild(tbody);
-
-                document.getElementById("table").appendChild(table);
-
-
-                document.getElementById("sort语文up").addEventListener("click", function() {
-                    resetTable();
-                    ascendingSort(data.student, "Chinese");
-                    render();
-                }, false);
-                document.getElementById("sort电脑up").addEventListener("click", function() {
-                    resetTable();
-                    ascendingSort(data.student, "Computer");
-                    render();
-                }, false);
-                document.getElementById("sort英语up").addEventListener("click", function() {
-                    resetTable();
-                    ascendingSort(data.student, "English");
-                    render();
-                }, false);
-                document.getElementById("sort语文down").addEventListener("click", function() {
-                    resetTable();
-                    descendingSort(data.student, "Chinese");
-                    render();
-                }, false);
-                document.getElementById("sort电脑down").addEventListener("click", function() {
-                    resetTable();
-                    descendingSort(data.student, "Computer");
-                    render();
-                }, false);
-                document.getElementById("sort英语down").addEventListener("click", function() {
-                    resetTable();
-                    descendingSort(data.student, "English");
-                    render();
-                }, false);
-                document.getElementsByTagName("thead")[0].childNodes[0].childNodes[0].removeChild(document.getElementsByTagName("thead")[0].childNodes[0].childNodes[0].childNodes[1]);
-                document.getElementsByTagName("thead")[0].childNodes[0].childNodes[0].removeChild(document.getElementsByTagName("thead")[0].childNodes[0].childNodes[0].childNodes[1]);
+                table_html += "<td name='" + this.data.table_head[i] + "'><p>" + this.data.table_head[i] + tempHTML;
             }
-            render();
+
+            thead.innerHTML = table_html;
+            table.appendChild(thead);
+
+            var tbody = document.createElement("tbody");
+            var tbody_html = "";
+
+            for (var i in this.data.tbody_obj) {
+                for (var j = 0; j < this.data.table_head.length; j++) {
+                    tbody_html += "<td>" + this.data.tbody_obj[i][j] + "</td>";
+                }
+                tbody_html = "<tr>" + tbody_html + "</tr>";
+            }
+
+            tbody.innerHTML = tbody_html;
+            table.appendChild(tbody);
+
+            document.body.appendChild(table);
+
+            //操作单元格的宽高
+            var td = document.getElementsByTagName("td");
+            var td_width = this.data.tdWH[0] + "px";
+            var td_height = this.data.tdWH[1] + "px";
+            for (var k = 0; k < td.length; k++) {
+                td[k].style.width = td_width;
+                td[k].style.height = td_height;
+            }
+
+            var span_arr = document.getElementsByTagName("span");
+            for (var i = 0; i < span_arr.length; i++) {
+                var that = this; //底下事件监听的时候this无法定位到数组内，所以拷贝一份
+                span_arr[i].style.cursor = "pointer";
+                span_arr[i].addEventListener("click", function() {
+                    if (this.getAttribute("class") == "asc") {
+                        for (x in that.data.table_head) {
+                            if (this.parentNode.getAttribute("name").toUpperCase() == that.data.table_head[x].toUpperCase()) {
+                                that.sortUp(x);
+                            }
+                        }
+                    } else {
+                        for (x in that.data.table_head) {
+                            if (this.parentNode.getAttribute("name").toUpperCase() == that.data.table_head[x].toUpperCase()) {
+                                that.sortDown(x);
+                            }
+                        }
+                    }
+                    that.resetTable();
+                    that.createTable();
+                }, false)
+            }
+
 
         },
+
+        sortUp: function(index) { //引入一个newArr和newObj先来处理排序，index指代的是要排序科目在数组中的位置
+            var sortData = this.data.tbody_obj,
+                newArr = [],
+                newObj = {};
+            for (key in sortData) {
+                newArr.push(sortData[key]);
+            }
+
+            newArr.sort(function(a, b) {
+                return a[index] - b[index];
+            });
+
+            for (var i = 0; i < newArr.length; i++) {
+                newObj[i + 1] = newArr[i];
+            }
+
+            this.data.tbody_obj = newObj;
+        },
+        sortDown: function(index) { //引入一个newArr和newObj先来处理排序，index指代的是要排序科目在数组中的位置
+            var sortData = this.data.tbody_obj,
+                newArr = [],
+                newObj = {};
+            for (key in sortData) {
+                newArr.push(sortData[key]);
+            }
+
+            newArr.sort(function(a, b) {
+                return b[index] - a[index];
+            });
+
+            for (var i = 0; i < newArr.length; i++) {
+                newObj[i + 1] = newArr[i];
+            }
+            this.data.tbody_obj = newObj;
+        },
+        resetTable: function() { //删除掉旧的表格
+            var old = document.getElementById(this.data.table_name);
+            document.body.removeChild(old);
+        },
+
     }
 
-    TableTool.createTable();
-    /**
-     * 排序函数
-     * @param  {array} data    要参照的数组
-     * @param  {obj} courese 要参照的科目
-     * @return {array}         返回排序好之后的数组
-     */
+    var table1 = new tableTool({
+        table_name: "table1",
+        table_head: ["Name", "Chinese", "Computer", "English"],
+        isSort: [0, 1, 1, 1],
+        tbody_obj: {
+            1: ["小明", 20, 90, 40],
+            2: ["小红", 90, 60, 90],
+            3: ["小肛", 60, 100, 70],
+            4: ["小3", 30, 50, 10]
+        },
+        tdWH: [200, 50],
+        head_color: "#eee",
+        table_color: "#F8C0FF",
+    })
 
-    function ascendingSort(data, courese) {
-        data.sort(function(a, b) {
-            return a[courese] - b[courese];
-        });
-        return data;
-    }
-
-    function descendingSort(data, courese) {
-        data.sort(function(a, b) {
-            return b[courese] - a[courese];
-        });
-        return data;
-    }
-
-
-    function resetTable() {
-        document.getElementById("table").innerHTML = "";
-    }
+    table1.createTable();
+    var table2 = new tableTool({
+        table_name: "table2",
+        table_head: ["Name", "eee", "www", "qqq"],
+        isSort: [0, 1, 1, 1],
+        tbody_obj: {
+            1: ["小2", 20, 90, 40],
+            2: ["小红", 90, 60, 90],
+            3: ["小4", 60, 100, 70],
+        },
+        tdWH: [200, 50],
+        head_color: "rgb(74,158,158)",
+        table_color: "rgb(28,170,125)",
+    })
+    table2.createTable();
     </script>
 </body>
 
