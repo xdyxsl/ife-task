@@ -12,7 +12,9 @@ a {
     color: #697a8e;
     ;
 }
-
+li:hover{
+    cursor: pointer;
+}
 a:visited {
     color: #697a8e;
 }
@@ -149,7 +151,9 @@ dd {
 .aside-icon-dt:hover {
     background: url(img/task09-aside11.png) no-repeat 52px #fff;
 }
-
+.aside-icon li:nth-child(3){
+        background: url(img/task09-aside11.png) no-repeat 52px #383d4e;
+}
 .aside-icon li:nth-child(3),
 .aside-icon li:nth-child(4) {
     color: #fff;
