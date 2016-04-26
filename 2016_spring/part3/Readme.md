@@ -97,6 +97,7 @@ task43 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part3/ta
 * clientHeight = height - border 
 * offsetWidth = width 
 * offsetHeight = height
+
 ---
 
 通过review发现一个厉害的东西，cursor的`resize`属性。日后完善相关介绍。
@@ -136,4 +137,6 @@ var Y =fixed_table.getBoundingClientRect().top+document.documentElement.scrollTo
 
 ```
 #### task43 多功能相册之拼图布局
-学习使用clip-path，有两种方法，一种的svg内置的方法，还有一种是CSS属性的clip-path（需要添加-webkit-前缀）
+学习使用`clip-path`，有两种方法，一种的svg内置的方法，还有一种是`CSS`属性的`clip-path`（需要添加`-webkit-`前缀）。CSS不兼容FF和IE。
+
+svg中使用clip-path的时候，如果是外部文件记得引用的时候要用添加上文件名，而且`polygo`n属性的参数要把CSS里面的参数换成小数。可以兼容FF。

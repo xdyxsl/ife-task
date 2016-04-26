@@ -36,10 +36,14 @@ div {
 
 .ablum2 img:nth-child(1) {
     -webkit-clip-path: polygon(0% 0%, 70% 0%, 30% 100%, 0% 100%);
+    /*引入设置好的svg文件参数*/
+    clip-path: url('clipPath.svg#clip1');
 }
 
 .ablum2 img:nth-child(2) {
     -webkit-clip-path: polygon(70% 0%, 100% 0%, 100% 100%, 30% 100%);
+    /*引入设置好的svg文件参数*/
+    clip-path: url('clipPath.svg#clip2');
 }
 
 .ablum2 img:nth-child(1),
