@@ -9,6 +9,8 @@ task38 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part3/ta
 task39 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part3/task39><br>
 task39 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part3/task39/>
 
+task43 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part3/task43><br>
+task43 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part3/task43/>
 ## IFE春季班第三阶段任务
 
 　　 第三阶段的主要目标是帮助大家 综合练习HTML，CSS，JavaScript。第三阶段任务从 `4月11日` 开始，持续到 `5月4日`。当然，您也可以在这个时间以后继续自行实践练习。第三阶段的任务主要是为第四阶段的大任务进行准备，会有比较大的连贯性。
@@ -133,3 +135,5 @@ var Y =fixed_table.getBoundingClientRect().top+document.documentElement.scrollTo
 
 
 ```
+#### task43 多功能相册之拼图布局
+学习使用clip-path，有两种方法，一种的svg内置的方法，还有一种是CSS属性的clip-path（需要添加-webkit-前缀）

@@ -1,0 +1,192 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+div {
+    margin: 20px 0;
+}
+
+.gallery img {
+    object-fit: cover;
+    position: absolute;
+}
+
+.gallery {
+    position: relative;
+    width: 600px;
+    height: 300px;
+}
+
+
+/***************
+***一图片样式***
+****************/
+
+.ablum1 img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+
+/***************
+***两图片样式***
+****************/
+
+.ablum2 img:nth-child(1) {
+    -webkit-clip-path: polygon(0% 0%, 70% 0%, 30% 100%, 0% 100%);
+}
+
+.ablum2 img:nth-child(2) {
+    -webkit-clip-path: polygon(70% 0%, 100% 0%, 100% 100%, 30% 100%);
+}
+
+.ablum2 img:nth-child(1),
+.ablum2 img:nth-child(2) {
+    width: 100%;
+    height: 100%;
+}
+
+
+/***************
+***三图片样式***
+****************/
+
+.ablum3 img:nth-child(1) {
+    width: 100%;
+    height: 100%;
+    left: 0;
+}
+
+.ablum3 img:nth-child(3) {
+    bottom: 0;
+}
+
+.ablum3 img:nth-child(2),
+.ablum3 img:nth-child(3) {
+    width: 30%;
+    height: 50%;
+    right: 0;
+}
+
+
+/***************
+***四图片样式***
+****************/
+
+.ablum4 img:nth-child(2),
+.ablum4 img:nth-child(4) {
+    right: 0;
+}
+
+.ablum4 img:nth-child(1),
+.ablum4 img:nth-child(3) {
+    left: 0;
+}
+
+.ablum4 img:nth-child(3),
+.ablum4 img:nth-child(4) {
+    bottom: 0;
+}
+
+.ablum4 img:nth-child(1),
+.ablum4 img:nth-child(2),
+.ablum4 img:nth-child(3),
+.ablum4 img:nth-child(4) {
+    width: 50%;
+    height: 50%;
+}
+
+
+/***************
+***五图片样式***
+****************/
+
+.ablum5 img:nth-child(1) {
+    width: 66.6667%;
+    height: 66.6667%;
+    left: 0;
+    top: 0;
+}
+
+.ablum5 img:nth-child(2) {
+    top: 0;
+}
+
+.ablum5 img:nth-child(3) {
+    bottom: 0;
+}
+
+.ablum5 img:nth-child(4) {
+    left: 0;
+}
+
+.ablum5 img:nth-child(5) {
+    left: 33.3333%;
+}
+
+.ablum5 img:nth-child(2),
+.ablum5 img:nth-child(3),
+.ablum5 img:nth-child(4),
+.ablum5 img:nth-child(5) {
+    width: 33.3333%;
+}
+
+.ablum5 img:nth-child(2),
+.ablum5 img:nth-child(3) {
+    height: 50%;
+    right: 0;
+}
+
+.ablum5 img:nth-child(4),
+.ablum5 img:nth-child(5) {
+    height: 33.3333%;
+    bottom: 0;
+}
+
+
+/***************
+***六图片样式***
+****************/
+
+.ablum6 img:nth-child(1) {
+    width: 66.6667%;
+    height: 66.6667%;
+    left: 0;
+    top: 0;
+}
+
+.ablum6 img:nth-child(2) {
+    right: 0;
+    top: 0;
+}
+
+.ablum6 img:nth-child(3) {
+    right: 0;
+    bottom: 33.3333%;
+}
+
+.ablum6 img:nth-child(4) {
+    right: 0;
+    bottom: 0;
+}
+
+.ablum6 img:nth-child(5) {
+    left: 0;
+    bottom: 0;
+}
+
+.ablum6 img:nth-child(6) {
+    left: 33.3333%;
+    bottom: 0;
+}
+
+.ablum6 img:nth-child(2),
+.ablum6 img:nth-child(3),
+.ablum6 img:nth-child(4),
+.ablum6 img:nth-child(5),
+.ablum6 img:nth-child(6) {
+    width: 33.3333%;
+    height: 33.3333%;
+}
