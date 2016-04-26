@@ -139,4 +139,4 @@ var Y =fixed_table.getBoundingClientRect().top+document.documentElement.scrollTo
 #### task43 多功能相册之拼图布局
 学习使用`clip-path`，有两种方法，一种的svg内置的方法，还有一种是`CSS`属性的`clip-path`（需要添加`-webkit-`前缀）。CSS不兼容FF和IE。
 
-svg中使用clip-path的时候，如果是外部文件记得引用的时候要用添加上文件名，而且`polygo`n属性的参数要把CSS里面的参数换成小数。可以兼容FF。
+`svg`中使用`clip-path`的时候，如果是外部文件记得引用的时候要用添加上文件名，而且`polygon`属性的参数要把CSS里面的参数换成小数。可以兼容FF。
