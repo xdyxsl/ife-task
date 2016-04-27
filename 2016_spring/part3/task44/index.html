@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task44 多功能相册之瀑布布局</title>
+    <style type="text/css">
+
+    .wf-column{
+       /* display:inline-block;
+        vertical-align:top;
+        box-sizing: border-box;*/
+    }
+    img{
+        box-shadow:10px 10px 5px #888888;
+    }
+    #wf-container{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    </style>
+</head>
+<body>
+    <div id="wf-container"></div>
+    <script type="text/javascript">
+        console.log(document.body.clientWidth,document.body.clientHeight);
+
+        var waterfall = {
+            container:document.getElementById("wf-container"),
+            src: "http://cued.xunlei.com/demos/publ/img/",//图片来自迅雷UED，图片链接的结尾为：P_001.jpg
+            imgNumber:0,//每张图的编号
+            column:6,
+            margin:10,
+            setData:function(){
+                var img_arr = document.getElementsByTagName("img");
+                for(var i = 0;i<img_arr.length;i++){
+                    img_arr[i].style.margin = this.margin +"px";
+                }
+            },
+            getIndex:function(){//获取图片编号
+                var index = this.imgNumber;
+                if (index < 10) {
+                    index = "00" + index;   
+                } else if (index < 100) {
+                    index = "0" + index;    
+                }
+                return index;
+            },
+            append:function(column){//添加函数
+                if(this.imgNumber<160){
+                    var index = this.getIndex(),
+                    div = document.createElement("div")
+                    img = document.createElement("img"),
+                    imgUrl = this.src+"P_"+index+".jpg";
+
+                    img.setAttribute("src",imgUrl);
+                    div.appendChild(img);
+                    column.appendChild(div);
+                    this.imgNumber ++;
+                }else{
+                    return;
+                }
+            },
+            create:function(){
+                var containter = document.getElementById("wf-container");
+
+                var column_html = "";
+                for(var i =0;i<this.column;i++){
+                    var index = this.getIndex();
+                    column_html += "<div id='wfcolumn"+ i +"' class='wf-column' style='text-align: center;'><div><img src='"+ this.src +"P_"+ index +".jpg' style></div></div>";
+                    this.imgNumber ++;
+                }
+                this.container.innerHTML = column_html;
+            },
+            appendOnce:function(){//每栏增加一个图片
+                for(var i =0;i<this.column;i++){
+                    var name = "wfcolumn"+i;
+                    this.append(document.getElementById(name));
+                }
+            },
+            scroll:function(){
+                var that = this;
+                window.onscroll=function(){
+                    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                    if(document.body.clientHeight-window.screen.availHeight-scrollTop<=100){
+                        that.appendOnce();
+                        that.setData();
+                    }
+                }
+            }
+        };
+        waterfall.create();
+        waterfall.appendOnce();
+        waterfall.appendOnce();
+        waterfall.setData();
+        window.onload=function(){
+            waterfall.scroll()
+        }
+    </script>
+</body>
+</html>
