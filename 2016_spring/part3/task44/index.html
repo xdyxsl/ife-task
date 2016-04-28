@@ -1,101 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Task44 多功能相册之瀑布布局</title>
-    <style type="text/css">
-
-    .wf-column{
-       /* display:inline-block;
-        vertical-align:top;
-        box-sizing: border-box;*/
-    }
-    img{
-        box-shadow:10px 10px 5px #888888;
-    }
-    #wf-container{
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-    }
-    </style>
 </head>
+
 <body>
     <div id="wf-container"></div>
+    <div id="wf-mask"></div>
     <script type="text/javascript">
-        console.log(document.body.clientWidth,document.body.clientHeight);
+    var waterfall = {
+        container: document.getElementById("wf-container"),
+        src: "http://cued.xunlei.com/demos/publ/img/", //图片来自迅雷UED，图片链接的结尾为：P_001.jpg
+        imgNumber: 0, //每张图的编号
+        column: 6, //瀑布栏数，基于我取的照片，6栏最美好。
+        // width:200,//每一栏瀑布的宽,由于是flex布局，自动算宽，就不手动设置宽和左右边距了。
+        margin: 10, //底边距
+        zoomWidth: 350, //放大后的图片宽度
+        setData: function() {
+            var img_arr = document.getElementById("wf-container").getElementsByTagName("img"),
+                self = this;
+            for (var i = 0; i < img_arr.length; i++) {
+                img_arr[i].style.marginBottom = this.margin + "px";
+                img_arr[i].style.boxShadow = "10px 10px 5px #888888";
+                img_arr[i].style.cursor = "zoom-in";
+                img_arr[i].style.width = "100%";
+                img_arr[i].setAttribute("onclick", "waterfall.zoom(this)");
+                img_arr[i].setAttribute("title", "点击放大");
+            }
 
-        var waterfall = {
-            container:document.getElementById("wf-container"),
-            src: "http://cued.xunlei.com/demos/publ/img/",//图片来自迅雷UED，图片链接的结尾为：P_001.jpg
-            imgNumber:0,//每张图的编号
-            column:6,
-            margin:10,
-            setData:function(){
-                var img_arr = document.getElementsByTagName("img");
-                for(var i = 0;i<img_arr.length;i++){
-                    img_arr[i].style.margin = this.margin +"px";
-                }
-            },
-            getIndex:function(){//获取图片编号
-                var index = this.imgNumber;
-                if (index < 10) {
-                    index = "00" + index;   
-                } else if (index < 100) {
-                    index = "0" + index;    
-                }
-                return index;
-            },
-            append:function(column){//添加函数
-                if(this.imgNumber<160){
-                    var index = this.getIndex(),
-                    div = document.createElement("div")
+            this.container.style.display = "flex";
+            this.container.style.justifyContent = "space-around";
+            this.container.style.flexWrap = "wrap";
+        },
+        getIndex: function() { //获取图片编号
+            var index = this.imgNumber;
+            if (index < 10) {
+                index = "00" + index;
+            } else if (index < 100) {
+                index = "0" + index;
+            }
+            return index;
+        },
+        append: function(column) { //添加函数
+            if (this.imgNumber < 160) {
+                var index = this.getIndex(),
+                    div = document.createElement("div"),
                     img = document.createElement("img"),
-                    imgUrl = this.src+"P_"+index+".jpg";
+                    imgUrl = this.src + "P_" + index + ".jpg";
 
-                    img.setAttribute("src",imgUrl);
-                    div.appendChild(img);
-                    column.appendChild(div);
-                    this.imgNumber ++;
-                }else{
-                    return;
-                }
-            },
-            create:function(){
-                var containter = document.getElementById("wf-container");
+                img.setAttribute("src", imgUrl);
+                div.appendChild(img);
+                column.appendChild(div);
+                this.imgNumber++;
+            } else {
+                return;
+            }
+        },
+        create: function() {
+            var containter = document.getElementById("wf-container"),
+                column_html = "";
+            for (var i = 0; i < this.column; i++) {
+                var index = this.getIndex();
+                column_html += "<div id='wfcolumn" + i + "' style='width:" + this.width + "px'><div><img src='" + this.src + "P_" + index + ".jpg' style></div></div>";
+                this.imgNumber++;
+            }
+            this.container.innerHTML = column_html;
+            this.appendOnce();
+            this.appendOnce(); //先加两次,把滚动栏加载出来
+        },
+        appendOnce: function() { //判断每栏最后一个元素的offsetTop，给最短的增加图片
+            var temp_arr = [];
 
-                var column_html = "";
-                for(var i =0;i<this.column;i++){
-                    var index = this.getIndex();
-                    column_html += "<div id='wfcolumn"+ i +"' class='wf-column' style='text-align: center;'><div><img src='"+ this.src +"P_"+ index +".jpg' style></div></div>";
-                    this.imgNumber ++;
-                }
-                this.container.innerHTML = column_html;
-            },
-            appendOnce:function(){//每栏增加一个图片
-                for(var i =0;i<this.column;i++){
-                    var name = "wfcolumn"+i;
+            for (var i = 0; i < this.column; i++) { //把每栏最后一个子节点的offsetTop拿出来
+                var name = "wfcolumn" + i;
+                temp_arr.push(document.getElementById(name).lastChild.offsetTop);
+            }
+
+            var min = temp_arr[0];
+            for (var x = 1; x < temp_arr.length; x++) {
+                if (min > temp_arr[x]) {
+                    min = temp_arr[x]
+                };
+            }
+
+            for (var i = 0; i < this.column; i++) {
+                var name = "wfcolumn" + i;
+                if (document.getElementById(name).lastChild.offsetTop == min) {
                     this.append(document.getElementById(name));
                 }
-            },
-            scroll:function(){
-                var that = this;
-                window.onscroll=function(){
-                    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-                    if(document.body.clientHeight-window.screen.availHeight-scrollTop<=100){
-                        that.appendOnce();
-                        that.setData();
-                    }
+            }
+
+        },
+        scroll: function() {
+            var that = this;
+            window.onscroll = function() {
+                var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                if (document.body.clientHeight - window.screen.availHeight - scrollTop <= 100) {
+                    that.appendOnce();
+                    that.setData();
                 }
             }
-        };
-        waterfall.create();
-        waterfall.appendOnce();
-        waterfall.appendOnce();
-        waterfall.setData();
-        window.onload=function(){
-            waterfall.scroll()
+        },
+        zoom: function(e) {
+            var mask = document.getElementById("wf-mask");
+            mask.innerHTML = "";
+            mask.style.height = "100%";
+            mask.style.width = "100%";
+            mask.style.display = "flex";
+            mask.style.position = "fixed";
+            mask.style.justifyContent = "center";
+            mask.style.alignItems = "center";
+            mask.style.left = "0";
+            mask.style.top = "0";
+
+            var maskdiv = document.createElement("div");
+            maskdiv.style.backgroundColor = "rgba(0,0,0,0.8)";
+            maskdiv.style.position = "absolute";
+            maskdiv.style.top = "0";
+            maskdiv.style.bottom = "0";
+            maskdiv.style.left = "0";
+            maskdiv.style.right = "0";
+
+            var img = document.createElement("img");
+            img.setAttribute("src", e.getAttribute("src"));
+            img.setAttribute("title", "图片编号：" + e.getAttribute("src").slice(-7, -4));
+            img.style.display = "block";
+            img.style.zIndex = "999";
+            img.style.width = this.zoomWidth + "px";
+
+            mask.appendChild(maskdiv);
+            mask.appendChild(img);
+
+            maskdiv.addEventListener("click", function() {
+                mask.style.display = "none";
+            }, false)
+        },
+        init: function() {
+            this.scroll();
+            this.create();
+            this.setData();
         }
+    };
+
+    window.onload = function() {
+        waterfall.init();
+    }
     </script>
 </body>
+
 </html>

@@ -11,6 +11,9 @@ task39 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part3/ta
 
 task43 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part3/task43><br>
 task43 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part3/task43/>
+
+task44 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part3/task44><br>
+task44 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part3/task44/>
 ## IFE春季班第三阶段任务
 
 　　 第三阶段的主要目标是帮助大家 综合练习HTML，CSS，JavaScript。第三阶段任务从 `4月11日` 开始，持续到 `5月4日`。当然，您也可以在这个时间以后继续自行实践练习。第三阶段的任务主要是为第四阶段的大任务进行准备，会有比较大的连贯性。
@@ -140,3 +143,25 @@ var Y =fixed_table.getBoundingClientRect().top+document.documentElement.scrollTo
 学习使用`clip-path`，有两种方法，一种的svg内置的方法，还有一种是`CSS`属性的`clip-path`（需要添加`-webkit-`前缀）。CSS不兼容FF和IE。
 
 `svg`中使用`clip-path`的时候，如果是外部文件记得引用的时候要用添加上文件名，而且`polygon`属性的参数要把CSS里面的参数换成小数。可以兼容FF。
+
+#### task44 
+瀑布流的原理是分栏装载图片，一开始误以为横排横排的加载，就去想着怎么才能实现参差不齐的效果。用分栏的瀑布去解决就很简单了，根本不需要什么样式。
+
+整体参考了这篇讲解瀑布流的文章[折腾:瀑布流布局（基于多栏列表流体布局实现）](http://www.zhangxinxu.com/wordpress/?p=2308)，十分感谢。
+
+数组中取最大值，先把数组中第一个数当作最大值取出来放到变量`max`里面，再遍历去和数组中其他数比较，如果小于其他数，就把其他数赋值给`max`。
+
+```
+var new_arr = [20,30,16];
+var max = new_arr[0];
+for(var i =1;i<new_arr.length;i++){
+    if(max<new_arr[i]){max=new_arr[i]}
+}
+console.log(max)//30
+```
+
+想获得img的宽高，如果没有写样式的话直接去获得是空的，
+> 网页加载的过程是这样的，首先加载的是document文档。也就是HTML，以及包含的js文件、css文件。加载完毕之后，才会继续加载各个图片，每个图片相当于一个单独的请求。所以当document的ready的时候，也就是加载完成的时候，图片可是还没有加载完成，是刚刚准备加载。此时你当然得不到图片的尺寸了。当image的load或者onreadystatechange事件，可以处理判断，得到image的尺寸。
+
+所以把获取的方式加载img.onload函数里面去就能获得宽高了。可以参考这个链接：[JS快速获取图片宽高的方法](http://www.css88.com/archives/5224/comment-page-1)
+
