@@ -144,7 +144,7 @@ var Y =fixed_table.getBoundingClientRect().top+document.documentElement.scrollTo
 
 `svg`中使用`clip-path`的时候，如果是外部文件记得引用的时候要用添加上文件名，而且`polygon`属性的参数要把CSS里面的参数换成小数。可以兼容FF。
 
-#### task44 
+#### task44 多功能相册之瀑布布局
 瀑布流的原理是分栏装载图片，一开始误以为横排横排的加载，就去想着怎么才能实现参差不齐的效果。用分栏的瀑布去解决就很简单了，根本不需要什么样式。
 
 整体参考了这篇讲解瀑布流的文章[折腾:瀑布流布局（基于多栏列表流体布局实现）](http://www.zhangxinxu.com/wordpress/?p=2308)，十分感谢。
@@ -165,3 +165,11 @@ console.log(max)//30
 
 所以把获取的方式加载img.onload函数里面去就能获得宽高了。可以参考这个链接：[JS快速获取图片宽高的方法](http://www.css88.com/archives/5224/comment-page-1)
 
+其他参考：
+* [瀑布流布局浅析](http://www.68design.net/Web-Guide/HTMLCSS/58734-1.html)
+* [原生JS实现的简单“瀑布流”布局](http://www.oschina.net/code/snippet_114440_10309)
+* [css的div垂直居中的方法，百分比div垂直居中](http://www.haorooms.com/post/css_div_juzhong)
+* [垂直居中的几种实现方法](http://www.360doc.com/content/11/1011/10/1609343_155094382.shtml)
+* [CSS实现垂直居中的5种方法](http://blog.163.com/hongshaoguoguo@126/blog/static/1804698120135156225265/)
+
+#### task45 多功能相册之木桶布局
