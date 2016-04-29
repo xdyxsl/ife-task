@@ -1,4 +1,4 @@
-#wf-container {
+#wf_container {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
@@ -18,7 +18,7 @@
     margin-bottom: 10px;
 }
 
-#wf-mask {
+#wf_mask {
     height: 100%;
     width: 100%;
     position: fixed;

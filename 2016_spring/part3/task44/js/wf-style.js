@@ -1,11 +1,11 @@
 var waterfall = {
-    container: document.getElementById("wf-container"),
+    container: document.getElementById("wf_container"),
     src: "http://cued.xunlei.com/demos/publ/img/", //图片来自迅雷UED，图片链接的结尾为：P_001.jpg
     imgNumber: 0, //每张图的编号
     column: 6, //瀑布栏数，基于我取的照片，6栏最美好。
     zoomWidth: 350, //放大后的图片宽度
     setData: function() {
-        var img_arr = document.getElementById("wf-container").getElementsByTagName("img"),
+        var img_arr = this.container.getElementsByTagName("img"),
             self = this;
         for (var i = 0; i < img_arr.length; i++) {
             img_arr[i].setAttribute("onclick", "waterfall.zoom(this)");
@@ -38,8 +38,7 @@ var waterfall = {
         }
     },
     create: function() {
-        var containter = document.getElementById("wf-container"),
-            column_html = "";
+        var column_html = "";
         for (var i = 0; i < this.column; i++) {
             var index = this.getIndex();
             column_html += "<div id='wfcolumn" + i + "' ><div><img src='" + this.src + "P_" + index + ".jpg' style></div></div>";
@@ -83,7 +82,7 @@ var waterfall = {
         }
     },
     zoom: function(e) {
-        var mask = document.getElementById("wf-mask");
+        var mask = document.getElementById("wf_mask");
         mask.innerHTML = "";
         mask.style.zIndex = "0";
         mask.style.display = "flex";
