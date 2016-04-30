@@ -1,6 +1,6 @@
 var waterfall = {
     container: document.getElementById("wf_container"),
-    src: "http://cued.xunlei.com/demos/publ/img/", //图片来自迅雷UED，图片链接的结尾为：P_001.jpg
+    src: "http://cued.xunlei.com/demos/publ/img/P_", //图片来自迅雷UED，图片链接的结尾为：P_001.jpg
     imgNumber: 0, //每张图的编号
     column: 6, //瀑布栏数，基于我取的照片，6栏最美好。
     zoomWidth: 350, //放大后的图片宽度
@@ -27,7 +27,7 @@ var waterfall = {
             var index = this.getIndex(),
                 div = document.createElement("div"),
                 img = document.createElement("img"),
-                imgUrl = this.src + "P_" + index + ".jpg";
+                imgUrl = this.src + index + ".jpg";
 
             img.setAttribute("src", imgUrl);
             div.appendChild(img);
@@ -41,7 +41,7 @@ var waterfall = {
         var column_html = "";
         for (var i = 0; i < this.column; i++) {
             var index = this.getIndex();
-            column_html += "<div id='wfcolumn" + i + "' ><div><img src='" + this.src + "P_" + index + ".jpg' style></div></div>";
+            column_html += "<div id='wfcolumn" + i + "' ><div><img src='" + this.src + index + ".jpg' style></div></div>";
             this.imgNumber++;
         }
         this.container.innerHTML = column_html;
