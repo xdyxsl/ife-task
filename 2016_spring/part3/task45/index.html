@@ -37,7 +37,6 @@
                     var img = document.createElement("img");
                     img.src = this.src+index+".jpg";
 
-                        console.log(img.naturalWidth);
                         this.imgs.push({
                             width:img.width,
                             height:img.height,
@@ -46,7 +45,6 @@
                         }); 
                     
                     this.imgNumber++;
-                    console.log(this.imgs);
                 }
             },
             create:function(){
