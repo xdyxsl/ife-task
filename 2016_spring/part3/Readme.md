@@ -163,7 +163,7 @@ console.log(max)//30
 想获得img的宽高，如果没有写样式的话直接去获得是空的，
 > 网页加载的过程是这样的，首先加载的是document文档。也就是HTML，以及包含的js文件、css文件。加载完毕之后，才会继续加载各个图片，每个图片相当于一个单独的请求。所以当document的ready的时候，也就是加载完成的时候，图片可是还没有加载完成，是刚刚准备加载。此时你当然得不到图片的尺寸了。当image的load或者onreadystatechange事件，可以处理判断，得到image的尺寸。
 
-所以把获取的方式加载img.onload函数里面去就能获得宽高了。可以参考这个链接：[JS快速获取图片宽高的方法](http://www.css88.com/archives/5224/comment-page-1)
+所以把获取的方式加载img.onload函数里面去就能获得宽高了，或者设置一个timeout。可以参考这个链接：[JS快速获取图片宽高的方法](http://www.css88.com/archives/5224/comment-page-1)
 
 其他参考：
 * [瀑布流布局浅析](http://www.68design.net/Web-Guide/HTMLCSS/58734-1.html)
@@ -173,3 +173,5 @@ console.log(max)//30
 * [CSS实现垂直居中的5种方法](http://blog.163.com/hongshaoguoguo@126/blog/static/1804698120135156225265/)
 
 #### task45 多功能相册之木桶布局
+`obj.naturalWidth(naturalHeight)`方法，这是HTML5里新添加的一个获取元素高宽的方法，但只适用于Firefox/IE9/Safari/Chrome/Opera浏览器。[参考链接](http://www.cnblogs.com/koukouyifan/p/4066564.html)
+

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task45 多功能相册之木桶布局</title>
+    <style type="text/css">
+    img{
+        max-width:100%;
+        max-height:100%;
+        height:100%;
+
+    }
+    </style>
+</head>
+<body>
+    <div id="cask_container"></div>
+    <script type="text/javascript">
+        var cask = {
+            container:document.getElementById("cask_container"),
+            src:"http://cued.xunlei.com/demos/publ/img/P_",
+            imgNumber:0, //每张图的编号
+            imgs:[],//图片数组
+            loadNumber:30,//初始水桶数
+            height:200,//水桶的高度
+            getIndex:function(){
+                var index = this.imgNumber;
+                if(index<10){
+                    index = "00" +index;
+                }else if(index<100){
+                    index  = "0"+index;
+                }
+                return index;
+            },
+            getImage:function(){
+                var i,width,height,index=this.getIndex();
+                for(i=0;i<this.loadNumber;i++){
+                    var img = document.createElement("img");
+                    img.src = this.src+index+".jpg";
+
+                        console.log(img.naturalWidth);
+                        this.imgs.push({
+                            width:img.width,
+                            height:img.height,
+                            src:this.src+index+".jpg",
+                            ratio:img.height/img.width,
+                        }); 
+                    
+                    this.imgNumber++;
+                    console.log(this.imgs);
+                }
+            },
+            create:function(){
+                var self = this;
+                for(var i=0;i<3;i++){
+                    var div =  document.createElement("div");
+                    div.setAttribute("class","cask-wrap");
+                    div.style.height = this.height + "px";
+                    this.container.appendChild(div);
+                }
+                var cask_wrap_arr = document.getElementsByClassName("cask-wrap");
+                var temp = 0;
+
+                for(var i =0;i<cask_wrap_arr.length;i++){
+                    var index = this.getIndex();
+                    var img = document.createElement("img");
+                    var img_url = this.src + index + ".jpg";
+                    img.src = img_url;
+
+                    cask_wrap_arr[temp].appendChild(img);
+                    this.imgNumber++;
+                }
+                
+                function check(){
+                    if(img.width>0){
+                        document.body.innerHTML += 'width:'+img.width+',height:'+img.height;
+                        clearInterval(set);
+
+                        function check1 (){
+                            var sum = 0;
+                            for(var j =0;j<cask_wrap_arr[temp].childNodes.length;j++){
+                                sum += cask_wrap_arr[temp].childNodes[j].width;
+                            }
+                            if(sum<cask_wrap_arr[temp].clientWidth-100){
+                                var index = self.getIndex();
+                                var img = document.createElement("img");
+                                var img_url = self.src + index + ".jpg";
+                                img.src = img_url;
+
+                                cask_wrap_arr[temp].appendChild(img);
+                                self.imgNumber++;
+                                console.log("work",sum)
+                            }else{
+                                // cask_wrap_arr[temp].style.height = cask_wrap_arr[temp].clientWidth*0.33333 + "px";
+                                console.log(sum,cask_wrap_arr[temp].clientWidth/cask_wrap_arr[temp].childNodes.length)
+                                temp++;
+                            }
+                        }
+                        var set1 = setInterval(check1,400)
+                    }
+                }
+                var set = setInterval(check,40);
+            },
+            append:function(){
+                var self = this;
+                var cask_wrap_arr = document.getElementsByClassName("cask-wrap");
+                var img_arr = document.getElementsByTagName("img");
+                var temp = 0;
+                var index = self.getIndex();
+
+                // if(index<=160){
+                //     window.onscroll = function(){
+                //         if(self.imgNumber<160){
+                //             for(var i =0;i<cask_wrap_arr.length;i++){
+                //                 cask_wrap_arr[i].style.height = cask_wrap_arr[i].clientWidth/6 + "px";
+                //             }
+                //             if(cask_wrap_arr[temp].clientWidth>=self.container.clientWidth){
+                //                 index = self.getIndex();
+                //                 var img = document.createElement("img");
+                //                 var img_url = self.src + index + ".jpg";
+                //                 img.src = img_url;
+
+                //                 cask_wrap_arr[temp].appendChild(img);
+                //                 self.imgNumber++;
+                //                 console.log("worlk?")
+                //             }else{
+                //                 temp++;
+                //                 index = self.getIndex();
+                //                 var div =  document.createElement("div");
+                //                 div.setAttribute("class","cask-wrap");
+                //                 div.style.height = self.height + "px";
+                                
+                //                 var img = document.createElement("img");
+                //                 var img_url = self.src + index + ".jpg";
+                //                 img.src = img_url;
+                //                 self.container.appendChild(div);
+                //                 cask_wrap_arr[temp].appendChild(img);
+                //                 console.log("funck");
+                //             }
+                //         }else{
+                //             return;
+                //         }
+                //     }
+                // }
+
+            },
+            init:function(){
+                this.create();
+                this.append();
+                this.getImage()
+            }
+        }
+        window.onload = function(){
+            cask.init();
+        }
+    </script>
+</body>
+</html>
