@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>Task41 UI组件之日历组件（二）</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<input type="text" class="date" data-calendar/>
+	
+	<script src="js/jquery-1.11.3.min.js"></script>
+	<script src="js/calendar.js"></script>
+	<script>
+		$(document).ready(function() {
+			var options = {
+				'calendarClass' : 'calendar',
+				'inputClass' : 'input',
+				'cellClass' : 'cell',
+				'uesdClass' : 'used',
+			}
+			var c = $.Calendar(options);	
+		});
+	</script>
+</body>
+</html>

@@ -9,11 +9,17 @@ task38 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part3/ta
 task39 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part3/task39><br>
 task39 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part3/task39/>
 
+task41 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part3/task41><br>
+task41 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part3/task41/>
+
 task43 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part3/task43><br>
 task43 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part3/task43/>
 
 task44 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part3/task44><br>
 task44 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part3/task44/>
+
+task45 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part3/task45><br>
+task45 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part3/task45/>
 ## IFE春季班第三阶段任务
 
 　　 第三阶段的主要目标是帮助大家 综合练习HTML，CSS，JavaScript。第三阶段任务从 `4月11日` 开始，持续到 `5月4日`。当然，您也可以在这个时间以后继续自行实践练习。第三阶段的任务主要是为第四阶段的大任务进行准备，会有比较大的连贯性。
