@@ -49,6 +49,11 @@
                     calen.removeChild(calen.lastChild);
                     self.paint(yearText, monthText);
 
+                    //选择框里的日也随之变化
+                    var dayBox = document.querySelector("#day");
+                    if(dayBox[this.innerHTML-1]=="undefined"){return};//防止报错
+                    dayBox[this.innerHTML-1].selected = "ture";
+
                     self.initTd();
                 }, false)
             }
@@ -74,6 +79,7 @@
                 self.paint(text, monthText);
 
                 self.input.value = text + "-" + monthText + "-" + dayText;
+
                 self.initTd();
             }, false);
             document.querySelector("#month").addEventListener("change", function() {
