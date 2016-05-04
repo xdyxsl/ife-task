@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>Task42 UI组件之日历组件（三）</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<input type="text" class="date" data-calendar/>
+	
+	<script src="js/jquery-1.11.3.min.js"></script>
+	<script src="js/calendar.js"></script>
+	<script>
+			var options1 = {
+				'calendarClass' : 'calendar',
+				'inputClass' : 'input',
+				'cellClass' : 'cell',
+				'uesdClass' : 'used',
+				'multiSelect': 1,//1：多选；0：单选
+			}
+			var table1 = $.Calendar(options1);
+			var options2 = {
+				'calendarClass' : 'calendar',
+				'inputClass' : 'input',
+				'cellClass' : 'cell',
+				'uesdClass' : 'used',
+				'multiSelect': 0,//1：多选；0：单选
+			}
+			var table2 = $.Calendar(options2);
+	</script>
+</body>
+</html>
