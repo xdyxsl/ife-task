@@ -134,12 +134,6 @@ input[type="button"]{
 /**
  * [Detail component] 详情页
  */
-#detail{
-    background-color: #fff;
-    width: 1000px;
-    margin: 20px auto;
-    padding: 50px 0;
-}
 .detail-header{
     text-align: center;
     border-bottom:1px solid #eee;
@@ -187,12 +181,6 @@ input[type="button"]{
 /**
  * [Add component] 新建问卷页
  */
-#add{
-    background-color: #fff;
-    width: 1000px;
-    margin: 20px auto;
-    padding:50px 0;
-}
 .add{
     cursor:pointer;
     font-size:24px;

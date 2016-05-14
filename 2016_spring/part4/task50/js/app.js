@@ -15,12 +15,12 @@ var HeaderContent = React.createClass({
 
 ReactDOM.render(
     <HeaderContent />,
-    document.getElementsByClassName('js-header')[0]
+    document.getElementById('header')
 );
 /**
  * [List component] 01-1
  */
-var ListTable = React.createClass({
+var ListBox = React.createClass({
     getInitialState:function(){
         return {
             checked:false,
@@ -125,7 +125,7 @@ var ListTable = React.createClass({
     }
 })
 ReactDOM.render(
-    <ListTable />,
+    <ListBox />,
     document.getElementById("container")
 );
 
@@ -180,7 +180,7 @@ ReactDOM.render(
 var Detail = React.createClass({
     goHome:function(){
         ReactDOM.render(
-            <ListTable />,
+            <ListBox />,
             document.getElementById("container")
         );
     },
