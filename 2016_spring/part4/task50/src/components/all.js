@@ -1,3 +1,6 @@
+import React from 'react'
+import ReactDOM from 'react'
+import redner from 'react'
 /**
  * [Header component]
  */
@@ -17,6 +20,7 @@ ReactDOM.render(
     <HeaderContent />,
     document.getElementById('header')
 );
+export default HeaderContent
 /**
  * [List component] 01-1
  */
@@ -128,6 +132,7 @@ ReactDOM.render(
     <ListBox />,
     document.getElementById("container")
 );
+
 
 /**
  * [Mask component] 01-2
@@ -389,3 +394,7 @@ var Edit = React.createClass({
 //     <Edit />,
 //     document.getElementById("edit")
 // )
+ReactDOM.render(
+    <HeaderContent />,
+    document.getElementById('header')
+);
