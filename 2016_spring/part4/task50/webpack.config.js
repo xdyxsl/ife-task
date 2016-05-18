@@ -1,9 +1,10 @@
-var webpack = require('webpack')
+var webpack = require('webpack'),
+    path = require('path')//获取路径
 
 module.exports = {
   entry: './entry.js',
   output: {
-    path: __dirname,
+    path:  path.resolve(__dirname, "build"),
     filename: 'bundle.js'
   },
   resolve: {
@@ -12,8 +13,17 @@ module.exports = {
   module: {
     loaders: [
       {test: /\.css$/, loader: 'style!css'},
-      { test: /\.js?$/, loaders: ['react-hot', 'babel'], exclude: /node_modules/ },//js*类的文件都用babel的loader
-      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
+      {
+        test: /\.js$/,
+        loader: "'babel'",
+        query: {
+            presets: ['es2015','react'],
+            cacheDirectory: true,
+            plugins: ['syntax-object-rest-spread']
+        },
+        exclude: /node_modules/,
+        include: path.join(__dirname,'/blog/frontend')
+    }
     ]
   }
 }

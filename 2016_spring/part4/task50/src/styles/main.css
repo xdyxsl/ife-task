@@ -27,10 +27,12 @@ input[type="button"]{
     margin-left:50px;
 }
 .header img{
-    vertical-align: middle;
+    float:left;
+    margin:0.5rem 2rem 0 6rem;
 }
 .header h3{
     display: inline;
+    line-height: 50px
 }
 .header span{
     margin-left:50px;
@@ -46,7 +48,7 @@ input[type="button"]{
  */
 .container{
     background-color: #fff;
-    width: 1000px;
+    max-width: 1000px;
     margin: 20px auto;
     padding: 50px 0;
 }
@@ -201,7 +203,6 @@ input[type="button"]{
  */
 .edit{
     background-color: #fff;
-    width: 1000px;
     margin: 20px auto;
     padding:50px 0;
 }

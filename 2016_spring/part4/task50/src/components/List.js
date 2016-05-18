@@ -1,8 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react'
-import Add from './Add'
-import Detail from './Detail'
-import Edit from './Edit'
+import { Link } from 'react-router'
 /**
  * [List component] 01-1
  */
@@ -25,39 +22,6 @@ var ListBox = React.createClass({
     },
     delete:function(){
         document.getElementById("maskControl").className = "show";
-    },
-    addQuest:function(){
-        ReactDOM.render(
-            <div>
-                <HeaderContent />
-                <div className="container" id="container">
-                    <Add/>
-                </div>
-            </div>,
-            document.getElementById('app')
-        );
-    },
-    detail:function(){
-        ReactDOM.render(
-            <div>
-                <HeaderContent />
-                <div className="container" id="container">
-                    <Detail/>
-                </div>
-            </div>,
-            document.getElementById('app')
-        );
-    },
-    edit:function(){
-        ReactDOM.render(
-            <div>
-                <HeaderContent />
-                <div className="container" id="container">
-                    <Edit/>
-                </div>
-            </div>,
-            document.getElementById('app')
-        );
     },
     render:function(){
         var ifChecked = "",
@@ -86,9 +50,9 @@ var ListBox = React.createClass({
                     <td>2016-05-12 11:15:56</td>
                     <td className="pubing">发布中</td>
                     <td>
-                        <input type="button" value="编辑" onClick={this.edit}/>
+                        <Link to="/EditPage"><input type="button" value="编辑" /></Link>
                         <input type="button" value="删除" onClick={this.delete}/ >
-                        <input type="button" value="查看数据" onClick={this.detail}/>
+                        <Link to="/DetailPage"><input type="button" value="查看数据" /></Link>
                     </td>
                 </tr>
                 <tr className={ifChecked}>
@@ -97,9 +61,9 @@ var ListBox = React.createClass({
                     <td>2016-05-12 11:15:56</td>
                     <td className="unpub">未发布</td>
                     <td>
-                        <input type="button" value="编辑" onClick={this.edit}/>
+                        <Link to="/EditPage"><input type="button" value="编辑" /></Link>
                         <input type="button" value="删除" onClick={this.delete}/ >
-                        <input type="button" value="查看数据" onClick={this.detail}/>
+                        <Link to="/DetailPage"><input type="button" value="查看数据" /></Link>
                     </td>
                 </tr>
                 <tr className={ifChecked}>
@@ -108,9 +72,9 @@ var ListBox = React.createClass({
                     <td>2016-05-12 11:15:56</td>
                     <td className="pubed">已发布</td>
                     <td>
-                        <input type="button" value="编辑" onClick={this.edit}/>
+                        <Link to="/EditPage"><input type="button" value="编辑" /></Link>
                         <input type="button" value="删除" onClick={this.delete}/ >
-                        <input type="button" value="查看数据" onClick={this.detail}/>
+                        <Link to="/DetailPage"><input type="button" value="查看数据" /></Link>
                     </td>
                 </tr>
                 </tbody>
@@ -118,7 +82,7 @@ var ListBox = React.createClass({
                     <tr>
                         <td><input type="checkbox" id="selectAll" onChange={this.handleChange}/>全选</td>
                         <td><input type="button" value="删除" onClick={this.delete}/></td>
-                        <td><input type="button" id="addQn" value="+ 新增问卷" onClick={this.addQuest}/></td>
+                        <Link to="/AddPage"><td><input type="button" id="addQn" value="+ 新增问卷"/></td></Link>
                     </tr>
                 </tfoot>
             </table>

@@ -9,6 +9,9 @@ select{
 select:nth-child(n+2){
 	width:40px;
 }
+p{
+	text-align: center;
+}
 .date{
 	display:block;
 	margin: 10px auto;
