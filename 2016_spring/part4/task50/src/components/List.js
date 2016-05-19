@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 /**
  * [List component] 01-1
  */
-var ListBox = React.createClass({
+var List = React.createClass({
     getInitialState:function(){
         return {
             checked:false,
@@ -82,11 +82,11 @@ var ListBox = React.createClass({
                     <tr>
                         <td><input type="checkbox" id="selectAll" onChange={this.handleChange}/>全选</td>
                         <td><input type="button" value="删除" onClick={this.delete}/></td>
-                        <Link to="/AddPage"><td><input type="button" id="addQn" value="+ 新增问卷"/></td></Link>
+                        <td><Link to="/AddPage"><input type="button" id="addQn" value="+ 新增问卷"/></Link></td>
                     </tr>
                 </tfoot>
             </table>
         )
     }
 })
-module.exports = ListBox;
+module.exports = List;

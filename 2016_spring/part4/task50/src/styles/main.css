@@ -15,6 +15,12 @@ input[type="button"]{
     border:1px solid #9A9A9A;
     transition:all .8s;
 }
+a{
+    text-decoration: none;
+}
+a:visited,a{
+    color:#fff;
+}
 .header{
     height:50px;
     background-color: rgba(255,70,0,.68);

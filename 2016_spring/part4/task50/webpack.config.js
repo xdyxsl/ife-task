@@ -2,28 +2,19 @@ var webpack = require('webpack'),
     path = require('path')//获取路径
 
 module.exports = {
-  entry: './entry.js',
+  entry: './src/index.js',
+
   output: {
-    path:  path.resolve(__dirname, "build"),
-    filename: 'bundle.js'
+    filename: 'myQ.bundle.js',
+    path: path.resolve(__dirname, "build")
   },
   resolve: {
       extensions: ['', '.js', '.jsx']
   },
   module: {
     loaders: [
-      {test: /\.css$/, loader: 'style!css'},
-      {
-        test: /\.js$/,
-        loader: "'babel'",
-        query: {
-            presets: ['es2015','react'],
-            cacheDirectory: true,
-            plugins: ['syntax-object-rest-spread']
-        },
-        exclude: /node_modules/,
-        include: path.join(__dirname,'/blog/frontend')
-    }
+      { test: /\.css$/, loader: 'style!css'},
+      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader?presets[]=es2015&presets[]=react' }
     ]
   }
 }
