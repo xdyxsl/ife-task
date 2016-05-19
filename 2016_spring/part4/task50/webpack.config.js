@@ -9,7 +9,7 @@ module.exports = {
     path: path.resolve(__dirname, "build")
   },
   resolve: {
-      extensions: ['', '.js', '.jsx']
+      extensions: ['', '.js', '.jsx']//自动扩展文件后缀名，意味着我们require模块可以省略不写后缀名
   },
   module: {
     loaders: [

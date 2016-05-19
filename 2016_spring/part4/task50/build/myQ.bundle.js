@@ -58,33 +58,42 @@
 
 	var _ListPage2 = _interopRequireDefault(_ListPage);
 
-	var _DetailPage = __webpack_require__(224);
+	var _DetailPage = __webpack_require__(221);
 
 	var _DetailPage2 = _interopRequireDefault(_DetailPage);
 
-	var _AddPage = __webpack_require__(226);
+	var _AddPage = __webpack_require__(222);
 
 	var _AddPage2 = _interopRequireDefault(_AddPage);
 
-	var _EditPage = __webpack_require__(228);
+	var _EditPage = __webpack_require__(223);
 
 	var _EditPage2 = _interopRequireDefault(_EditPage);
 
-	var _HeaderContent = __webpack_require__(221);
+	var _App = __webpack_require__(224);
 
-	var _HeaderContent2 = _interopRequireDefault(_HeaderContent);
+	var _App2 = _interopRequireDefault(_App);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	__webpack_require__(229);
+	//入口文件，渲染Router
+
+
+	__webpack_require__(227);
 
 	(0, _reactDom.render)(_react2.default.createElement(
 	  _reactRouter.Router,
 	  { history: _reactRouter.hashHistory },
-	  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _ListPage2.default }),
-	  _react2.default.createElement(_reactRouter.Route, { path: '/DetailPage', component: _DetailPage2.default }),
-	  _react2.default.createElement(_reactRouter.Route, { path: '/AddPage', component: _AddPage2.default }),
-	  _react2.default.createElement(_reactRouter.Route, { path: '/EditPage', component: _EditPage2.default })
+	  _react2.default.createElement(
+	    _reactRouter.Route,
+	    { path: '/', component: _App2.default },
+	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _ListPage2.default }),
+	    '//默认页面',
+	    _react2.default.createElement(_reactRouter.Route, { path: '/ListPage', component: _ListPage2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/DetailPage', component: _DetailPage2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/AddPage', component: _AddPage2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/EditPage', component: _EditPage2.default })
+	  )
 	), document.getElementById('app'));
 
 /***/ },
@@ -25203,96 +25212,6 @@
 
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(159);
-
-	var _HeaderContent = __webpack_require__(221);
-
-	var _HeaderContent2 = _interopRequireDefault(_HeaderContent);
-
-	var _List = __webpack_require__(222);
-
-	var _List2 = _interopRequireDefault(_List);
-
-	var _Mask = __webpack_require__(223);
-
-	var _Mask2 = _interopRequireDefault(_Mask);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'ListPage',
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(_HeaderContent2.default, null),
-	      _react2.default.createElement(
-	        'div',
-	        { id: 'container', className: 'container' },
-	        _react2.default.createElement(_List2.default, null)
-	      ),
-	      _react2.default.createElement(_Mask2.default, null)
-	    );
-	  }
-	});
-
-/***/ },
-/* 221 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(159);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'HeaderContent',
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'header' },
-	      _react2.default.createElement('img', { src: '../src/imgs/log_50x50.png' }),
-	      _react2.default.createElement(
-	        'h3',
-	        null,
-	        '问卷管理'
-	      ),
-	      _react2.default.createElement(
-	        _reactRouter.Link,
-	        { to: '/' },
-	        _react2.default.createElement(
-	          'span',
-	          null,
-	          '我的问卷'
-	        )
-	      )
-	    );
-	  }
-	});
-
-/***/ },
-/* 222 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -25522,91 +25441,10 @@
 	module.exports = List;
 
 /***/ },
-/* 223 */
+/* 221 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * [Mask component] 01-2
-	 */
-	var Mask = _react2.default.createClass({
-	    displayName: 'Mask',
-
-	    // getInitialState:function(){//不用state来操控，直接通过控制class来操作
-	    //     return {
-	    //         display:false,
-	    //     }
-	    // },
-	    handleClick: function handleClick() {
-	        // this.setState({display: !this.state.display});
-	        document.getElementById("maskControl").className = "hide";
-	    },
-	    render: function render() {
-	        var isShow = "hide";
-	        // var isShow = "";
-	        // if(this.state.display==true){
-	        //     isShow = "show";
-	        // }else{
-	        //     isShow = "hide";
-	        // }
-	        return _react2.default.createElement(
-	            'div',
-	            { id: 'maskControl', className: isShow },
-	            _react2.default.createElement('div', { className: 'mask' }),
-	            _react2.default.createElement(
-	                'div',
-	                { className: 'alert' },
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'alert-top' },
-	                    _react2.default.createElement(
-	                        'span',
-	                        null,
-	                        '提示'
-	                    ),
-	                    _react2.default.createElement(
-	                        'span',
-	                        { className: 'close', onClick: this.handleClick },
-	                        'X'
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'alert-bottom' },
-	                    _react2.default.createElement(
-	                        'p',
-	                        null,
-	                        '确认要删除此问卷？'
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        null,
-	                        _react2.default.createElement('input', { type: 'button', value: '确定' }),
-	                        _react2.default.createElement('input', { type: 'button', value: '取消', onClick: this.handleClick })
-	                    )
-	                )
-	            )
-	        );
-	    }
-	});
-	module.exports = Mask;
-
-/***/ },
-/* 224 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
 
 	var _react = __webpack_require__(1);
 
@@ -25614,39 +25452,304 @@
 
 	var _reactRouter = __webpack_require__(159);
 
-	var _HeaderContent = __webpack_require__(221);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var _HeaderContent2 = _interopRequireDefault(_HeaderContent);
+	/**
+	 * [Detail component] 01-3
+	 */
+	var Detail = _react2.default.createClass({
+	    displayName: 'Detail',
 
-	var _Edit = __webpack_require__(225);
+	    render: function render() {
+	        return _react2.default.createElement(
+	            'div',
+	            { className: 'datail' },
+	            _react2.default.createElement(
+	                'div',
+	                { className: 'detail-header' },
+	                _react2.default.createElement(
+	                    _reactRouter.Link,
+	                    { to: '/' },
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'detail-header-wrap' },
+	                        _react2.default.createElement('img', { src: '../src/imgs/back-16.png', alt: 'back' }),
+	                        '返回'
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    _react2.default.createElement(
+	                        'h2',
+	                        null,
+	                        '这里是标题'
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        null,
+	                        '此统计分析只包含完整回收的数据'
+	                    )
+	                )
+	            ),
+	            _react2.default.createElement(
+	                'div',
+	                { className: 'detail-boxes' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'detail-box' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        null,
+	                        _react2.default.createElement(
+	                            'span',
+	                            null,
+	                            'Q1'
+	                        ),
+	                        _react2.default.createElement(
+	                            'dl',
+	                            null,
+	                            _react2.default.createElement(
+	                                'dt',
+	                                null,
+	                                '单选题'
+	                            ),
+	                            _react2.default.createElement(
+	                                'dd',
+	                                null,
+	                                '选项一'
+	                            ),
+	                            _react2.default.createElement(
+	                                'dd',
+	                                null,
+	                                '选项二'
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'detail-chart' },
+	                        _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            '数据占比'
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            null,
+	                            '这里是图标'
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'detail-box' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        null,
+	                        _react2.default.createElement(
+	                            'span',
+	                            null,
+	                            'Q2'
+	                        ),
+	                        _react2.default.createElement(
+	                            'dl',
+	                            null,
+	                            _react2.default.createElement(
+	                                'dt',
+	                                null,
+	                                '多选题'
+	                            ),
+	                            _react2.default.createElement(
+	                                'dd',
+	                                null,
+	                                '选项一'
+	                            ),
+	                            _react2.default.createElement(
+	                                'dd',
+	                                null,
+	                                '选项二'
+	                            ),
+	                            _react2.default.createElement(
+	                                'dd',
+	                                null,
+	                                '选项三'
+	                            ),
+	                            _react2.default.createElement(
+	                                'dd',
+	                                null,
+	                                '选项四'
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'detail-chart' },
+	                        _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            '数据占比'
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            null,
+	                            '这里是图标'
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'detail-box' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        null,
+	                        _react2.default.createElement(
+	                            'span',
+	                            null,
+	                            'Q3'
+	                        ),
+	                        _react2.default.createElement(
+	                            'dl',
+	                            null,
+	                            _react2.default.createElement(
+	                                'dt',
+	                                null,
+	                                '单选题'
+	                            ),
+	                            _react2.default.createElement(
+	                                'dd',
+	                                null,
+	                                '选项一'
+	                            ),
+	                            _react2.default.createElement(
+	                                'dd',
+	                                null,
+	                                '选项二'
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'detail-chart' },
+	                        _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            '数据占比'
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            null,
+	                            '这里是图标'
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'detail-box' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        null,
+	                        _react2.default.createElement(
+	                            'span',
+	                            null,
+	                            'Q4'
+	                        ),
+	                        _react2.default.createElement(
+	                            'dl',
+	                            null,
+	                            _react2.default.createElement(
+	                                'dt',
+	                                null,
+	                                '文本题'
+	                            ),
+	                            _react2.default.createElement(
+	                                'dd',
+	                                null,
+	                                '选项一'
+	                            ),
+	                            _react2.default.createElement(
+	                                'dd',
+	                                null,
+	                                '选项二'
+	                            )
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'detail-chart' },
+	                        _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            '有效回答占比'
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            null,
+	                            '这里是图标'
+	                        )
+	                    )
+	                )
+	            ),
+	            _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: '/' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'detail-bottom' },
+	                    _react2.default.createElement('img', { src: '../src/imgs/back-32.png', alt: 'back' }),
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        '返回'
+	                    )
+	                )
+	            )
+	        );
+	    }
+	});
+	module.exports = Detail;
 
-	var _Edit2 = _interopRequireDefault(_Edit);
+/***/ },
+/* 222 */
+/***/ function(module, exports, __webpack_require__) {
 
-	var _Mask = __webpack_require__(223);
+	'use strict';
 
-	var _Mask2 = _interopRequireDefault(_Mask);
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(159);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = _react2.default.createClass({
-	  displayName: 'DetailPage',
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(_HeaderContent2.default, null),
-	      _react2.default.createElement(
-	        'div',
-	        { id: 'container', className: 'container' },
-	        _react2.default.createElement(_Edit2.default, null)
-	      ),
-	      _react2.default.createElement(_Mask2.default, null)
-	    );
-	  }
+	/**
+	 * [Add component] 新建问卷页 02-1
+	 */
+	var Add = _react2.default.createClass({
+	    displayName: 'Add',
+
+	    render: function render() {
+	        return _react2.default.createElement(
+	            'div',
+	            { className: 'add' },
+	            _react2.default.createElement(
+	                'div',
+	                { className: 'add-icon' },
+	                _react2.default.createElement('img', { src: '../src/imgs/add-32.png', alt: 'add' })
+	            ),
+	            _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: 'EditPage' },
+	                '新建问卷'
+	            )
+	        );
+	    }
 	});
+	module.exports = Add;
 
 /***/ },
-/* 225 */
+/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25771,7 +25874,7 @@
 	                    _react2.default.createElement(
 	                        'li',
 	                        { onClick: this.makeChoice },
-	                        _react2.default.createElement('img', { src: 'imgs/radio-16.png', alt: 'q-icon' }),
+	                        _react2.default.createElement('img', { src: '../src/imgs/radio-16.png', alt: 'q-icon' }),
 	                        _react2.default.createElement(
 	                            'span',
 	                            null,
@@ -25781,7 +25884,7 @@
 	                    _react2.default.createElement(
 	                        'li',
 	                        { onClick: this.makeChoice },
-	                        _react2.default.createElement('img', { src: 'imgs/check-16.png', alt: 'q-icon' }),
+	                        _react2.default.createElement('img', { src: '../src/imgs/check-16.png', alt: 'q-icon' }),
 	                        _react2.default.createElement(
 	                            'span',
 	                            null,
@@ -25791,7 +25894,7 @@
 	                    _react2.default.createElement(
 	                        'li',
 	                        { onClick: this.makeChoice },
-	                        _react2.default.createElement('img', { src: 'imgs/text-16.png', alt: 'q-icon' }),
+	                        _react2.default.createElement('img', { src: '../src/imgs/text-16.png', alt: 'q-icon' }),
 	                        _react2.default.createElement(
 	                            'span',
 	                            null,
@@ -25831,149 +25934,180 @@
 	module.exports = Edit;
 
 /***/ },
+/* 224 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(159);
+
+	var _HeaderContent = __webpack_require__(225);
+
+	var _HeaderContent2 = _interopRequireDefault(_HeaderContent);
+
+	var _Mask = __webpack_require__(226);
+
+	var _Mask2 = _interopRequireDefault(_Mask);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	//用来组合各部件
+	exports.default = _react2.default.createClass({
+	  displayName: 'App',
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(_HeaderContent2.default, null),
+	      _react2.default.createElement(
+	        'div',
+	        { id: 'container', className: 'container' },
+	        this.props.children
+	      ),
+	      _react2.default.createElement(_Mask2.default, null)
+	    );
+	  }
+	});
+
+/***/ },
+/* 225 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(159);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'HeaderContent',
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'header' },
+	      _react2.default.createElement('img', { src: '../src/imgs/log_50x50.png' }),
+	      _react2.default.createElement(
+	        'h3',
+	        null,
+	        '问卷管理'
+	      ),
+	      _react2.default.createElement(
+	        _reactRouter.Link,
+	        { to: '/' },
+	        _react2.default.createElement(
+	          'span',
+	          null,
+	          '我的问卷'
+	        )
+	      )
+	    );
+	  }
+	});
+
+/***/ },
 /* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactRouter = __webpack_require__(159);
-
-	var _HeaderContent = __webpack_require__(221);
-
-	var _HeaderContent2 = _interopRequireDefault(_HeaderContent);
-
-	var _Add = __webpack_require__(227);
-
-	var _Add2 = _interopRequireDefault(_Add);
-
-	var _Mask = __webpack_require__(223);
-
-	var _Mask2 = _interopRequireDefault(_Mask);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = _react2.default.createClass({
-	  displayName: 'AddPage',
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(_HeaderContent2.default, null),
-	      _react2.default.createElement(
-	        'div',
-	        { id: 'container', className: 'container' },
-	        _react2.default.createElement(_Add2.default, null)
-	      ),
-	      _react2.default.createElement(_Mask2.default, null)
-	    );
-	  }
+	/**
+	 * [Mask component] 01-2
+	 */
+	var Mask = _react2.default.createClass({
+	    displayName: 'Mask',
+
+	    // getInitialState:function(){//不用state来操控，直接通过控制class来操作
+	    //     return {
+	    //         display:false,
+	    //     }
+	    // },
+	    handleClick: function handleClick() {
+	        // this.setState({display: !this.state.display});
+	        document.getElementById("maskControl").className = "hide";
+	    },
+	    render: function render() {
+	        var isShow = "hide";
+	        // var isShow = "";
+	        // if(this.state.display==true){
+	        //     isShow = "show";
+	        // }else{
+	        //     isShow = "hide";
+	        // }
+	        return _react2.default.createElement(
+	            'div',
+	            { id: 'maskControl', className: isShow },
+	            _react2.default.createElement('div', { className: 'mask' }),
+	            _react2.default.createElement(
+	                'div',
+	                { className: 'alert' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'alert-top' },
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        '提示'
+	                    ),
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'close', onClick: this.handleClick },
+	                        'X'
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'alert-bottom' },
+	                    _react2.default.createElement(
+	                        'p',
+	                        null,
+	                        '确认要删除此问卷？'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        null,
+	                        _react2.default.createElement('input', { type: 'button', value: '确定' }),
+	                        _react2.default.createElement('input', { type: 'button', value: '取消', onClick: this.handleClick })
+	                    )
+	                )
+	            )
+	        );
+	    }
 	});
+	module.exports = Mask;
 
 /***/ },
 /* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(159);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	/**
-	 * [Add component] 新建问卷页 02-1
-	 */
-	var Add = _react2.default.createClass({
-	    displayName: 'Add',
-
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'div',
-	            { className: 'add' },
-	            _react2.default.createElement(
-	                'div',
-	                { className: 'add-icon' },
-	                _react2.default.createElement('img', { src: 'imgs/add-32.png', alt: 'add' })
-	            ),
-	            _react2.default.createElement(
-	                _reactRouter.Link,
-	                { to: 'EditPage' },
-	                '新建问卷'
-	            )
-	        );
-	    }
-	});
-	module.exports = Add;
-
-/***/ },
-/* 228 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRouter = __webpack_require__(159);
-
-	var _HeaderContent = __webpack_require__(221);
-
-	var _HeaderContent2 = _interopRequireDefault(_HeaderContent);
-
-	var _Edit = __webpack_require__(225);
-
-	var _Edit2 = _interopRequireDefault(_Edit);
-
-	var _Mask = __webpack_require__(223);
-
-	var _Mask2 = _interopRequireDefault(_Mask);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = _react2.default.createClass({
-	  displayName: 'EditPage',
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement(_HeaderContent2.default, null),
-	      _react2.default.createElement(
-	        'div',
-	        { id: 'container', className: 'container' },
-	        _react2.default.createElement(_Edit2.default, null)
-	      ),
-	      _react2.default.createElement(_Mask2.default, null)
-	    );
-	  }
-	});
-
-/***/ },
-/* 229 */
-/***/ function(module, exports, __webpack_require__) {
-
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(230);
+	var content = __webpack_require__(228);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(232)(content, {});
+	var update = __webpack_require__(230)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -25990,21 +26124,21 @@
 	}
 
 /***/ },
-/* 230 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(231)();
+	exports = module.exports = __webpack_require__(229)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "/**\r\n * [common] 公共样式 \r\n */\r\nhtml,\r\nbody{\r\n    margin:0;\r\n    padding:0;\r\n    background-color:#eee;\r\n}\r\n\r\nh1,h2,h3,span,a,input,td{font-family:\"Microsoft Yahei\" ;}\r\ninput[type=\"button\"]{\r\n    cursor:pointer;\r\n    background-color:#fff;\r\n    border:1px solid #9A9A9A;\r\n    transition:all .8s;\r\n}\r\na{\r\n    text-decoration: none;\r\n}\r\na:visited,a{\r\n    color:#fff;\r\n}\r\n.header{\r\n    height:50px;\r\n    background-color: rgba(255,70,0,.68);\r\n    color:#fff;\r\n}\r\n\r\n.header div{\r\n    display: inline-block;\r\n    line-height: 50px;\r\n    margin-left:50px;\r\n}\r\n.header img{\r\n    float:left;\r\n    margin:0.5rem 2rem 0 6rem;\r\n}\r\n.header h3{\r\n    display: inline;\r\n    line-height: 50px\r\n}\r\n.header span{\r\n    margin-left:50px;\r\n}\r\n.hide{\r\n    display:none;\r\n}\r\n.show{\r\n    display:block;\r\n}\r\n/**\r\n * [List component] 问卷列表页\r\n */\r\n.container{\r\n    background-color: #fff;\r\n    max-width: 1000px;\r\n    margin: 20px auto;\r\n    padding: 50px 0;\r\n}\r\n.list-table{\r\n    border-collapse: collapse;\r\n    margin:50px auto;\r\n    background-color: #fff;\r\n}\r\n.list-table th,\r\n.list-table td{\r\n    padding:10px;\r\n}\r\n.list-table tbody td{\r\n    border-bottom:1px solid #D4D4D4;\r\n}\r\n.list-table tbody tr:hover{\r\n    background-color:rgba(255,70,0,.5);\r\n}\r\n.list-table tbody input{\r\n    margin:0 5px;\r\n}\r\n.list-table input:hover{\r\n    color:#fff;\r\n    background-color: rgba(255,70,0,.68);\r\n    border:1px solid rgba(255,70,0,.68);\r\n    border-radius:10px;\r\n    transition:all .8s;\r\n}\r\n.pubing{\r\n    color:green;\r\n}\r\n.unpub{\r\n    color:red;\r\n}\r\n.pubed{\r\n    color:purple;\r\n}\r\n#addQn{\r\n    border:none;\r\n    background-color: rgba(255,70,0,.68);\r\n    color:#fff;\r\n    padding:5px 10px;\r\n}\r\n.checked{\r\n    background-color: rgba(255,70,0,.68);\r\n}\r\n/**\r\n * [Mask component] 浮框页\r\n */\r\n.mask{\r\n    position:fixed;\r\n    top:0;\r\n    left:0;\r\n    bottom:0;\r\n    right:0;\r\n    background-color: rgba(0,0,0,.5);\r\n}\r\n.alert{\r\n    position:fixed;\r\n    z-index:99;\r\n    top:35%;\r\n    left:45%;\r\n    background-color: #fff;\r\n    border-radius:10px;\r\n}\r\n.alert div{\r\n    padding:5px 30px;\r\n    border-radius:10px;\r\n    text-align: center;\r\n}\r\n.alert-top{\r\n    background-color:#eee;\r\n}\r\n\r\n.alert-top span:last-child{\r\n    float:right;\r\n}\r\n.alert-bottom input{\r\n    margin:5px;\r\n}\r\n.close{\r\n    cursor:pointer;\r\n}\r\n\r\n/**\r\n * [Detail component] 详情页\r\n */\r\n.detail-header{\r\n    text-align: center;\r\n    border-bottom:1px solid #eee;\r\n}\r\n.detail-header span{\r\n    cursor:pointer;\r\n    float:left;\r\n    margin:34px 0 -28px 45px;\r\n}\r\n.detail-header div{\r\n    clear:both;\r\n}\r\n.detail-boxes{\r\n    padding:20px;\r\n}\r\n.detail-box{\r\n    border:1px solid #eee;\r\n    margin: 20px;\r\n    padding:20px;\r\n    display: flex;\r\n    justify-content: space-between;\r\n}\r\n.detail-box dl{\r\n    float: right;\r\n    margin: 3px;\r\n}\r\n.detail-bottom{\r\n    text-align: center;\r\n    cursor:pointer;\r\n    background-color:#FA7C4D;\r\n    color:#fff;\r\n    margin:0 auto;\r\n    width: 150px;\r\n    height:50px;\r\n    line-height:50px;\r\n}\r\n.detail-bottom img{\r\n    float:left;\r\n    margin:8px -27px 0 17px\r\n}\r\n.detail-chart{\r\n    width:300px;\r\n    padding-left:20px;\r\n}\r\n/**\r\n * [Add component] 新建问卷页\r\n */\r\n.add{\r\n    cursor:pointer;\r\n    font-size:24px;\r\n    font-weight: bold;\r\n    width: 150px;\r\n    margin: 0 auto;\r\n    background-color: #FA7C4D;\r\n    color:#fff;\r\n    padding: 10px 20px;\r\n}\r\n.add-icon{\r\n    display: inline-block;\r\n    vertical-align: middle;\r\n    margin-right: 10px;\r\n}\r\n/**\r\n * [Edit component] 编辑问卷页\r\n */\r\n.edit{\r\n    background-color: #fff;\r\n    margin: 20px auto;\r\n    padding:50px 0;\r\n}\r\n.edit-header{\r\n    border-bottom:2px solid #eee;\r\n    padding-bottom: 20px;\r\n}\r\n.edit-header input{\r\n    text-align: center;\r\n    width: 100%;\r\n    font-size: 28px;\r\n    border:none;\r\n    font-weight: bold;\r\n    height: 45px;\r\n    transition:all .8s;\r\n}\r\n.edit-header input:hover{\r\n    color:#fff;\r\n    background-color: rgba(255,70,0,.68);\r\n    border-radius:10px;\r\n    transition:all .8s;\r\n}\r\n.edit-body{\r\n    background-color: #eee;\r\n    width: 900px;\r\n    margin: 20px auto;\r\n    text-align: center;\r\n    border: 1px solid #000;\r\n    font-size: 22px;\r\n    line-height: 80px;\r\n}\r\n.edit-body span:last-child{\r\n    cursor:pointer;\r\n}\r\n.edit-body ul{\r\n    background-color: #fff;\r\n    margin-top: 0;\r\n}\r\n.edit-body li{\r\n    display: inline-block;\r\n    list-style: none;\r\n    padding: 0px 50px;\r\n    margin: 15px 15px;\r\n    border: 1px solid #eee;\r\n}\r\n.edit-footer{\r\n    border-top:2px solid #eee;\r\n    display: flex;\r\n    justify-content: space-around;\r\n    padding-top:30px;\r\n}\r\n.edit-footer input{\r\n    margin-left:10px;\r\n}", ""]);
+	exports.push([module.id, "/**\r\n * [common] 公共样式 \r\n */\r\nhtml,\r\nbody{\r\n    margin:0;\r\n    padding:0;\r\n    background-color:#eee;\r\n}\r\n\r\nh1,h2,h3,span,a,input,td{font-family:\"Microsoft Yahei\" ;}\r\ninput[type=\"button\"]{\r\n    cursor:pointer;\r\n    background-color:#fff;\r\n    border:1px solid #9A9A9A;\r\n    transition:all .8s;\r\n}\r\na{\r\n    text-decoration: none;\r\n}\r\na:visited,a{\r\n    color:#fff;\r\n}\r\n.header{\r\n    height:50px;\r\n    background-color: rgba(255,70,0,.68);\r\n    color:#fff;\r\n}\r\n\r\n.header div{\r\n    display: inline-block;\r\n    line-height: 50px;\r\n    margin-left:50px;\r\n}\r\n.header img{\r\n    float:left;\r\n    margin:0.5rem 2rem 0 6rem;\r\n}\r\n.header h3{\r\n    display: inline;\r\n    line-height: 50px\r\n}\r\n.header span{\r\n    margin-left:50px;\r\n}\r\n.hide{\r\n    display:none;\r\n}\r\n.show{\r\n    display:block;\r\n}\r\n/**\r\n * [List component] 问卷列表页\r\n */\r\n.container{\r\n    background-color: #fff;\r\n    max-width: 1000px;\r\n    margin: 20px auto;\r\n    padding: 50px 0;\r\n}\r\n.list-table{\r\n    border-collapse: collapse;\r\n    margin:50px auto;\r\n    background-color: #fff;\r\n}\r\n.list-table th,\r\n.list-table td{\r\n    padding:10px;\r\n}\r\n.list-table tbody td{\r\n    border-bottom:1px solid #D4D4D4;\r\n}\r\n.list-table tbody tr:hover{\r\n    background-color:rgba(255,70,0,.5);\r\n}\r\n.list-table tbody input{\r\n    margin:0 5px;\r\n}\r\n.list-table input:hover{\r\n    color:#fff;\r\n    background-color: rgba(255,70,0,.68);\r\n    border:1px solid rgba(255,70,0,.68);\r\n    border-radius:10px;\r\n    transition:all .8s;\r\n}\r\n.pubing{\r\n    color:green;\r\n}\r\n.unpub{\r\n    color:red;\r\n}\r\n.pubed{\r\n    color:purple;\r\n}\r\n#addQn{\r\n    border:none;\r\n    background-color: rgba(255,70,0,.68);\r\n    color:#fff;\r\n    padding:5px 10px;\r\n}\r\n.checked{\r\n    background-color: rgba(255,70,0,.68);\r\n}\r\n/**\r\n * [Mask component] 浮框页\r\n */\r\n.mask{\r\n    position:fixed;\r\n    top:0;\r\n    left:0;\r\n    bottom:0;\r\n    right:0;\r\n    background-color: rgba(0,0,0,.5);\r\n}\r\n.alert{\r\n    position:fixed;\r\n    z-index:99;\r\n    top:35%;\r\n    left:45%;\r\n    background-color: #fff;\r\n    border-radius:10px;\r\n}\r\n.alert div{\r\n    padding:5px 30px;\r\n    border-radius:10px;\r\n    text-align: center;\r\n}\r\n.alert-top{\r\n    background-color:#eee;\r\n}\r\n\r\n.alert-top span:last-child{\r\n    float:right;\r\n}\r\n.alert-bottom input{\r\n    margin:5px;\r\n}\r\n.close{\r\n    cursor:pointer;\r\n}\r\n\r\n/**\r\n * [Detail component] 详情页\r\n */\r\n.detail-header{\r\n    text-align: center;\r\n    border-bottom:1px solid #eee;\r\n    position:relative;\r\n}\r\n.detail-header-wrap{\r\n    cursor:pointer;\r\n    position:absolute;\r\n    left: 10%;\r\n    color: #000;\r\n    font-size: 1.5rem;\r\n    top: 20%;\r\n}\r\n\r\n.detail-boxes{\r\n    padding:20px;\r\n}\r\n.detail-box{\r\n    border:1px solid #eee;\r\n    margin: 20px;\r\n    padding:20px;\r\n    display: flex;\r\n    justify-content: space-between;\r\n}\r\n.detail-box dl{\r\n    float: right;\r\n    margin: 3px;\r\n}\r\n.detail-bottom{\r\n    text-align: center;\r\n    cursor:pointer;\r\n    background-color:#FA7C4D;\r\n    color:#fff;\r\n    margin:0 auto;\r\n    width: 150px;\r\n    height:50px;\r\n    line-height:50px;\r\n}\r\n.detail-bottom img{\r\n    float:left;\r\n    margin:8px -27px 0 17px\r\n}\r\n.detail-chart{\r\n    width:300px;\r\n    padding-left:20px;\r\n}\r\n/**\r\n * [Add component] 新建问卷页\r\n */\r\n.add{\r\n    cursor:pointer;\r\n    font-size:24px;\r\n    font-weight: bold;\r\n    width: 150px;\r\n    margin: 0 auto;\r\n    background-color: #FA7C4D;\r\n    color:#fff;\r\n    padding: 10px 20px;\r\n}\r\n.add-icon{\r\n    display: inline-block;\r\n    vertical-align: middle;\r\n    margin-right: 10px;\r\n}\r\n/**\r\n * [Edit component] 编辑问卷页\r\n */\r\n.edit{\r\n    background-color: #fff;\r\n    margin: 20px auto;\r\n    padding:50px 0;\r\n}\r\n.edit-header{\r\n    border-bottom:2px solid #eee;\r\n    padding-bottom: 20px;\r\n}\r\n.edit-header input{\r\n    text-align: center;\r\n    width: 100%;\r\n    font-size: 28px;\r\n    border:none;\r\n    font-weight: bold;\r\n    height: 45px;\r\n    transition:all .8s;\r\n}\r\n.edit-header input:hover{\r\n    color:#fff;\r\n    background-color: rgba(255,70,0,.68);\r\n    border-radius:10px;\r\n    transition:all .8s;\r\n}\r\n.edit-body{\r\n    background-color: #eee;\r\n    max-width: 1000px;\r\n    margin: 20px auto;\r\n    text-align: center;\r\n    border: 1px solid #000;\r\n    font-size: 22px;\r\n    line-height: 80px;\r\n}\r\n.edit-body span:last-child{\r\n    cursor:pointer;\r\n}\r\n.edit-body ul{\r\n    background-color: #fff;\r\n    margin-top: 0;\r\n}\r\n.edit-body li{\r\n    display: inline-block;\r\n    list-style: none;\r\n    padding: 0px 50px;\r\n    margin: 15px 15px;\r\n    border: 1px solid #eee;\r\n}\r\n.edit-footer{\r\n    border-top:2px solid #eee;\r\n    display: flex;\r\n    justify-content: space-around;\r\n    padding-top:30px;\r\n}\r\n.edit-footer input{\r\n    margin-left:10px;\r\n}", ""]);
 
 	// exports
 
 
 /***/ },
-/* 231 */
+/* 229 */
 /***/ function(module, exports) {
 
 	/*
@@ -26060,7 +26194,7 @@
 
 
 /***/ },
-/* 232 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*

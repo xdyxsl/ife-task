@@ -145,15 +145,17 @@ a:visited,a{
 .detail-header{
     text-align: center;
     border-bottom:1px solid #eee;
+    position:relative;
 }
-.detail-header span{
+.detail-header-wrap{
     cursor:pointer;
-    float:left;
-    margin:34px 0 -28px 45px;
+    position:absolute;
+    left: 10%;
+    color: #000;
+    font-size: 1.5rem;
+    top: 20%;
 }
-.detail-header div{
-    clear:both;
-}
+
 .detail-boxes{
     padding:20px;
 }
@@ -233,7 +235,7 @@ a:visited,a{
 }
 .edit-body{
     background-color: #eee;
-    width: 900px;
+    max-width: 1000px;
     margin: 20px auto;
     text-align: center;
     border: 1px solid #000;

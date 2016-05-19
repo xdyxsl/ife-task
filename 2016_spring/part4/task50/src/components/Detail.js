@@ -4,23 +4,11 @@ import { Link } from 'react-router'
  * [Detail component] 01-3
  */
 var Detail = React.createClass({
-    goHome:function(){
-        ReactDOM.render(
-            <div>
-                <HeaderContent />
-                <div className="container" id="container">
-                <ListBox />
-                </div>
-                <Mask/>
-            </div>,
-            document.getElementById('app')
-        );
-    },
     render:function(){
         return (
             <div className="datail">
                 <div className="detail-header">
-                    <span onClick={this.goHome}><img src="imgs/back-16.png" alt="back"/>返回</span>
+                    <Link to="/"><span className="detail-header-wrap"><img src="../src/imgs/back-16.png" alt="back"/>返回</span></Link>
                     <div>
                         <h2>这里是标题</h2>
                         <p>此统计分析只包含完整回收的数据</p>
@@ -94,10 +82,10 @@ var Detail = React.createClass({
                         </div>
                     </div>
                 </div>
-                <div className="detail-bottom" onClick={this.goHome}>
-                    <img src="imgs/back-32.png" alt="back"/>
+                <Link to="/"><div className="detail-bottom" >
+                    <img src="../src/imgs/back-32.png" alt="back"/>
                     <span>返回</span>
-                </div>
+                </div></Link>
                 
             </div>
         )

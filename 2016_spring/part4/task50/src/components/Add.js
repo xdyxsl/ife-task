@@ -7,7 +7,7 @@ var Add = React.createClass({
     render:function(){
         return (
             <div className="add">
-                <div className="add-icon"><img src="imgs/add-32.png" alt="add"/></div>
+                <div className="add-icon"><img src="../src/imgs/add-32.png" alt="add"/></div>
                 <Link to="EditPage">新建问卷</Link>
             </div>
         )

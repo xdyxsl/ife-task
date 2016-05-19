@@ -68,9 +68,9 @@ var Edit = React.createClass({
                 </div>
                 <div className="edit-body">
                     <ul className={isShow}>
-                        <li onClick={this.makeChoice}><img src="imgs/radio-16.png" alt="q-icon"/><span>单选</span></li>
-                        <li onClick={this.makeChoice}><img src="imgs/check-16.png" alt="q-icon"/><span>多选</span></li>
-                        <li onClick={this.makeChoice}><img src="imgs/text-16.png" alt="q-icon"/><span>文本题</span></li>
+                        <li onClick={this.makeChoice}><img src="../src/imgs/radio-16.png" alt="q-icon"/><span>单选</span></li>
+                        <li onClick={this.makeChoice}><img src="../src/imgs/check-16.png" alt="q-icon"/><span>多选</span></li>
+                        <li onClick={this.makeChoice}><img src="../src/imgs/text-16.png" alt="q-icon"/><span>文本题</span></li>
                     </ul>
                     <span onClick={this.handleClick}>+ 添加问题</span>
                 </div>
