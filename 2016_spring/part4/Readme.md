@@ -3,6 +3,12 @@
 task50 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part4/task50><br>
 task50 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part4/task50/build/>
 
+task51 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part4/task51><br>
+task51 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part4/task51/build/>
+
+task52 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part4/task52><br>
+task52 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part4/task52/build/>
+
 ## IFE春季班第四阶段任务 
 
 　　 第四阶段的主要目标是帮助大家在第三阶段的基础上结合模块化、过程管理工具，综合运用HTML，CSS，JavaScript实现一个小型的网站或者应用。第四阶段任务从 `4月18日` 开始，持续到 ` 5月22日`。大家可以第三阶段和第四阶段一起考虑来实现。
