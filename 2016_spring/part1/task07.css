@@ -1,12 +1,22 @@
+/**************
+*****公共区****
+**************/
+
 * {
     font-family: "Microsoft Yahei";
-    font-size: 16px;
+    font-size: 1.2vw;
     color: #B5B0B0;
 }
 
 li {
     list-style: none;
     display: inline-block;
+    margin: 0;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
 }
 
 a {
@@ -15,28 +25,34 @@ a {
 }
 
 
-/*一点妥协。。。哎。。响应式太花时间。。暂时就藏起来好了*/
+/*花时间把媒介查询的响应式做了出来*/
 
-@media screen and (max-width: 1124px) {
-    .part06-right {
+@media screen and (max-width: 680px) {
+    .menu {
         display: none;
     }
-    .part08-bottom-left {
-        visibility: hidden;
+    .mini-menu {
+        display: block !important;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        right: 5%;
     }
-    .part08-bottom-right {
-        display: table;
+    .mini-menu li {
+        display: none;
+        margin: 10px 0;
+        z-index: 99;
+    }
+    .mini-menu a {
+        font-size: 1vw;
+        font-weight: bold;
     }
 }
 
-@media screen and (max-width: 900px) {
-    .header {
-        display: none;
-    }
-}
 
-
-/*header*/
+/**************
+*****header****
+**************/
 
 .header {
     position: relative;
@@ -55,20 +71,27 @@ a {
     display: inline-block;
     color: #000;
     font-size: 1.5rem;
+    line-height: 30px;
 }
 
-.header ul {
+.menu {
     position: absolute;
-    top: 0;
+    top: 10px;
     right: 5%;
 }
 
-.header a {
+.mini-menu {
+    display: none;
+}
+
+.menu a {
     padding: 5px 18px;
+    transition: all .3s;
 }
 
 .header a:hover {
     border-bottom: solid #e74f4d 5px;
+    transition: all .3s;
 }
 
 .header li:first-child a {
@@ -82,13 +105,15 @@ a {
 }
 
 
-/*part01*/
+/**************
+*****part01****
+**************/
 
 .part01 {
     position: relative;
     background: url(img/task07-background01.png) no-repeat;
     background-size: 100% auto;
-    height: 390px;
+    height: 35vw;
     color: white;
 }
 
@@ -114,28 +139,42 @@ a {
 }
 
 .part01-content input {
-    width: 100%;
-    font-size: 2.1rem;
+    width: 18rem;
+    font-size: 3rem;
+    transition: all .5s;
+}
+
+.part01-content input:hover {
+    transition: all .5s;
+    border-radius: 20px;
 }
 
 
-/*part02*/
+/**************
+*****part02****
+**************/
 
 .part02 {
     background: url(img/task07-background02.png) no-repeat;
     background-size: 100%;
 }
 
+.part02 ul {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
 .part02 li {
     text-align: center;
-    display: inline-block;
-    width: 17%;
-    padding: 3.5%;
-    margin-top: 4%;
+    padding: 2vw;
+    margin: 4vw 2vw;
 }
 
 
-/*part03*/
+/**************
+*****part03****
+**************/
 
 .part03 {
     background-color: #ededec;
@@ -145,20 +184,24 @@ a {
 
 .part03 p {
     padding-bottom: 10%;
-    font-size: 3rem;
+    font-size: 3vw;
 }
 
 .part03 img {
     margin-top: 8%;
+    width: 7vw;
 }
 
 
-/*part04*/
+/**************
+*****part04****
+**************/
 
 .part04 {
     background: url(img/task07-background04.png) #f7f7f7 no-repeat;
     text-align: center;
     background-size: 100% auto;
+    padding-bottom: 10%;
 }
 
 .part04 p,
@@ -178,24 +221,28 @@ a {
 .part04 select,
 .part04 a {
     display: inline-block;
-    width: 17%;
-    height: 30px;
-    line-height: 30px;
+    border: 1px solid #E74F4D;
+    width: 16vw;
+    height: 4vw;
+    line-height: 4vw;
+    transition: all .5s;
 }
 
-.part04 select {
-    /*background:url(img/task07-background04-01.png) no-repeat white 203px 3px;
-*/
+.part04 select:hover,
+.part04 a:hover {
+    border: 1px solid #01BEEF;
+    transition: all .5s;
 }
 
 .part04 a {
     background-color: #e74f4d;
     color: white;
-    margin-bottom: 15%;
 }
 
 
-/*part05*/
+/**************
+*****part05****
+**************/
 
 .part05 {
     background-color: #f7f7f7;
@@ -203,12 +250,19 @@ a {
     text-align: center;
 }
 
-.part05 li {
-    padding: 0 1%;
+.part05 ul {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-justify-content: space-around;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    margin: 0;
 }
 
 .part05 img {
     border: 10px solid white;
+    width: 70%;
 }
 
 .part05 h2 {
@@ -221,25 +275,38 @@ a {
 }
 
 
-/*part06*/
+/**************
+*****part06****
+**************/
 
 .part06 {
-    position: relative;
-    margin-top: -20px;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    height: 41vw;
 }
 
 .part06-right {
     background: url(img/task07-background06.png) no-repeat;
-    background-size: 67%;
-    height: 568px;
-    color: white;
+    background-size: 100%;
+    -webkit-flex: 2;
+    -ms-flex: 2;
+    flex: 2;
+}
+
+.part06-right p {
+    line-height: 10vw;
 }
 
 .part06-left {
-    position: absolute;
-    left: 71%;
-    top: 7%;
-    right: 3%;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+.part06-left span {
+    display: inline-block;
+    padding: 0 3vw;
 }
 
 .part06-left h3,
@@ -266,12 +333,6 @@ a {
     color: #e74f4d;
 }
 
-.part06-right-content {
-    position: absolute;
-    top: 14%;
-    left: 23%;
-}
-
 .part06-right-content span {
     display: block;
     text-align: center;
@@ -287,10 +348,14 @@ a {
 }
 
 
-/*part07*/
+/**************
+*****part07****
+**************/
 
 .part07 {
-    overflow: hidden;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
 }
 
 .part07-left,
@@ -300,23 +365,23 @@ a {
 }
 
 .part07-left {
-    width: 33%;
-    float: left;
-    height: 520px;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
     background-color: #e74f4d;
 }
 
 .part07-middle {
-    float: left;
-    height: 520px;
-    width: 33%;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
 }
 
 .part07-right {
     background: url(img/task07-background07.png) no-repeat;
-    float: right;
-    height: 520px;
-    width: 33%;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
 }
 
 .part07-left a {
@@ -333,15 +398,15 @@ a {
 }
 
 .part07 p {
-    padding-top: 50%;
+    padding: 10vw;
 }
 
 
-/*part08*/
+/**************
+*****part08****
+**************/
 
-.part08 {
-    position: relative;
-}
+.part08 {}
 
 .part08 p:first-child {
     text-align: center;
@@ -354,27 +419,42 @@ a {
 }
 
 .part08-bottom-right {
-    position: absolute;
-    top: 18%;
-    right: 7%;
-    width: 600px;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+.part08-bottom-right textarea {
+    width: 90%;
+}
+
+.part08-bottom-right ul li:hover,
+.part08-bottom-right textarea:hover {
+    color: #000;
+    transition: all .5s;
 }
 
 .part08-bottom-right input {
     background-color: #ededee;
     color: black;
     border: none;
+    transition: all .5s;
+}
+
+.part08-sbumit:hover {
+    background-color: #e74f4d;
+    color: #fff;
+    transition: all .5s;
 }
 
 .part08-sbumit {
-    width: 98.5%;
+    width: 94%;
     height: 3rem;
     margin-top: 3%;
 }
 
 .part08-bottom-right ul {
     padding-left: 0;
-    width: 600px;
 }
 
 .part08-bottom-right li,
@@ -384,7 +464,8 @@ a {
 }
 
 .part08-bottom-right li {
-    width: 274px;
+    min-width: 274px;
+    width: 43%;
     margin: 5px 0;
 }
 
@@ -392,18 +473,41 @@ a {
     color: #000;
 }
 
+.part08-bottom {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
 .part08-bottom-left {
-    width: 28%;
+    min-width: 370px;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
     margin: 3.2% 10%;
 }
 
 .part08-bottom-left a {
     display: block;
+    border: 1px solid #fff;
     text-align: right;
+    transition: all .5s;
+}
+
+.part08-bottom-left a:hover {
+    transition: all .5s;
+    background-color: #e74f4d;
+    color: #fff;
 }
 
 
-/*footer*/
+/**************
+*****footer****
+**************/
 
 .footer {
     position: relative;

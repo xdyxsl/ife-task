@@ -11,7 +11,17 @@
 <body>
     <div class="header" id="header">
         <span><img src="img/task07-header02.png" alt="logo" /><strong>新世界</strong></span>
-        <ul>
+        <ul class="menu">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">最新活动</a></li>
+            <li><a href="#">项目介绍</a></li>
+            <li><a href="#">爱心社区</a></li>
+            <li><a href="#">关于我们</a></li>
+            <li>
+                <a href="#"><img src="img/task07-header01.png" alt="login" />登录</a>
+            </li>
+        </ul>
+        <ul class="mini-menu" id="mini-menu"><img src="img/menu.png" alt="menu" />
             <li><a href="#">首页</a></li>
             <li><a href="#">最新活动</a></li>
             <li><a href="#">项目介绍</a></li>
@@ -53,20 +63,30 @@
     <div class="part04">
         <h4>查找新世界城市活动信息</h4>
         <p>每个城市的有不同的活动信息，请自主查询您所需要了解的城市</p>
-        <select name="国家">
+        <select name="国家" id="country">
             <option>中国</option>
             <option>美国</option>
-            <option>英国</option>
         </select>
-        <select name="省份">
+        <select name="省份" id="province" onchange="choosePro()">
             <option>湖南省</option>
             <option>湖北省</option>
-            <option>广东省</option>
+            <option>香港特别行政区</option>
         </select>
-        <select name="市">
-            <option>北京</option>
-            <option>长沙</option>
-            <option>怀化</option>
+        <select name="市" id="city">
+            <option>长沙市</option>
+            <option>株洲市</option>
+            <option>湘潭市</option>
+            <option>衡阳市</option>
+            <option>邵阳市</option>
+            <option>岳阳市</option>
+            <option>张家界市</option>
+            <option>益阳市</option>
+            <option>常德市</option>
+            <option>娄底市</option>
+            <option>郴州市</option>
+            <option>永州市</option>
+            <option>怀化市</option>
+            <option>湘西土家族苗族自治州</option>
         </select>
         <a href="#">搜索</a>
     </div>
@@ -96,7 +116,7 @@
         </div>
         <div class="part06-left">
             <h3>新世界／<span style="color:#e74f4d;">01</span></h3>
-            <span>新世界是个新世界新世界是个新世界新世界是个新世界 新世界是个新世界新世界是个新世界新世界是个新世界 新世界是个新世界新世界是个新世界新世界是个新世界 新世界是个新世界新世界是个新世界</span>
+            <span>新世界是个新世界新世界是个新世界新世界是个新世界 新世界是个新世界新世界是个新世界新世界是个新世界 新世界是个新世界新世界是个新世界新世界是个新世界</span>
             <a href="#">更多详情</a>
             <ul>
                 <li></li>
@@ -122,41 +142,45 @@
         <p><span>成为我们的志愿者</span>新世界的大家庭需要每一个爱生活的人的加入，如果你够年轻，有梦想，有激情 那就不要犹豫，快来加入我们，成为改变所有人生活的人 </p>
         <div class="part08-bottom">
             <div class="part08-bottom-left">
-                <h5>新世界志愿者协议</h5>
-                <span>加入新世界志愿者的人员必须遵守中华人民共共和国的 相关法律法规，并且本着平等资源的原则 ......</span>
-                <a href="#"><img src="img/task07-background08-01.png" alt="pulldown" />&nbsp;more</a>
+                <div>
+                    <h5>新世界志愿者协议</h5>
+                    <span>加入新世界志愿者的人员必须遵守中华人民共共和国的 相关法律法规，并且本着平等资源的原则 ......</span>
+                    <a href="#"><img src="img/task07-background08-01.png" alt="pulldown" />&nbsp;more</a>
+                </div>
+                <div>
+                    <h5>新世界志愿者权利</h5>
+                    <span>新世界志愿者享受新世界内部所有资源共享的权利，并且享受所在四新世界活动的优先参与资格 ......</span>
+                    <a href="#"><img src="img/task07-background08-01.png" alt="pulldown" />&nbsp;more</a>
+                </div>
+                <div>
+                    <h5>更多条款</h5>
+                    <a href="#"><img src="img/task07-background08-01.png" alt="pulldown" />&nbsp;more</a>
+                </div>
             </div>
-            <div class="part08-bottom-left">
-                <h5>新世界志愿者权利</h5>
-                <span>新世界志愿者享受新世界内部所有资源共享的权利，并且享受所在四新世界活动的优先参与资格 ......</span>
-                <a href="#"><img src="img/task07-background08-01.png" alt="pulldown" />&nbsp;more</a>
+            <div class="part08-bottom-right">
+                <form method="post" action="#">
+                    <ul>
+                        <li>
+                            <label for="name">姓名:</label>
+                            <input type="text" name="name" id="name" />
+                        </li>
+                        <li>
+                            <label for="age">年龄:</label>
+                            <input type="text" name="age" id="age">
+                        </li>
+                        <li>
+                            <label for="contact">联系方式:</label>
+                            <input type="text" name="contact" id="contact">
+                        </li>
+                        <li>
+                            <label for="address">联系地址:</label>
+                            <input type="text" name="address" id="address">
+                        </li>
+                    </ul>
+                    <textarea name="text-content" cols="69" rows="8">请简单描述您梦想的生活</textarea>
+                    <input type="button" value="提交申请" name="submit" class="part08-sbumit" />
+                </form>
             </div>
-            <div class="part08-bottom-left">
-                <h5>更多条款</h5>
-                <a href="#"><img src="img/task07-background08-01.png" alt="pulldown" />&nbsp;more</a>
-            </div>
-            <form method="post" action="#" class="part08-bottom-right">
-                <ul>
-                    <li>
-                        <label for="name">姓名:</label>
-                        <input type="text" name="name" id="name" />
-                    </li>
-                    <li>
-                        <label for="age">年龄:</label>
-                        <input type="text" name="age" id="age">
-                    </li>
-                    <li>
-                        <label for="contact">联系方式:</label>
-                        <input type="text" name="contact" id="contact">
-                    </li>
-                    <li>
-                        <label for="address">联系地址:</label>
-                        <input type="text" name="address" id="address">
-                    </li>
-                </ul>
-                <textarea name="text-content" cols="69" rows="8">请简单描述您梦想的生活</textarea>
-                <input type="button" value="提交申请" name="submit" class="part08-sbumit" />
-            </form>
         </div>
     </div>
     <div class="footer">
@@ -183,6 +207,7 @@
             <a href="#header">Back to top</a>
         </div>
     </div>
+    <script type="text/javascript" src="task07.js"></script>
 </body>
 
 </html>
