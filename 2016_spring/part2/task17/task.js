@@ -67,6 +67,7 @@ var pageState = {
  */
 function renderChart() {
     var chart_wrap = document.getElementById('aqi-chart-wrap'); //获取表格区的内容
+    var yC= document.getElementById('y-coor');
 
     var now_select_city = pageState["nowSelectCity"]; //当前选择城市
     var now_gra_time = pageState["nowGraTime"]; //当前选择的粒度,默认是day
@@ -77,13 +78,15 @@ function renderChart() {
     //设置HTML样式模板
     var style = "style='width:{width};height:{height};background-color:rgba({color},0.6)'";
     var title = "title = {title}的空气质量数值为：{data}";
-    var module = "<div " + style + title + " ></div>";
+    var module = "<div " + style + title + " ><span>{date}</span></div>";
 
     var html = ""; //循环体外先声明
     for (var x in graData) {
-        html += module.replace('{width}', graData[x]['width']).replace('{height}', graData[x]['height']).replace('{color}', graData[x]['color']).replace('{title}', graData[x]['title']).replace('{data}', graData[x]['data']); //调用5次replace()方法动态设置浏览器元素为数据组里的数据
+        html += module.replace('{width}', graData[x]['width']).replace('{height}', graData[x]['height']).replace('{color}', graData[x]['color']).replace('{title}', graData[x]['title']).replace('{data}', graData[x]['data']).replace('{date}',graData[x]['date']); //调用replace()方法动态设置浏览器元素为数据组里的数据
     }
+
     chart_wrap.innerHTML = html;
+
 }
 /**
  * 日、周、月的radio事件点击时的处理函数
@@ -164,10 +167,12 @@ function initAqiChartData() {
             var dayGet = {}; //声明一个数组暂时存放需要的数据
             dayGet['data'] = sourceData; //把数据赋给date属性
             dayGet['height'] = sourceData * 0.75 + "px"; //把数据值乘以0.75赋给height，给以后动态调用
-            dayGet['width'] = '10px'; //每日数据的宽度设为10px
+            dayGet['width'] = '14px'; //每日数据的宽度设为10px
             dayGet['color'] = randomColor();
             dayGet['title'] = city + date; //传入当前的城市和日期
 
+            var dayAbbr = date.slice(8,10)//5开始就是精确到月
+            dayGet['date'] = dayAbbr; //传入当前的日期
 
             day[city][date] = dayGet; //把dayGet所获得的动态数组赋给day数组的当前值
 
@@ -183,6 +188,7 @@ function initAqiChartData() {
                 weekGet['width'] = '50px'; //每日数据的宽度设为10px
                 weekGet['color'] = randomColor();
                 weekGet['title'] = city + key; //传入当前的城市和日期
+                weekGet['date'] = key; //传入当前的日期
 
                 week[city][key] = weekGet; //把dayGet所获得的动态数组赋给day数组的当前值
                 weekTotal = 0;
@@ -205,6 +211,7 @@ function initAqiChartData() {
                 monthGet['width'] = '50px'; //每日数据的宽度设为10px
                 monthGet['color'] = randomColor();
                 monthGet['title'] = city + key; //传入当前的城市和日期
+                monthGet['date'] = key; //传入当前的日期
 
                 month[city][key] = monthGet;
                 monthTotal = 0;
