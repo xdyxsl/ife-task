@@ -38,10 +38,39 @@ a {
         top: 0;
         right: 5%;
     }
+    #mini-menu {
+        z-index: 999;
+    }
     .mini-menu li {
-        display: none;
         margin: 10px 0;
         z-index: 99;
+        position: absolute;
+        transition: all .2s;
+    }
+    .mini-menu ul li:nth-child(1) {
+        top: 40px;
+        right: -99px;
+    }
+    .mini-menu ul li:nth-child(2) {
+        top: 60px;
+        right: -99px;
+    }
+    .mini-menu ul li:nth-child(3) {
+        top: 80px;
+        right: -99px;
+    }
+    .mini-menu ul li:nth-child(4) {
+        top: 100px;
+        right: -99px;
+    }
+    .mini-menu ul li:nth-child(5) {
+        top: 120px;
+        right: -99px;
+    }
+    .login {
+        position: absolute;
+        top: 140px;
+        right: -99px;
     }
     .mini-menu a {
         font-size: 1vw;
@@ -124,12 +153,15 @@ a {
 
 .part01-content {
     position: absolute;
-    top: 13%;
     left: 13%;
 }
 
 .part01-content h2 {
-    font-size: 2.8rem;
+    font-size: 4.8vw;
+}
+
+.part01 p:nth-child(2) {
+    font-size: 1.8vw;
 }
 
 .part01 h2,
@@ -139,8 +171,8 @@ a {
 }
 
 .part01-content input {
-    width: 18rem;
-    font-size: 3rem;
+    width: 18vw;
+    font-size: 3vw;
     transition: all .5s;
 }
 
@@ -543,7 +575,6 @@ a {
 .footer-bottom {
     position: absolute;
     background-color: #2f3038;
-    bottom: 0;
     right: 0;
     left: 0;
     height: 50px;

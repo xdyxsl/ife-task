@@ -25,12 +25,14 @@ var lis = mini_menu.getElementsByTagName("li");
 
 mini_menu.addEventListener("mousemove", function() {
     for (var i = 0; i < lis.length; i++) {
-        lis[i].style.display = "block";
+        lis[i].style.right = "0";
+        mini_menu.style.height = "160px";
     }
 }, false)
 mini_menu.addEventListener("mouseout", function() {
         for (var i = 0; i < lis.length; i++) {
-            lis[i].style.display = "none";
+            lis[i].style.right = "-99px";
+            mini_menu.style.height = "0";
         }
     }, false)
     /**********************************国家筛选项，PASS******************************************
