@@ -42,14 +42,15 @@ a {
 
 .part3 {
     position: relative;
-    height: 150px;
+    height: 200px;
+    width: 400px;
 }
 
 .change-btn {
     position: absolute;
     bottom: -17px;
     left: 138px;
-    z-index: 4;
+    z-index: 5;
 }
 
 .change-btn li {
@@ -61,13 +62,20 @@ a {
     text-align: center;
 }
 
+.pics {
+    position: relative;
+    height: 200px;
+}
+
 .pics li:first-child,
 .pics li:nth-child(2),
 .pics li:nth-child(3) {
-    display: inline-block;
     position: absolute;
-    width: 30%;
+    width: 400px;
     height: 100%;
+    /*新尝试*/
+    display: none;
+    left: 0;
 }
 
 .pics li:first-child {
@@ -82,15 +90,16 @@ a {
     background-color: green;
 }
 
-:target {
-    /*这里要使用动画第一张红色和后面两张的衔接顺序就不对了，不知道为什么.可以把下面这行animation注释掉就可以纯切换*/
-    -webkit-animation: change_color .8s;
+.pics li:target {
+    /*-webkit-animation: change_color .8s;
     animation: change_color .8s;
-    z-index: 2!important;
-    transition: all 1s;
+    z-index: 2!important;*/
+    transition: all 2s;
+    display: block
 }
 
-@-webkit-keyframes change_color {
+
+/*@-webkit-keyframes change_color {
     from {
         left: -80px;
     }
@@ -106,4 +115,4 @@ a {
     to {
         left: 40px;
     }
-}
+}*/
