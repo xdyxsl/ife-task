@@ -47,6 +47,7 @@
         <input type="button" value="右侧出" id="inputRightOut">
         <input type="button" value="听天由命" id="randomNum">
         <input type="button" value="排序" id="sort">
+        <input type="text" placeholder="排序速度，默认50" id="ideNum">
     </div>
     <ul id="content"></ul>
     <script type="text/javascript">
@@ -87,7 +88,7 @@
                 newItem.setAttribute('title', value);
 
             } else {
-                alert("最多输入60个哦~");
+                alert("最多输入60个哦！");
             }
         }
     }
@@ -107,7 +108,6 @@
         content.removeChild(e.target);
     }, false)
 
-
     //过滤数字
     function validNum() {
         var num = parseInt(txt.value);
@@ -125,20 +125,22 @@
         for (var i = 1; i < 40; i++) {
             var x = Math.floor(Math.random() * 90 + 10);
             html += "<li style='height:" + x + "px;width:15px;transition:all .5s;' title=" + x + ">" + x + "</li>"; //因为我排序时候提取的是innerHTML，所以这里要把值写入innerHTML
-            console.log("randomNum work!")
         }
         content.innerHTML = html;
     }
 
     //循环遍历改变位置
+    
     function sort() {
         var Li = content.childNodes;
         var len = Li.length;
         var i = 0;
         var j = len - 1;
+        var sortSpeed = 50;
+        var inputSpeed = document.getElementById("ideNum").value;
+        if(inputSpeed.match(/^[1-9]\d/)){sortSpeed = inputSpeed}
 
         function timeout() {
-
             if (i < len) {
                 if (j > i) {
                     Li[j].style.backgroundColor = "red";
@@ -148,31 +150,34 @@
                         Li[j - 1] = temp;
                         Li[j].style.backgroundColor = "#00FF00";
                         content.insertBefore(Li[j], Li[j - 1]);
-                        setTimeout(timeout,50);
+                        setTimeout(timeout,sortSpeed);
                         j--;
                     } else {
                         j--;
                         Li[j].style.backgroundColor = "#00FF00";
-                        setTimeout(timeout,50);
+                        setTimeout(timeout,sortSpeed);
                     }
                 } else { //这个else语句很关键！！！哎，总算搞出来了，不考虑这个else的话if只搜索一遍就跳出去了！设置这个else再初始化i和j的值！
                     i++;
                     Li[j].style.backgroundColor = "#000";
                     j = len - 1;
-                    setTimeout(timeout,50);
+                    setTimeout(timeout,sortSpeed);
                 }
             }
-
         }
-        setTimeout(timeout,50);
+        setTimeout(timeout,sortSpeed);
     }
-
 
     document.getElementById("inputLeftIn").addEventListener("click", inputLeftIn, false);
     document.getElementById("inputRightIn").addEventListener("click", inputRightIn, false);
     document.getElementById("inputLeftOut").addEventListener("click", inputLeftOut, false);
     document.getElementById("inputRightOut").addEventListener("click", inputRightOut, false);
-    document.getElementById('sort').addEventListener("click", sort, false);
+    document.getElementById('sort').addEventListener("click", function(){
+        if(status!=1){
+            sort();
+            status = 1;
+        }
+    }, false);
     document.getElementById('randomNum').addEventListener("click", randomNum, false)
 
     </script>
