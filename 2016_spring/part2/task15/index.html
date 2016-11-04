@@ -51,7 +51,6 @@
                 [lis[i].innerHTML.slice(10, 12)]
             ])
         }
-        console.log("getData", data)
         return data;
     }
 
@@ -87,19 +86,13 @@
     function btnHandle() {
         var aqiData = getData();
         aqiData = sortAqiData(aqiData);
-        console.log("btn2" + aqiData)
         render(aqiData);
     }
 
-
-    function init() {
-
+    (function init() {
         // 在这下面给sort-btn绑定一个点击事件，点击时触发btnHandle函数
-
         document.getElementById('sort-btn').addEventListener("click", btnHandle, false)
-    }
-
-    init();
+    })()
     </script>
 </body>
 
