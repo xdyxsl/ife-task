@@ -39,183 +39,29 @@
     div {
         margin: auto;
     }
+    
+    .factory {
+        border: 5px solid gray;
+        margin: 40px 20px;
+    }
     </style>
 </head>
 
 <body>
-    <input type="checkbox" id="checkbox_name" value="checkbox_name" checked="checked">
+    <input type="checkbox" id="checkbox_name" value="checkbox_name" checked="checked" disabled="true">
     <label id="checkbox_name">账号</label>
-    <input type="checkbox" id="checkbox_password" value="checkbox_password">
+    <input type="checkbox" id="checkbox_password" value="checkbox_password" checked="checked" disabled="true">
     <label id="checkbox_password">密码</label>
-    <input type="checkbox" id="checkbox_password_confirm" value="checkbox_password_confirm">
+    <input type="checkbox" id="checkbox_password_confirm" value="checkbox_password_confirm" checked="checked" disabled="true">
     <label id="checkbox_password_confirm">确认密码</label>
     <input type="checkbox" id="checkbox_email" value="checkbox_email">
     <label id="checkbox_email">邮箱</label>
     <input type="checkbox" id="checkbox_phone" value="checkbox_phone">
     <label id="checkbox_phone">手机号码</label>
     <input type="button" id="create" value="创建表单">
+    <input type="button" id="reset" value="重置">
     <form id="form"></form>
-
-    <script type="text/javascript">
-
-    //表单工厂
-    function FormFactory(name, type, func, rules, success, fail) {
-        this.label = name; // 表单标签
-        this.type = type; // 表单类型
-        this.validator = func; // 表单验证规
-        this.rules = rules; // 填写规则提示
-        this.success = success; // 验证通过提示
-        this.fail = fail // 验证失败提示
-    }
-
-    //验证的工厂
-    var CheckFactory = {
-        name: function() {
-            function getLength(str) {
-                var countLength = 0;
-                for (var i = 0; i < str.length; i++) {
-                    char_code = str.charCodeAt(i); //取每一个字符的code值
-                    if (char_code >= 0 && char_code <= 128) {
-                        countLength += 1; //如果非汉字就自加1
-                    } else {
-                        countLength += 2; //如果非汉字以外就自加2
-                    }
-                }
-                return countLength;
-            };
-            var name_info = document.getElementById('name');
-            name_info.addEventListener("change", function() {
-                if (name_info.value == "") { //验证是否为空
-                    this.nextElementSibling.innerHTML = name_input.rules;
-                } else if (getLength(name_info.value) < 4 || getLength(name_info.value) > 16) { //验证长度是否符合标准
-                    name_info.nextElementSibling.setAttribute("class", "fail");
-                    name_info.setAttribute("class", "fail");
-                    this.nextElementSibling.innerHTML = name_input.fail;
-                } else {
-                    name_info.nextElementSibling.setAttribute("class", "success");
-                    name_info.setAttribute("class", "success");
-                    this.nextElementSibling.innerHTML = name_input.success;
-                }
-            }, false)
-
-        },
-        password: function() {
-            var password_info = document.getElementById('password');
-            password_info.addEventListener("change", function() {
-                if (password_info.value != "") {
-                    password_info.nextElementSibling.setAttribute("class", "success");
-                    password_info.setAttribute("class", "success");
-                    this.nextElementSibling.innerHTML = password_input.success;
-                } else {
-                    password_info.nextElementSibling.setAttribute("class", "rules");
-                    password_info.setAttribute("class", "rules");
-                    this.nextElementSibling.innerHTML = password_input.rules;
-                }
-            }, false)
-        },
-        password_confirm: function() {
-            var password_info = document.getElementById('password');
-            var password_confirm_info = document.getElementById('password_confirm');
-            password_confirm_info.addEventListener("change", function() {
-                if (password_confirm_info.value != "") {
-                    if (password_info.value === password_confirm_info.value) {
-                        password_confirm_info.nextElementSibling.setAttribute("class", "success");
-                        password_confirm_info.setAttribute("class", "success");
-                        this.nextElementSibling.innerHTML = password_confirm_input.success;
-                    } else {
-                        password_confirm_info.nextElementSibling.setAttribute("class", "fail");
-                        password_confirm_info.setAttribute("class", "fail");
-                        this.nextElementSibling.innerHTML = password_confirm_input.fail;
-                    }
-                } else {
-                    password_confirm_info.nextElementSibling.setAttribute("class", "rules");
-                    password_confirm_info.setAttribute("class", "rules");
-                    this.nextElementSibling.innerHTML = password_confirm_input.rules;
-                }
-            }, false)
-        },
-        email: function() {
-            var email_info = document.getElementById('email');
-            email_info.addEventListener("change", function() {
-                if (email_info.value != "") {
-                    var filter = /^[a-z0-9]([a-z0-9]*[-_]?[a-z0-9]+)*@([a-z0-9]*[-_]?[a-z0-9]+)+[\.][a-z]{2,3}([\.][a-z]{2})?$/;
-                    if (filter.test(email_info.value)) {
-                        email_info.nextElementSibling.setAttribute("class", "success");
-                        email_info.setAttribute("class", "success");
-                        this.nextElementSibling.innerHTML = email_input.success;
-                    } else {
-                        email_info.nextElementSibling.setAttribute("class", "fail");
-                        email_info.setAttribute("class", "fail");
-                        this.nextElementSibling.innerHTML = email_input.fail;
-                    }
-                } else {
-                    email_info.nextElementSibling.setAttribute("class", "rules");
-                    email_info.setAttribute("class", "rules");
-                    this.nextElementSibling.innerHTML = email_input.rules;
-                }
-            }, false)
-        },
-        phone: function() {
-            var phone_info = document.getElementById('phone');
-            phone_info.addEventListener("change", function() {
-                if (phone_info.value != "") {
-                    var filter = /^1[3|4|5|8][0-9]\d{8}$/i;
-                    if (filter.test(phone_info.value)) {
-                        phone_info.nextElementSibling.setAttribute("class", "success");
-                        phone_info.setAttribute("class", "success");
-                        this.nextElementSibling.innerHTML = phone_input.success;
-                    } else {
-                        phone_info.nextElementSibling.setAttribute("class", "fail");
-                        phone_info.setAttribute("class", "fail");
-                        this.nextElementSibling.innerHTML = phone_input.fail;
-                    }
-                } else {
-                    phone_info.nextElementSibling.setAttribute("class", "rules");
-                    phone_info.setAttribute("class", "rules");
-                    this.nextElementSibling.innerHTML = phone_input.rules;
-                }
-            }, false)
-        }
-    }
-
-    var name_input = new FormFactory("name", "text", CheckFactory.name, "必填，长度为4-16个字符", "名称格式正确", "长度只能为为4~16个字符");
-    var password_input = new FormFactory("password", "password", CheckFactory.password, "请输入密码", "密码可用", "请输入密码");
-    var password_confirm_input = new FormFactory("password_confirm", "password", CheckFactory.password_confirm, "再次输入相同的密码", "密码输入一致", "密码输入不一致");
-    var email_input = new FormFactory("email", "email", CheckFactory.email, "输入您的邮箱", "邮箱格式正确", "邮箱格式错误");
-    var phone_input = new FormFactory("phone", "text", CheckFactory.phone, "输入您的手机号码", "手机格式正确", "手机格式错误");
-
-    var inputArray = [name_input, password_input, password_confirm_input, email_input, phone_input]; //把对象们存入数组
-
-    var labelTranslate = { //中文名对象
-        name: "名称",
-        password: "密码",
-        password_confirm: "确认密码",
-        email: "邮箱",
-        phone: "手机号码",
-    }
-
-    var checkboxArray = ["checkbox_name", "checkbox_password", "checkbox_password_confirm", "checkbox_email", "checkbox_phone"];
-
-    var renderForm = function() {
-        var html = "";
-        var count = [];
-        for (var i = 0; i < checkboxArray.length; i++) {
-            if (document.getElementById(checkboxArray[i]).checked == true) {
-
-                var checked_name = checkboxArray[i].slice(9);
-                html += "<div><label for='" + inputArray[i].label + "'>" + labelTranslate[checked_name] + "</label><input type='" + inputArray[i].type + "' id='" + inputArray[i].label + "' /><p>" + inputArray[i].rules + "</p></div>";
-                document.getElementById('form').innerHTML = html;
-                count.push(inputArray[i]); //把选出的Input组成新的数组，等会回调他们的验证函数 
-            }
-        }
-        //for in循环精准对被选择了的Input进行验证
-        for (var x in count) {
-            count[x].validator();
-        }
-    }
-
-    document.getElementById('create').addEventListener("click", renderForm, false);
-    </script>
+    <script type="text/javascript" src="task32.js"></script>
 </body>
 
 </html>
