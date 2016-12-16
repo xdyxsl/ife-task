@@ -90,11 +90,13 @@ var cask = {
             }
         }
     },
+
     init: function() {
         this.getImage();
         this.scroll();
     }
 }
 window.onload = function() {
+    document.getElementById("cask_container").style.width = document.documentElement.clientWidth - 30 + "px";
     cask.init();
 }
