@@ -28,14 +28,17 @@ var CheckFactory = {
             name_info[i].onblur = function(e){
                 if (e.target.value == "") { //验证是否为空
                     e.target.nextElementSibling.innerHTML = name_input.rules;
+                    console.log("111")
                 } else if (getLength(e.target.value) < 4 || getLength(e.target.value) > 16) { //验证长度是否符合标准
                     e.target.nextElementSibling.setAttribute("class", "fail");
                     e.target.setAttribute("class", "fail");
                     e.target.nextElementSibling.innerHTML = name_input.fail;
+                    console.log("222")
                 } else {
                     e.target.nextElementSibling.setAttribute("class", "success");
                     e.target.setAttribute("class", "success");
                     e.target.nextElementSibling.innerHTML = name_input.success;
+                    console.log("333")
                 }
             }
         }
@@ -159,14 +162,12 @@ var renderForm = function() {
     document.getElementById('form').innerHTML += html;
     //for in循环精准对被选择了的Input进行验证
     for (var x in count) {
-        var date = new Date()
-        count[x].validator();
-        console.log(count[x],date)
-    }
+            var date = new Date()
+            count[x].validator();
+            // console.log(count[x],date)
+        }
+    console.log(count)
 }
 
-function reset() {
-    location.reload();
-}
 document.getElementById('create').addEventListener("click", renderForm, false);
-document.getElementById('reset').addEventListener("click", reset, false);
+document.getElementById('reset').addEventListener("click", function(){location.reload();}, false);

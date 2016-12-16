@@ -164,10 +164,10 @@ var RobotBox = {
                 if (face == 1) {
                     clearInterval(little);
                 }
-            }, 200);
-            RobotBox.transLeft();
+            }, 100);
+            setTimeout("RobotBox.transLeft()",1000);
         } else {
-            RobotBox.transLeft();
+            setTimeout("RobotBox.transLeft()",1000);
         }
     },
     moveTop: function() {
@@ -177,10 +177,10 @@ var RobotBox = {
                 if (face == 0) {
                     clearInterval(little);
                 }
-            }, 200);
-            RobotBox.transTop();
+            }, 100);
+            setTimeout("RobotBox.transTop()",1000);
         } else {
-            RobotBox.transTop();
+            setTimeout("RobotBox.transTop()",1000);
         }
     },
     moveRight: function() {
@@ -190,10 +190,10 @@ var RobotBox = {
                 if (face == 3) {
                     clearInterval(little);
                 }
-            }, 200);
-            RobotBox.transRight();
+            }, 100);
+            setTimeout("RobotBox.transRight()",1000);
         } else {
-            RobotBox.transRight();
+            setTimeout("RobotBox.transRight()",1000);
         }
     },
     moveBottom: function() {
@@ -203,14 +203,13 @@ var RobotBox = {
                 if (face == 2) {
                     clearInterval(little);
                 }
-            }, 200);
-            RobotBox.transBottom();
+            }, 100);
+            setTimeout("RobotBox.transBottom()",1000);
         } else {
-            RobotBox.transBottom();
+            setTimeout("RobotBox.transBottom()",1000);
         }
     },
 }
-
 
 cmd_btn.addEventListener("click", RobotBox.go, false)
 t_left.addEventListener("click", RobotBox.turnLeft, false);
