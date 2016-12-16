@@ -19,6 +19,8 @@
             }
         }
     }
+    document.getElementById('command_input').value = 'MOV RIG 3 \nmoV bot 2\nMOV lef 1\ntra bot 2';
+    updateLineNum()
 })();
 
 //正则分割内容框里的内容,扩展命令，添加数字
@@ -62,7 +64,7 @@ var RobotBox = {
             throw "啊？"
         }
     },
-    go: function(str, line_num) { //修改为传入参数，自动识别
+    go: function(str, line_num) {
         switch (str) {
             case "GO":
                 switch (face) {
@@ -79,8 +81,8 @@ var RobotBox = {
                         RobotBox.transRight();
                         break;
                     default:
-                    alert("???");
-                    break;
+                        alert("???");
+                        break;
                 }
                 break;
             case "TUN LEF":
@@ -117,7 +119,7 @@ var RobotBox = {
                 RobotBox.moveBottom();
                 break;
             default: //处理错误的命令所对应的行数
-                console.log("指令错误，请查阅右边的指令");
+                alert("指令错误，请查阅右边的指令");
                 var Li = document.getElementById('command_display_count').getElementsByTagName("li");
                 Li[line_num].style.borderRadius = "10px"
                 Li[line_num].style.backgroundColor = "#FF9A9A"
@@ -144,85 +146,82 @@ var RobotBox = {
         RobotBox.face();
     },
     transLeft: function() {
-        setTimeout(function(){
+        setTimeout(function() {
             if (xPos > 50) {
-            xPos -= 50;
-            robot.style.left = xPos + 'px';
-        }
-        },20)
+                xPos -= 50;
+                robot.style.left = xPos + 'px';
+            }
+        }, 20)
     },
     transTop: function() {
-        setTimeout(function(){
+        setTimeout(function() {
             if (yPos > 50) {
-            yPos -= 50;
-            robot.style.top = yPos + 'px';
-        }
-        },20)
+                yPos -= 50;
+                robot.style.top = yPos + 'px';
+            }
+        }, 20)
     },
     transRight: function() {
-        setTimeout(function(){
+        setTimeout(function() {
             if (xPos < 500) {
-            xPos += 50;
-            robot.style.left = xPos + 'px';
-        }
-        },20)
+                xPos += 50;
+                robot.style.left = xPos + 'px';
+            }
+        }, 20)
     },
     transBottom: function() {
-        setTimeout(function(){
+        setTimeout(function() {
             if (yPos < 500) {
-            yPos += 50;
-            robot.style.top = yPos + 'px';
-        }
-        },20)
+                yPos += 50;
+                robot.style.top = yPos + 'px';
+            }
+        }, 20)
     },
     moveLeft: function() {
-        if (face != 1) { //如果方向不同
-            RobotBox.turnLeft();
-            var time_out_count = setTimeout(function() {
-                RobotBox.moveLeft();
-            }, 0);
-        } else {
-            clearTimeout(time_out_count);
-            RobotBox.transLeft();
+        function turnFuncL() {
+            if (face != 1) { //如果方向不同
+                RobotBox.turnLeft();
+                setTimeout(turnFuncL, 50);
+            } else {
+                setTimeout(RobotBox.transLeft, 1000);
+            };
         }
-        
+        setTimeout(turnFuncL, 50);
     },
     moveTop: function() {
-        if (face != 0) { //如果方向不同
-            RobotBox.turnLeft();
-            var time_out_count = setTimeout(function() {
-                RobotBox.moveTop();
-            }, 0);
-        } else {
-            clearTimeout(time_out_count);
-            RobotBox.transTop();
+        function turnFuncT() {
+            if (face != 0) { //如果方向不同
+                RobotBox.turnLeft();
+                setTimeout(turnFuncT, 50);
+            } else {
+                setTimeout(RobotBox.transTop, 1000);
+            };
         }
+        setTimeout(turnFuncT, 50);
     },
     moveRight: function() {
-        if (face != 3) { //如果方向不同
-            RobotBox.turnLeft();
-            var time_out_count = setTimeout(function() {
-                RobotBox.moveRight();
-            }, 0);
-        } else {
-            clearTimeout(time_out_count);
-            RobotBox.transRight()
-        }
+        function turnFuncR() {
+            if (face != 3) { //如果方向不同
+                RobotBox.turnLeft();
+                setTimeout(turnFuncR, 50);
+            } else {
+                setTimeout(RobotBox.transRight, 1000);
+            }
+        };
+        setTimeout(turnFuncR, 50);
     },
     moveBottom: function() {
-        if (face != 2) { //如果方向不同
-            RobotBox.turnLeft();
-            var time_out_count = setTimeout(function() {
-                RobotBox.moveBottom();
-            }, 0);
-        } else {
-            clearTimeout(time_out_count);
-            RobotBox.transBottom()
+        function turnFuncB() {
+            if (face != 2) { //如果方向不同
+                RobotBox.turnLeft();
+                setTimeout(turnFuncB, 50);
+            } else {
+                setTimeout(RobotBox.transBottom, 1000);
+            };
         }
+        setTimeout(turnFuncB, 50);
     },
 }
-
-
 
 /***********************************输入框区域的函数********************************/
 
@@ -255,34 +254,45 @@ function setMargin() {
 }
 
 //执行按钮   
-function execute() {
+function render() {
     var inputArr = enhanceCommand(command_input.value);
-    for (var x in inputArr) {
-        var times = "";
-        if (inputArr[x].slice(0, 2).toUpperCase() == "GO") {
-            conmmand_input = "GO";
-            times = inputArr[x].slice(3)?Number(inputArr[x].slice(3)):1;
-            console.log("go work")
-        } else if (inputArr[x] == "") {
-            conmmand_input = "blank";
-            times = 1;
-        } else {
-            conmmand_input = inputArr[x].slice(0, 7);
-            times = inputArr[x].slice(8) ? Number(inputArr[x].slice(8)) : 1;
+    var x = 0;
+    (function bigLoop() {
+        if (x < inputArr.length) {
+            var times = "";
+            if (inputArr[x].slice(0, 2).toUpperCase() == "GO") {
+                conmmand_input = "GO";
+                times = inputArr[x].slice(3) ? Number(inputArr[x].slice(3)) : 1;
+            } else if (inputArr[x] == "") {
+                conmmand_input = "blank";
+                times = 1;
+            } else {
+                conmmand_input = inputArr[x].slice(0, 7);
+                times = inputArr[x].slice(8) ? Number(inputArr[x].slice(8)) : 1;
+            }
+
+            if (isNaN(times)) { alert("次数输入有误，请规范书写！"); }
+            var i = 0;
+
+            function finalLoop() {
+                if (i < times) {
+                    RobotBox.go(conmmand_input.toUpperCase(), x)
+                    setTimeout(finalLoop, 1000);
+                    console.log(conmmand_input, x, i, times)
+                    i++;
+                } else {
+                    x++;
+                    setTimeout(bigLoop, 1000);
+                }
+            }
+            finalLoop();
         }
-        if (isNaN(times)) { alert("次数输入有误，请规范书写！"); }
-        
-        for (var i = 0; i < times; i++) {
-            RobotBox.go(conmmand_input.toUpperCase(), x)
-            console.log(conmmand_input)
-        }
-    }
+    })()
 }
 
-//重置按钮 
-function reset() {
+document.getElementById('clean_buttun').addEventListener("click", function() {
     command_input.value = "";
     updateLineNum();
-}
-document.getElementById('refresh_buttun').addEventListener("click", reset, false);
-cmd_btn.addEventListener("click", execute, false);
+}, false);
+document.getElementById("refresh_button").addEventListener("click",function(){location.reload()},false)
+cmd_btn.addEventListener("click", render, false);

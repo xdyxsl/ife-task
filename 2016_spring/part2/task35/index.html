@@ -66,8 +66,6 @@
         justify-content: space-around;
     }
     
-    .command-part-display-count {}
-    
     .command-part-display-count {
         background-color: #2C3E50;
         color: #fff;
@@ -95,6 +93,10 @@
     input[type="button"] {
         width: 50px;
         height: 25px;
+        background-color:#6289AF;
+        border:none;
+        color:#fff;
+        cursor:pointer;
     }
     
     .command-rules {
@@ -112,7 +114,8 @@
         <section class="command-part">
             <section class="command-part-button">
                 <input type="button" id="command_button" value="执行">
-                <input type="button" id="refresh_buttun" value="重置">
+                <input type="button" id="clean_buttun" value="清空">
+                <input type="button" id="refresh_button" value="刷新">
             </section>
             <section class="command-part-display">
                 <ul class="command-part-display-count" id="command_display_count">
@@ -134,7 +137,7 @@
             <li>MOV BOT n：方向转向屏幕下面，向屏幕的下面移动 n 格</li>
         </ul>
     </section>
-    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="task35.js"></script>
 </body>
 
 </html>
