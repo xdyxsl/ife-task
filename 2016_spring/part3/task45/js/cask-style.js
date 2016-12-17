@@ -63,7 +63,7 @@ var cask = {
                 tempArr = [];
             }
         }
-        self.render()
+        self.render();
     },
     render: function() {
         var self = this,
@@ -98,5 +98,15 @@ var cask = {
 }
 window.onload = function() {
     document.getElementById("cask_container").style.width = document.documentElement.clientWidth - 30 + "px";
+    isReady();
     cask.init();
+}
+function isReady(){
+    var content = document.getElementById("cask_container");
+    if(content.childNodes.length==0){
+        var timeout = setTimeout(isReady,1000);
+    }else{
+        document.getElementsByClassName("mask")[0].style.display = "none";
+        clearTimeout(timeout);
+    }
 }
