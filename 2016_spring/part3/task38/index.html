@@ -22,23 +22,25 @@
     }
     </style>
 </head>
-<section>
-    <h1>/**<br>**设置参数，在INDEX页用new方法新建一个实例就OK了，参数如下<br>**/</h1>
-    <p>table_name:"default", //表格名称</p>
-    <p>table_head: ["Name", "course1", "course2", "course3"], //表格首栏</p>
-    <p>isSort: [0, 1, 1, 1], //1为有排序功能，0为没有</p>
-    <p>tbody_obj: { //表格详细数据</p>
-    <p>&nbsp&nbsp&nbsp&nbsp&nbsp1:["person1", 20, 90, 40],</p>
-    <p>&nbsp&nbsp&nbsp&nbsp&nbsp2:["person2", 90, 60, 90],</p>
-    <p>&nbsp&nbsp&nbsp&nbsp&nbsp3: ["person3", 60, 100, 70],</p>
-    <p>},</p>
-    <p>tdWH: [200, 50], //表格宽和高</p>
-    <p>head_color: "#eee", //首栏背景颜色</p>
-    <p>table_color: "#F8C0FF", //表格背景色</p>
-    <p>isFrozen: 1 //1为冻结，0为不冻结</p>
-</section>
+
 
 <body>
+    <section>
+        <h1>***********首栏可排序的head名称不能重复出现，否则排序会一起排。***********</h1>
+        <h3>/**<br>**设置参数，在INDEX页用new方法新建一个实例就OK了，参数如下<br>**/</h3>
+        <p>table_name:"default", //表格名称</p>
+        <p>table_head: ["Name", "course1", "course2", "course3"], //表格首栏</p>
+        <p>isSort: [0, 1, 1, 1], //1为有排序功能，0为没有</p>
+        <p>tbody_obj: { //表格详细数据</p>
+        <p>&nbsp&nbsp&nbsp&nbsp&nbsp1:["person1", 20, 90, 40],</p>
+        <p>&nbsp&nbsp&nbsp&nbsp&nbsp2:["person2", 90, 60, 90],</p>
+        <p>&nbsp&nbsp&nbsp&nbsp&nbsp3: ["person3", 60, 100, 70],</p>
+        <p>},</p>
+        <p>tdWH: [200, 50], //表格宽和高</p>
+        <p>head_color: "#eee", //首栏背景颜色</p>
+        <p>table_color: "#F8C0FF", //表格背景色</p>
+        <p>isFrozen: 1 //1为冻结，0为不冻结</p>
+    </section>
     <script type="text/javascript" src="TableTool.js"></script>
     <script type="text/javascript">
     var table1 = new TableTool({
@@ -49,33 +51,34 @@
             1: ["小明", 20, 90, 40],
             2: ["小红", 90, 60, 90],
             3: ["小肛", 60, 100, 70],
-            4: ["小屁", 30, 50, 10],
+            4: ["小3", 30, 50, 10],
             5: ["小鸟", 10, 20, 30]
         },
         tdWH: [200, 50],
         head_color: "#eee",
         table_color: "#F8C0FF",
-        isFrozen: 1
+        isFrozen:1
     })
+
     var table2 = new TableTool({
         table_name: "table2",
-        table_head: ["Name", "Chinese", "English", "Computer"],
+        table_head: ["Name", "eee", "www", "qqq"],
         isSort: [0, 1, 1, 1],
         tbody_obj: {
-            1: ["小J", 20, 90, 40],
-            2: ["小A", 90, 60, 90],
-            3: ["小Q", 60, 100, 70],
+            1: ["小2", 20, 90, 40],
+            2: ["小红", 90, 60, 90],
+            3: ["小4", 60, 100, 70],
             4: ["小E", 60, 20, 70],
             5: ["小W", 60, 100, 60],
         },
         tdWH: [200, 50],
         head_color: "rgb(74,158,158)",
         table_color: "rgb(28,170,125)",
-        isFrozen: 0
+        isFrozen:0
     })
     var table3 = new TableTool({
         table_name: "table3",
-        table_head: ["Name", "Computer", "Chinese", "English"],
+        table_head: ["Name", "qwe", "ewq", "dsa"],
         isSort: [0, 1, 1, 1],
         tbody_obj: {
             1: ["小1", 20, 90, 40],

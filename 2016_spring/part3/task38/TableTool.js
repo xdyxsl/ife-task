@@ -78,8 +78,6 @@ TableTool.prototype = {
     bindSort:function(){
         var span_newarr = new Array();
         var span_arr = document.getElementsByTagName("span");
-        var cur_t = document.getElementById(this.data.table_name);
-        var cur_t_span_arr = cur_t.getElementsByTagName("span");
         for (var i = 0; i < span_arr.length; i++) {
             span_newarr.push(span_arr[i])
         }
@@ -107,29 +105,6 @@ TableTool.prototype = {
                 that.isFrozen();
             }, false)
         })
-        // for (var i = 0; i < span_arr.length; i++) {
-        //     var that = this; //底下事件监听的时候this无法定位到数组内，所以拷贝一份
-        //     span_arr[i].style.cursor = "pointer";
-        //     span_arr[i].addEventListener("click", function() {
-        //         if (this.getAttribute("class") == "asc") {
-        //             for (x in that.data.table_head) {
-        //                 if (this.parentNode.getAttribute("name").toUpperCase() == that.data.table_head[x].toUpperCase()) {
-        //                     that.sortUp(x);
-        //                 }
-        //             }
-        //         } else {
-        //             for (x in that.data.table_head) {
-        //                 if (this.parentNode.getAttribute("name").toUpperCase() == that.data.table_head[x].toUpperCase()) {
-        //                     that.sortDown(x);
-        //                 }
-        //             }
-        //         }
-
-        //         that.createTable();
-        //         that.resetTable();
-                
-        //     }, false)
-        // }
     },
     sortUp: function(index) { //引入一个newArr和newObj先来处理排序，index指代的是要排序科目在数组中的位置
         var sortData = this.data.tbody_obj,
