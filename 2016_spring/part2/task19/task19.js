@@ -85,12 +85,12 @@ function randomNum() {
 
 //循环遍历改变位置
 function sort() {
-    var Li = content.childNodes;
-    var len = Li.length;
-    var i = 0;
-    var j = len - 1;
-    var sortSpeed = 50;
-    var inputSpeed = document.getElementById("ideNum").value;
+    var Li = content.childNodes,
+    len = Li.length,
+    i = 0,
+    j = len - 1,
+    sortSpeed = 50,
+    inputSpeed = document.getElementById("ideNum").value;
     if (inputSpeed.match(/^[1-9]\d/)) { sortSpeed = inputSpeed };
 
     function timeout() {
