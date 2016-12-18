@@ -9,6 +9,9 @@ task38 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part3/ta
 task39 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part3/task39><br>
 task39 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part3/task39/>
 
+task40 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part3/task40><br>
+task40 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part3/task40/>
+
 task41 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part3/task41><br>
 task41 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part3/task41/>
 
@@ -37,7 +40,7 @@ task45 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part3/ta
 
 > **任务四十一**：日历组件升级
 
-> **任务四十一**：支持日期段选择的日历组件实现
+> **任务四十二**：支持日期段选择的日历组件实现
 　
 * 系列任务二：高级相册准备工作
 
@@ -118,7 +121,7 @@ task45 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part3/ta
 排序的时候把tbody组成的对象先遍历放入新数组，然后把新数组排序，接着把排序完的数组放入新对象，最后把新对象赋值给旧对象。
 #### task39 UI组件之冻结行列表格
 scrollTop需要兼容。
-```
+```javascript
 window.onscroll = function(e) {
         /**
          * [兼容浏览器]
