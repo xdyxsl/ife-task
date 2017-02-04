@@ -29,3 +29,40 @@ task52 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part4/ta
 ## notes
 
 #### task50 RIA 问卷管理平台
+原生JS写的时候，在编辑页面，主要用到的是node的知识，有些坑没注意到的。
+1. 如果用getElement等方法来获取的时候，或者说用element.childNodes、previousSibling等等有关node的方法，得到的是NodeList，这里面包含了所有的节点，也就是说nodeType为3的text节点也在里面，但是我们大多情况下是只需要nodeType为1的元素节点。我们只要element的话可以改用element.children或者firstElementChild或者previousElementSibling等等。
+2. node原生就有很多方法，包括了新建，删除，替换，克隆等等，完全足够在编辑页面的功能。
+```javascript
+//查找节点  
+document.getElementById("id");//通过id查找，返回唯一的节点，如果有多个将会返回第一个，在IE6、7中有个bug，会返回name值相同的元素，所有要做一个兼容  
+document.getElementsByClassName("class");//通过class查找，返回节点数组  
+document.getElementsByTagName("div");  
+  
+//创建节点  
+document.createDocumentFragment();//创建内存文档碎片  
+document.createElement();//创建元素  
+document.createTextNode();//创建文本节点  
+  
+//添加节  
+var ele = document.getElementById("my_div");  
+var oldEle = document.createElement("p");  
+var newEle=document.createElement("div");  
+ele.appendChild(oldEle);  
+//移除  
+ele.removeChild(oldEle);  
+//替换  
+ele.replaceChild(newEle,oldEle);  
+;插入  
+ele.insertBefore(oldEle,newEle);//在newEle之前插入 oldEle节点  
+  
+//复制节点  
+var cEle = oldEle.cloneNode(true);//深度复制，复制节点下面所有的子节点  
+cEle = oldEle.cloneNode(false);//只复制当前节点，不复制子节点  
+  
+//移动节点  
+var cloneEle = oldEle.cloneNode(true);//被移动的节点  
+document.removeChild(oldEle);//删除原节点  
+document.insertBefore(cloneEle,newEle);//插入到目标节点之前 
+
+by hua @http://blog.csdn.net/hxfdarling/article/details/40347207
+```

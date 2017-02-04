@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>编辑</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" type="text/css" href="styles/CalendarsStyle.css">
+</head>
+
+<body>
+    <header class='header'>
+        <img src="./imgs/log_50x50.png" />
+        <h3>问卷管理</h3>
+        <a href="index.html"><span>我的问卷</span></a>
+    </header>
+    <section>
+        <div class="edit">
+            <div class="edit-header" id="edit-header">
+                <input type="text" value="标题" />
+            </div>
+            <div class="edit-qbox" id="edit-qbox">
+
+            </div>
+            <div class="edit-body">
+                <ul class='hide'>
+                    <li onClick="newRadio()"><img src="imgs/radio-16.png" alt="q-icon" /><span>单选</span></li>
+                    <li onClick="newCheckbox()"><img src="imgs/check-16.png" alt="q-icon" /><span>多选</span></li>
+                    <li onClick="newTextarea()"><img src="imgs/text-16.png" alt="q-icon" /><span>文本题</span></li>
+                </ul>
+                <span onClick='toggleShowBtn()'>+ 添加问题</span>
+            </div>
+            <div class="edit-footer">
+                <div>
+                    <span>问卷截至日期</span>
+                    <input type="text"  class="date" data-calendar/>
+                </div>
+                <div>
+                    <input type="button" value="保存问卷" onclick="myQuestionaire.save()" />
+                    <input type="button" value="发布问卷" onClick="myQuestionaire.post()" />
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="maskControl" class="hide">
+        <div class="mask"></div>
+        <div class="alert">
+            <div class="alert-top">
+                <span>提示</span>
+                <span class="close" onClick="toggleMask()">X</span>
+            </div>
+            <div class="alert-bottom">
+                <p>是否发布问卷？</p>
+                <p>此问卷截止日期为<span id="limitedDate">2017-01-01</span></p>
+                <div>
+                    <input type="button" value="确定" />
+                    <input type="button" value="取消" onClick="toggleMask()" />
+                </div>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript">
+    function toggleMask() {
+        var curStatus = document.getElementById("maskControl").className;
+        if (curStatus === 'show') {
+            document.getElementById("maskControl").className = 'hide';
+        } else {
+            document.getElementById("maskControl").className = 'show';
+        }
+    }
+
+    function toggleCheck(e) {
+    	var e = window.event||e;
+        if (e.target.checked) {
+            e.target.parentNode.parentNode.className = "checked";
+        } else {
+            e.target.parentNode.parentNode.className = "";
+        }
+    }
+
+    function getQuesionNum() {
+        return document.getElementById('edit-qbox').children.length + 1
+    }
+    // function getCurrentNum(e){
+    // 	return e.target.parentNode.parentNode.id.slice(1)
+    // }
+    function newRadio() {
+    	var randomNumber = Math.random()
+
+    	var div1 = document.createElement('div');
+    	div1.className = "radio";
+    	var div1span1 = document.createElement('span');
+  
+    	var div1span2 = document.createElement('span');
+    	div1span2.innerHTML = "单选题"
+    	var div1input = document.createElement('input');
+    	div1input.type = 'text';
+    	div1input.placeholder = "单选标题";
+    	div1input.className = "subject";
+
+    	div1.appendChild(div1span1);
+    	div1.appendChild(div1span2);
+    	div1.appendChild(div1input);
+        
+        var divWrap = document.createElement('div');
+        var div2 = document.createElement('div');
+        var div2input1 = document.createElement('input');
+        div2input1.type = "radio";
+        div2input1.name = "radio"+randomNumber;
+
+        var div2input2 = document.createElement('input');
+        div2input2.type = "text";
+        div2input2.placeholder = "单选内容";
+
+        var div2span1 = document.createElement('span');
+        div2span1.setAttribute("onclick","deleSelf()");
+        div2span1.innerHTML = "X";
+
+        divWrap.className = 'radios';
+        divWrap.appendChild(div2input1);
+        divWrap.appendChild(div2input2);
+        divWrap.appendChild(div2span1);
+        div2.appendChild(divWrap);
+        
+        var div3 = document.createElement('div');
+        var div3span = document.createElement('span');
+        div3span.setAttribute("onclick","newRadioLine()");
+        div3span.innerHTML = "+";
+        div3.appendChild(div3span);
+
+
+        var div4 = document.createElement('div');
+        var div4span1 = document.createElement('span');
+        div4span1.innerHTML = '上移';
+        div4span1.setAttribute("onclick","moveUp()");
+        var div4span2 = document.createElement('span');
+        div4span2.innerHTML = '下移';
+        div4span2.setAttribute("onclick","moveDown()");
+        var div4span3 = document.createElement('span');
+        div4span3.innerHTML = '复用';
+        div4span3.setAttribute("onclick","copy()");
+        var div4span4 = document.createElement('span');
+        div4span4.innerHTML = '删除';
+        div4span4.setAttribute("onclick","deleQuestion()");
+
+        div4.appendChild(div4span1);
+        div4.appendChild(div4span2);
+        div4.appendChild(div4span3);
+        div4.appendChild(div4span4);
+        
+        var contentDiv = document.createElement("div");
+        contentDiv.className = 'questions';
+
+        contentDiv.appendChild(div1);
+        contentDiv.appendChild(div2);
+        contentDiv.appendChild(div3);
+        contentDiv.appendChild(div4);
+
+        document.getElementById('edit-qbox').appendChild(contentDiv);
+        queueUp();
+    }
+
+    function newCheckbox(){
+		var div1 = document.createElement('div');
+    	div1.className = "checkbox";
+		var div1span1 = document.createElement('span');
+		var div1span2 = document.createElement('span');
+		div1span2.innerHTML = "多选题"
+		var div1input = document.createElement('input');
+    	div1input.type = 'text';
+		div1input.placeholder = "多选标题";
+		div1input.className = "subject";
+
+		div1.appendChild(div1span1);
+		div1.appendChild(div1span2);
+		div1.appendChild(div1input);
+	    
+	    var divWrap = document.createElement('div');
+	    var div2 = document.createElement('div');
+	    var div2input1 = document.createElement('input');
+	    div2input1.type = "checkbox";
+
+	    var div2input2 = document.createElement('input');
+	    div2input2.type = "text";
+	    div2input2.placeholder = "多选内容";
+
+	    var div2span1 = document.createElement('span');
+	    div2span1.setAttribute("onclick","deleSelf()");
+	    div2span1.innerHTML = "X";
+
+	    divWrap.className = 'checkboxs';
+	    divWrap.appendChild(div2input1);
+	    divWrap.appendChild(div2input2);
+	    divWrap.appendChild(div2span1);
+	    div2.appendChild(divWrap);
+	    
+	    var div3 = document.createElement('div');
+	    var div3span = document.createElement('span');
+	    div3span.setAttribute("onclick","newCheckboxLine()");
+	    div3span.innerHTML = "+";
+	    div3.appendChild(div3span);
+
+
+	    var div4 = document.createElement('div');
+	    var div4span1 = document.createElement('span');
+	    div4span1.innerHTML = '上移';
+	    div4span1.setAttribute("onclick","moveUp()");
+	    var div4span2 = document.createElement('span');
+	    div4span2.innerHTML = '下移';
+	    div4span2.setAttribute("onclick","moveDown()");
+	    var div4span3 = document.createElement('span');
+	    div4span3.innerHTML = '复用';
+	    div4span3.setAttribute("onclick","copy()");
+	    var div4span4 = document.createElement('span');
+	    div4span4.innerHTML = '删除';
+	    div4span4.setAttribute("onclick","deleQuestion()");
+
+	    div4.appendChild(div4span1);
+	    div4.appendChild(div4span2);
+	    div4.appendChild(div4span3);
+	    div4.appendChild(div4span4);
+	    
+	    var contentDiv = document.createElement("div");
+	    contentDiv.className = 'questions';
+
+	    contentDiv.appendChild(div1);
+	    contentDiv.appendChild(div2);
+	    contentDiv.appendChild(div3);
+	    contentDiv.appendChild(div4);
+
+	    document.getElementById('edit-qbox').appendChild(contentDiv);
+	    queueUp();
+    }
+
+    function newTextarea() {
+    	var div1 = document.createElement('div');
+    	div1.className = "textarea";
+    	var div1span1 = document.createElement("span");
+  
+    	var div1span2 = document.createElement('span');
+    	div1span2.innerHTML = '文本题';
+    	var div1input1 = document.createElement('input');
+    	div1input1.type = 'text';
+    	div1input1.placeholder = "文本题标题";
+    	div1input1.className = "subject";
+    	var div1input2 = document.createElement('input');
+    	div1input2.type = "checkbox";
+    	var div1span3 = document.createElement("span");
+    	div1span3.innerHTML = "此题是否必填";
+    	div1.appendChild(div1span1);
+    	div1.appendChild(div1span2);
+    	div1.appendChild(div1input1);
+    	div1.appendChild(div1input2);
+    	div1.appendChild(div1span3);
+
+    	var div2 = document.createElement('div');
+    	var div2textarea = document.createElement('textarea');
+    	div2textarea.cols = "100";
+    	div2textarea.rows = "10";
+    	div2textarea.placeholder = "请填写你的回答";
+    	div2textarea.className = "textareas";
+    	div2.appendChild(div2textarea);
+
+    	var div3 = document.createElement('div');
+    	var div3span1 = document.createElement('span');
+    	div3span1.innerHTML = '上移';
+    	div3span1.setAttribute("onclick","moveUp()");
+    	var div3span2 = document.createElement('span');
+    	div3span2.innerHTML = '下移';
+    	div3span2.setAttribute("onclick","moveDown()");
+    	var div3span3 = document.createElement('span');
+    	div3span3.innerHTML = '复用';
+    	div3span3.setAttribute("onclick","copy()");
+    	var div3span4 = document.createElement('span');
+    	div3span4.innerHTML = '删除';
+    	div3span4.setAttribute("onclick","deleQuestion()");
+
+    	div3.appendChild(div3span1);
+    	div3.appendChild(div3span2);
+    	div3.appendChild(div3span3);
+    	div3.appendChild(div3span4);
+
+    	var contentDiv = document.createElement("div");
+    	contentDiv.className = 'questions';
+
+    	contentDiv.appendChild(div1);
+    	contentDiv.appendChild(div2);
+    	contentDiv.appendChild(div3);
+
+    	document.getElementById('edit-qbox').appendChild(contentDiv);
+    	queueUp();
+    }
+
+    function deleSelf(e) {
+    	var e = window.event||e;
+        var thisNode = e.target.parentNode;
+        if(thisNode.parentNode.getElementsByTagName('div').length!=1){
+        	thisNode.parentNode.removeChild(thisNode);
+        }
+    }
+    function newRadioLine(e){
+    	var e = window.event||e;
+
+    	var namebefore = e.target.parentNode.previousElementSibling.firstElementChild.firstElementChild.name
+    	var input1 = document.createElement("input");
+    	input1.type = "radio";
+    	input1.name = namebefore;
+
+    	var input2 = document.createElement("input");
+    	input2.type = "text";
+    	input2.placeholder = "单选内容";
+
+    	var span = document.createElement("span");
+    	span.setAttribute("onclick","deleSelf()");
+    	span.innerHTML = "X";
+
+    	var div = document.createElement("div");
+    	div.className = "radios";
+    	div.appendChild(input1);
+    	div.appendChild(input2);
+    	div.appendChild(span);
+
+    	e.target.parentNode.previousSibling.appendChild(div);
+
+    }
+    function newCheckboxLine(e){
+    	var e = window.event||e;
+    	var input1 = document.createElement("input");
+    	input1.type = "checkbox";
+
+    	var input2 = document.createElement("input");
+    	input2.type = "text";
+    	input2.placeholder = "多选内容";
+
+    	var span = document.createElement("span");
+    	span.setAttribute("onclick","deleSelf()");
+    	span.innerHTML = "X";
+
+    	var div = document.createElement("div");
+    	div.className = "checkboxs";
+    	div.appendChild(input1);
+    	div.appendChild(input2);
+    	div.appendChild(span);
+
+    	e.target.parentNode.previousSibling.appendChild(div);
+
+    }
+    function toggleShowBtn(e){
+    	var e = window.event||e;
+    	if(e.target.parentNode.firstElementChild.className == "hide"){
+    		e.target.parentNode.firstElementChild.className = "show";
+    	}else{
+    		e.target.parentNode.firstElementChild.className = "hide";
+    	}
+    }
+
+    var myQuestionaire = {
+    	data:[],
+    	info:{
+    		subject:"",
+    		allData:[],
+    		date:""
+    	},
+    	render:function(){
+    		this.info = {};
+    		this.data=[];
+
+	    	var collecion = document.getElementsByClassName('questions');
+	    	for(var i=0;i<collecion.length;i++){
+	    		var perObj = {
+	    			name:"",
+	    			type:"",
+	    			subject:"",
+	    			data:[]
+	    		};
+	    		
+	    		perObj.name = collecion[i].firstElementChild.firstElementChild.innerHTML;
+	    		perObj.type = collecion[i].firstElementChild.className;
+	    		perObj.subject = collecion[i].getElementsByClassName('subject')[0].value;
+
+	    		switch(perObj.type){
+	    			case "radio":
+	    			var radios = collecion[i].getElementsByClassName('radios');
+	    			for(var j=0;j<radios.length;j++){
+	    				var detailObj = {
+	    					status:0,
+	    					content:""
+	    				}
+	    				detailObj.status =  radios[j].firstElementChild.checked;
+	    				detailObj.content = radios[j].firstElementChild.nextElementSibling.value;
+	    				perObj.data.push(detailObj);
+	    			}
+	    			this.data.push(perObj);
+	    			break;
+	    			case "checkbox":
+		    			var checkboxs = collecion[i].getElementsByClassName('checkboxs');
+		    			for(var j=0;j<checkboxs.length;j++){
+		    				var detailObj = {
+		    					status:0,
+		    					content:""
+		    				}
+		    				detailObj.status =  checkboxs[j].firstElementChild.checked;
+		    				detailObj.content = checkboxs[j].firstElementChild.nextElementSibling.value;
+		    				perObj.data.push(detailObj);
+		    			}
+		    			this.data.push(perObj);
+	    			break;
+	    			case "textarea":
+		    			var textarea = collecion[i].getElementsByTagName('textarea')[0];
+	    				var detailObj = {
+	    					status:0,
+	    					content:""
+	    				}
+	    				detailObj.status =  textarea.parentNode.previousElementSibling.getElementsByTagName('input')[1].checked;
+	    				detailObj.content = textarea.value;
+	    				perObj.data.push(detailObj);
+		    			this.data.push(perObj);
+	    			break;
+	    			default:
+	    			console.log("出错了！");
+	    			break;
+	    		}
+	    	}
+	    	var headValue = document.getElementById("edit-header").firstElementChild.value;
+	    	this.info.subject = headValue;
+	    	this.info.allData = this.data;
+	    	this.info.date = document.querySelector('[data-calendar]').value;
+	    	document.getElementById('limitedDate').innerHTML = document.querySelector('[data-calendar]').value;
+			var dateObj = getCurrentTime();
+	    	this.info.id = headValue+dateObj.year+dateObj.month+dateObj.date+dateObj.hour+dateObj.minute+dateObj.second;
+    	},
+    	save:function(){
+    		this.render();
+	    	this.info.state = '-1';//未发布：-1，发布中：0，已结束：1
+	    	addDataToDB();
+	    	alert("保存成功");
+	    	window.location.href = "index.html";
+    	},
+    	post:function(){
+    		this.render();
+    		this.info.state = '0';//未发布：-1，发布中：0，已结束：1
+    		toggleMask();
+    		addDataToDB();
+    	}
+    }
+
+   /**
+    * IndexedDB储存
+    */
+    var request,database;
+    request = indexedDB.open('2');//打开(创建)数据库
+
+    request.onerror = function(event){
+    	alert("不支持indexedDB,请更换高级点的浏览器！"+event.target.errorCod);
+    	return
+    }
+    request.onsuccess = function(event){
+    	database = event.target.result;
+    	console.log("打开成功");
+    }
+
+    request.onupgradeneeded = function(e){
+    	var db = e.target.result;
+    	var store = db.createObjectStore("myQuestionaire",{keyPath:"subject"})
+
+    	store.createIndex("subject", "subject", {//创建一个subject的索引
+            unique: true//是否唯一，true的话这个第二次储存的时候就无效
+        });
+    }
+
+  	function addDataToDB(add_way){
+  		var transaction = database.transaction("myQuestionaire", "readwrite");
+    	store = transaction.objectStore("myQuestionaire");
+    	// var request = store.add({ //这个request是添加数据的回执
+    	// 	"id":myQuestionaire.info.id,
+    	// 	"subject":myQuestionaire.info.subject,
+    	// 	"date":myQuestionaire.info.date,
+    	// 	"state":myQuestionaire.info.state,
+    	// 	"allData":myQuestionaire.info.allData
+    	// })
+    	// request.onsuccess = function(){
+    	// 	console.log("成功添加数据");
+    	// }
+    	// request.onerror = function(event){
+    	// 	console.log("添加数据出错，错误代码:",event.target.errorCod);
+    	// }
+    	
+    	// if(add_way == 'add'){
+        // for(var i in myQuestionaire.info){
+			// store.add(myQuestionaire.info[i])
+		// }
+    		// console.log("改标题已经存在")
+    	// }else{
+    		store.put({
+    			"id":myQuestionaire.info.id,
+    			"subject":myQuestionaire.info.subject,
+    			"date":myQuestionaire.info.date,
+    			"state":myQuestionaire.info.state,
+    			"allData":myQuestionaire.info.allData
+    		})
+    	// }
+  	}
+  	
+  	window.indexedDB.deleteDatabase("1");
+
+  	function getCurrentTime(){
+  		var nowDate = new Date();
+  		var year = nowDate.getFullYear();
+  		var month = nowDate.getMonth();
+  		var date = nowDate.getDate();
+  		var hour = nowDate.getHours();
+  		var minute = nowDate.getMinutes();
+  		var second = nowDate.getSeconds();
+  		var day = nowDate.getDay();
+  		var time = nowDate.getTime();
+  		return{
+  			"year":year,
+  			"month":month,
+			"date":date,
+  			"hour":hour,
+  			"minute":minute,
+  			"second":second,
+  			"day":day,
+  			"time":time
+  		}
+  	}
+
+    function moveUp(e){
+    	var e = window.event||e;
+    	var oldEle = e.target.parentNode.parentNode;
+    	var targetNode = oldEle.previousElementSibling;
+    	if(targetNode!=null){
+    		var cloneEle = oldEle.cloneNode(true);
+    		oldEle.parentNode.removeChild(oldEle);
+    		targetNode.parentNode.insertBefore(cloneEle,targetNode)
+    	}else{
+    		alert("移到头了！");
+    	}
+    	queueUp();
+    }
+    function moveDown(e){
+    	var e = window.event||e;
+    	var oldEle = e.target.parentNode.parentNode;
+    	var parent = oldEle.parentNode
+    	var targetNode = oldEle.nextElementSibling;
+    	if(targetNode!=null){
+    		var cloneEle = oldEle.cloneNode(true);
+    		oldEle.parentNode.removeChild(oldEle);
+    		targetNode.parentNode.insertBefore(cloneEle,targetNode.nextElementSibling);
+    	}else{
+    		alert("移到头了！");
+    	}
+    	queueUp();
+    }
+    function copy(e){
+    	var e = window.event||e;
+    	var oldEle = e.target.parentNode.parentNode;
+    	var cloneNode = oldEle.cloneNode(true);
+    	var str = "Q"+getQuesionNum(e);
+    	cloneNode.firstElementChild.firstChild.innerHTML = str;
+    	oldEle.parentNode.appendChild(cloneNode);
+    }
+    function deleQuestion(e){
+    	var e = window.event||e;
+    	var currentDiv = e.target.parentNode.parentNode;
+    	currentDiv.parentNode.removeChild(currentDiv);
+    	queueUp();
+    }
+    function queueUp(){
+    	var wrapBox = document.getElementById("edit-qbox");
+    	var j;
+    	for(var i=0;i<wrapBox.children.length;i++){
+    		j=i+1;
+    		wrapBox.children[i].firstElementChild.firstElementChild.innerHTML = "Q"+j;
+    	}
+    }
+
+
+    // if(database.version!="1.0"){
+    // 	database.setVersion('1.0');
+    // }
+
+    </script>
+    <script src="script/Calendar.js"></script>
+    <script>
+    	var options = {
+    		'calendarClass' : 'calendar',
+    		'inputClass' : 'input',
+    		'cellClass' : 'cell',
+    		'uesdClass' : 'used',
+    	}
+    	new Calendar(options);
+    </script>
+</body>
+
+</html>
