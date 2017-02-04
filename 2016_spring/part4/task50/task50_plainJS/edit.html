@@ -448,7 +448,7 @@
     * IndexedDB储存
     */
     var request,database;
-    request = indexedDB.open('2');//打开(创建)数据库
+    request = indexedDB.open('Questionaire',1);//打开(创建)数据库
 
     request.onerror = function(event){
     	alert("不支持indexedDB,请更换高级点的浏览器！"+event.target.errorCod);
@@ -501,8 +501,6 @@
     	// }
   	}
   	
-  	window.indexedDB.deleteDatabase("1");
-
   	function getCurrentTime(){
   		var nowDate = new Date();
   		var year = nowDate.getFullYear();
