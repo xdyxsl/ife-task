@@ -66,3 +66,16 @@ document.insertBefore(cloneEle,newEle);//插入到目标节点之前
 
 by hua @http://blog.csdn.net/hxfdarling/article/details/40347207
 ```
+indexeddb怎么触发onupgradeneeded？
+IDBOpenDBRequest还有一个类似回调函数句柄——onupgradeneeded。
+**该句柄在我们请求打开的数据库的版本号和已经存在的数据库版本号不一致的时候调用。**
+indexedDB.open方法还有第二个可选参数，数据库版本号，数据库创建的时候默认版本号为1，当我们传入的版本号和数据库当前版本号不一致的时候onupgradeneeded就会被调用，当然我们不能试图打开比当前数据库版本低的version.
+代码中定义了一个myDB对象，在创建indexedDB request的成功毁掉函数中，把request获取的DB对象赋值给了myDB的db属性，这样就可以使用myDB.db来访问创建的indexedDB了。
+
+用indexedBD的时候要善用onerror来获取错误的信息，这样就知道哪里出错了。
+
+还是indexedBD的坑，在更新数据的时候，只能用store的put()方法来更新，并且对象是顶层(第一层)的数据，没有办法直接找到要更新的那一条然后定点更新。一直想着怎么准确找到要更新的地方准确更新数据，然而并没有办法，后来想到了解决的方法。就是先找到要更新的顶层，对这一层全部进行克隆，克隆的是个对象的存在，所以就可以随意改了，改好了之后再把这个修改完的用put()方法更新。
+
+我想如果用Local storage来储存应该更方便些吧，并且兼容性会更好些。
+
+基于首页对不同的数据进行查看或者编辑就需要在打开另一个页面的时候传递相应参数过去，location.href或者a链接里面的href等都跨域达到这个效果。接着在接收页面可以用location.search快速找到?及后面的地址，然后取出来，解码就能用了。解码编码是JavaScript 全局对象。[JavaScript 全局对象-W3C](http://www.w3school.com.cn/jsref/jsref_obj_global.asp)

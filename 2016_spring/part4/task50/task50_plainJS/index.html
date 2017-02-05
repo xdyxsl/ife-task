@@ -143,7 +143,7 @@
 				var store = transaction.objectStore('myQuestionaire');
 				var req = store.openCursor();
 
-				var stateText = "",stateClass = "";
+				var stateText = "",stateClass = "",inputStyle="";
 				req.onsuccess = function(event){
 					console.log("游标遍历");
 					var cursor = event.target.result;
@@ -153,14 +153,17 @@
 							case "-1":
 							stateText = '未发布';
 							stateClass = "unpub";
+							inputStyle = "<a href='edit.html?subject="+cursor.value.subject+"'><input type='button' value='编辑'></a>"
 							break;
 							case "0":
 							stateText = '发布中';
 							stateClass = "pubing";
+							inputStyle = "<a href='detail.html?subject="+cursor.value.subject+"'><input type='button' value='查看数据'></a>"
 							break;
 							case "1":
 							stateText = '已结束';
 							stateClass = "pubed";
+							inputStyle = "<a href='detail.html?subject="+cursor.value.subject+"'><input type='button' value='查看数据'></a>";
 							break;
 							default:
 							break;
@@ -180,7 +183,7 @@
 						}
 
 						//渲染HTML内容
-						htmlCont += "<tr><td><input type='checkbox' name='myQN' onchange='toggleCheck()' ></td><td>"+cursor.value.subject+"</td><td>"+cursor.value.date+"</td><td class='"+stateClass+"'>"+stateText+"</td><td id="+cursor.value.subject+"><a href='edit.html'><input type='button' value='编辑'></a><input type='button' value='删除' onclick='toggleMask()'><a href='detail.html'><input type='button' value='查看数据'></a></td></tr>"
+						htmlCont += "<tr><td><input type='checkbox' name='myQN' onchange='toggleCheck()' ></td><td>"+cursor.value.subject+"</td><td>"+cursor.value.date+"</td><td class='"+stateClass+"'>"+stateText+"</td><td id="+cursor.value.subject+">"+inputStyle+"<input type='button' value='删除' onclick='toggleMask()'><a href='write.html?subject="+cursor.value.subject+"'><input type='button' value='填写数据'></a></td></tr>"
 						var date = cursor.value.date;
 						cursor.continue();
 					}else{
@@ -193,12 +196,12 @@
 						// 	alert("还没有问卷，先去新建一个吧！");
 						// 	window.location.href = "add.html";
 						// }
-
 					}
 				}
 			}
     	}
     	renderTbody();
+    	
 
     	function getTimeCompare(oldtime) {//感觉写法可以更优雅点，但是暂时没想到
     		var tempArr = oldtime.split('-')
@@ -260,7 +263,6 @@
     			}
     		}
     	}
-
     </script>
 </body>
 </html>
