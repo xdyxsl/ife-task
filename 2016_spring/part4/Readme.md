@@ -79,3 +79,69 @@ indexedDB.open方法还有第二个可选参数，数据库版本号，数据库
 我想如果用Local storage来储存应该更方便些吧，并且兼容性会更好些。
 
 基于首页对不同的数据进行查看或者编辑就需要在打开另一个页面的时候传递相应参数过去，location.href或者a链接里面的href等都跨域达到这个效果。接着在接收页面可以用location.search快速找到?及后面的地址，然后取出来，解码就能用了。解码编码是JavaScript 全局对象。[JavaScript 全局对象-W3C](http://www.w3school.com.cn/jsref/jsref_obj_global.asp)
+
+在对象里面，this指的是这个对象，不能向更上层传递了。比如：
+```javascript 
+function Foo(){
+	this.init();
+}
+var foo = new Foo();
+Foo.prototype={
+	init:function(){
+		console.log(this)//Foo {_prototype_:Object}
+	},
+	obj1:{
+		test1:function(){
+			console.log(this);//test1:function(){}
+		},
+	},
+	obj2:{
+		test2:function(){
+			console.log(this);//test2:function(){}
+		},
+	}
+}
+```
+
+更改数据的时候，换个思路，不要在IDB里面用游标遍历再储存，突然想到要更改数据的时候，先提取要修改的数据，修改之后调用IDB的PUT更新。这样更容易把不同功能分配到不同函数。以前调用游标遍历的时候非常麻烦，每次都要调用游标遍历然后再遍历里面再多次循环渲染HTML内容。
+但是操作起来发现IDB的又一个麻烦事，由于IDB是异步的，所以在把IDB的数据操作的时候，传不出它执行时候的域。类似问题[IDB的异步问题](http://stackoverflow.com/questions/38973744/uncaught-invalidstateerror-failed-to-read-the-result-property-from-idbreques)。
+
+>You need to learn about how to write asynchronous Javascript. Your db variable isn't defined at the time you access it.
+
+>Don't do this:
+
+> 
+```javascript
+var r = indexedDB.open();
+var db = null;
+r.onsuccess = function(event) { db = event.target.result); }
+```
+>Do this:
+
+```javascript 
+var r = indexedDB.open();
+r.onsuccess = function(event) {
+  var db = event.target.result;
+};
+```
+>And yes, that means db isn't available outside the scope of the onsuccess function. Stop trying to use it outside its scope or you will just run into the problem you are experiencing.
+
+差点要放弃了，还是搞出来了。如果要搞IDB里面的数据，必须在每一次的回执(request)的onsuccess函数里面操作，就可以访问到数据了!!!之前一直是简单的把一个操作当作Obj那样用`.`去访问然后左边直接赋值。比如说
+```javascript
+var transaction = db.transaction('myQuestionaire','readwrite');
+var store = transaction.objectStore('myQuestionaire');
+var IDB = store.get(that.requestInfo);
+```
+上面的代码就是不行的，如果你通过F12会看到其实IDB是可以看到的，并且是IDB的数据结构，也看的到IDB的result里面的东西，但是如果你试图访问IDB.result，那么浏览器会报错。但是下面这么写就完全没问题了，这个地方的难点就在于要深刻理解IDB里面的操作都是会返回一个回执(request)的。
+```javascript
+var transaction = db.transaction('myQuestionaire','readwrite');
+var store = transaction.objectStore('myQuestionaire');
+var request = store.get(that.requestInfo);
+request.onsuccess = function(){
+	console.log(request.result)//完全可以访问，还能操作
+}
+```
+
+哎，checked属性，想把勾选状态改成不勾选状态，貌似只有删除checked属性。把checked设置成什么东西，都会勾上。
+
+储存字符串时，最好trim一下，突然发现动态获取的时候空格会出错。

@@ -23,44 +23,12 @@
     	    </tr>
     	    </thead>
     	    <tbody id="checkBox">
-    	    <!-- <tr class="checked">
-    	        <td><input type="checkbox" name="myQN" onchange="toggleCheck()" checked="checked" /></td>
-    	        <td>这是我的第一份问卷</td>
-    	        <td>2016-05-12 11:15:56</td>
-    	        <td class="pubing">发布中</td>
-    	        <td>
-    	            <a href="edit.html"><input type="button" value="编辑" /></a>
-    	            <input type="button" value="删除" onClick="toggleMask()"/ >
-    	            <a href="detail.html"><input type="button" value="查看数据" /></a>
-    	        </td>
-    	    </tr>
-    	    <tr >
-    	        <td><input type="checkbox" name="myQN" onchange="toggleCheck()"/></td>
-    	        <td>这是我的第二份问卷</td>
-    	        <td>2016-05-12 11:15:56</td>
-    	        <td class="unpub">未发布</td>
-    	        <td>
-    	            <a href="edit.html"><input type="button" value="编辑" /></a>
-    	            <input type="button" value="删除" onClick="toggleMask()"/ >
-    	            <a href="detail.html"><input type="button" value="查看数据" /></a>
-    	        </td>
-    	    </tr>
-    	    <tr >
-    	        <td><input type="checkbox" name="myQN" onchange="toggleCheck()"/></td>
-    	        <td>这是我的第三份问卷</td>
-    	        <td>2016-05-12 11:15:56</td>
-    	        <td class="pubed">已发布</td>
-    	        <td>
-    	            <a href="edit.html"><input type="button" value="编辑" /></a>
-    	            <input type="button" value="删除" onClick="toggleMask()"/ >
-    	            <a href="detail.html"><input type="button" value="查看数据" /></a>
-    	        </td>
-    	    </tr> -->
+    	    
     	    </tbody>
     	    <tfoot>
     	        <tr>
-    	            <td><input type="checkbox" id="checkAll" onChange="checkAll()"/>全选</td>
-    	            <td><input type="button" value="删除" id="delete_some" onClick="toggleMask()"/></td>
+    	            <td><input type="checkbox" id="checkAll" onChange="myQuestionaire.index.checkAll()"/>全选</td>
+    	            <td><input type="button" value="删除" id="delete_some" onClick="myQuestionaire.index.toggleMask()"/></td>
     	            <td><a href="add.html"><input type="button" id="addQn" value="+ 新增问卷"/></a></td>
     	        </tr>
     	    </tfoot>
@@ -71,198 +39,17 @@
         <div class="alert">
             <div class="alert-top">
                 <span>提示</span>
-                <span class="close" onClick="toggleMask()">X</span>
+                <span class="close" onClick="myQuestionaire.index.toggleMask()">X</span>
             </div>
             <div class="alert-bottom">
                 <p>确认要删除此问卷？</p>
                 <div>
-                    <input type="button" value="确定" onclick="deleteQuestionaire()" />
-                    <input type="button" value="取消" onClick="toggleMask()"/>
+                    <input type="button" value="确定" onclick="myQuestionaire.index.deleteQuestionaire()" />
+                    <input type="button" value="取消" onClick="myQuestionaire.index.toggleMask()"/>
                 </div>
             </div>
         </div>
     </section>
-    <script type="text/javascript">
-    	var needDeleteArr = [];
-    	function toggleMask(e){
-    		var e = window.event||e;
-
-    		var curStatus = document.getElementById("maskControl").className;
-    		if(curStatus ==='show'){
-    			document.getElementById("maskControl").className = 'hide';
-    		}else{
-    			document.getElementById("maskControl").className = 'show';
-    		}
-    		
-    		if(e.target.id=="delete_some"){//判断是否是删除多个的按钮
-    			var chekckedLines = document.getElementById("checkBox").getElementsByClassName('checked');
-    			for(var i=0;i<chekckedLines.length;i++){
-    				needDeleteArr.push(chekckedLines[i].lastElementChild.id);
-    			}
-    			return needDeleteArr
-    		}
-    		needDeleteArr.push(e.target.parentNode.id)
-    		return needDeleteArr
-    	}
-    	function toggleCheck(){
-    		if(event.target.checked){
-    			event.target.parentNode.parentNode.className = "checked";
-    		}else{
-    			if(document.getElementById('checkAll').checked){
-    				document.getElementById('checkAll').checked = "";
-    			}
-    			event.target.parentNode.parentNode.className = "";
-    		}
-    	}
-    	function checkAll(){
-    		var inputs = document.getElementsByName('myQN');
-    		if(event.target.checked){
-    			for(var i=0;i<inputs.length;i++){
-    				inputs[i].checked = 'checked';
-    				inputs[i].parentNode.parentNode.className = "checked";
-    			}
-    		}else{
-    			for(var i=0;i<inputs.length;i++){
-    				inputs[i].checked = '';
-    				inputs[i].parentNode.parentNode.className = "";
-    			}
-    		}
-
-    	}
-    	
-    	function renderTbody(){
-    		//IndexedDB操作
-			var request,database,db,htmlCont="";
-			request = indexedDB.open("Questionaire",1);
-
-			request.onsuccess = function() {
-				db = this.result;
-				console.log("成功打开indexedDB");
-
-				var transaction = db.transaction('myQuestionaire','readwrite');
-				var store = transaction.objectStore('myQuestionaire');
-				var req = store.openCursor();
-
-				var stateText = "",stateClass = "",inputStyle="";
-				req.onsuccess = function(event){
-					console.log("游标遍历");
-					var cursor = event.target.result;
-					if(cursor){
-
-						switch(cursor.value.state){//判断状态
-							case "-1":
-							stateText = '未发布';
-							stateClass = "unpub";
-							inputStyle = "<a href='edit.html?subject="+cursor.value.subject+"'><input type='button' value='编辑'></a>"
-							break;
-							case "0":
-							stateText = '发布中';
-							stateClass = "pubing";
-							inputStyle = "<a href='detail.html?subject="+cursor.value.subject+"'><input type='button' value='查看数据'></a>"
-							break;
-							case "1":
-							stateText = '已结束';
-							stateClass = "pubed";
-							inputStyle = "<a href='detail.html?subject="+cursor.value.subject+"'><input type='button' value='查看数据'></a>";
-							break;
-							default:
-							break;
-						}
-						
-						//判断问卷是否过期，过期就更新state
-						//先获取要更改的值并且得到回执，回执的onsuccess里面把event.target.result用Put更新
-						console.log(getTimeCompare(cursor.value.date))
-						if(getTimeCompare(cursor.value.date)){
-							var value = cursor.value.subject;
-							var tempRequest = store.get(value);
-							tempRequest.onsuccess = function(event){
-								var myTarget = event.target.result;
-								myTarget.state="1";
-								store.put(myTarget);
-							}
-						}
-
-						//渲染HTML内容
-						htmlCont += "<tr><td><input type='checkbox' name='myQN' onchange='toggleCheck()' ></td><td>"+cursor.value.subject+"</td><td>"+cursor.value.date+"</td><td class='"+stateClass+"'>"+stateText+"</td><td id="+cursor.value.subject+">"+inputStyle+"<input type='button' value='删除' onclick='toggleMask()'><a href='write.html?subject="+cursor.value.subject+"'><input type='button' value='填写数据'></a></td></tr>"
-						var date = cursor.value.date;
-						cursor.continue();
-					}else{
-						console.log("遍历结束");
-						document.getElementById('checkBox').innerHTML = htmlCont;
-
-						//EDGE报错
-						// var theResult = hasContent();
-						// if(theResult){
-						// 	alert("还没有问卷，先去新建一个吧！");
-						// 	window.location.href = "add.html";
-						// }
-					}
-				}
-			}
-    	}
-    	renderTbody();
-    	
-
-    	function getTimeCompare(oldtime) {//感觉写法可以更优雅点，但是暂时没想到
-    		var tempArr = oldtime.split('-')
-
-    		var oldyear = Number(tempArr[0]);
-    		var oldmonth = Number(tempArr[1]);
-    		var oldday = Number(tempArr[2]);
-
-    		var a = new Date();
-    		var newyear = a.getFullYear();
-    		var newmonth = a.getMonth()+1;
-    		var newday = a.getDate();
-    		console.log(newday,oldday)
-
-    		if(newyear>oldyear){
-    			return true;
-    		}else{
-    			if(newmonth>oldmonth){
-    				return true;
-    			}else{
-    				if(newday>oldday){
-    					return true;
-    				}else{
-    					return false;
-    				}
-    			}
-    		}
-    	}
-
-    	function hasContent(){//通过HTML元素判断有无数据
-    		if(document.getElementById("checkBox").children.length == 0){
-    			return true
-    		}else{
-    			return false
-    		}
-    	}
-    	function deleteQuestionaire(e){
-    		var e = window.event||e;
-
-    		var request,database,db;
-    		request = indexedDB.open("Questionaire",1);
-
-    		request.onsuccess = function() {
-    			db = this.result;
-    			console.log("成功打开indexedDB");
-
-    			var transaction = db.transaction('myQuestionaire','readwrite');
-    			var store = transaction.objectStore('myQuestionaire');
-    			for(var i=0;i<needDeleteArr.length;i++){
-    				var rq = store.delete(needDeleteArr[i]);
-    				rq.onsuccess = function(event){
-    					console.log("删除成功");
-    					renderTbody();
-    				}
-    			}
-    			document.getElementById("maskControl").className = 'hide';//确定完后隐藏mask
-    			if(document.getElementById("checkAll").checked){//保证全选删除后，全选框是非选中状态
-    				document.getElementById("checkAll").checked="";
-    			}
-    		}
-    	}
-    </script>
+    <script type="text/javascript" src="script/Questionaire.js"></script>
 </body>
 </html>
