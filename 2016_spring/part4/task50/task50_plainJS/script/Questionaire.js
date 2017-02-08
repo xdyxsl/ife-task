@@ -1,11 +1,11 @@
 function Questionaire() {
     this.init();
-    this.requestInfo = decodeURI(location.search.substring(9));//主键的名称
+    // this.requestInfo = decodeURI(location.search.substring(9));//主键的名称
     this.strPage = "";
 }
 Questionaire.prototype = {
     init: function() {
-        console.log("初始化init",this);
+        console.log("init Questionaire & IDB",this);
         /**
          * IndexedDB储存
          */
@@ -22,8 +22,8 @@ Questionaire.prototype = {
                 keyPath: "subject"
             })
 
-            objStore.createIndex("id", "id", { //创建一个id的索引
-                unique: true //是否唯一，true的话这个第二次储存的时候就无效
+            objStore.createIndex("count", "count", { 
+                unique: false 
             });
             objStore.createIndex("date", "date", {
                 unique: false
@@ -33,6 +33,9 @@ Questionaire.prototype = {
             });
             objStore.createIndex("allData", "allData", {
                 unique: false
+            });
+            objStore.createIndex("time", "time", {//是否唯一，true的话这个第二次储存的时候就无效
+                unique: true
             });
         }
         var strURL = window.location.href;
@@ -47,28 +50,233 @@ Questionaire.prototype = {
             this.index.init();
             break;
             case "write":
+            this.write.init();
             break;
             case "detail":
+            this.detail.init();
             break;
             default:
             break;
         }
     },
-    // data:[],
-    // info:{
-    //  subject:"",
-    //  allData:[],
-    //  date:""
-    // },
+    detail:{
+        init:function(){
+            console.log("init detail page");
+            this.requestInfo = decodeURI(location.search.substring(9));
+            this.DBtoOBJ();
+        },
+        DBtoOBJ:function(){//把已有的数据渲染到HTML
+            var request,staticObj;
+            request = indexedDB.open('Questionaire', 1); //打开(创建)数据库
+
+            request.onerror = function(event) {
+                alert("创建/打开数据库失败，失败MSG：" + event.target.error.message);
+            }
+            var that = this;//底下this的作用域改变，提前复制一份
+            request.onsuccess = function(event){
+               db = event.target.result;
+
+               var transaction = db.transaction('myQuestionaire','readwrite');
+               var store = transaction.objectStore('myQuestionaire');
+               var obj = store.get(that.requestInfo);
+               obj.onsuccess = function(){
+                   that.OBJtoOBJ(obj.result);
+               }
+            }
+        },
+        OBJtoOBJ:function(obj){//接收IDB读取出来的OBJ
+            this.currentObj =obj;
+            var tempObj = {};
+            var tempArr = [];
+            var html ="";
+            for(var i=0;i<obj.allData.length;i++){
+               switch(obj.allData[i].type){
+                   case "radio":
+                   html +="<div class='detail-box'><div><span>"+obj.allData[i].name+"</span><span>单选题</span><dl><dt>"+obj.allData[i].subject+"</dt>";
+                   break;
+                   case "checkbox":
+                   html +="<div class='detail-box'><div><span>"+obj.allData[i].name+"</span><span>多选题</span><dl><dt>"+obj.allData[i].subject+"</dt>";
+                   break;
+                   case "textarea":
+                   html +="<div class='detail-box'><div><span>"+obj.allData[i].name+"</span><span>文本题</span><dl><dt>"+obj.allData[i].subject+"</dt>";
+                   break;
+                   default:
+                   break;
+               }   
+
+                for(var j=0;j<obj.allData[i].data.length;j++){
+                   switch(obj.allData[i].type){
+                       case "radio":
+                       case "checkbox":
+                       html +="<dd><span class='content'>"+obj.allData[i].data[j].content+"<span><span>——————被选的次数"+this.calculatePersent(obj.allData[i].data[j].count,obj.count)+"</span></dd>";
+                       break;
+                       case "textarea":
+                       // if(obj.allData[i].data[j].status=="true"){//checked属性，想把勾选状态改成不勾选状态，貌似只有删除checked属性。把checked设置成什么东西，都会勾上。只有再加一层if了
+                       // }else{
+                       // }
+                       html +="<dd><span class='content'>"+obj.allData[i].data[j].content+"<span><span>——————有效回答占比"+this.calculatePersent(obj.allData[i].data[j].count,obj.count)+"</span></dd>";
+                       break;
+                       default:
+                       break;
+                   }
+                   
+               }
+                html += "</dl></div></div>";
+            }
+            document.getElementById('page_subject').innerHTML = this.requestInfo;
+            document.getElementById('content_area').innerHTML = html;
+        },
+        calculatePersent:function(currentNum,totalNum){
+            var result = Number(currentNum)/Number(totalNum)*100;
+            if(isNaN(result)){
+                result = '数据不够,请先填写数据！';
+                return result
+            }
+            result +="%";
+            return result
+        },
+    },
     write:{
-        haha:function(){
-            console.log("haha")
-        }
+        init:function(){
+            console.log("init write page");
+            this.requestInfo = decodeURI(location.search.substring(9));
+            this.DBtoOBJ();
+            this.currentObj;
+        },
+        DBtoOBJ:function(){//把已有的数据渲染到HTML
+            var request,staticObj;
+            request = indexedDB.open('Questionaire', 1); //打开(创建)数据库
+
+            request.onerror = function(event) {
+                alert("创建/打开数据库失败，失败MSG：" + event.target.error.message);
+            }
+            var that = this;//底下this的作用域改变，提前复制一份
+            request.onsuccess = function(event){
+               db = event.target.result;
+
+               var transaction = db.transaction('myQuestionaire','readwrite');
+               var store = transaction.objectStore('myQuestionaire');
+               var obj = store.get(that.requestInfo);
+               obj.onsuccess = function(){
+                   that.OBJtoHTML(obj.result);
+               }
+            }
+        },
+        OBJtoHTML:function(obj){//接收IDB读取出来的OBJ
+            this.currentObj =obj;
+            var html ="";
+            for(var i=0;i<obj.allData.length;i++){
+
+               switch(obj.allData[i].type){
+                   case "radio":
+                   html +="<div class='questions'><div class='radio'><span>"+obj.allData[i].name+"</span><span>单选题</span><span class='subject'>"+obj.allData[i].subject+"</span></div><div>";
+                   break;
+                   case "checkbox":
+                   html +="<div class='questions'><div class='checkbox'><span>"+obj.allData[i].name+"</span><span>多选题</span><span class='subject'>"+obj.allData[i].subject+"</span></div><div>";
+                   break;
+                   case "textarea":
+                   html +="<div class='questions'><div class='textarea'><span>"+obj.allData[i].name+"</span><span>文本题</span><span class='subject'>"+obj.allData[i].subject+"</span></div><div>";
+                   break;
+                   default:
+                   break;
+               }   
+
+                for(var j=0;j<obj.allData[i].data.length;j++){
+                   switch(obj.allData[i].type){
+                       case "radio":
+                       html +="<div class='radios'><input type='radio' name='"+obj.allData[i].data[j].randomNumberId+"' ><span>"+obj.allData[i].data[j].content+"</span></div>";
+                       break;
+                       case "checkbox":
+                       html +="<div class='checkboxs'><input type='checkbox' ><span>"+obj.allData[i].data[j].content+"</span></div>";
+                       break;
+                       case "textarea":
+                       if(obj.allData[i].data[j].status=="true"){//checked属性，想把勾选状态改成不勾选状态，貌似只有删除checked属性。把checked设置成什么东西，都会勾上。只有再加一层if了
+                       html += "<span class='true'>此题必填</span> <div><textarea cols='100' rows='10' placeholder='请填写你的回答' class='textareas' ></textarea></div>";
+                       }else{
+                       html += "<span class='false'>此题选填</span> <div><textarea cols='100' rows='10' placeholder='请填写你的回答' class='textareas' ></textarea></div>";
+                       }
+                       break;
+                       default:
+                       break;
+                   }
+               }
+                html += "</div></div>"
+            }
+            document.getElementById('page_subject').value = this.requestInfo;
+            document.getElementById('content_area').innerHTML = html;
+        },
+        putDataToDB:function() {
+            var request, database;
+            request = indexedDB.open('Questionaire', 1); //打开(创建)数据库
+
+            request.onerror = function(event) {
+                alert("创建/打开数据库失败，失败MSG：" + event.target.error.message);
+                return
+            }
+
+            var that = this;//下面作用域this改变
+            request.onsuccess = function(event) {
+                database = event.target.result;
+
+                var transaction = database.transaction("myQuestionaire", "readwrite");
+                store = transaction.objectStore("myQuestionaire");
+        
+                store.put({//不用通过Get先查询再操作，因为subject索引是唯一，直接Put会自动更新相应的OBJ
+                    "count": that.currentObj.count,
+                    "subject": that.currentObj.subject,
+                    "date": that.currentObj.date,
+                    "state": that.currentObj.state,
+                    "allData": that.currentObj.allData,
+                    "time":that.currentObj.time
+                })
+                alert("问卷提交成功！");
+                // window.location.href = 'index.html';
+            }
+        },
+        saveObj:function (){
+            var collecion = document.getElementsByClassName('questions'); //把每一个Question的数据内容以OBJ的形式储存到DATA数组中
+            var type="";
+            for (var i = 0; i < collecion.length; i++) {
+
+                type = collecion[i].firstElementChild.className;//问题类型
+                switch (type) {
+                    case "radio":
+                        var radios = collecion[i].getElementsByClassName('radios');
+                        for (var j = 0; j < radios.length; j++) {
+                            if(radios[j].firstElementChild.checked){
+                                this.currentObj.allData[i].data[j].count ++;
+                            }
+                        }
+                        break;
+                    case "checkbox":
+                        var checkboxs = collecion[i].getElementsByClassName('checkboxs');
+                        for (var j = 0; j < checkboxs.length; j++) {
+                            if(checkboxs[j].firstElementChild.checked){
+                                this.currentObj.allData[i].data[j].count ++;
+                            }
+                        }
+                        break;
+                    case "textarea"://这里没有再套for循环了，因为设计的时候就只存一条数据进来，改设计的时候要过来加for循环
+                        var textarea = collecion[i].getElementsByTagName('textarea')[0];
+                        if(textarea.parentNode.previousElementSibling.className=='true'&&textarea.value==""){//必填时，无内容就无效
+                            break;
+                        }
+                        this.currentObj.allData[i].data[0].content = textarea.value;
+                        this.currentObj.allData[i].data[0].count ++;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            this.currentObj.count++;
+            this.putDataToDB();
+        },
     },
     index:{
         init:function(){
             this.renderTbody();
             this.needDeleteArr = [];
+            console.log("init index page");
         },
         toggleMask:function (e){
             var e = window.event||e;
@@ -129,7 +337,6 @@ Questionaire.prototype = {
 
                 var stateText = "",stateClass = "",inputStyle="";
                 req.onsuccess = function(event){
-                    console.log("游标遍历");
                     var cursor = event.target.result;
                     if(cursor){
 
@@ -147,7 +354,7 @@ Questionaire.prototype = {
                             case "1":
                             stateText = '已结束';
                             stateClass = "pubed";
-                            inputStyle = "<a href='detail.html?subject="+cursor.value.subject+"'><input type='button' value='查看数据'></a>";
+                            inputStyle = "<a href='detail.html?subject="+cursor.value.subject+"'><input type='button' value='查看数据'></a><input type='button' value='删除问卷' onclick='myQuestionaire.index.toggleMask()'>";
                             break;
                             default:
                             break;
@@ -170,37 +377,29 @@ Questionaire.prototype = {
                         var date = cursor.value.date;
                         cursor.continue();
                     }else{
-                        console.log("遍历结束");
                         document.getElementById('checkBox').innerHTML = htmlCont;
                     }
                 }
             }
         },
-        getTimeCompare:function(oldtime) {//感觉写法可以更优雅点，但是暂时没想到
-            var tempArr = oldtime.split('-')
+        getTimeCompare:function(targetTime) {//更新了时间的比较法，这个简洁明了
+            var uniTime1 = targetTime.replace(/-/g,'/')
 
-            var oldyear = Number(tempArr[0]);
-            var oldmonth = Number(tempArr[1]);
-            var oldday = Number(tempArr[2]);
+            var date = new Date();
+            var nowYear = date.getFullYear();
+            var nowMonth = date.getMonth()+1;
+            var nowDay = date.getDate();
 
-            var a = new Date();
-            var newyear = a.getFullYear();
-            var newmonth = a.getMonth()+1;
-            var newday = a.getDate();
+            var uniTime2 = nowYear+"/" +nowMonth +"/"+ nowDay;
 
-            if(newyear>oldyear){
-                return true;
-            }else{
-                if(newmonth>oldmonth){
-                    return true;
-                }else{
-                    if(newday>oldday){
-                        return true;
-                    }else{
-                        return false;
-                    }
-                }
+            var oDate1 = new Date(uniTime1);
+            var oDate2 = new Date(uniTime2);
+            if(oDate1.getTime() > oDate2.getTime()){
+                return false;
+            } else {
+                return true
             }
+
         },
         deleteQuestionaire:function (e){
             var e = window.event||e;
@@ -211,16 +410,14 @@ Questionaire.prototype = {
             var that = this;//作用域问题
             request.onsuccess = function() {
                 var db = this.result;
-                console.log("成功打开indexedDB",db);
 
                 var transaction = db.transaction('myQuestionaire','readwrite');
                 var store = transaction.objectStore('myQuestionaire');
-                console.log(that.needDeleteArr);
                 for(var i=0;i<that.needDeleteArr.length;i++){
                     console.log(that.needDeleteArr[i]);
                     var rq = store.delete(that.needDeleteArr[i]);
                     rq.onsuccess = function(event){
-                        console.log("删除成功");
+                        console.log("删除成功！");
                         that.renderTbody();
                     }
                 }
@@ -238,15 +435,12 @@ Questionaire.prototype = {
             if(this.requestInfo!=''){
                 this.DBtoOBJ();
             };
-            console.log("edit初始化");
+            console.log("init edit page");
         },
         oneOfDB:function(){//判断是否已有数据
 
         },
         DBtoOBJ:function(){//把已有的数据渲染到HTML
-            /**
-             * IndexedDB储存
-             */
             var request,staticObj;
             request = indexedDB.open('Questionaire', 1); //打开(创建)数据库
 
@@ -265,7 +459,7 @@ Questionaire.prototype = {
                }
             }
         },
-        OBJtoHTML:function(obj){//接受IDB读取出来的OBJ
+        OBJtoHTML:function(obj){//接收IDB读取出来的OBJ
             var html ="";
             for(var i=0;i<obj.allData.length;i++){
 
@@ -315,8 +509,9 @@ Questionaire.prototype = {
                    break;
                }   
             }
-            document.getElementById('write_subject').value = this.requestInfo;
+            document.getElementById('page_subject').value = this.requestInfo;
             document.getElementById('edit-qbox').innerHTML = html;
+            document.getElementsByClassName("date")[0].value = obj.date;
         },
         topPart: function(type) {
             var div = document.createElement('div');
@@ -539,7 +734,7 @@ Questionaire.prototype = {
                 thisNode.parentNode.removeChild(thisNode);
             }
         },
-        objSave: function() {
+        saveObj: function() {
             this.info = {};
             this.data = [];
 
@@ -594,28 +789,25 @@ Questionaire.prototype = {
                             content: "",
                             count:0
                         }
-                        console.log(textarea)
                         detailObj.status = textarea.parentNode.previousElementSibling.previousElementSibling.checked?'true':'false';
-                        console.log(status)
                         detailObj.content = textarea.value;
                         perObj.data.push(detailObj);
                         this.data.push(perObj);
                         break;
                     default:
-                        console.log("出错了！");
                         break;
                 }
 
             }
 
             //储存Question以外的数据
-            var headValue = document.getElementById("write_subject").value;
+            var headValue = document.getElementById("page_subject").value;
             this.info.subject = this.trim(headValue,"g"); //标题，也是唯一的索引
             this.info.allData = this.data; //Question数据的集合
             this.info.date = document.querySelector('[data-calendar]').value; //截止日期
             document.getElementById('limitedDate').innerHTML = document.querySelector('[data-calendar]').value;
-            var dateObj = this.getCurrentTime();
-            this.info.id = this.trim(headValue,"g") + dateObj.year + dateObj.month + dateObj.date + dateObj.hour + dateObj.minute + dateObj.second; //一个独一无二的ID，暂时不打算用这个
+            this.info.count = 0; //记录总的提交次数
+            this.info.time = this.getCurrentTime().time;
         },
         trim:function (str,is_global){
             var result;
@@ -626,14 +818,14 @@ Questionaire.prototype = {
             return result;
         },
         save: function() {
-            this.objSave();
+            this.saveObj();
             this.info.state = '-1'; //未发布：-1，发布中：0，已结束：1
             this.addDataToDB(this.requestInfo);
             alert("保存成功");
             // window.location.href = "index.html";
         },
         confirmPost:function() {
-            this.objSave();
+            this.saveObj();
             var curStatus = document.getElementById("maskControl").className;
             if (curStatus === 'show') {
                 document.getElementById("maskControl").className = 'hide';
@@ -642,11 +834,11 @@ Questionaire.prototype = {
             }
         },
         post: function() {
-            this.objSave();
+            this.saveObj();
             this.info.state = '0'; //未发布：-1，发布中：0，已结束：1
             this.addDataToDB(this.requestInfo);
             alert("发布成功");
-            // window.location.href = "index.html";
+            window.location.href = "index.html";
         },
         moveUp: function(e) {
             var e = window.event || e;
@@ -734,31 +926,28 @@ Questionaire.prototype = {
                 "time": time
             }
         },
-        addDataToDB: function(DBkey) {
-            /**
-             * IndexedDB储存
-             */
-            var request, database;
+        addDataToDB: function() {
+            var request;
             request = indexedDB.open('Questionaire', 1); //打开(创建)数据库
 
             request.onerror = function(event) {
                 alert("创建/打开数据库失败，失败MSG：" + event.target.error.message);
-                return
             }
 
             var that = this;//下面作用域this改变
             request.onsuccess = function(event) {
-                database = event.target.result;
+                var database = event.target.result;
 
                 var transaction = database.transaction("myQuestionaire", "readwrite");
                 store = transaction.objectStore("myQuestionaire");
  
                 store.put({//不用通过Get先查询再操作，因为subject索引是唯一，直接Put会自动更新相应的OBJ
-                    "id": that.info.id,
+                    "count": that.info.count,
                     "subject": that.info.subject,
                     "date": that.info.date,
                     "state": that.info.state,
-                    "allData": that.info.allData
+                    "allData": that.info.allData,
+                    "time":that.info.time
                 })
             }
         },

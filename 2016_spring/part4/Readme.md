@@ -1,7 +1,7 @@
 # 2016年百度IFE春季班
 ## Demo 
 task50 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part4/task50><br>
-task50 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part4/task50/build/>
+task50 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part4/task50/index.html>
 
 task51 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part4/task51><br>
 task51 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part4/task51/build/>
