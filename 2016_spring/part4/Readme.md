@@ -160,3 +160,5 @@ var store = db.createObjectStore('my_store', {keyPath: 'key', autoIncrement: tru
 store.put({key: 11, value: 33}); // OK, key generator set to 11
 store.put({value: 66}); // OK, will have auto-generated key 12
 ```
+
+编辑页面保存数据然后跳转，Chrome里这么操作没问题，但是Edge浏览器里测试的时候，跳转的太快，导致Edge浏览器没能储存成功，所以为了兼容Edge加个跳转页面的延迟。

@@ -799,9 +799,8 @@ Questionaire.prototype = {
                     default:
                         break;
                 }
-
             }
-
+            
             //储存Question以外的数据
             var headValue = document.getElementById("page_subject").value;
             this.info.subject = this.trim(headValue, "g"); //标题，也是唯一的索引
@@ -841,10 +840,11 @@ Questionaire.prototype = {
             this.saveObj();
             if (this.isDateChoose()) {
                 if (this.isRightNum()) {
+                    document.getElementById("maskControl").className = 'hide';
                     this.info.state = '0'; //未发布：-1，发布中：0，已结束：1
                     this.addDataToDB(this.requestInfo);
-                    alert("发布成功");
-                    window.location.href = "index.html";
+                    alert("发布成功,1秒后跳转到主页");
+                    setTimeout(function() { window.location.href = "index.html" }, 2000); //edge里测试的时候，跳转的太快，导致没能储存成功，所以加个延迟
                 }
             }
         },
