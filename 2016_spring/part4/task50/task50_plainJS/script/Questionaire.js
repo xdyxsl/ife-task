@@ -111,9 +111,6 @@ Questionaire.prototype = {
                             html += "<dd><span class='content'>" + obj.allData[i].data[j].content + "<span><span>——————被选的次数" + this.calculatePersent(obj.allData[i].data[j].count, obj.count) + "</span></dd>";
                             break;
                         case "textarea":
-                            // if(obj.allData[i].data[j].status=="true"){//checked属性，想把勾选状态改成不勾选状态，貌似只有删除checked属性。把checked设置成什么东西，都会勾上。只有再加一层if了
-                            // }else{
-                            // }
                             html += "<dd><span class='content'>" + obj.allData[i].data[j].content + "<span><span>——————有效回答占比" + this.calculatePersent(obj.allData[i].data[j].count, obj.count) + "</span></dd>";
                             break;
                         default:
@@ -229,8 +226,11 @@ Questionaire.prototype = {
                     "allData": that.currentObj.allData,
                     "time": that.currentObj.time
                 })
-                alert("问卷提交成功！");
-                window.location.href = 'index.html';
+                
+                setTimeout(function(){
+                    alert("问卷提交成功，1秒后自动回到主页。");
+                    window.location.href = 'index.html';
+                },1500)
             }
         },
         saveObj: function() {
