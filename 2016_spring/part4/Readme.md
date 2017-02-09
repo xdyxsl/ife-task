@@ -145,3 +145,18 @@ request.onsuccess = function(){
 哎，checked属性，想把勾选状态改成不勾选状态，貌似只有删除checked属性。把checked设置成什么东西，都会勾上。
 
 储存字符串时，最好trim一下，突然发现动态获取的时候空格会出错。
+
+>IDB的储存方面，put失败并且提示 `failed to execute 'put' on 'idbobjectstore' evaluating the object store's key path did not yield a value`的时候，可以尝试下
+>If your object store has a key path, the object being stored must contain a value pointed at by that key path or must use a key generator ({autoIncrement: true}).
+
+>For example:
+
+```javascript
+var store = db.createObjectStore('my_store', {keyPath: 'key'});
+store.put({key: 11, value: 33}); // OK
+store.put({value: 66}); // throws, since 'key' is not present
+
+var store = db.createObjectStore('my_store', {keyPath: 'key', autoIncrement: true});
+store.put({key: 11, value: 33}); // OK, key generator set to 11
+store.put({value: 66}); // OK, will have auto-generated key 12
+```

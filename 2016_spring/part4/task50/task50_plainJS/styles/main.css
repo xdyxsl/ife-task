@@ -156,6 +156,7 @@ a:visited,a{
 .detail-header-wrap{
     cursor:pointer;
     position:absolute;
+    left:0;
     color: #000;
     font-size: 1.5rem;
 }
