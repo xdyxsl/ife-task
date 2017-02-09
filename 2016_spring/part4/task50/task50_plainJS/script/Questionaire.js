@@ -226,9 +226,8 @@ Questionaire.prototype = {
                     "allData": that.currentObj.allData,
                     "time": that.currentObj.time
                 })
-                
+                alert("问卷提交成功，1秒后自动回到主页。");
                 setTimeout(function(){
-                    alert("问卷提交成功，1秒后自动回到主页。");
                     window.location.href = 'index.html';
                 },1500)
             }
@@ -843,7 +842,7 @@ Questionaire.prototype = {
                     document.getElementById("maskControl").className = 'hide';
                     this.info.state = '0'; //未发布：-1，发布中：0，已结束：1
                     this.addDataToDB(this.requestInfo);
-                    alert("发布成功,1秒后跳转到主页");
+                    alert("发布成功,1秒后跳转到主页。");
                     setTimeout(function() { window.location.href = "index.html" }, 2000); //edge里测试的时候，跳转的太快，导致没能储存成功，所以加个延迟
                 }
             }
