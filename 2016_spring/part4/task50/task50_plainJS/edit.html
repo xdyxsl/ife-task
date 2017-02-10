@@ -23,11 +23,11 @@
             </div>
             <div class="edit-body">
                 <ul class='hide'>
-                    <li onClick="myQuestionaire.edit.newRadio()"><img src="imgs/radio-16.png" alt="q-icon" /><span>单选</span></li>
-                    <li onClick="myQuestionaire.edit.newCheckbox()"><img src="imgs/check-16.png" alt="q-icon" /><span>多选</span></li>
-                    <li onClick="myQuestionaire.edit.newTextarea()"><img src="imgs/text-16.png" alt="q-icon" /><span>文本题</span></li>
+                    <li onClick="myQuestionaire.edit.newRadio(event)"><img src="imgs/radio-16.png" alt="q-icon" /><span>单选</span></li>
+                    <li onClick="myQuestionaire.edit.newCheckbox(event)"><img src="imgs/check-16.png" alt="q-icon" /><span>多选</span></li>
+                    <li onClick="myQuestionaire.edit.newTextarea(event)"><img src="imgs/text-16.png" alt="q-icon" /><span>文本题</span></li>
                 </ul>
-                <span onClick='myQuestionaire.edit.toggleShowBtn()'>+ 添加问题</span>
+                <span onClick='myQuestionaire.edit.toggleShowBtn(event)'>+ 添加问题</span>
             </div>
             <div class="edit-footer">
                 <div>
@@ -46,14 +46,14 @@
         <div class="alert">
             <div class="alert-top">
                 <span>提示</span>
-                <span class="close" onClick="myQuestionaire.edit.confirmPost()">X</span>
+                <span class="close" onClick="myQuestionaire.edit.confirmPost(event)">X</span>
             </div>
             <div class="alert-bottom">
                 <p>是否发布问卷？</p>
                 <p>此问卷截止日期为<span id="limitedDate">未选择时间</span></p>
                 <div>
-                    <input type="button" value="确定" onClick="myQuestionaire.edit.post()" />
-                    <input type="button" value="取消" onClick="myQuestionaire.edit.confirmPost()" />
+                    <input type="button" value="确定" onClick="myQuestionaire.edit.post(event)" />
+                    <input type="button" value="取消" onClick="myQuestionaire.edit.confirmPost(event)" />
                 </div>
             </div>
         </div>

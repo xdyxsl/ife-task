@@ -6,6 +6,10 @@ function Questionaire() {
 Questionaire.prototype = {
     init: function() {
         console.log("init Questionaire & IDB", this);
+        if(navigator.appName.indexOf("Microsoft Internet Explorer")!=-1 && document.all){//IE
+            alert("IE10及以下版本浏览器不兼容，为了您的体验请更换其他高级浏览器(Chrome/Firefox/Edge/Safiri等等)再尝试！点击确定2S后自动前往我的主页。");
+            // setTimeout(function(){window.location.href = 'http://pkjy.github.io'},2000);
+        }
         /**
          * IndexedDB储存
          */
@@ -226,7 +230,7 @@ Questionaire.prototype = {
                     "allData": that.currentObj.allData,
                     "time": that.currentObj.time
                 })
-                alert("问卷提交成功，1秒后自动回到主页。");
+                alert("问卷提交成功，点击确定1秒后自动跳转到主页。");
                 setTimeout(function(){
                     window.location.href = 'index.html';
                 },1500)
@@ -278,8 +282,8 @@ Questionaire.prototype = {
             console.log("init index page");
         },
         toggleMask: function(e) {
-            var e = window.event || e;
-
+            var oEvent  = e||window.event;
+            var oTarget = oEvent.target || oEvent.srcElement; 
             var curStatus = document.getElementById("maskControl").className;
             if (curStatus === 'show') {
                 document.getElementById("maskControl").className = 'hide';
@@ -287,29 +291,35 @@ Questionaire.prototype = {
                 document.getElementById("maskControl").className = 'show';
             }
 
-            if (e.target.id == "delete_some") { //判断是否是删除多个的按钮
+            if (oTarget.id == "delete_some") { //判断是否是删除多个的按钮
                 var chekckedLines = document.getElementById("checkBox").getElementsByClassName('checked');
                 for (var i = 0; i < chekckedLines.length; i++) {
                     this.needDeleteArr.push(chekckedLines[i].lastElementChild.id);
                 }
                 return this.needDeleteArr
             }
-            this.needDeleteArr.push(e.target.parentNode.id)
+            this.needDeleteArr.push(oTarget.parentNode.id)
             return this.needDeleteArr
         },
-        toggleCheck: function() {
-            if (event.target.checked) {
-                event.target.parentNode.parentNode.className = "checked";
+        toggleCheck: function(e) {
+            var oEvent  = e||window.event;
+            var oTarget = oEvent.target || oEvent.srcElement; 
+
+            if (oTarget.checked) {
+                oTarget.parentNode.parentNode.className = "checked";
             } else {
                 if (document.getElementById('checkAll').checked) {
                     document.getElementById('checkAll').checked = "";
                 }
-                event.target.parentNode.parentNode.className = "";
+                oTarget.parentNode.parentNode.className = "";
             }
         },
-        checkAll: function() {
+        checkAll: function(e) {
+            var oEvent  = e||window.event;
+            var oTarget = oEvent.target || oEvent.srcElement; 
+
             var inputs = document.getElementsByName('myQN');
-            if (event.target.checked) {
+            if (oTarget.checked) {
                 for (var i = 0; i < inputs.length; i++) {
                     inputs[i].checked = 'checked';
                     inputs[i].parentNode.parentNode.className = "checked";
@@ -345,17 +355,17 @@ Questionaire.prototype = {
                             case "-1":
                                 stateText = '未发布';
                                 stateClass = "unpub";
-                                inputStyle = "<a href='edit.html?subject=" + cursor.value.subject + "'><input type='button' value='编辑问卷'></a><input type='button' value='删除问卷' onclick='myQuestionaire.index.toggleMask()'>"
+                                inputStyle = "<a href='edit.html?subject=" + encodeURI(cursor.value.subject) + "'><input type='button' value='编辑问卷'></a><input type='button' value='删除问卷' onclick='myQuestionaire.index.toggleMask(event)'>"
                                 break;
                             case "0":
                                 stateText = '发布中';
                                 stateClass = "pubing";
-                                inputStyle = "<a href='write.html?subject=" + cursor.value.subject + "'><input type='button' value='填写数据'></a><a href='detail.html?subject=" + cursor.value.subject + "'><input type='button' value='查看数据'></a>"
+                                inputStyle = "<a href='write.html?subject=" + encodeURI(cursor.value.subject) + "'><input type='button' value='填写数据'></a><a href='detail.html?subject=" + encodeURI(cursor.value.subject) + "'><input type='button' value='查看数据'></a>"
                                 break;
                             case "1":
                                 stateText = '已结束';
                                 stateClass = "pubed";
-                                inputStyle = "<a href='detail.html?subject=" + cursor.value.subject + "'><input type='button' value='查看数据'></a><input type='button' value='删除问卷' onclick='myQuestionaire.index.toggleMask()'>";
+                                inputStyle = "<a href='detail.html?subject=" + encodeURI(cursor.value.subject) + "'><input type='button' value='查看数据'></a><input type='button' value='删除问卷' onclick='myQuestionaire.index.toggleMask(event)'>";
                                 break;
                             default:
                                 break;
@@ -374,7 +384,7 @@ Questionaire.prototype = {
                         }
 
                         //渲染HTML内容
-                        htmlCont += "<tr><td><input type='checkbox' name='myQN' onchange='myQuestionaire.index.toggleCheck()' ></td><td>" + cursor.value.subject + "</td><td>" + cursor.value.date + "</td><td class='" + stateClass + "'>" + stateText + "</td><td id=" + cursor.value.subject + ">" + inputStyle + "</td></tr>"
+                        htmlCont += "<tr><td><input type='checkbox' name='myQN' onchange='myQuestionaire.index.toggleCheck(event)' ></td><td>" + cursor.value.subject + "</td><td>" + cursor.value.date + "</td><td class='" + stateClass + "'>" + stateText + "</td><td id=" + cursor.value.subject + ">" + inputStyle + "</td></tr>"
                         var date = cursor.value.date;
                         cursor.continue();
                     } else {
@@ -402,9 +412,7 @@ Questionaire.prototype = {
             }
 
         },
-        deleteQuestionaire: function(e) {
-            var e = window.event || e;
-
+        deleteQuestionaire: function() {
             var request, database;
             request = indexedDB.open("Questionaire", 1);
 
@@ -481,10 +489,10 @@ Questionaire.prototype = {
                 for (var j = 0; j < obj.allData[i].data.length; j++) {
                     switch (obj.allData[i].type) {
                         case "radio":
-                            html += "<div class='radios'><input type='radio' name='" + Math.random() + "'  disabled='disabled'><input type='text' placeholder='单选内容' value='" + obj.allData[i].data[j].content + "'><span onclick='myQuestionaire.edit.deleSelf()'>X</span></div>";
+                            html += "<div class='radios'><input type='radio' name='" + Math.random() + "'  disabled='disabled'><input type='text' placeholder='单选内容' value='" + obj.allData[i].data[j].content + "'><span onclick='myQuestionaire.edit.deleSelf(event)'>X</span></div>";
                             break;
                         case "checkbox":
-                            html += "<div class='checkboxs'><input type='checkbox'  disabled='disabled'><input type='text' placeholder='多选内容' value='" + obj.allData[i].data[j].content + "'><span onclick='myQuestionaire.edit.deleSelf()'>X</span></div>";
+                            html += "<div class='checkboxs'><input type='checkbox'  disabled='disabled'><input type='text' placeholder='多选内容' value='" + obj.allData[i].data[j].content + "'><span onclick='myQuestionaire.edit.deleSelf(event)'>X</span></div>";
                             break;
                         case "textarea":
                             console.log(obj.allData[i].data[j].status)
@@ -501,10 +509,10 @@ Questionaire.prototype = {
                 switch (obj.allData[i].type) {
                     case "radio":
                     case "checkbox":
-                        html += "</div><div><span onclick='myQuestionaire.edit.newLine()'>+</span></div><div><span onclick='myQuestionaire.edit.moveUp()'>上移</span><span onclick='myQuestionaire.edit.moveDown()'>下移</span><span onclick='myQuestionaire.edit.copy()'>复用</span><span onclick='myQuestionaire.edit.deleQuestion()'>删除</span></div></div>";
+                        html += "</div><div><span onclick='myQuestionaire.edit.newLine(event)'>+</span></div><div><span onclick='myQuestionaire.edit.moveUp(event)'>上移</span><span onclick='myQuestionaire.edit.moveDown(event)'>下移</span><span onclick='myQuestionaire.edit.copy(event)'>复用</span><span onclick='myQuestionaire.edit.deleQuestion(event)'>删除</span></div></div>";
                         break;
                     case "textarea":
-                        html += "</div><div><span onclick='myQuestionaire.edit.moveUp()'>上移</span><span onclick='myQuestionaire.edit.moveDown()'>下移</span><span onclick='myQuestionaire.edit.copy()'>复用</span><span onclick='myQuestionaire.edit.deleQuestion()'>删除</span></div></div>";
+                        html += "</div><div><span onclick='myQuestionaire.edit.moveUp(event)'>上移</span><span onclick='myQuestionaire.edit.moveDown(event)'>下移</span><span onclick='myQuestionaire.edit.copy(event)'>复用</span><span onclick='myQuestionaire.edit.deleQuestion(event)'>删除</span></div></div>";
                         break;
                     default:
                         break;
@@ -558,7 +566,7 @@ Questionaire.prototype = {
             input2.type = "text";
 
             var span = document.createElement('span');
-            span.setAttribute("onclick", "myQuestionaire.edit.deleSelf()");
+            span.setAttribute("onclick", "myQuestionaire.edit.deleSelf(event)");
             span.innerHTML = "X";
 
             switch (type) {
@@ -615,16 +623,16 @@ Questionaire.prototype = {
             var div = document.createElement('div');
             var span1 = document.createElement('span');
             span1.innerHTML = '上移';
-            span1.setAttribute("onclick", "myQuestionaire.edit.moveUp()");
+            span1.setAttribute("onclick", "myQuestionaire.edit.moveUp(event)");
             var span2 = document.createElement('span');
             span2.innerHTML = '下移';
-            span2.setAttribute("onclick", "myQuestionaire.edit.moveDown()");
+            span2.setAttribute("onclick", "myQuestionaire.edit.moveDown(event)");
             var span3 = document.createElement('span');
             span3.innerHTML = '复用';
-            span3.setAttribute("onclick", "myQuestionaire.edit.copy()");
+            span3.setAttribute("onclick", "myQuestionaire.edit.copy(event)");
             var span4 = document.createElement('span');
             span4.innerHTML = '删除';
-            span4.setAttribute("onclick", "myQuestionaire.edit.deleQuestion()");
+            span4.setAttribute("onclick", "myQuestionaire.edit.deleQuestion(event)");
 
             div.appendChild(span1);
             div.appendChild(span2);
@@ -635,7 +643,7 @@ Questionaire.prototype = {
         addPart: function() {
             var div = document.createElement('div');
             var span = document.createElement('span');
-            span.setAttribute("onclick", "myQuestionaire.edit.newLine()");
+            span.setAttribute("onclick", "myQuestionaire.edit.newLine(event)");
             span.innerHTML = "+";
             div.appendChild(span);
             return div;
@@ -678,10 +686,11 @@ Questionaire.prototype = {
             myQuestionaire.edit.queueUp();
         },
         newLine: function(e) { //整合单选和多选的添加行函数
-            var e = window.event || e;
-            switch (this.getQuestionType(e.target)) {
+            var oEvent  = e||window.event;
+            var oTarget = oEvent.target || oEvent.srcElement; 
+            switch (this.getQuestionType(oTarget)) {
                 case "radio":
-                    var namebefore = e.target.parentNode.previousElementSibling.firstElementChild.firstElementChild.name
+                    var namebefore = oTarget.parentNode.previousElementSibling.firstElementChild.firstElementChild.name
                     var input1 = document.createElement("input");
                     input1.type = "radio";
                     input1.name = namebefore;
@@ -692,7 +701,7 @@ Questionaire.prototype = {
                     input2.placeholder = "单选内容";
 
                     var span = document.createElement("span");
-                    span.setAttribute("onclick", "myQuestionaire.edit.deleSelf()");
+                    span.setAttribute("onclick", "myQuestionaire.edit.deleSelf(event)");
                     span.innerHTML = "X";
 
                     var div = document.createElement("div");
@@ -701,7 +710,7 @@ Questionaire.prototype = {
                     div.appendChild(input2);
                     div.appendChild(span);
 
-                    e.target.parentNode.previousSibling.appendChild(div);
+                    oTarget.parentNode.previousSibling.appendChild(div);
                     break;
                 case "checkbox":
                     var input1 = document.createElement("input");
@@ -713,7 +722,7 @@ Questionaire.prototype = {
                     input2.placeholder = "多选内容";
 
                     var span = document.createElement("span");
-                    span.setAttribute("onclick", "myQuestionaire.edit.deleSelf()");
+                    span.setAttribute("onclick", "myQuestionaire.edit.deleSelf(event)");
                     span.innerHTML = "X";
 
                     var div = document.createElement("div");
@@ -722,15 +731,16 @@ Questionaire.prototype = {
                     div.appendChild(input2);
                     div.appendChild(span);
 
-                    e.target.parentNode.previousSibling.appendChild(div);
+                    oTarget.parentNode.previousSibling.appendChild(div);
                     break;
                 default:
                     break;
             }
         },
         deleSelf: function(e) {
-            var e = window.event || e;
-            var thisNode = e.target.parentNode;
+            var oEvent  = e||window.event;
+            var oTarget = oEvent.target || oEvent.srcElement; 
+            var thisNode = oTarget.parentNode;
             if (thisNode.parentNode.getElementsByTagName('div').length != 1) {
                 thisNode.parentNode.removeChild(thisNode);
             }
@@ -842,7 +852,7 @@ Questionaire.prototype = {
                     document.getElementById("maskControl").className = 'hide';
                     this.info.state = '0'; //未发布：-1，发布中：0，已结束：1
                     this.addDataToDB(this.requestInfo);
-                    alert("发布成功,1秒后跳转到主页。");
+                    alert("发布成功,点击确定1秒后自动跳转到主页。");
                     setTimeout(function() { window.location.href = "index.html" }, 2000); //edge里测试的时候，跳转的太快，导致没能储存成功，所以加个延迟
                 }
             }
@@ -866,7 +876,7 @@ Questionaire.prototype = {
             }
         },
         moveUp: function(e) {
-            var e = window.event || e;
+            var e = e||window.event;
             var oldEle = e.target.parentNode.parentNode;
             var targetNode = oldEle.previousElementSibling;
             if (targetNode != null) {
@@ -887,8 +897,9 @@ Questionaire.prototype = {
             }
         },
         moveDown: function(e) {
-            var e = window.event || e;
-            var oldEle = e.target.parentNode.parentNode;
+            var oEvent  = e||window.event;
+            var oTarget = oEvent.target || oEvent.srcElement; 
+            var oldEle = oTarget.parentNode.parentNode;
             var parent = oldEle.parentNode
             var targetNode = oldEle.nextElementSibling;
             if (targetNode != null) {
@@ -901,8 +912,9 @@ Questionaire.prototype = {
             this.queueUp();
         },
         copy: function(e) {
-            var e = window.event || e;
-            var oldEle = e.target.parentNode.parentNode;
+            var oEvent  = e||window.event;
+            var oTarget = oEvent.target || oEvent.srcElement; 
+            var oldEle = oTarget.parentNode.parentNode;
             var cloneNode = oldEle.cloneNode(true);
             var str = "Q" + this.getQuestionRank(e);
             cloneNode.firstElementChild.firstChild.innerHTML = str;
@@ -919,8 +931,9 @@ Questionaire.prototype = {
             oldEle.parentNode.appendChild(cloneNode);
         },
         deleQuestion: function(e) {
-            var e = window.event || e;
-            var currentDiv = e.target.parentNode.parentNode;
+            var oEvent  = e||window.event;
+            var oTarget = oEvent.target || oEvent.srcElement; 
+            var currentDiv = oTarget.parentNode.parentNode;
             currentDiv.parentNode.removeChild(currentDiv);
             this.queueUp();
         },
@@ -977,11 +990,12 @@ Questionaire.prototype = {
             }
         },
         toggleShowBtn: function(e) {
-            var e = window.event || e;
-            if (e.target.parentNode.firstElementChild.className == "hide") {
-                e.target.parentNode.firstElementChild.className = "show";
+            var oEvent  = e||window.event;
+            var oTarget = oEvent.target || oEvent.srcElement; 
+            if (oTarget.parentNode.firstElementChild.className == "hide") {
+                oTarget.parentNode.firstElementChild.className = "show";
             } else {
-                e.target.parentNode.firstElementChild.className = "hide";
+                oTarget.parentNode.firstElementChild.className = "hide";
             }
         }
     },
