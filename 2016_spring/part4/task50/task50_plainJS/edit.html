@@ -3,9 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>编辑</title>
+    <title>问卷编辑页面</title>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" type="text/css" href="styles/CalendarsStyle.css">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 </head>
 
 <body>
@@ -46,11 +47,10 @@
         <div class="alert">
             <div class="alert-top">
                 <span>提示</span>
-                <span class="close" onClick="myQuestionaire.edit.confirmPost(event)">X</span>
             </div>
             <div class="alert-bottom">
                 <p>是否发布问卷？</p>
-                <p>此问卷截止日期为<span id="limitedDate">未选择时间</span></p>
+                <p>问卷截止日期到<span id="limitedDate">未选择时间</span></p>
                 <div>
                     <input type="button" value="确定" onClick="myQuestionaire.edit.post(event)" />
                     <input type="button" value="取消" onClick="myQuestionaire.edit.confirmPost(event)" />

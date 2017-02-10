@@ -108,10 +108,10 @@ Questionaire.prototype = {
                     switch (obj.allData[i].type) {
                         case "radio":
                         case "checkbox":
-                            html += "<dd><span class='content'>" + obj.allData[i].data[j].content + "<span><span>——————被选的次数" + this.calculatePersent(obj.allData[i].data[j].count, obj.count) + "</span></dd>";
+                            html += "<dd><span class='content'>" + obj.allData[i].data[j].content + "<span><span>被选的次数" + this.calculatePersent(obj.allData[i].data[j].count, obj.count) + "</span></dd>";
                             break;
                         case "textarea":
-                            html += "<dd><span class='content'>" + obj.allData[i].data[j].content + "<span><span>——————有效回答占比" + this.calculatePersent(obj.allData[i].data[j].count, obj.count) + "</span></dd>";
+                            html += "<dd><span class='content'>" + obj.allData[i].data[j].content + "<span><span>有效回答占比" + this.calculatePersent(obj.allData[i].data[j].count, obj.count) + "</span></dd>";
                             break;
                         default:
                             break;
@@ -188,9 +188,9 @@ Questionaire.prototype = {
                             break;
                         case "textarea":
                             if (obj.allData[i].data[j].status == "true") { //checked属性，想把勾选状态改成不勾选状态，貌似只有删除checked属性。把checked设置成什么东西，都会勾上。只有再加一层if了
-                                html += "<span class='true'>此题必填</span> <div><textarea cols='100' rows='10' placeholder='请填写你的回答' class='textareas' ></textarea></div>";
+                                html += "<span class='true'>此题必填</span> <div><textarea cols='20' rows='10' placeholder='请填写你的回答' class='textareas' ></textarea></div>";
                             } else {
-                                html += "<span class='false'>此题选填</span> <div><textarea cols='100' rows='10' placeholder='请填写你的回答' class='textareas' ></textarea></div>";
+                                html += "<span class='false'>此题选填</span> <div><textarea cols='20' rows='10' placeholder='请填写你的回答' class='textareas' ></textarea></div>";
                             }
                             break;
                         default:
@@ -329,7 +329,7 @@ Questionaire.prototype = {
         },
         renderTbody: function() {
             //IndexedDB操作
-            var request, database, htmlCont = "";
+            var request, htmlCont = "",hasContent=0;
             request = indexedDB.open("Questionaire", 1);
 
             var that = this; //等会要变作用域
@@ -346,7 +346,6 @@ Questionaire.prototype = {
                 req.onsuccess = function(event) {
                     var cursor = event.target.result;
                     if (cursor) {
-
                         switch (cursor.value.state) { //判断状态
                             case "-1":
                                 stateText = '未发布';
@@ -382,8 +381,13 @@ Questionaire.prototype = {
                         //渲染HTML内容
                         htmlCont += "<tr><td><input type='checkbox' name='myQN' onchange='myQuestionaire.index.toggleCheck(event)' ></td><td>" + cursor.value.subject + "</td><td>" + cursor.value.date + "</td><td class='" + stateClass + "'>" + stateText + "</td><td id=" + cursor.value.subject + ">" + inputStyle + "</td></tr>"
                         var date = cursor.value.date;
+                        hasContent++;
                         cursor.continue();
                     } else {
+                        if(hasContent===0){
+                            alert("还没有问卷，先去创建吧！点击确定将自动跳转至新建页面。");
+                            window.location.href='add.html';
+                        }
                         document.getElementById('checkBox').innerHTML = htmlCont;
                     }
                 }
@@ -441,9 +445,6 @@ Questionaire.prototype = {
             };
             console.log("init edit page");
         },
-        oneOfDB: function() { //判断是否已有数据
-
-        },
         DBtoOBJ: function() { //把已有的数据渲染到HTML
             var request, staticObj;
             request = indexedDB.open('Questionaire', 1); //打开(创建)数据库
@@ -484,16 +485,16 @@ Questionaire.prototype = {
                 for (var j = 0; j < obj.allData[i].data.length; j++) {
                     switch (obj.allData[i].type) {
                         case "radio":
-                            html += "<div class='radios'><input type='radio' name='" + Math.random() + "'  disabled='disabled'><input type='text' placeholder='单选内容' value='" + obj.allData[i].data[j].content + "'><span onclick='myQuestionaire.edit.deleSelf(event)'>X</span></div>";
+                            html += "<div class='radios'><input type='radio' name='" + Math.random() + "'  disabled='disabled'><input type='text' placeholder='单选内容' value='" + obj.allData[i].data[j].content + "'><span onclick='myQuestionaire.edit.deleSelf(event)' class='dele-self'>X</span></div>";
                             break;
                         case "checkbox":
-                            html += "<div class='checkboxs'><input type='checkbox'  disabled='disabled'><input type='text' placeholder='多选内容' value='" + obj.allData[i].data[j].content + "'><span onclick='myQuestionaire.edit.deleSelf(event)'>X</span></div>";
+                            html += "<div class='checkboxs'><input type='checkbox'  disabled='disabled'><input type='text' placeholder='多选内容' value='" + obj.allData[i].data[j].content + "'><span onclick='myQuestionaire.edit.deleSelf(event)' class='dele-self'>X</span></div>";
                             break;
                         case "textarea":
                             if (obj.allData[i].data[j].status == "true") { //checked属性，想把勾选状态改成不勾选状态，貌似只有删除checked属性。把checked设置成什么东西，都会勾上。只有再加一层if了
-                                html += "<input type='checkbox' checked='checked'><span>此题是否必填</span> <div><textarea cols='100' rows='10' placeholder='请填写你的回答' class='textareas'  disabled='disabled'></textarea></div>";
+                                html += "<input type='checkbox' checked='checked'><span>此题是否必填</span> <div><textarea cols='20' rows='10' placeholder='请填写你的回答' class='textareas'  disabled='disabled'></textarea></div>";
                             } else {
-                                html += "<input type='checkbox' ><span>此题是否必填</span> <div><textarea cols='100' rows='10' placeholder='请填写你的回答' class='textareas'  disabled='disabled'></textarea></div>"
+                                html += "<input type='checkbox' ><span>此题是否必填</span> <div><textarea cols='20' rows='10' placeholder='请填写你的回答' class='textareas'  disabled='disabled'></textarea></div>"
                             }
                             break;
                         default:
@@ -503,10 +504,10 @@ Questionaire.prototype = {
                 switch (obj.allData[i].type) {
                     case "radio":
                     case "checkbox":
-                        html += "</div><div><span onclick='myQuestionaire.edit.newLine(event)'>+</span></div><div><span onclick='myQuestionaire.edit.moveUp(event)'>上移</span><span onclick='myQuestionaire.edit.moveDown(event)'>下移</span><span onclick='myQuestionaire.edit.copy(event)'>复用</span><span onclick='myQuestionaire.edit.deleQuestion(event)'>删除</span></div></div>";
+                        html += "</div><div class='add-line'><span onclick='myQuestionaire.edit.newLine(event)'>++++++++++++</span></div><div class='tool-line'><span onclick='myQuestionaire.edit.moveUp(event)'>上移</span><span onclick='myQuestionaire.edit.moveDown(event)'>下移</span><span onclick='myQuestionaire.edit.copy(event)'>复用</span><span onclick='myQuestionaire.edit.deleQuestion(event)'>删除</span></div></div>";
                         break;
                     case "textarea":
-                        html += "</div><div><span onclick='myQuestionaire.edit.moveUp(event)'>上移</span><span onclick='myQuestionaire.edit.moveDown(event)'>下移</span><span onclick='myQuestionaire.edit.copy(event)'>复用</span><span onclick='myQuestionaire.edit.deleQuestion(event)'>删除</span></div></div>";
+                        html += "</div><div class='tool-line'><span onclick='myQuestionaire.edit.moveUp(event)'>上移</span><span onclick='myQuestionaire.edit.moveDown(event)'>下移</span><span onclick='myQuestionaire.edit.copy(event)'>复用</span><span onclick='myQuestionaire.edit.deleQuestion(event)'>删除</span></div></div>";
                         break;
                     default:
                         break;
@@ -562,6 +563,7 @@ Questionaire.prototype = {
             var span = document.createElement('span');
             span.setAttribute("onclick", "myQuestionaire.edit.deleSelf(event)");
             span.innerHTML = "X";
+            span.setAttribute('class','dele-self');
 
             switch (type) {
                 case "radio":
@@ -599,7 +601,7 @@ Questionaire.prototype = {
                     span.innerHTML = "此题是否必填";
 
                     var textarea = document.createElement('textarea');
-                    textarea.cols = "100";
+                    textarea.cols = "20";
                     textarea.rows = "10";
                     textarea.disabled = 'disabled';
                     textarea.className = "textareas";
@@ -615,6 +617,7 @@ Questionaire.prototype = {
         },
         bottomPart: function() { //创建上移、下移、复用、删除那一行
             var div = document.createElement('div');
+            div.setAttribute('class','tool-line');
             var span1 = document.createElement('span');
             span1.innerHTML = '上移';
             span1.setAttribute("onclick", "myQuestionaire.edit.moveUp(event)");
@@ -636,9 +639,10 @@ Questionaire.prototype = {
         },
         addPart: function() {
             var div = document.createElement('div');
+            div.setAttribute('class','add-line');
             var span = document.createElement('span');
             span.setAttribute("onclick", "myQuestionaire.edit.newLine(event)");
-            span.innerHTML = "+";
+            span.innerHTML = "++++++++++++";
             div.appendChild(span);
             return div;
         },
@@ -697,6 +701,7 @@ Questionaire.prototype = {
                     var span = document.createElement("span");
                     span.setAttribute("onclick", "myQuestionaire.edit.deleSelf(event)");
                     span.innerHTML = "X";
+                    span.setAttribute('class','dele-self');
 
                     var div = document.createElement("div");
                     div.className = "radios";
@@ -718,6 +723,7 @@ Questionaire.prototype = {
                     var span = document.createElement("span");
                     span.setAttribute("onclick", "myQuestionaire.edit.deleSelf(event)");
                     span.innerHTML = "X";
+                    span.setAttribute('class','dele-self');
 
                     var div = document.createElement("div");
                     div.className = "checkboxs";
