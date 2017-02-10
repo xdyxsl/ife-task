@@ -6,10 +6,6 @@ function Questionaire() {
 Questionaire.prototype = {
     init: function() {
         console.log("init Questionaire & IDB", this);
-        if(navigator.appName.indexOf("Microsoft Internet Explorer")!=-1 && document.all){//IE
-            alert("IE10及以下版本浏览器不兼容，为了您的体验请更换其他高级浏览器(Chrome/Firefox/Edge/Safiri等等)再尝试！点击确定2S后自动前往我的主页。");
-            // setTimeout(function(){window.location.href = 'http://pkjy.github.io'},2000);
-        }
         /**
          * IndexedDB储存
          */
@@ -141,11 +137,11 @@ Questionaire.prototype = {
         init: function() {
             console.log("init write page");
             this.requestInfo = decodeURI(location.search.substring(9));
-            this.DBtoOBJ();
+            this.DBtoOBJ(); 
             this.currentObj;
         },
         DBtoOBJ: function() { //把已有的数据渲染到HTML
-            var request, staticObj;
+            var request;
             request = indexedDB.open('Questionaire', 1); //打开(创建)数据库
 
             request.onerror = function(event) {
@@ -203,7 +199,7 @@ Questionaire.prototype = {
                 }
                 html += "</div></div>"
             }
-            document.getElementById('page_subject').value = this.requestInfo;
+            document.getElementById('page_subject').innerHTML = this.requestInfo;
             document.getElementById('content_area').innerHTML = html;
         },
         putDataToDB: function() {
@@ -423,10 +419,9 @@ Questionaire.prototype = {
                 var transaction = db.transaction('myQuestionaire', 'readwrite');
                 var store = transaction.objectStore('myQuestionaire');
                 for (var i = 0; i < that.needDeleteArr.length; i++) {
-                    console.log(that.needDeleteArr[i]);
                     var rq = store.delete(that.needDeleteArr[i]);
                     rq.onsuccess = function(event) {
-                        console.log("删除成功！");
+                        alert("删除成功！");
                         that.renderTbody();
                     }
                 }
@@ -495,7 +490,6 @@ Questionaire.prototype = {
                             html += "<div class='checkboxs'><input type='checkbox'  disabled='disabled'><input type='text' placeholder='多选内容' value='" + obj.allData[i].data[j].content + "'><span onclick='myQuestionaire.edit.deleSelf(event)'>X</span></div>";
                             break;
                         case "textarea":
-                            console.log(obj.allData[i].data[j].status)
                             if (obj.allData[i].data[j].status == "true") { //checked属性，想把勾选状态改成不勾选状态，貌似只有删除checked属性。把checked设置成什么东西，都会勾上。只有再加一层if了
                                 html += "<input type='checkbox' checked='checked'><span>此题是否必填</span> <div><textarea cols='100' rows='10' placeholder='请填写你的回答' class='textareas'  disabled='disabled'></textarea></div>";
                             } else {
@@ -1000,6 +994,13 @@ Questionaire.prototype = {
         }
     },
 }
-var myQuestionaire = new Questionaire(); //必须用myQuestionaire，写的时候是用的myQuestionaire为指针
 
+
+if(navigator.appName.indexOf("Microsoft Internet Explorer")!=-1 && document.all){//IE
+    if(navigator.userAgent.split(";")[1].toLowerCase().indexOf("msie 10.0")=="-1"){//IE10以下
+        alert("IE9及以下版本浏览器不兼容，为了您的体验请更换其他高级浏览器(Chrome/Firefox/Edge/Safiri等等)再尝试！点击确定2S后自动前往我的主页。");
+        setTimeout(function(){window.location.href = 'http://pkjy.github.io'},2000);
+    }
+}
+var myQuestionaire = new Questionaire(); //必须用myQuestionaire，写的时候是用的myQuestionaire为指针
 // window.indexedDB.deleteDatabase("Questionaire");
