@@ -15,6 +15,7 @@ input[type="button"]{
     cursor:pointer;
     background-color:#fff;
     border:1px solid #9A9A9A;
+    -webkit-transition:all .8s;
     transition:all .8s;
     padding: 0.5rem 1rem;
 }
@@ -50,6 +51,8 @@ a:visited,a{
     display:none!important; 
 }
 .show{
+    display:-webkit-box;
+    display:-ms-flexbox;
     display:flex;
 }
 @media screen and (max-width: 42em) {/*672以下header栏*/
@@ -98,6 +101,7 @@ a:visited,a{
     background-color: rgba(255,70,0,.68);
     border:1px solid rgba(255,70,0,.68);
     border-radius:1rem;
+    -webkit-transition:all .8s;
     transition:all .8s;
 }
 .pubing{
@@ -184,8 +188,11 @@ tfoot{
     padding: 1rem 2rem;
 }
 .alert-bottom div{
+    display:-webkit-box;
+    display:-ms-flexbox;
     display:flex;
-    justify-content: space-around;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
 }
 @media screen and (max-width: 56.25em) {/*672以下header栏*/
     .alert-top{
@@ -213,14 +220,29 @@ tfoot{
     height: 4rem;
 }
 /**
+ * 加阴影
+ */
+ .header,
+ .detail,
+ .list-table,
+ .add,
+ .edit{
+    box-shadow: 9px 6px 2rem 2px rgba(0, 0, 0, 0.5);
+ }
+/**
  * [Detail component] 详情页
  */
 .detail{
     background-color: #fff;
     margin: 2rem;
     padding: 2rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
 }
 .detail-header{
     text-align: center;
@@ -235,8 +257,12 @@ tfoot{
     border:1px solid #ccc;
     margin: 1rem;
     padding: 1rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-between;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
 }
 .detail-box dl{
     float: right;
@@ -309,11 +335,12 @@ tfoot{
 }
 .edit-header input{
     text-align: center;
-    width: 100%;
+    width: 80%;
     font-size: 2rem;
     border:none;
     font-weight: bold;
     height: 2.5rem;
+    -webkit-transition:all .8s;
     transition:all .8s;
 }
 .edit-header input:hover,
@@ -322,6 +349,7 @@ tfoot{
     color:#fff;
     background-color: rgba(255,70,0,.68);
     border-radius:10px;
+    -webkit-transition:all .8s;
     transition:all .8s;
 }
 .edit-body{
@@ -346,8 +374,11 @@ tfoot{
     line-height: 1.5rem;
 }
 .tool-line{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-around;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
 }
 .tool-line span{
     width: 25%;
@@ -357,11 +388,14 @@ tfoot{
 }
 
 .subject{
-    margin:1rem;
-    height: 2rem;
-    width:90%;
+    display: block;
+    margin: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
-
+#page_subject{
+    font-size: 2rem;
+}
 .checkboxs,
 .radios,
 .textarea + div{
@@ -376,8 +410,12 @@ tfoot{
 .edit-body ul{
     background-color: #fff;
     margin: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
 }
 .edit-body li{
     list-style: none;
@@ -387,14 +425,25 @@ tfoot{
 }
 .edit-footer{
     border-top:2px solid #ccc;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
     padding-top:1rem;
 }
 .edit-footer div:nth-child(1){
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: row;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
 }
 .edit-footer div:nth-child(1) span{
             display: block;
@@ -410,19 +459,35 @@ tfoot{
     
    }
    .edit-body ul{
-        flex-direction: column;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
         padding-left: 0
    }
    .edit-body li{
         padding:0;
         margin:0;
    }
+   .edit-footer input{
+       margin: 0 auto;
+   }
    .edit-footer{
-        flex-direction: column;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
    }
    .edit-footer div:nth-child(1){
-        flex-direction: column;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
         text-align: center;
+   }
+   .edit-footer div:nth-child(2){
+        text-align: center;
+        margin-top: 1rem;
    }
 }
 
