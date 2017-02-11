@@ -25,6 +25,22 @@ a{
 a:visited,a{
     color:#fff;
 }
+.echart{
+    width:800px; 
+    height:400px;
+}
+@media screen and (max-width: 48em) {/*768以下header栏*/
+   .echart{
+    width:380px; 
+    height:200px;
+    }
+}
+@media screen and (max-width: 32em) {/*512以下header栏*/
+   .echart{
+    width:250px; 
+    height:200px;
+    }
+}
 
 .header{
     height:3rem;
@@ -235,7 +251,7 @@ tfoot{
 .detail{
     background-color: #fff;
     margin: 2rem;
-    padding: 2rem;
+    padding: 1rem;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -251,7 +267,6 @@ tfoot{
 }
 
 .detail-boxes{
-    padding:1rem;
 }
 .detail-box{
     border:1px solid #ccc;
@@ -263,6 +278,7 @@ tfoot{
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
             justify-content: space-between;
+    overflow: auto;
 }
 .detail-box dl{
     float: right;

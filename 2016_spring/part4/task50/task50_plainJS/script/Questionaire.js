@@ -88,48 +88,142 @@ Questionaire.prototype = {
             this.currentObj = obj;
             var tempObj = {};
             var tempArr = [];
+
+            //下面两个data用来储存数据，直接放到echarts里面渲染
+            var dataArr = [];
+            var subjectData =[];
+
             var html = "";
             for (var i = 0; i < obj.allData.length; i++) {
+                var tempArrTemp = [];
                 switch (obj.allData[i].type) {
                     case "radio":
-                        html += "<div class='detail-box'><div><span>" + obj.allData[i].name + "</span><span>单选题</span><dl><dt>" + obj.allData[i].subject + "</dt>";
+                        html += "<div class='detail-box'><div><span>" + obj.allData[i].name + "</span><span>单选题</span><div id='"+obj.allData[i].name+"' class='echart''>" ;
                         break;
                     case "checkbox":
-                        html += "<div class='detail-box'><div><span>" + obj.allData[i].name + "</span><span>多选题</span><dl><dt>" + obj.allData[i].subject + "</dt>";
+                        html += "<div class='detail-box'><div><span>" + obj.allData[i].name + "</span><span>多选题</span><div id='"+obj.allData[i].name+"' class='echart''>" ;
                         break;
                     case "textarea":
-                        html += "<div class='detail-box'><div><span>" + obj.allData[i].name + "</span><span>文本题</span><dl><dt>" + obj.allData[i].subject + "</dt>";
+                        html += "<div class='detail-box'><div><span>" + obj.allData[i].name + "</span><span>文本题</span><div id='"+obj.allData[i].name+"' class='echart''>" ;
                         break;
                     default:
                         break;
                 }
-
-                for (var j = 0; j < obj.allData[i].data.length; j++) {
-                    switch (obj.allData[i].type) {
-                        case "radio":
-                        case "checkbox":
-                            html += "<dd><span class='content'>" + obj.allData[i].data[j].content + "<span><span>被选的次数" + this.calculatePersent(obj.allData[i].data[j].count, obj.count) + "</span></dd>";
-                            break;
-                        case "textarea":
-                            html += "<dd><span class='content'>" + obj.allData[i].data[j].content + "<span><span>有效回答占比" + this.calculatePersent(obj.allData[i].data[j].count, obj.count) + "</span></dd>";
-                            break;
-                        default:
-                            break;
-                    }
-
+                var newArr = [];
+                for(var j=0;j<obj.allData[i].data.length;j++){
+                    newArr.push(this.calculatePersent(obj.allData[i].data[j].count,obj.count))
+                    //注释的是圆饼图的设置
+                    // newArr.push({
+                    //     value:this.calculatePersent(obj.allData[i].data[j].count,obj.count),
+                    //     name :obj.allData[i].data[j].content
+                    // })
+                    // subjectData.push(obj.allData[i].data[j].content)
+                    tempArrTemp.push(obj.allData[i].data[j].content);
                 }
-                html += "</dl></div></div>";
+                subjectData.push(tempArrTemp)
+                dataArr.push(newArr);
+
+                html += "</div></div></div>";
             }
             document.getElementById('page_subject').innerHTML = this.requestInfo;
             document.getElementById('content_area').innerHTML = html;
+            console.log(obj,dataArr)
+            
+            var tempStr;
+           
+            for(var i=0;i<obj.allData.length;i++){
+                // 基于准备好的dom，初始化echarts实例
+                // Echart设置区。
+                tempStr = 'Q'+(i+1);
+                var nowSub = obj.allData[i].subject
+                var questTotalSubmit = "该问卷总提交数" +obj.count +"次";
+                console.log(subjectData,dataArr[i])
+
+                var myChart = echarts.init(document.getElementById(tempStr));
+
+                option={
+                    baseOption: {
+                        title: {
+                            text: nowSub,
+                            subtext: questTotalSubmit,
+                            left:'1%'
+                        },
+                        color: ['#f97a4b'],
+                        tooltip : {
+                            trigger: 'axis',
+                            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                            },
+                            position: ['50%', '50%']
+                        },
+                        grid: {
+                            containLabel: true,
+                            right:"10%"
+                        },
+                        xAxis : [
+                            {
+                                type : 'category',
+                                data : subjectData[i],
+                                axisTick: {
+                                    alignWithLabel: true
+                                }
+                            }
+                        ],
+                        yAxis : [
+                            {
+                                type : 'value',
+                                axisLabel: {
+                                  show: true,
+                                  interval: 'auto',
+                                  formatter: '{value} %'
+                                }
+                            }
+                        ],
+                        series : [
+                            {
+                                name:'直接访问',
+                                type:'bar',
+                                barWidth: '30%',
+                                data:dataArr[i]
+                            }
+                        ]
+                    },
+                    media: [
+                        {
+                            option:{
+                                grid:{
+                                    left: '3%',
+                                    right: '4%',
+                                    bottom: '3%',
+                                },
+                                series:[
+                                    {
+                                       // barWidth: '60%'
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                };
+                switch(obj.allData[i].type){
+                    case 'radio':
+                    case 'checkbox':
+                        option.baseOption.series[0].name = '被选择的比例';
+                    break;
+                    case 'textarea':
+                        option.baseOption.series[0].name = '该文本题的有效率';
+                    break;
+                }
+                myChart.setOption(option);
+            }
         },
         calculatePersent: function(currentNum, totalNum) {
-            var result = Number(currentNum) / Number(totalNum) * 100;
+            var result = (Number(currentNum) / Number(totalNum)*100).toFixed(2);
+            console.log(result)
             if (isNaN(result)) {
                 result = '数据不够,请先填写数据！';
                 return result
             }
-            result += "%";
             return result
         },
     },
@@ -160,7 +254,7 @@ Questionaire.prototype = {
             }
         },
         OBJtoHTML: function(obj) { //接收IDB读取出来的OBJ
-            this.currentObj = obj;
+            this.currentObj = obj;//先储存到this里面，其它函数就不用这么麻烦了
             var html = "";
             for (var i = 0; i < obj.allData.length; i++) {
 
