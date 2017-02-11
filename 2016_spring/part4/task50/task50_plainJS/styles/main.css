@@ -227,7 +227,7 @@ tfoot{
  .list-table,
  .add,
  .edit{
-    box-shadow: 9px 6px 2rem 2px rgba(0, 0, 0, 0.5);
+    box-shadow: 6px 19px 19px -9px rgba(0, 0, 0, 0.5);
  }
 /**
  * [Detail component] 详情页
@@ -392,6 +392,7 @@ tfoot{
     margin: 1rem;
     font-size: 1.5rem;
     font-weight: bold;
+    width: 70%;
 }
 #page_subject{
     font-size: 2rem;
@@ -406,6 +407,7 @@ tfoot{
     height: 1.5rem;
     width:50%;
     margin-right:1rem;
+    margin-left: 0.5rem;
 }
 .edit-body ul{
     background-color: #fff;
@@ -445,6 +447,17 @@ tfoot{
         -ms-flex-direction: row;
             flex-direction: row;
 }
+.edit-footer div:nth-child(2){
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    text-align: center;
+
+}
 .edit-footer div:nth-child(1) span{
             display: block;
     height: 3.5rem;
@@ -470,7 +483,8 @@ tfoot{
         margin:0;
    }
    .edit-footer input{
-       margin: 0 auto;
+       margin: 0.5rem auto;
+       text-align: center;
    }
    .edit-footer{
         -webkit-box-orient: vertical;
@@ -486,8 +500,10 @@ tfoot{
         text-align: center;
    }
    .edit-footer div:nth-child(2){
-        text-align: center;
-        margin-top: 1rem;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
    }
 }
 
