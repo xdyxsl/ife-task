@@ -4,7 +4,7 @@ task50 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016
 task50 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part4/task50/index.html>
 
 task51 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part4/task51><br>
-task51 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part4/task51/build/>
+task51 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part4/task51/index.html>
 
 task52 任务要求地址：<https://github.com/pkjy/ife-task/tree/gh-pages/2016_spring/part4/task52><br>
 task52 在线预览地址：<http://pkjy.github.io/ife-task/2016_spring/part4/task52/build/>
