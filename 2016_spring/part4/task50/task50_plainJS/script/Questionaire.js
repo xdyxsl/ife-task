@@ -320,7 +320,7 @@ Questionaire.prototype = {
                     "allData": that.currentObj.allData,
                     "time": that.currentObj.time
                 })
-                alert("问卷提交成功，点击确定1秒后自动跳转到主页。");
+                alert("问卷提交成功，1秒后自动跳转到主页。");
                 setTimeout(function(){
                     window.location.href = 'index.html';
                 },1500)
@@ -479,7 +479,7 @@ Questionaire.prototype = {
                         cursor.continue();
                     } else {
                         if(hasContent===0){
-                            alert("还没有问卷，先去创建吧！点击确定将自动跳转至新建页面。");
+                            alert("还没有问卷，先去创建吧！将自动跳转至新建页面。");
                             window.location.href='add.html';
                         }
                         document.getElementById('checkBox').innerHTML = htmlCont;
@@ -519,7 +519,6 @@ Questionaire.prototype = {
                 for (var i = 0; i < that.needDeleteArr.length; i++) {
                     var rq = store.delete(that.needDeleteArr[i]);
                     rq.onsuccess = function(event) {
-                        alert("删除成功！");
                         that.renderTbody();
                     }
                 }
@@ -946,7 +945,7 @@ Questionaire.prototype = {
                     document.getElementById("maskControl").className = 'hide';
                     this.info.state = '0'; //未发布：-1，发布中：0，已结束：1
                     this.addDataToDB(this.requestInfo);
-                    alert("发布成功,点击确定1秒后自动跳转到主页。");
+                    alert("发布成功,1秒后自动跳转到主页。");
                     setTimeout(function() { window.location.href = "index.html" }, 2000); //edge里测试的时候，跳转的太快，导致没能储存成功，所以加个延迟
                 }
             }
@@ -994,7 +993,6 @@ Questionaire.prototype = {
             var oEvent  = e||window.event;
             var oTarget = oEvent.target || oEvent.srcElement; 
             var oldEle = oTarget.parentNode.parentNode;
-            var parent = oldEle.parentNode
             var targetNode = oldEle.nextElementSibling;
             if (targetNode != null) {
                 var cloneEle = oldEle.cloneNode(true);
@@ -1098,7 +1096,7 @@ Questionaire.prototype = {
 
 if(navigator.appName.indexOf("Microsoft Internet Explorer")!=-1 && document.all){//IE
     if(navigator.userAgent.split(";")[1].toLowerCase().indexOf("msie 10.0")=="-1"){//IE10以下
-        alert("IE9及以下版本浏览器不兼容，为了您的体验请更换其他高级浏览器(Chrome/Firefox/Edge/Safiri等等)再尝试！点击确定2S后自动前往我的主页。");
+        alert("IE9及以下版本浏览器不兼容，为了您的体验请更换其他高级浏览器(Chrome/Firefox/Edge/Safiri等等)再尝试！2秒后自动前往我的主页。");
         setTimeout(function(){window.location.href = 'http://pkjy.github.io'},2000);
     }
 }
