@@ -3,8 +3,8 @@ var cask = {
     src: "http://cued.xunlei.com/demos/publ/img/P_",
     imgNumber: 0, //每张图的编号
     imgs: [], //图片数组
-    loadNumber: 50, //初始水桶数
-    height: 200, //水桶的高度
+    loadNumber: 30, //初始水桶数
+    height: 300, //水桶的高度
     rows: [],
     getIndex: function() {
         var index = this.imgNumber;
@@ -34,6 +34,7 @@ var cask = {
                 self.imgNumber++;
                 i++;
                 if (i > self.loadNumber) {
+                    cask.imgNumber = 0;
                     clearInterval(setImg);
                     timer = 1;
                 }
@@ -68,7 +69,7 @@ var cask = {
     render: function() {
         var self = this,
             index;
-        // if (self.imgNumber > 160) return;//暂不支持动态更新
+
         for (var i = 0; i < self.rows.length; i += 2) {
             var div = document.createElement("div");
             for (var j = 0; j < self.rows[i].length; j++) {
@@ -84,22 +85,25 @@ var cask = {
     scroll: function() {
         var self = this;
         window.onscroll = function() {
-            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-            if (document.body.clientHeight - window.screen.availHeight - scrollTop <= 20) {
+            var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+            if (scrollTop + document.documentElement.clientHeight >= document.documentElement.offsetHeight-2) {
                 self.render(); //循环显示所设置的个数
             }
         }
     },
 
     init: function() {
+        document.getElementById("cask_container").style.width = document.documentElement.clientWidth - 30 + "px";
+        isReady();
         this.getImage();
         this.scroll();
     }
 }
 window.onload = function() {
-    document.getElementById("cask_container").style.width = document.documentElement.clientWidth - 30 + "px";
-    isReady();
     cask.init();
+}
+window.onresize = function() {
+    location.reload()
 }
 function isReady(){
     var content = document.getElementById("cask_container");

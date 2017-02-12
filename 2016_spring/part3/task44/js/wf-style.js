@@ -2,7 +2,7 @@ var waterfall = {
     container: document.getElementById("wf_container"),
     src: "http://cued.xunlei.com/demos/publ/img/P_", //图片来自迅雷UED，图片链接的结尾为：P_001.jpg
     imgNumber: 0, //每张图的编号
-    column: 6, //瀑布栏数，基于我取的照片，6栏最美好。
+    column: 5, //瀑布栏数，基于我取的照片，6栏最美好。
     zoomWidth: 350, //放大后的图片宽度
     setData: function() {
         var img_arr = this.container.getElementsByTagName("img"),
@@ -45,8 +45,22 @@ var waterfall = {
             this.imgNumber++;
         }
         this.container.innerHTML = column_html;
-        this.appendOnce();
-        this.appendOnce(); //先加两次,把滚动栏加载出来
+
+        var self = this;
+        var appendInterval = setInterval(function(){
+            if(self.initAppend()){
+                clearInterval(appendInterval)
+            }else{
+                self.appendOnce();
+            }
+        },0)
+    },
+    initAppend:function(){
+        if(document.documentElement.clientHeight < document.documentElement.offsetHeight-4){
+            return true
+        }else{
+            return false
+        }
     },
     appendOnce: function() { //判断每栏最后一个元素的offsetTop，给最短的增加图片
         var temp_arr = [];
@@ -74,8 +88,10 @@ var waterfall = {
     scroll: function() {
         var that = this;
         window.onscroll = function() {
-            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-            if (document.body.clientHeight - window.screen.availHeight - scrollTop <= 100) {
+            var scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+            if (scrollTop + document.documentElement.clientHeight >= document.documentElement.offsetHeight-2) {
+                that.appendOnce();//下拉触发一次，添加3张照片
+                that.appendOnce();
                 that.appendOnce();
                 that.setData();
             }
@@ -112,4 +128,7 @@ var waterfall = {
 
 window.onload = function() {
     waterfall.init();
+}
+window.onresize = function() {
+    window.location.reload();
 }
