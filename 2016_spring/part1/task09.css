@@ -5,6 +5,7 @@
 
 body {
     font-family: "Microsoft Yahei";
+    font-size:16px;
 }
 
 a {
@@ -225,9 +226,8 @@ dd {
 /*main-part01*/
 
 .main-part01 {
-    width: 80%;
-    padding: 20px 40px;
-    margin: 2% auto;
+    padding: 2rem 4rem;
+    margin: 2rem 1rem;
 }
 
 .main-part01 label {
@@ -285,7 +285,7 @@ dd {
 }
 
 .main-part01 input:last-child {
-    margin-left: 40px;
+    margin-left: 2rem;
     vertical-align: text-bottom;
     border: none;
     margin-bottom: 15px;
@@ -309,8 +309,7 @@ dd {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    width: 89%;
-    margin: 2% auto;
+    margin: 2rem 1rem;
 }
 
 .main-part02-btn {
@@ -332,8 +331,7 @@ dd {
 }
 
 .main-part02 li {
-    margin: 0 10px 0 10px;
-    padding: 10px;
+    padding: 1rem;
 }
 
 .main-part02 li:nth-child(2) {
@@ -367,6 +365,7 @@ dd {
 .main-part02-class {
     text-align: center;
     color: #ABABAB;
+    margin: 0 1rem;
 }
 
 .main-part02-time {
@@ -415,8 +414,7 @@ dd {
 /*main-part03*/
 
 .main-part03 {
-    width: 87%;
-    margin: 2% auto;
+    margin: 2rem 1rem;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
@@ -494,13 +492,11 @@ dd {
     color: #b0afaf;
     padding: 15px;
     margin: 0;
-    font-size: 16px;
 }
 
 .main-part04 {
-    width: 619px;
-    margin-left: 6.4%;
-    padding-bottom: 1px;
+    width: 600px;
+    margin: 0 0 2rem 1rem;
 }
 
 .main-part04-project {
@@ -545,8 +541,7 @@ li:target {
 /*main-part05*/
 
 .main-part05 {
-    width: 360px;
-    margin: 0px 0px 0px 26px;
+    margin: 0 0 2rem 1rem;
 }
 
 .main-part05 span {
@@ -556,7 +551,7 @@ li:target {
 
 .main-part05 ul,
 .main-part05 div {
-    font-size: 14px;
+    font-size: 0.85rem;
 }
 
 .main-part05-ul {
@@ -584,7 +579,7 @@ li:target {
 }
 
 .main-part05-bottom {
-    padding: 12.5px;
+    padding: 0.88rem;
     border-top: 1px solid #eee;
 }
 
@@ -594,7 +589,7 @@ li:target {
 
 .search-btn {
     border: none;
-    line-height: 24px;
+    line-height: 1.5rem;
     background-color: #388ac1;
     margin-left: 170px;
     color: #fff;
@@ -613,14 +608,14 @@ li:target {
 /*main-part06*/
 
 .main-part06 {
-    width: 347.9999px;
-    margin: 2% 2% 0 6.5%;
+    width: 360px;
+    margin:0 0 2rem 1rem;
 }
 
 .main-part06-header {
     font-size: 0.8rem;
-    margin: 18px;
-    padding-bottom: 15px;
+    margin: 0.8rem;
+    padding-bottom: 0.8rem;
     border-bottom: 1px solid #A8CFEC;
 }
 
@@ -640,27 +635,27 @@ li:target {
     padding-left: 0;
     font-size: 0.95rem;
     border-bottom: 1px solid #ECECEC;
-    padding: 0 0 10px 0;
+    padding: 0 0 1rem 0;
     text-align: center;
-    margin-left: 18px;
-    margin-right: 18px;
 }
 
 .main-part06-middle li {
     display: inline-block;
-    padding: 0 10px;
+    padding:0 13px;
 }
 
 .main-part06-bottom li {
     float: left;
     font-size: 0.7rem;
-    height: 40px;
+    height: 2rem;
     text-align: center;
-    width: 39px;
+    width: 46px;
     margin: 2px 0;
 }
 
-.main-part06-bottom {}
+.main-part06-bottom {
+    margin-left: 1rem;
+}
 
 .festival,
 .weekend {
@@ -676,8 +671,8 @@ li:target {
 /*main-part07*/
 
 .main-part07 {
-    margin: 2% 2% 10% 1%;
-    width: 622px;
+    margin: 0 0 2rem 1rem;
+    width: 600px;
 }
 
 .main-part07 tr:hover {
