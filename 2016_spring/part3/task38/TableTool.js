@@ -1,29 +1,15 @@
-function TableTool(param) {
+function TableTool(param,id) {
     this.data = param;
-    this.createTable();
-    this.bindSort();
-    this.isFrozen();
+    this.init(id);
 };
 
 TableTool.prototype = {
-    data: {
-        /**
-         **设置参数，在INDEX页用new方法新建一个实例就OK了，参数如下
-         **/
-        // table_name:"default", 表格名称
-        // table_head: ["Name", "course1", "course2", "course3"], 表格首栏
-        // isSort: [0, 1, 1, 1], 1为有排序功能，0为没有
-        // tbody_obj: { 表格详细数据
-        //     1:["person1", 20, 90, 40],
-        //     2:["person2", 90, 60, 90],
-        //     3: ["person3", 60, 100, 70],
-        // },
-        // tdWH: [200, 50], 表格宽和高
-        // head_color: "#eee",首栏背景颜色
-        // table_color: "#F8C0FF",表格背景色
-        // isFrozen: 1 //1为冻结，0为不冻结
+    init:function(id){
+        this.createTable(id);
+        this.bindSort();
+        this.isFrozen();
     },
-    createTable: function() {
+    createTable: function(id) {
         var table = document.createElement("table");
         table.setAttribute("id", this.data.table_name);
 
@@ -43,7 +29,7 @@ TableTool.prototype = {
             } else {
                 tempHTML = "</p><span data-index='0'></span>&nbsp<span data-index='0'></span</td>";
             }
-            table_html += "<td name='" + this.data.table_head[i] + "'><p>" + this.data.table_head[i] + tempHTML;
+            table_html += "<td name='" + this.data.table_head[i] + "' style='width:"+this.data.tdWH[0]+"px;height:"+this.data.tdWH[1]+"px'><p>" + this.data.table_head[i] + tempHTML;
         }
 
         thead.innerHTML = table_html;
@@ -54,34 +40,31 @@ TableTool.prototype = {
 
         for (var i in this.data.tbody_obj) {
             for (var j = 0; j < this.data.table_head.length; j++) {
-                tbody_html += "<td>" + this.data.tbody_obj[i][j] + "</td>";
+                tbody_html += "<td style='width:"+this.data.tdWH[0]+"px;height:"+this.data.tdWH[1]+"px'>" + this.data.tbody_obj[i][j] + "</td>";
             }
             tbody_html = tbody_html + "</tr>";
         }
 
         tbody.innerHTML = tbody_html;
         table.appendChild(tbody);
+        console.log(id)
 
-        document.body.appendChild(table);
-
-        //操作单元格的宽高
-        var td = document.getElementsByTagName("td");
-        var td_width = this.data.tdWH[0] + "px";
-        var td_height = this.data.tdWH[1] + "px";
-        for (var k = 0; k < td.length; k++) {
-            td[k].style.width = td_width;
-            td[k].style.height = td_height;
+        if(id === undefined){
+            var div = document.createElement('div');
+            div.appendChild(table);
+            document.body.appendChild(div);
+        }else{
+            document.getElementById(id).appendChild(table);
         }
-        
+
         this.bindSort();
     },
     bindSort:function(){
         var span_newarr = new Array();
-        var span_arr = document.getElementsByTagName("span");
+        var span_arr = document.getElementById(this.data.table_name).getElementsByTagName("span");
         for (var i = 0; i < span_arr.length; i++) {
             span_newarr.push(span_arr[i])
         }
-        // console.log(span_newarr);
         var that = this;
         span_newarr.forEach(function(item){
             item.style.cursor = "pointer";
@@ -89,8 +72,7 @@ TableTool.prototype = {
                 if (this.getAttribute("class") == "asc") {
                     for (x in that.data.table_head) {
                         if (this.parentNode.getAttribute("name").toUpperCase() == that.data.table_head[x].toUpperCase()) {
-                            temp1 = that.sortUp(x);
-                            // console.log("temp1",temp1)
+                            that.sortUp(x);
                         }
                     }
                 } else {
@@ -100,11 +82,25 @@ TableTool.prototype = {
                         }
                     }
                 }
-                that.createTable();
-                that.resetTable();
                 that.isFrozen();
             }, false)
         })
+    },
+    updateTbody:function(){
+        var tbody = document.createElement("tbody");
+        var tbody_html = "";
+
+        for (var i in this.data.tbody_obj) {
+            for (var j = 0; j < this.data.table_head.length; j++) {
+                tbody_html += "<td style='width:"+this.data.tdWH[0]+"px;height:"+this.data.tdWH[1]+"px'>" + this.data.tbody_obj[i][j] + "</td>";
+            }
+            tbody_html = tbody_html + "</tr>";
+        }
+
+        tbody.innerHTML = tbody_html;
+        document.getElementById(this.data.table_name).removeChild(document.getElementById(this.data.table_name).lastElementChild);
+        document.getElementById(this.data.table_name).appendChild(tbody);
+        
     },
     sortUp: function(index) { //引入一个newArr和newObj先来处理排序，index指代的是要排序科目在数组中的位置
         var sortData = this.data.tbody_obj,
@@ -122,7 +118,7 @@ TableTool.prototype = {
             newObj[i + 1] = newArr[i];
         }
         this.data.tbody_obj = newObj;
-        // return newObj;
+        this.updateTbody();
     },
     sortDown: function(index) { //引入一个newArr和newObj先来处理排序，index指代的是要排序科目在数组中的位置
         var sortData = this.data.tbody_obj,
@@ -140,11 +136,7 @@ TableTool.prototype = {
             newObj[i + 1] = newArr[i];
         }
         this.data.tbody_obj = newObj;
-        // return newObj;
-    },
-    resetTable: function() { //删除掉旧的表格
-        var old = document.getElementById(this.data.table_name);
-        document.body.removeChild(old);
+        this.updateTbody();
     },
     isFrozen: function() {
         switch (this.data.isFrozen) {
