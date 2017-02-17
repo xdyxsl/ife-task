@@ -25,8 +25,8 @@
     /************* 以下是本库提供的公有方法 *************/
 
     VarietyAlbum.prototype.init = function(dom,opts){
-
         var album = new VarietyAlbum(dom,opts);
+
         return album
     }
 
@@ -130,6 +130,7 @@
                     timer = 1;
                 }
                 if (timer == 1) {//储存完毕则通过判断决定下一步的render
+                    document.getElementsByClassName("mask")[0].style.display = "none";
                     self.handlerComplete();
                 }
             }
@@ -711,7 +712,6 @@ document.getElementById('selectLayout').onchange = function(){
     }
     myAlbum.setOption(opts);
 }
-
 // myAlbum.setOption(opts);
 // var opts = { 木桶布局的参数
 //     layout:3,
