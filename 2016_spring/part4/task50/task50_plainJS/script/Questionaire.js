@@ -38,9 +38,10 @@ Questionaire.prototype = {
                 unique: true
             });
         }
-        var strURL = window.location.href;
-        var arrURL = strURL.split('/');
-        var lastStr = arrURL[arrURL.length - 1];
+        var strURL = window.location.href,
+            arrURL = strURL.split('/'),
+            lastStr = arrURL[arrURL.length - 1];
+
         this.strPage = lastStr.slice(0, lastStr.indexOf('.'));
         switch (this.strPage) {
             case "edit":
@@ -86,12 +87,12 @@ Questionaire.prototype = {
         },
         OBJtoOBJ: function(obj) { //接收IDB读取出来的OBJ
             this.currentObj = obj;
-            var tempObj = {};
-            var tempArr = [];
+            var tempObj = {},
+                tempArr = [];
 
             //下面两个data用来储存数据，直接放到echarts里面渲染
-            var dataArr = [];
-            var subjectData =[];
+            var dataArr = [],
+                subjectData =[];
 
             var html = "";
             for (var i = 0; i < obj.allData.length; i++) {
@@ -134,7 +135,7 @@ Questionaire.prototype = {
                 // 基于准备好的dom，初始化echarts实例
                 // Echart设置区。
                 tempStr = 'Q'+(i+1);
-                var nowSub = obj.allData[i].subject
+                var nowSub = obj.allData[i].subject;
                 var questTotalSubmit = "该问卷总提交数" +obj.count +"次";
 
                 var myChart = echarts.init(document.getElementById(tempStr));
@@ -369,9 +370,9 @@ Questionaire.prototype = {
             console.log("init index page");
         },
         toggleMask: function(e) {
-            var oEvent  = e||window.event;
-            var oTarget = oEvent.target || oEvent.srcElement; 
-            var curStatus = document.getElementById("maskControl").className;
+            var oEvent  = e||window.event,
+                oTarget = oEvent.target || oEvent.srcElement,
+                curStatus = document.getElementById("maskControl").className;
             if (curStatus === 'show') {
                 document.getElementById("maskControl").className = 'hide';
             } else {
@@ -389,8 +390,8 @@ Questionaire.prototype = {
             return this.needDeleteArr
         },
         toggleCheck: function(e) {
-            var oEvent  = e||window.event;
-            var oTarget = oEvent.target || oEvent.srcElement; 
+            var oEvent  = e||window.event,
+                oTarget = oEvent.target || oEvent.srcElement; 
 
             if (oTarget.checked) {
                 oTarget.parentNode.parentNode.className = "checked";
@@ -402,8 +403,8 @@ Questionaire.prototype = {
             }
         },
         checkAll: function(e) {
-            var oEvent  = e||window.event;
-            var oTarget = oEvent.target || oEvent.srcElement; 
+            var oEvent  = e||window.event,
+                oTarget = oEvent.target || oEvent.srcElement; 
 
             var inputs = document.getElementsByName('myQN');
             if (oTarget.checked) {
@@ -485,17 +486,16 @@ Questionaire.prototype = {
             }
         },
         getTimeCompare: function(targetTime) { //更新了时间的比较法，这个简洁明了
-            var uniTime1 = targetTime.replace(/-/g, '/')
+            var uniTime1 = targetTime.replace(/-/g, '/');
 
-            var date = new Date();
-            var nowYear = date.getFullYear();
-            var nowMonth = date.getMonth() + 1;
-            var nowDay = date.getDate();
+            var date = new Date(),
+                nowYear = date.getFullYear(),
+                nowMonth = date.getMonth() + 1,
+                nowDay = date.getDate(),
+                uniTime2 = nowYear + "/" + nowMonth + "/" + nowDay,
+                oDate1 = new Date(uniTime1),
+                oDate2 = new Date(uniTime2);
 
-            var uniTime2 = nowYear + "/" + nowMonth + "/" + nowDay;
-
-            var oDate1 = new Date(uniTime1);
-            var oDate2 = new Date(uniTime2);
             if (oDate1.getTime() >= oDate2.getTime()) {
                 return false;
             } else {
@@ -608,12 +608,11 @@ Questionaire.prototype = {
             document.getElementsByClassName("date")[0].value = obj.date;
         },
         topPart: function(type) {
-            var div = document.createElement('div');
+            var div = document.createElement('div'),
+                span1 = document.createElement('span'),
+                span2 = document.createElement('span'),
+                input = document.createElement('input');
 
-            var span1 = document.createElement('span');
-            var span2 = document.createElement('span');
-
-            var input = document.createElement('input');
             input.type = 'text';
             input.className = "subject";
 
@@ -643,11 +642,11 @@ Questionaire.prototype = {
             return div
         },
         middlePart: function(type, randomNumber) {
-            var divWrap = document.createElement('div');
-            var divParent = document.createElement('div');
-            var input1 = document.createElement('input');
+            var divWrap = document.createElement('div'),
+                divParent = document.createElement('div'),
+                input1 = document.createElement('input'),
+                input2 = document.createElement('input');
 
-            var input2 = document.createElement('input');
             input2.type = "text";
 
             var span = document.createElement('span');
@@ -774,8 +773,9 @@ Questionaire.prototype = {
             myQuestionaire.edit.queueUp();
         },
         newLine: function(e) { //整合单选和多选的添加行函数
-            var oEvent  = e||window.event;
-            var oTarget = oEvent.target || oEvent.srcElement; 
+            var oEvent  = e||window.event,
+                oTarget = oEvent.target || oEvent.srcElement; 
+                
             switch (this.getQuestionType(oTarget)) {
                 case "radio":
                     var namebefore = oTarget.parentNode.previousElementSibling.firstElementChild.firstElementChild.name
@@ -828,11 +828,12 @@ Questionaire.prototype = {
             }
         },
         deleSelf: function(e) {
-            var oEvent  = e||window.event;
-            var oTarget = oEvent.target || oEvent.srcElement; 
-            var thisNode = oTarget.parentNode;
-            if (thisNode.parentNode.getElementsByTagName('div').length != 1) {
-                thisNode.parentNode.removeChild(thisNode);
+            var oEvent  = e||window.event,
+                oTarget = oEvent.target || oEvent.srcElement,
+                thisNode = oTarget.parentNode,
+                parent = thisNode.parentNode;
+            if (parent.getElementsByTagName('div').length != 1) {
+                parent.removeChild(thisNode);
             }
         },
         saveObj: function() {
@@ -966,9 +967,9 @@ Questionaire.prototype = {
             }
         },
         moveUp: function(e) {
-            var e = e||window.event;
-            var oldEle = e.target.parentNode.parentNode;
-            var targetNode = oldEle.previousElementSibling;
+            var e = e||window.event,
+                oldEle = e.target.parentNode.parentNode,
+                targetNode = oldEle.previousElementSibling;
             if (targetNode != null) {
                 var cloneEle = oldEle.cloneNode(true);
                 oldEle.parentNode.removeChild(oldEle);
@@ -979,18 +980,20 @@ Questionaire.prototype = {
             this.queueUp();
         },
         queueUp: function() {
-            var wrapBox = document.getElementById("edit-qbox");
-            var j;
+            var wrapBox = document.getElementById("edit-qbox"),
+                j;
+
             for (var i = 0; i < wrapBox.children.length; i++) {
                 j = i + 1;
                 wrapBox.children[i].firstElementChild.firstElementChild.innerHTML = "Q" + j;
             }
         },
         moveDown: function(e) {
-            var oEvent  = e||window.event;
-            var oTarget = oEvent.target || oEvent.srcElement; 
-            var oldEle = oTarget.parentNode.parentNode;
-            var targetNode = oldEle.nextElementSibling;
+            var oEvent  = e||window.event,
+                oTarget = oEvent.target || oEvent.srcElement,
+                oldEle = oTarget.parentNode.parentNode,
+                targetNode = oldEle.nextElementSibling;
+
             if (targetNode != null) {
                 var cloneEle = oldEle.cloneNode(true);
                 oldEle.parentNode.removeChild(oldEle);
@@ -1001,11 +1004,12 @@ Questionaire.prototype = {
             this.queueUp();
         },
         copy: function(e) {
-            var oEvent  = e||window.event;
-            var oTarget = oEvent.target || oEvent.srcElement; 
-            var oldEle = oTarget.parentNode.parentNode;
-            var cloneNode = oldEle.cloneNode(true);
-            var str = "Q" + this.getQuestionRank(e);
+            var oEvent  = e||window.event,
+                oTarget = oEvent.target || oEvent.srcElement,
+                oldEle = oTarget.parentNode.parentNode,
+                cloneNode = oldEle.cloneNode(true),
+                str = "Q" + this.getQuestionRank(e);
+
             cloneNode.firstElementChild.firstChild.innerHTML = str;
 
             //如果是单选，更改单选的name，防止选项串流
@@ -1020,9 +1024,10 @@ Questionaire.prototype = {
             oldEle.parentNode.appendChild(cloneNode);
         },
         deleQuestion: function(e) {
-            var oEvent  = e||window.event;
-            var oTarget = oEvent.target || oEvent.srcElement; 
-            var currentDiv = oTarget.parentNode.parentNode;
+            var oEvent  = e||window.event,
+                oTarget = oEvent.target || oEvent.srcElement,
+                currentDiv = oTarget.parentNode.parentNode;
+
             currentDiv.parentNode.removeChild(currentDiv);
             this.queueUp();
         },
@@ -1033,15 +1038,15 @@ Questionaire.prototype = {
             return target.parentNode.parentNode.firstElementChild.className
         },
         getCurrentTime: function() { //获取当前的时间
-            var nowDate = new Date();
-            var year = nowDate.getFullYear();
-            var month = nowDate.getMonth();
-            var date = nowDate.getDate();
-            var hour = nowDate.getHours();
-            var minute = nowDate.getMinutes();
-            var second = nowDate.getSeconds();
-            var day = nowDate.getDay();
-            var time = nowDate.getTime();
+            var nowDate = new Date(),
+                year = nowDate.getFullYear(),
+                month = nowDate.getMonth(),
+                date = nowDate.getDate(),
+                hour = nowDate.getHours(),
+                minute = nowDate.getMinutes(),
+                second = nowDate.getSeconds(),
+                day = nowDate.getDay(),
+                time = nowDate.getTime();
             return {
                 "year": year,
                 "month": month,
@@ -1079,8 +1084,9 @@ Questionaire.prototype = {
             }
         },
         toggleShowBtn: function(e) {
-            var oEvent  = e||window.event;
-            var oTarget = oEvent.target || oEvent.srcElement; 
+            var oEvent  = e||window.event,
+                oTarget = oEvent.target || oEvent.srcElement; 
+
             if (oTarget.parentNode.firstElementChild.className == "hide") {
                 oTarget.parentNode.firstElementChild.className = "show";
             } else {
