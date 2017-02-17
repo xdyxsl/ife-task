@@ -19,14 +19,13 @@
         this.container = dom;//传容器
     }
 
-    // 私有变量可以写在这里
+    // 私有变量
     var imgNumber =0;
 
     /************* 以下是本库提供的公有方法 *************/
 
     VarietyAlbum.prototype.init = function(dom,opts){
         var album = new VarietyAlbum(dom,opts);
-
         return album
     }
 
@@ -112,8 +111,8 @@
             timer = 0;
 
         function imgIntrvl() {
-            var index = self.getIndex(imgNumber);
-            var img = document.createElement("img");
+            var index = self.getIndex(imgNumber),
+                img = document.createElement("img");
             img.src = self.src + index + ".jpg";
             if (img.width > 0 && img.height > 0) {
                 self.image.push({
@@ -171,7 +170,7 @@
                 tempArr = [];
             }
         }
-        this.renderBarrel()
+        this.renderBarrel();
     }
     VarietyAlbum.prototype.renderBarrel = function(){
         var index;
@@ -211,7 +210,6 @@
             default:
             break;
         }
-        
     }
 
     //开始拼图布局
@@ -234,170 +232,34 @@
                 if(this.opts.currentNum==this.opts.loadNumber){
                     this.opts.currentNum=0;//如果超过了初次渲染的图片就从头读取
                 }
+                var div = document.createElement('div');
+                div.className = "album";
                 switch(num){
                     case '1':
-                    var div = document.createElement('div');
-                    div.className = "album album1";
-                    var img = document.createElement('img');
-                    
-                    img.src = this.image[this.opts.currentNum].src;
-                    this.opts.currentNum++;
-                    div.appendChild(img);
-                    this.container.appendChild(div);
+                    var html = "<div class='album1'><img src='"+this.image[this.opts.currentNum++].src+"'></div>";
                     break;
                     case '2':
-                    var div = document.createElement('div');
-                    div.className = "album album2";
-                    var img1 = document.createElement('img');
-                    img1.src = this.image[this.opts.currentNum].src;
-                    this.opts.currentNum++;
-
-                    var img2 = document.createElement('img');
-                    img2.src = this.image[this.opts.currentNum].src;
-                    this.opts.currentNum++;
-                    div.appendChild(img1);
-                    div.appendChild(img2);
-                    this.container.appendChild(div);
+                    var html="<div class='album2'><img src='"+this.image[this.opts.currentNum++].src+"'><img src='"+this.image[this.opts.currentNum++].src+"'></div>";
                     break;
                     case '3':
-                    var div = document.createElement('div');
-                    div.className = "album";
-                    var div1 = document.createElement('div');
-                    div1.className = "album3-left";
-                    var div2 = document.createElement('div');
-                    div2.className = "album3-right";
-
-                    var img1 = document.createElement('img');
-                    img1.src = this.image[this.opts.currentNum].src;
-                    this.opts.currentNum++;
-                    var img2 = document.createElement('img');
-                    img2.src = this.image[this.opts.currentNum].src;
-                    this.opts.currentNum++;
-                    var img3 = document.createElement('img');
-                    img3.src = this.image[this.opts.currentNum].src;
-                    this.opts.currentNum++;
-                    div1.appendChild(img1);
-                    div2.appendChild(img2);
-                    div2.appendChild(img3);
-                    div.appendChild(div1);
-                    div.appendChild(div2);
-                    this.container.appendChild(div);
+                    var html = "<div class='album3-left'><img src='"+this.image[this.opts.currentNum++].src+"'></div><div class='album3-right'><img src='"+this.image[this.opts.currentNum++].src+"'><img src='"+this.image[this.opts.currentNum++].src+"'></div>";
                     break;
                     case '4':
-                    var div = document.createElement('div');
-                    div.className = "album";
-                    var div1 = document.createElement('div');
-                    div1.className = "album4-left";
-                    var div2 = document.createElement('div');
-                    div2.className = "album4-right";
-
-                    var img1 = document.createElement('img');
-                    img1.src = this.image[this.opts.currentNum].src;
-                    this.opts.currentNum++;
-                    var img2 = document.createElement('img');
-                    img2.src = this.image[this.opts.currentNum].src;
-                    this.opts.currentNum++;
-                    var img3 = document.createElement('img');
-                    img3.src = this.image[this.opts.currentNum].src;
-                    this.opts.currentNum++;
-                    var img4 = document.createElement('img');
-                    img4.src = this.image[this.opts.currentNum].src;
-                    this.opts.currentNum++;
-                    div1.appendChild(img1);
-                    div1.appendChild(img2);
-                    div2.appendChild(img3);
-                    div2.appendChild(img4);
-
-                    div.appendChild(div1);
-                    div.appendChild(div2);
-                    this.container.appendChild(div);
+                    var html= "<div class='album4-left'><img src='"+this.image[this.opts.currentNum++].src+"'><img src='"+this.image[this.opts.currentNum++].src+"'></div><div class='album4-right'><img src='"+this.image[this.opts.currentNum++].src+"'><img src='"+this.image[this.opts.currentNum++].src+"'></div>";
                     break;
                     case '5':
-                    var div = document.createElement('div');
-                    div.className = "album";
-                    var div1 = document.createElement('div');
-                    div1.className = "album5-left";
-                    var div2 = document.createElement('div');
-                    div2.className = "album5-right";
-                    var div3 = document.createElement('div');
-                    div3.className = "album5-left-top";
-                    var div4 = document.createElement('div');
-                    div4.className = "album5-left-bottom";
-
-                    var img1 = document.createElement('img');
-                    img1.src = this.image[this.opts.currentNum].src;
-                    this.opts.currentNum++;
-                    var img2 = document.createElement('img');
-                    img2.src = this.image[this.opts.currentNum].src;
-                    this.opts.currentNum++;
-                    var img3 = document.createElement('img');
-                    img3.src = this.image[this.opts.currentNum].src;
-                    this.opts.currentNum++;
-                    var img4 = document.createElement('img');
-                    img4.src = this.image[this.opts.currentNum].src;
-                    this.opts.currentNum++;
-                    var img5 = document.createElement('img');
-                    img5.src = this.image[this.opts.currentNum].src;
-                    this.opts.currentNum++;
-                    div2.appendChild(img1);
-                    div2.appendChild(img2);
-                    div3.appendChild(img3);
-                    div4.appendChild(img4);
-                    div4.appendChild(img5);
-
-                    div1.appendChild(div3);
-                    div1.appendChild(div4);
-                    div.appendChild(div1);
-                    div.appendChild(div2);
-                    this.container.appendChild(div);
+                    var html = "<div class='album5-left'><div class='album5-left-top'><img src='"+this.image[this.opts.currentNum++].src+"'></div><div class='album5-left-bottom'><img src='"+this.image[this.opts.currentNum++].src+"'><img src='"+this.image[this.opts.currentNum++].src+"'></div></div><div class='album5-right'><img src='"+this.image[this.opts.currentNum++].src+"'><img src='"+this.image[this.opts.currentNum++].src+"'></div>";
                     break;
                     case '6':
-                    var div = document.createElement('div');
-                    div.className = "album";
-                    var div1 = document.createElement('div');
-                    div1.className = "album6-left";
-                    var div2 = document.createElement('div');
-                    div2.className = "album6-right";
-                    var div3 = document.createElement('div');
-                    div3.className = "album6-left-top";
-                    var div4 = document.createElement('div');
-                    div4.className = "album6-left-bottom";
-
-                    var img1 = document.createElement('img');
-                    img1.src = this.image[this.opts.currentNum].src;
-                    this.opts.currentNum++;
-                    var img2 = document.createElement('img');
-                    img2.src = this.image[this.opts.currentNum].src;
-                    this.opts.currentNum++;
-                    var img3 = document.createElement('img');
-                    img3.src = this.image[this.opts.currentNum].src;
-                    this.opts.currentNum++;
-                    var img4 = document.createElement('img');
-                    img4.src = this.image[this.opts.currentNum].src;
-                    this.opts.currentNum++;
-                    var img5 = document.createElement('img');
-                    img5.src = this.image[this.opts.currentNum].src;
-                    this.opts.currentNum++;
-                    var img6 = document.createElement('img');
-                    img6.src = this.image[this.opts.currentNum].src;
-                    this.opts.currentNum++;
-                    div2.appendChild(img1);
-                    div2.appendChild(img3);
-                    div2.appendChild(img6);
-                    div3.appendChild(img2);
-                    div4.appendChild(img4);
-                    div4.appendChild(img5);
-
-                    div1.appendChild(div3);
-                    div1.appendChild(div4);
-                    div.appendChild(div1);
-                    div.appendChild(div2);
-                    this.container.appendChild(div);
+                    var html = "<div class='album6-left'><div class='album6-left-top'><img src='"+this.image[this.opts.currentNum++].src+"'></div><div class='album6-left-bottom'><img src='"+this.image[this.opts.currentNum++].src+"'><img src='"+this.image[this.opts.currentNum++].src+"'></div></div><div class='album6-right'><img src='"+this.image[this.opts.currentNum++].src+"'><img src='"+this.image[this.opts.currentNum++].src+"'><img src='"+this.image[this.opts.currentNum++].src+"'></div>";
                     break;
                     default:
                     console.log("type erorr");
                     break;
                 }
+                div.innerHTML = html;
+                this.container.appendChild(div);
+
                 this.setImgClass();
             }
         }.bind(this),500);
@@ -488,9 +350,8 @@
         var img = new Image(),
         div = document.createElement("div");
 
-        img.src = this.image[this.opts.imgNumber].src;
+        img.src = this.image[this.opts.imgNumber++].src;
         div.appendChild(img);
-        this.opts.imgNumber++;
         column.appendChild(div);
 
         this.setImgClass();
