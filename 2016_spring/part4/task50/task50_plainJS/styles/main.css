@@ -221,10 +221,10 @@ tfoot{
         padding:1rem 2rem;
     }
     .alert{
-        position: absolute;
-        top: 35%;
-        left: 17%;
-        bottom: 25%;
+        position: fixed;
+        top: 30%;
+        left: 10%;
+        bottom: 30%;
         right: 10%;
     }
 }

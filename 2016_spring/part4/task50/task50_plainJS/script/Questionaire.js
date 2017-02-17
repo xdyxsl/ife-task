@@ -127,7 +127,6 @@ Questionaire.prototype = {
             }
             document.getElementById('page_subject').innerHTML = this.requestInfo;
             document.getElementById('content_area').innerHTML = html;
-            console.log(obj,dataArr)
             
             var tempStr;
            
@@ -137,7 +136,6 @@ Questionaire.prototype = {
                 tempStr = 'Q'+(i+1);
                 var nowSub = obj.allData[i].subject
                 var questTotalSubmit = "该问卷总提交数" +obj.count +"次";
-                console.log(subjectData,dataArr[i])
 
                 var myChart = echarts.init(document.getElementById(tempStr));
 
@@ -219,7 +217,6 @@ Questionaire.prototype = {
         },
         calculatePersent: function(currentNum, totalNum) {
             var result = (Number(currentNum) / Number(totalNum)*100).toFixed(2);
-            console.log(result)
             if (isNaN(result)) {
                 result = '数据不够,请先填写数据！';
                 return result
