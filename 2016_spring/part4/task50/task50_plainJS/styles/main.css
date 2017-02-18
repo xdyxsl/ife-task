@@ -78,7 +78,7 @@ a {
 }
 
 .go-home {
-    margin-left: 5rem;
+    margin-left: 2rem;
 }
 
 .go-github {
@@ -98,11 +98,11 @@ a {
 @media screen and (max-width: 42em) {
     /*672以下header栏*/
     .header img {
-        margin: 0.5rem 2rem 0 1rem;
+        margin: 0.5rem 1rem 0 1rem;
     }
     .go-home {
         float: right;
-        margin: 1rem 1rem 0 0;
+        margin: 0.85rem 1rem 0 0;
     }
     .go-github {
         margin-left: 1rem;
