@@ -304,3 +304,26 @@ document.getElementById('clean_buttun').addEventListener("click", function() {
 }, false);
 document.getElementById("refresh_button").addEventListener("click",function(){location.reload()},false)
 cmd_btn.addEventListener("click", render, false);
+
+function keyEvent(e) {
+    var oEvt = e||window.event;
+    var oObj = oEvt.target||oEvt.srcElement;
+    var currKey=e.keyCode||e.which||e.charCode;
+    switch(currKey){
+        case 37:
+        RobotBox.transLeft();
+        break;
+        case 38:
+        RobotBox.transTop();
+        break;
+        case 39:
+        RobotBox.transRight();
+        break;
+        case 40:
+        RobotBox.transBottom();
+        break;
+        default:
+        break;
+    }
+}
+window.onkeydown = keyEvent;
